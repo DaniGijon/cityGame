@@ -55,7 +55,7 @@
                 $bonusPercepcion +=  $cabezasLista['percepcion'];
             }
         }
-        
+        //a
         foreach ($torsosDB as $torsosLista) {
             if($result[0]['torso'] == 0){
                
