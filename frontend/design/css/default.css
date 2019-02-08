@@ -1,0 +1,315 @@
+html,body{
+    height:100%;
+    margin:0px;
+}
+
+
+h1{
+    color:red;
+}
+
+.floatLeft{
+    float:left;
+}
+
+.floatRight{
+    float:right;
+}
+.blueText{
+    color:blue;
+}
+
+.redText{
+    color:red;
+}
+
+.large{
+    font-size:60px;
+}
+
+.noMargin{
+    margin:0;
+}
+
+.gridBox{
+    width:32%;
+    border:1px solid black;
+    float: left;
+    height:20%;
+    text-align:center;
+}
+
+.gridBox:hover{
+    background: yellow;
+}
+
+.cabezaBox{
+    width:32%;
+    border:1px solid black;
+    float: left;
+    height:16%;
+    text-align:center;
+    margin-left: 31%;
+}
+
+.mascotaBox{
+    width:15%;
+    border:1px solid black;
+    float: left;
+    height:10%;
+    text-align:center;
+    margin-top: 20%;
+}
+
+.izquierdaBox{
+    width:12%;
+    border:1px solid black;
+    float: left;
+    height:10%;
+    text-align:center;
+    margin-left: 5%;
+    margin-top: 20%;
+}
+
+.torsoBox{
+    width:24%;
+    border:1px solid black;
+    float: left;
+    height:20%;
+    text-align:center;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.derechaBox{
+    width:12%;
+    border:1px solid black;
+    float: left;
+    height:10%;
+    text-align:center;
+    margin-left: 2%;
+    margin-top: 20%;
+}
+
+.vehiculoBox{
+    width:15%;
+    border:1px solid black;
+    float: left;
+    height:10%;
+    text-align:center;
+    margin-left: 5%;
+    margin-top: 20%;
+}
+
+.piesBox{
+    width:32%;
+    border:1px solid black;
+    float: left;
+    height:16%;
+    text-align:center;
+    margin-left: 31%;
+    margin-top: 2%;
+}
+
+#boxHolder{
+    width:90%;
+    margin:auto;
+    
+}
+
+#tercioArriba{
+    width:100%;
+    margin:auto;
+    float: left;
+    
+}
+
+#tercioMedio{
+    width:100%;
+    margin:auto;
+    float: left;
+    
+}
+
+
+#tercioAbajo{
+    width:100%;
+    margin:auto;
+    float: left;
+    
+}
+
+#wrapper{
+    width:90%;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    margin:auto;
+    border-right:1px solid black;
+    border-left:1px solid black;
+}
+
+#top{
+    height:100px;
+    background:#bababa;
+    border-bottom:1px solid black;
+}
+
+#main{
+    background:#dadada;
+    flex-grow:1;
+    overflow-y:auto;
+    border-bottom:1px solid black;
+    padding:5px;
+}
+
+#footer{
+    background:#bababa;
+    height:30px;
+    text-align:center;
+    line-height:30px;
+}
+
+#accountOptions{
+    /*background:#fafafa;*/
+    height:100%;
+    width:25%;
+}
+
+#accountOptions button {
+    width:100%;
+}
+
+.contenedor1{
+    width: 50%;
+    float: left;
+}
+.contenedor2{
+    width: 50%;
+    float: left;
+}
+
+.quarterWidth{
+    width: 50%;
+    float:left;
+   
+}
+
+#nuevoCabeza{
+    display:none;
+    width:500px;
+    height:200px;
+    position:absolute;
+}
+
+#nuevoBoxCabeza{
+    width:30%;
+    margin:2px;
+    height:200px;
+    text-align:center;
+    float:left;
+    background:white;
+    border: 1px solid black;
+}
+
+#nuevoMascota{
+    display:none;
+    width:500px;
+    height:200px;
+    position:absolute;
+}
+
+#nuevoBoxMascota{
+    width:30%;
+    margin:2px;
+    height:200px;
+    text-align:center;
+    float:left;
+    background:white;
+    border: 1px solid black;
+}
+
+#nuevoIzquierda{
+    display:none;
+    width:500px;
+    height:200px;
+    position:absolute;
+}
+
+#nuevoBoxIzquierda{
+    width:30%;
+    margin:2px;
+    height:200px;
+    text-align:center;
+    float:left;
+    background:white;
+    border: 1px solid black;
+}
+
+#nuevoTorso{
+    display:none;
+    width:500px;
+    height:200px;
+    position:absolute;
+}
+
+#nuevoBoxTorso{
+    width:30%;
+    margin:2px;
+    height:200px;
+    text-align:center;
+    float:left;
+    background:white;
+    border: 1px solid black;
+}
+
+#nuevoDerecha{
+    display:none;
+    width:500px;
+    height:200px;
+    position:absolute;
+}
+
+#nuevoBoxDerecha{
+    width:30%;
+    margin:2px;
+    height:200px;
+    text-align:center;
+    float:left;
+    background:white;
+    border: 1px solid black;
+}
+
+#nuevoVehiculo{
+    display:none;
+    width:500px;
+    height:200px;
+    position:absolute;
+}
+
+#nuevoBoxVehiculo{
+    width:30%;
+    margin:2px;
+    height:200px;
+    text-align:center;
+    float:left;
+    background:white;
+    border: 1px solid black;
+}
+
+#nuevoPies{
+    display:none;
+    width:500px;
+    height:200px;
+    position:absolute;
+}
+
+#nuevoBoxPies{
+    width:30%;
+    margin:2px;
+    height:200px;
+    text-align:center;
+    float:left;
+    background:white;
+    border: 1px solid black;
+}
