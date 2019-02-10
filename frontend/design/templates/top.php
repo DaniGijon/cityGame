@@ -7,6 +7,7 @@
             <a href="?bPage=accountOptions&action=logout&nonUI"><button>Logout</button></a><br>
             <a href="?page=personaje"><button>Mi Personaje</button></a><br>
             <a href="?page=atacarJugador"><button>Atacar a otro jugador</button></a><br>
+            <a href="?page=ciudad"><button>Ir a Ciudad</button></a><br>
         </div>
         
     </div>

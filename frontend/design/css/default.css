@@ -51,26 +51,6 @@ h1{
     text-align:center;
     margin-left: 31%;
 }
-
-.mascotaBox{
-    width:15%;
-    border:1px solid black;
-    float: left;
-    height:10%;
-    text-align:center;
-    margin-top: 20%;
-}
-
-.izquierdaBox{
-    width:12%;
-    border:1px solid black;
-    float: left;
-    height:10%;
-    text-align:center;
-    margin-left: 5%;
-    margin-top: 20%;
-}
-
 .torsoBox{
     width:24%;
     border:1px solid black;
@@ -81,7 +61,27 @@ h1{
     margin-top: 2%;
 }
 
+.piesBox{
+    width:15%;
+    border:1px solid black;
+    float: left;
+    height:10%;
+    text-align:center;
+    margin-left: 23%;
+    margin-top: 2%;
+}
+
 .derechaBox{
+    width:12%;
+    border:1px solid black;
+    float: left;
+    height:10%;
+    text-align:center;
+    margin-left: 20%;
+    margin-top: 20%;
+}
+
+.izquierdaBox{
     width:12%;
     border:1px solid black;
     float: left;
@@ -97,18 +97,27 @@ h1{
     float: left;
     height:10%;
     text-align:center;
-    margin-left: 5%;
-    margin-top: 20%;
+    margin-left: 23%;
+    margin-top: 2%;
 }
 
-.piesBox{
-    width:32%;
+.mascotaBox{
+    width:15%;
     border:1px solid black;
     float: left;
-    height:16%;
+    height:10%;
     text-align:center;
-    margin-left: 31%;
     margin-top: 2%;
+}
+
+.bolsaBox{
+    width:12%;
+    border:1px solid black;
+    float: left;
+    height:10%;
+    text-align:center;
+    margin-left: 5%;
+    margin-top: 20%;
 }
 
 #boxHolder{
@@ -195,116 +204,14 @@ h1{
    
 }
 
-#nuevoCabeza{
+#capaBolsa{
     display:none;
     width:500px;
     height:200px;
     position:absolute;
 }
 
-#nuevoBoxCabeza{
-    width:30%;
-    margin:2px;
-    height:200px;
-    text-align:center;
-    float:left;
-    background:white;
-    border: 1px solid black;
-}
-
-#nuevoMascota{
-    display:none;
-    width:500px;
-    height:200px;
-    position:absolute;
-}
-
-#nuevoBoxMascota{
-    width:30%;
-    margin:2px;
-    height:200px;
-    text-align:center;
-    float:left;
-    background:white;
-    border: 1px solid black;
-}
-
-#nuevoIzquierda{
-    display:none;
-    width:500px;
-    height:200px;
-    position:absolute;
-}
-
-#nuevoBoxIzquierda{
-    width:30%;
-    margin:2px;
-    height:200px;
-    text-align:center;
-    float:left;
-    background:white;
-    border: 1px solid black;
-}
-
-#nuevoTorso{
-    display:none;
-    width:500px;
-    height:200px;
-    position:absolute;
-}
-
-#nuevoBoxTorso{
-    width:30%;
-    margin:2px;
-    height:200px;
-    text-align:center;
-    float:left;
-    background:white;
-    border: 1px solid black;
-}
-
-#nuevoDerecha{
-    display:none;
-    width:500px;
-    height:200px;
-    position:absolute;
-}
-
-#nuevoBoxDerecha{
-    width:30%;
-    margin:2px;
-    height:200px;
-    text-align:center;
-    float:left;
-    background:white;
-    border: 1px solid black;
-}
-
-#nuevoVehiculo{
-    display:none;
-    width:500px;
-    height:200px;
-    position:absolute;
-}
-
-#nuevoBoxVehiculo{
-    width:30%;
-    margin:2px;
-    height:200px;
-    text-align:center;
-    float:left;
-    background:white;
-    border: 1px solid black;
-}
-
-#nuevoPies{
-    display:none;
-    width:500px;
-    height:200px;
-    position:absolute;
-}
-
-#nuevoBoxPies{
+#nuevoBoxBolsa{
     width:30%;
     margin:2px;
     height:200px;
