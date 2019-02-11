@@ -6,6 +6,7 @@
         $spotId = 0;
         
         echo "<div id='moduloCiudad'>";
+        echo "<a href='?page=callejero'><button>Ver Callejero</button></a><br>";
 
             echo "<div class='contenido'>";
                 echo "<div class='seccionMapa'>" ;
@@ -52,16 +53,24 @@
         echo "</div>";
 ?>
 <script>
-                
-                $(".cajitaSpot").click(function(){
-                   var spotId = $(this).attr('id');
+    /*$(".cajitaSpot").hover(function(){
+        $(this).css("background-color", "lightblue");
+    },
+    function(){
+        $(this).css("background-color", "red");
+    });            
+    */            
+    $(".cajitaSpot").click(function(){
+        var id = $(this).attr('id');
+        /*$(this).css("background-color", "lightblue");*/
                    
-                   $.post("?bPage=ciudadFunctions", {
-                       spotId: spotId
-                   }).done(function(){
-                       $("#ciudadArea").load("index.php?bPage=ciudadFunctions&dibujarCiudad&nonUI&spotClickado")
-                   })
-                });
+        $.post("?bPage=ciudadFunctions", {
+        spotId: id
+                       
+        }).done(function(){
+            $("#ciudadArea").load("index.php?bPage=ciudadFunctions&dibujarCiudad&nonUI&spotClickado")
+        });
+    });
                     
 </script>
 <?php
@@ -69,8 +78,9 @@
     
     function mostrarSpot($spotId){
        
+       
         echo "<div class='seccionDescripcionZonaImagen'>";
-            echo 'Me estas pasando ' . $spotId;
+            echo 'Me estas pasando idS: ' . $spotId;
         echo "</div>";
         echo "<div class='seccionDescripcionZonaTexto'>";
             echo 'Texto del slot';

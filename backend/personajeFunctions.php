@@ -316,7 +316,6 @@
             <legend style="text-align: center"> Constantes vitales</legend>
             <span class="quarterWidth">Salud: <?php echo $result[0]['salud']; ?></span><br>
             <span class="quarterWidth">Energia: <?php echo $result[0]['energia']; ?></span><br>
-            <br>
         </fieldset>
         <fieldset>
             <legend style="text-align: center"> Fama</legend>
@@ -324,7 +323,7 @@
             <span class="quarterWidth">Social: <?php echo $result[0]['social']; ?></span><br>
         </fieldset>
         <fieldset>
-            <legend style="text-align: center"> Mis dineros</legend>
+            <legend style="text-align: center"> Mi dinero</legend>
             <span class="quarterWidth">En el bolsillo: <?php echo $result[0]['cash']; ?></span><br>
             <span class="quarterWidth">En el banco: <?php echo $result[0]['enBanco']; ?></span><br>
         </fieldset>

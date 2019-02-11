@@ -39,7 +39,7 @@ h1{
     text-align:center;
 }
 
-.gridBox:hover{
+.bolsaBox:hover{
     background: yellow;
 }
 
@@ -381,7 +381,7 @@ h1{
     background: blueviolet;
 }
 
-.tipotiendacomestibles{
+.tiporestaurante{
     background: red;
 }
 
