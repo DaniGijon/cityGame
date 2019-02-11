@@ -253,8 +253,13 @@ h1{
     margin-left: 15px;
 }
 
-.seccionDescripcionSlot{
+.seccionDescripcionSpot{
     float:left;
+    position: relative;
+    width: 384px;
+    height: 100%;
+    text-align: center;
+    margin-left: 15px;
     display:none;
 }
 

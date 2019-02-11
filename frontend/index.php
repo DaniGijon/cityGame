@@ -14,7 +14,7 @@
         
 ?>
         <script>
-        $(".seccionDescripcionSlot").toggle()
+        $(".seccionDescripcionSpot").toggle()
         $(".seccionDescripcionZona").toggle()
         </script>
 <?php        

@@ -3,10 +3,10 @@
         global $db;
         
         $id = $_SESSION['loggedIn'];
-        $spotId = 0;
+        
         
         echo "<div id='moduloCiudad'>";
-        echo "<a href='?page=callejero'><button>Ver Callejero</button></a><br>";
+            echo "<a href='?page=callejero'><button>Ver Callejero</button></a><br>";
 
             echo "<div class='contenido'>";
                 echo "<div class='seccionMapa'>" ;
@@ -19,7 +19,7 @@
                     $barrioActual = $result[0]['barrio'];
                     $zonaActual = $result[0]['zona'];
                     
-                    $sql = "SELECT * FROM spots WHERE idB='$barrioActual' AND idZ='$zonaActual'";
+                    $sql = "SELECT spots.*, zonas.nombreZona, zonas.textoZona, zonas.imagenZona FROM spots JOIN zonas ON spots.idZ = zonas.idZ WHERE spots.idB='$barrioActual' AND spots.idZ='$zonaActual'";
                     $stmt = $db->query($sql);
                     $result = $stmt->fetchAll();
                     
@@ -31,44 +31,40 @@
                        echo "</div>";
                     }
 
-                echo "</div>";
+                echo "</div>"; //FIN DE div seccionMapa
                 
                 
                 
                 echo "<div class='seccionDescripcionZona'>";
                     echo "<div class='seccionDescripcionZonaImagen'>";
-                        echo "Aqui irá una foto de esta zona";
+                        
+                        $imagenZona = "<img src='/design/img/zonas/" . $result[0]['imagenZona'] . "'>";
+                        echo $imagenZona;
+                    
                     echo "</div>";
                     echo "<div class='seccionDescripcionZonaTexto'>";
-                        echo 'Asdrúbal fue construido durante el siglo XX para alojar a las familias de los trabajadores de empresas mineras y petroquímicas ubicadas en la zona Sur de la ciudad.';
+                        $descripcionZona = $result[0]['textoZona'];
+                        echo $descripcionZona;
                     echo "</div>";
                 echo "</div>";
                 
-                echo "<div class='seccionDescripcionSlot'>";
+                echo "<div class='seccionDescripcionSpot'>";
                     mostrarSpot($spotId);
                 
                 echo "</div>";
-            echo "</div>";
+            echo "</div>"; //FIN DE div contenido
 
-        echo "</div>";
+        echo "</div>"; //FIN DE div moduloCiudad
 ?>
 <script>
-    /*$(".cajitaSpot").hover(function(){
-        $(this).css("background-color", "lightblue");
-    },
-    function(){
-        $(this).css("background-color", "red");
-    });            
-    */            
     $(".cajitaSpot").click(function(){
-        var id = $(this).attr('id');
-        /*$(this).css("background-color", "lightblue");*/
-                   
+        var spotId = $(this).attr('id');
+        alert(spotId);
+        
         $.post("?bPage=ciudadFunctions", {
-        spotId: id
-                       
+            spotId:spotId
         }).done(function(){
-            $("#ciudadArea").load("index.php?bPage=ciudadFunctions&dibujarCiudad&nonUI&spotClickado")
+            $("#ciudadArea").load("index.php?bPage=ciudadFunctions&dibujarCiudad&nonUI&spotClickado");
         });
     });
                     
@@ -77,15 +73,24 @@
     }
     
     function mostrarSpot($spotId){
-       
-       
         echo "<div class='seccionDescripcionZonaImagen'>";
+        global $db;
+        
+        $sql = "SELECT * FROM spots WHERE id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array($spotId));
+        
+        //SI EL OBJETO EXISTE
+        if($stmt->rowCount() > 0){
             echo 'Me estas pasando idS: ' . $spotId;
+        }
+        else{
+            echo 'Tu padre';
+        }
         echo "</div>";
         echo "<div class='seccionDescripcionZonaTexto'>";
-            echo 'Texto del slot';
+            echo 'Texto del spot';
         echo "</div>";
-        
     }
     
     if(isset($_GET['dibujarCiudad'])){
