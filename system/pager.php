@@ -22,8 +22,13 @@ function getPage(){
             include("..\backend\accountOptions.php");
         }
         elseif($_GET['bPage'] === "personajeFunctions"){
-            include("..\backend\personajeFunctions.php");
-            
+            include("..\backend\personajeFunctions.php");  
+        }
+        elseif($_GET['bPage'] === "fightFunctions"){
+            include("..\backend\fightFunctions.php");  
+        }
+        elseif($_GET['bPage'] === "ciudadFunctions"){
+            include("..\backend\ciudadFunctions.php");  
         }
     }
     else{

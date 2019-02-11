@@ -289,7 +289,7 @@
         
         <?php
         
-            $sql = "SELECT * FROM `personajes` WHERE id = '$id'";
+            $sql = "SELECT personajes.*, zonas.*, barrios.* FROM personajes JOIN zonas ON personajes.zona = zonas.idz JOIN barrios ON zonas.idb = barrios.idB WHERE id = '$id'";
             $stmt = $db->query($sql);
             $result = $stmt->fetchAll();
 
@@ -308,7 +308,9 @@
             <span class="quarterWidth">Experiencia: <?php echo $result[0]['experiencia']; ?></span>
             <span class="quarterWidth">Sexo: <?php echo $result[0]['sexo']; ?></span>
             <span class="quarterWidth">Nivel: <?php echo $result[0]['nivel']; ?></span>
-            <span class="quarterWidth">Barrio: <?php echo $result[0]['barrio']; ?></span>
+            <span class="quarterWidth">Barrio: <?php echo $result[0]['nombreBarrio']; ?></span>
+            <span class="quarterWidth">Zona: <?php echo $result[0]['nombreZona']; ?></span>
+            
         </fieldset>
         <fieldset>
             <legend style="text-align: center"> Constantes vitales</legend>

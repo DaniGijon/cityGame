@@ -220,3 +220,181 @@ h1{
     background:white;
     border: 1px solid black;
 }
+
+/* REFERENTES A LA CIUDAD */
+
+#moduloCiudad{
+    display: table;
+    width: 100%;
+}
+
+.contenido{
+    margin-top:10px;
+    width: 843px;
+    min-width: 843px;
+    overflow: hidden;
+    padding: 0 0 20px;
+}
+
+.seccionMapa{
+    float:left;
+    position: relative;
+    width: 443px;
+    height: 455px;
+    background: yellowgreen;
+}
+
+.seccionDescripcionZona{
+    float:left;
+    position: relative;
+    width: 384px;
+    height: 100%;
+    text-align: center;
+    margin-left: 15px;
+}
+
+.seccionDescripcionSlot{
+    float:left;
+    display:none;
+}
+
+.cajitaSpot{
+    padding: 5px 0 0 4px;
+    cursor: pointer;
+    border: 1px solid #0f0f0f;
+    position: absolute;
+    width: 33px;
+    height: 33px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.filaA{
+   top: 1px;
+}
+
+.filaB{
+   top: 35px;
+}
+
+.filaC{
+   top: 69px;
+}
+
+.filaD{
+   top: 103px;
+}
+
+.filaE{
+   top: 137px;
+}
+
+.filaF{
+   top: 171px;
+}
+
+.filaG{
+   top: 205px;
+}
+
+.filaH{
+   top: 239px;
+}
+
+.filaI{
+   top: 273px;
+}
+
+.filaJ{
+   top: 307px;
+}
+
+.filaK{
+   top: 341px;
+}
+
+.filaL{
+   top: 375px;
+}
+
+.filaM{
+   top: 409px;
+}
+
+.columna1{
+    left: 1px;
+}
+
+.columna2{
+    left: 35px;
+}
+
+.columna3{
+    left: 69px;
+}
+
+.columna4{
+    left: 103px;
+}
+
+.columna5{
+    left: 137px;
+}
+
+.columna6{
+    left: 171px;
+}
+
+.columna7{
+    left: 205px;
+}
+
+.columna8{
+    left: 239px;
+}
+
+.columna9{
+    left: 273px;
+}
+
+.columna10{
+    left: 307px;
+}
+
+.columna11{
+    left: 341px;
+}
+
+.columna12{
+    left: 375px;
+}
+
+.columna13{
+    left: 409px;
+}
+.tipocultura{
+    background: white;
+}
+
+.tipoiglesia{
+    background: blueviolet;
+}
+
+.tipotiendacomestibles{
+    background: red;
+}
+
+.seccionDescripcionZonaTexto{
+    width: 380px;
+    height: 155px;
+}
+
+.seccionDescripcionZonaImagen{
+    width: 380px;
+    height: 300px;
+    border-collapse: separate;
+    border-spacing: 0 3px;
+    clear: left;
+    margin: 0 10px;
+}

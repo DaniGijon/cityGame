@@ -9,4 +9,14 @@
     }else{
         include("design/templates/ui.php");
     }
+    
+    if(isset($_GET['spotClickado'])){
+        
+?>
+        <script>
+        $(".seccionDescripcionSlot").toggle()
+        $(".seccionDescripcionZona").toggle()
+        </script>
+<?php        
+    }
 ?>
