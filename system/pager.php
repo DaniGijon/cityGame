@@ -27,8 +27,8 @@ function getPage(){
         elseif($_GET['bPage'] === "fightFunctions"){
             include("..\backend\fightFunctions.php");  
         }
-        elseif($_GET['bPage'] === "ciudadFunctions"){
-            include("..\backend\ciudadFunctions.php");  
+        elseif($_GET['bPage'] === "zonaFunctions"){
+            include("..\backend\zonaFunctions.php");  
         }
     }
     else{
