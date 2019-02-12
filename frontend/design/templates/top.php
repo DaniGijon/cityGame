@@ -2,7 +2,7 @@
     if(isset($_SESSION['loggedIn'])){
 ?>
     <div id="top">
-        <h1 class="large noMargin floatLeft">My browser game</h1>
+        <h1 class="large noMargin floatLeft">PuertoGame</h1>
         <div id="accountOptions" class="floatRight" >
             <a href="?bPage=accountOptions&action=logout&nonUI"><button>Logout</button></a><br>
             <a href="?page=personaje"><button>Mi Personaje</button></a><br>

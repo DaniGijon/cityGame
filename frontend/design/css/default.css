@@ -140,7 +140,6 @@ h1{
     
 }
 
-
 #tercioAbajo{
     width:100%;
     margin:auto;
@@ -731,4 +730,14 @@ h1{
 
 .barrio10{
     background: grey;
+}
+
+
+/* MEJORANDO LA VENTANA DE PERSONAJE */
+
+#infoObjeto{
+    background-color: #ffcc99;
+    padding: 10px;
+    display: none;
+    position: absolute;
 }

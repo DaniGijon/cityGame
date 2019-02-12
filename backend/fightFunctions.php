@@ -51,22 +51,40 @@
     
     function hasGanado($id){
         global $db;
-        echo '¡Enhorabuena! Ganas 10 Euros y 30 puntos de Respeto';
-        
-        // Actualizo mi jugador
+        $opponentResult = getPersonajeRow($id);
         $miId = $_SESSION['loggedIn'];
         $yourResult = getPersonajeRow($_SESSION['loggedIn']);
-        $nuevoCash = $yourResult[0]['cash'] + 10;
-        $nuevoRespeto = $yourResult[0]['respeto'] +30;
+        
+        //Calcular el dinero que le gano: entre un 5% y 25% de lo que lleve en cash
+        $dineroPillado = rand(($opponentResult[0]['cash'])*0.05,($opponentResult[0]['cash'])*0.25);
+        
+        //Calcular el respeto que le gano
+        $nivelDiferencia = $opponentResult[0]['nivel'] - $yourResult[0]['nivel'];
+        if($nivelDiferencia > 2){
+            $respetoPillado = rand(80,100);
+        }
+        elseif($nivelDiferencia > 0 && $nivelDiferencia <= 2){
+            $respetoPillado = rand(30,50);
+        }
+        elseif($nivelDiferencia == 0){
+            $respetoPillado = rand(10,20);
+        }
+        else{
+            $respetoPillado = rand(1,9);
+        }
+        echo "¡Lo hiciste! Ganas " . $dineroPillado . "€ y " . $respetoPillado . " puntos de Respeto";
+        
+        // Actualizo mi jugador
+        $nuevoCash = $yourResult[0]['cash'] + $dineroPillado;
+        $nuevoRespeto = $yourResult[0]['respeto'] + $respetoPillado;
         $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$miId'";
         $stmt = $db->prepare($sql);
         $stmt->execute(array($id));
         $stmt->fetchAll();
         
         // Actualizo el rival
-        $opponentResult = getPersonajeRow($id);
-        $nuevoCash = $opponentResult[0]['cash'] - 10;
-        $nuevoRespeto = $opponentResult[0]['respeto'] - 20;
+        $nuevoCash = $opponentResult[0]['cash'] - $dineroPillado;
+        $nuevoRespeto = $opponentResult[0]['respeto'] - $respetoPillado;
         $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$id'";
         $stmt = $db->prepare($sql);
         $stmt->execute(array($id));
@@ -75,13 +93,33 @@
     
     function hasPerdido($id){
         global $db;
-        echo 'Qué pena... Vuelves a casa con 10 Euros menos y además todos se ríen de ti. Pierdes 20 puntos de Respeto';
-        
-        // Actualizo mi jugador
+        $opponentResult = getPersonajeRow($id);
         $miId = $_SESSION['loggedIn'];
         $yourResult = getPersonajeRow($_SESSION['loggedIn']);
-        $nuevoCash = $yourResult[0]['cash'] - 10;
-        $nuevoRespeto = $yourResult[0]['respeto'] - 20;
+        
+        //Calcular el dinero que pierdo: entre un 5% y 25% de lo que llevo en cash
+        $dineroPerdido = rand(($yourResult[0]['cash'])*0.05,($yourResult[0]['cash'])*0.25);
+        
+        //Calcular el respeto que pierdo
+        $nivelDiferencia = $yourResult[0]['nivel'] - $opponentResult[0]['nivel'];
+        if($nivelDiferencia > 2){
+            $respetoPerdido = rand(80,100);
+        }
+        elseif($nivelDiferencia > 0 && $nivelDiferencia <= 2){
+            $respetoPerdido = rand(30,50);
+        }
+        elseif($nivelDiferencia == 0){
+            $respetoPerdido = rand(10,20);
+        }
+        else{
+            $respetoPerdido = rand(1,9);
+        }
+        
+        echo "Qué desastre... Vuelves a casa llorando, todos se han reído de ti. Pierdes " . $dineroPerdido . "€ y " . $respetoPerdido . " puntos de Respeto";
+        
+        // Actualizo mi jugador
+        $nuevoCash = $yourResult[0]['cash'] - $dineroPerdido;
+        $nuevoRespeto = $yourResult[0]['respeto'] - $respetoPerdido;
         $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$miId'";
         $stmt = $db->prepare($sql);
         $stmt->execute(array($id));
@@ -89,8 +127,8 @@
         
         //Actualizo el rival
         $opponentResult = getPersonajeRow($id);
-        $nuevoCurrentMoney = $opponentResult[0]['cash'] + 10;
-        $nuevoRespeto = $opponentResult[0]['respeto'] + 0;
+        $nuevoCash = $opponentResult[0]['cash'] + $dineroPerdido;
+        $nuevoRespeto = $opponentResult[0]['respeto'] + $respetoPerdido;
         $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$id'";
         $stmt = $db->prepare($sql);
         $stmt->execute(array($id));

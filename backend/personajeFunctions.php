@@ -24,7 +24,7 @@
                 echo "<div id='boxHolder'>";
                 
                     echo "<div id='tercioArriba'>";
-                        echo "<span id='0' class='cabezaBox'>" . "cabeza" . "</span>";
+                        echo "<span id='0' class='cabezaBox objetoBox'>" . "cabeza" . "</span>";
                     echo "</div>";
                     
                     
@@ -51,16 +51,16 @@
                     
                     echo "<div id='tercioMedio'>";
                         
-                        echo "<span id='3' class='derechaBox'>" . "derecha". "</span>";
-                        echo "<span id='1' class='torsoBox'>" . "torso" . "</span>";        
-                        echo "<span id='4' class='izquierdaBox'>" . "izquierda". "</span>";
-                        echo "<span id='7' class='bolsaBox'>" . "bolsa". "</span>";
+                        echo "<span id='3' class='derechaBox objetoBox'>" . "derecha". "</span>";
+                        echo "<span id='1' class='torsoBox objetoBox'>" . "torso" . "</span>";        
+                        echo "<span id='4' class='izquierdaBox objetoBox'>" . "izquierda". "</span>";
+                        echo "<span id='7' class='bolsaBox objetoBox'>" . "bolsa". "</span>";
                         
                     echo "</div>";
                     echo "<div id='tercioAbajo'>";
-                        echo "<span id='6' class='mascotaBox'>" . "mascota". "</span>";
-                        echo "<span id='2' class='piesBox'>" . "pies" . "</span>";  
-                        echo "<span id='5' class='vehiculoBox'>" . "vehiculo". "</span>";
+                        echo "<span id='6' class='mascotaBox objetoBox'>" . "mascota". "</span>";
+                        echo "<span id='2' class='piesBox objetoBox'>" . "pies" . "</span>";  
+                        echo "<span id='5' class='vehiculoBox objetoBox'>" . "vehiculo". "</span>";
                     echo "</div>";
                 echo "</div>";
          /*       var_dump($cabezasDB);
@@ -69,218 +69,17 @@
                 }
                 
            */ 
+                echo "<div id='infoObjeto'>";
+                //Consultar que objetos tiene el personaje en cada slot (se ordenan por slot)
+                    $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id'";
+                    $stmt = $db->query($sql);
+                    $result = $stmt->fetchAll();
+                    var_dump($objetosDB);
+                    
+                    
+                echo "</div>";
             ?>
-            
-            <script>
-                $(".bolsaBox").click(function(event){
-                   var id = $(this).attr('id');
-                     
-                    $("#capaBolsa").css('left',event.pageX);
-                    $("#capaBolsa").css('top',event.pageY);
-                    $("#capaBolsa").toggle();
-                      
-                });
-               
-                $(".nuevoBoxBolsa").click(function(){
-                   var objetoBolsaId = $(this).attr('id');
-                   $.post("?bPage=personajeFunctions", {
-                       objetoBolsaId: objetoBolsaId
-                   }).done(function(){
-                       $("#personajeArea").load("index.php?bPage=personajeFunctions&listPersonajeTodo&nonUI")
-                   })
-                });
-           </script>   
-           
-            <span class="quarterWidth">Cabeza: 
-                <?php  
-                    $id = $_SESSION['loggedIn'];
-                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot = '0'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetchAll();
-                    
-                    echo $result[0]['nombre'];
-                   
-                    $bonusDestreza +=  $result[0]['destreza'];
-                    $bonusFuerza +=  $result[0]['fuerza'];
-                    $bonusAgilidad +=  $result[0]['agilidad'];
-                    $bonusResistencia +=  $result[0]['resistencia'];
-                    $bonusEspiritu +=  $result[0]['espiritu'];
-                    $bonusEstilo += $result[0]['estilo'];
-                    $bonusIngenio +=  $result[0]['ingenio'];
-                    $bonusPercepcion +=  $result[0]['percepcion'];
-                ?>
-            </span><br>
-            <span class="quarterWidth">Torso: 
-                <?php  
-                    $id = $_SESSION['loggedIn'];
-                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot = '1'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetchAll();
-                    
-                    echo $result[0]['nombre'];
-                    
-                    $bonusDestreza +=  $result[0]['destreza'];
-                    $bonusFuerza +=  $result[0]['fuerza'];
-                    $bonusAgilidad +=  $result[0]['agilidad'];
-                    $bonusResistencia +=  $result[0]['resistencia'];
-                    $bonusEspiritu +=  $result[0]['espiritu'];
-                    $bonusEstilo += $result[0]['estilo'];
-                    $bonusIngenio +=  $result[0]['ingenio'];
-                    $bonusPercepcion +=  $result[0]['percepcion'];
-                ?>
-            </span><br>
-            <span class="quarterWidth">Pies: 
-                <?php  
-                    $id = $_SESSION['loggedIn'];
-                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot = '2'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetchAll();
-                    
-                    echo $result[0]['nombre'];
-                    
-                    $bonusDestreza +=  $result[0]['destreza'];
-                    $bonusFuerza +=  $result[0]['fuerza'];
-                    $bonusAgilidad +=  $result[0]['agilidad'];
-                    $bonusResistencia +=  $result[0]['resistencia'];
-                    $bonusEspiritu +=  $result[0]['espiritu'];
-                    $bonusEstilo += $result[0]['estilo'];
-                    $bonusIngenio +=  $result[0]['ingenio'];
-                    $bonusPercepcion +=  $result[0]['percepcion'];
-                ?>
-            </span><br>
-            <span class="quarterWidth">Derecha: 
-                <?php  
-                    $id = $_SESSION['loggedIn'];
-                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot = '3'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetchAll();
-                    
-                    echo $result[0]['nombre'];
-                    
-                    $bonusDestreza +=  $result[0]['destreza'];
-                    $bonusFuerza +=  $result[0]['fuerza'];
-                    $bonusAgilidad +=  $result[0]['agilidad'];
-                    $bonusResistencia +=  $result[0]['resistencia'];
-                    $bonusEspiritu +=  $result[0]['espiritu'];
-                    $bonusEstilo += $result[0]['estilo'];
-                    $bonusIngenio +=  $result[0]['ingenio'];
-                    $bonusPercepcion +=  $result[0]['percepcion'];
-                ?>
-            </span><br>
-            <span class="quarterWidth">Izquierda: 
-                <?php  
-                    $id = $_SESSION['loggedIn'];
-                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot = '4'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetchAll();
-                    
-                    echo $result[0]['nombre'];
-                    
-                    $bonusDestreza +=  $result[0]['destreza'];
-                    $bonusFuerza +=  $result[0]['fuerza'];
-                    $bonusAgilidad +=  $result[0]['agilidad'];
-                    $bonusResistencia +=  $result[0]['resistencia'];
-                    $bonusEspiritu +=  $result[0]['espiritu'];
-                    $bonusEstilo += $result[0]['estilo'];
-                    $bonusIngenio +=  $result[0]['ingenio'];
-                    $bonusPercepcion +=  $result[0]['percepcion'];
-                ?>
-            </span><br>
-            <span class="quarterWidth">Vehículo: 
-                <?php  
-                    $id = $_SESSION['loggedIn'];
-                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot = '5'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetchAll();
-                    
-                    echo $result[0]['nombre'];
-                    
-                    $bonusDestreza +=  $result[0]['destreza'];
-                    $bonusFuerza +=  $result[0]['fuerza'];
-                    $bonusAgilidad +=  $result[0]['agilidad'];
-                    $bonusResistencia +=  $result[0]['resistencia'];
-                    $bonusEspiritu +=  $result[0]['espiritu'];
-                    $bonusEstilo += $result[0]['estilo'];
-                    $bonusIngenio +=  $result[0]['ingenio'];
-                    $bonusPercepcion +=  $result[0]['percepcion'];
-                ?>
-            </span><br>
-            <span class="quarterWidth">Mascota: 
-                <?php  
-                    $id = $_SESSION['loggedIn'];
-                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot = '6'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetchAll();
-                    
-                    echo $result[0]['nombre'];
-                    
-                    $bonusDestreza +=  $result[0]['destreza'];
-                    $bonusFuerza +=  $result[0]['fuerza'];
-                    $bonusAgilidad +=  $result[0]['agilidad'];
-                    $bonusResistencia +=  $result[0]['resistencia'];
-                    $bonusEspiritu +=  $result[0]['espiritu'];
-                    $bonusEstilo += $result[0]['estilo'];
-                    $bonusIngenio +=  $result[0]['ingenio'];
-                    $bonusPercepcion +=  $result[0]['percepcion'];
-                ?>
-            </span><br>
-            <span class="quarterWidth">Bolsa: 
-                <?php  
-                    $id = $_SESSION['loggedIn'];
-                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot = '7'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetchAll();
-                   
-                    echo $result[0]['nombre'];
-                    
-                    $bonusDestreza +=  $result[0]['destreza'];
-                    $bonusFuerza +=  $result[0]['fuerza'];
-                    $bonusAgilidad +=  $result[0]['agilidad'];
-                    $bonusResistencia +=  $result[0]['resistencia'];
-                    $bonusEspiritu +=  $result[0]['espiritu'];
-                    $bonusEstilo += $result[0]['estilo'];
-                    $bonusIngenio +=  $result[0]['ingenio'];
-                    $bonusPercepcion +=  $result[0]['percepcion'];
-                ?>
-            </span><br>
-            <span class="quarterWidth">Item1: 
-                <?php  
-                    $id = $_SESSION['loggedIn'];
-                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot = '8'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetchAll();
-                    
-                    echo $result[0]['nombre'];
-                    
-                    $bonusDestreza +=  $result[0]['destreza'];
-                    $bonusFuerza +=  $result[0]['fuerza'];
-                    $bonusAgilidad +=  $result[0]['agilidad'];
-                    $bonusResistencia +=  $result[0]['resistencia'];
-                    $bonusEspiritu +=  $result[0]['espiritu'];
-                    $bonusEstilo += $result[0]['estilo'];
-                    $bonusIngenio +=  $result[0]['ingenio'];
-                    $bonusPercepcion +=  $result[0]['percepcion'];
-                ?>
-            </span><br>
-            <span class="quarterWidth">Item2: 
-                <?php  
-                    $id = $_SESSION['loggedIn'];
-                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot = '9'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetchAll();
-                    
-                    echo $result[0]['nombre'];
-                    
-                    $bonusDestreza +=  $result[0]['destreza'];
-                    $bonusFuerza +=  $result[0]['fuerza'];
-                    $bonusAgilidad +=  $result[0]['agilidad'];
-                    $bonusResistencia +=  $result[0]['resistencia'];
-                    $bonusEspiritu +=  $result[0]['espiritu'];
-                    $bonusEstilo += $result[0]['estilo'];
-                    $bonusIngenio +=  $result[0]['ingenio'];
-                    $bonusPercepcion +=  $result[0]['percepcion'];
-                ?>
-            </span><br>
+   
         </fieldset>
         
     </span>
@@ -340,22 +139,48 @@
         </fieldset>
         
     </span>
-
+    
+    <script>
+                $(".bolsaBox").click(function(event){
+                   var id = $(this).attr('id');
+                     
+                    $("#capaBolsa").css('left',event.pageX);
+                    $("#capaBolsa").css('top',event.pageY);
+                    $("#capaBolsa").toggle();
+                      
+                });
+               
+                $(".nuevoBoxBolsa").click(function(){
+                   var objetoBolsaId = $(this).attr('id');
+                   $.post("?bPage=personajeFunctions", {
+                       objetoBolsaId: objetoBolsaId
+                   }).done(function(){
+                       $("#personajeArea").load("index.php?bPage=personajeFunctions&listPersonajeTodo&nonUI")
+                   })
+                });
+                
+                $(".objetoBox").mouseenter(function(e){
+                    $("#infoObjeto").css("left", e.pageX + 5);
+                    $("#infoObjeto").css("top", e.pageY + 5);
+                    $("#infoObjeto").css("display", "block");
+                });
+                
+                $(".objetoBox").mouseleave(function(e){
+                    $("#infoObjeto").css("display", "none");
+                });
+           </script>   
 <?php
     }
-?>
 
-<?php
     function listJugadorRival($id){
         global $db;
         
-        $sql = "SELECT nombre,sexo,barrio,nivel,respeto,cash FROM personajes WHERE id='$id'";
+        $sql = "SELECT nombre,sexo,nivel,respeto,cash FROM personajes WHERE id='$id'";
         $stmt = $db->query($sql);
         $result = $stmt->fetchAll();
         
         $nombre = $result[0]['nombre'];
         $sexo = $result[0]['sexo'];
-        $barrio = $result[0]['barrio'];
         $nivel = $result[0]['nivel'];
         $respeto = $result[0]['respeto'];
         $currentMoney = $result[0]['cash'];
@@ -373,7 +198,7 @@
         
         // Rangos de Respeto
         if($respeto < 50){
-            $respetoText = 'Piltrafa';
+            $respetoText = 'Nuevo en la ciudad';
         }
         if($respeto >=50 && $respeto< 200){
             $respetoText = 'Don Nadie';
@@ -383,14 +208,11 @@
         }
         echo'Nombre: ' . $nombre . '<br>';
         echo'Sexo: ' . $sexo . '<br>';
-        echo'Barrio: ' . $barrio . '<br>';
         echo'Nivel: ' . $nivel . '<br>';
         echo'Respeto: ' . $respetoText . '<br>';
-        echo'Dineros: ' . $currentMoneyText . '<br>';
+        echo'Dinero: ' . $currentMoneyText . '<br>';
     }  
-?>
 
-<?php
     function equiparCabeza($objetoBolsaId){
         
         global $db;
