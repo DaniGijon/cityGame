@@ -76,6 +76,18 @@
                     $result = $stmt->fetchAll();
                     var_dump($objetosDB);
                     
+                    foreach ($result as $objetosPersonaje) {
+                        $bonusDestreza = $bonusDestreza + $objetosPersonaje['destreza'];
+                        $bonusFuerza = $bonusFuerza + $objetosPersonaje['fuerza'];
+                        $bonusAgilidad = $bonusAgilidad + $objetosPersonaje['agilidad'];
+                        $bonusResistencia = $bonusResistencia + $objetosPersonaje['resistencia'];
+                        $bonusEspiritu = $bonusEspiritu + $objetosPersonaje['espiritu'];
+                        $bonusEstilo = $bonusEstilo + $objetosPersonaje['estilo'];
+                        $bonusIngenio = $bonusIngenio + $objetosPersonaje['ingenio'];
+                        $bonusPercepcion = $bonusPercepcion + $objetosPersonaje['percepcion']; 
+                        
+                    }
+                    
                     
                 echo "</div>";
             ?>
