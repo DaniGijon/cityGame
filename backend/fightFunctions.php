@@ -3,14 +3,14 @@
     function listRivales(){
         global $db;
         $id = $_SESSION['loggedIn'];
-        $sql = "SELECT * FROM personajes WHERE id != $id";
+        $sql = "SELECT * FROM personajes WHERE id != '$id' AND barrio = (SELECT barrio FROM personajes WHERE id='$id')";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         
         $result = $stmt->fetchAll();
         
         foreach ($result as $rivales) {
-            echo "<a href='?page=jugadorRival&id=" .$rivales['id'] . "'>" . $rivales['nombre'] . "</a><br>";
+            echo "<a href='?page=jugadorRival&id=" .$rivales['id'] . "'>" . $rivales['nombre'] . " (Nivel: " . $rivales['nivel'] . ")" . "</a><br>";
             
         }
        
@@ -27,6 +27,7 @@
     
     function atacarJugador($id){
         global $db;
+        $miId = $_SESSION['loggedIn'];
         
         $opponentResult = getPersonajeRow($id);
         $yourResult = getPersonajeRow($_SESSION['loggedIn']);
@@ -37,6 +38,13 @@
         else{
             hasPerdido($id);
         }
+        
+        //El atacante pierde energía
+        $nuevoEnergia = rand(30,100);
+        $sql = "UPDATE personajes SET energia = energia-'$nuevoEnergia' WHERE id='$miId'";
+        $stmt = $db->query($sql);
+        $stmt->fetchAll();
+        
     }
     
     function getPersonajeRow($id){
@@ -77,15 +85,15 @@
         // Actualizo mi jugador
         $nuevoCash = $yourResult[0]['cash'] + $dineroPillado;
         $nuevoRespeto = $yourResult[0]['respeto'] + $respetoPillado;
-        $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$miId'";
+        $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='?'";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($id));
+        $stmt->execute(array($miId));
         $stmt->fetchAll();
         
         // Actualizo el rival
         $nuevoCash = $opponentResult[0]['cash'] - $dineroPillado;
         $nuevoRespeto = $opponentResult[0]['respeto'] - $respetoPillado;
-        $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$id'";
+        $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='?'";
         $stmt = $db->prepare($sql);
         $stmt->execute(array($id));
         return $stmt->fetchAll();
