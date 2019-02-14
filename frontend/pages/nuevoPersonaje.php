@@ -32,8 +32,6 @@ Ey! Cuéntame de tí:
     <option>Ciudad Jardin</option>
     
     </select>
-    
-  <!--  <input type="text" name="sexo" required><br>
-    Origen: <input type="text" name="origen" required><br> -->
+  
     <input type="submit">
 </form>

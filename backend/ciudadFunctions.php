@@ -33,6 +33,12 @@
                     echo "</div>";
                     echo "<div class='seccionDescripcionZonaTexto'>";
                         echo'Caja de Texto';
+                        ?>
+                <form action="?bPage=actualizaciones&action=actualizarZona&nonUI" method="post">
+                   <input type="hidden" name="casilla" value="3"> <!-- Value hay que automatizarlo -->
+                   <input type="submit" value="Ir allí">
+		</form>
+                        <?php
                     echo "</div>";
                 echo "</div>";
                 
@@ -40,6 +46,7 @@
                     mostrarSpot($spotId);
                 
                 echo "</div>";
+                
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona

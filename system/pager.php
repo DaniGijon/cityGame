@@ -30,6 +30,9 @@ function getPage(){
         elseif($_GET['bPage'] === "zonaFunctions"){
             include("..\backend\zonaFunctions.php");  
         }
+        elseif($_GET['bPage'] === "actualizaciones"){
+            include("..\backend\actualizaciones.php");  
+        }
     }
     else{
         if(isset($_SESSION['loggedIn'])){

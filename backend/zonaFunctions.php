@@ -3,23 +3,23 @@
         global $db;
         
         $id = $_SESSION['loggedIn'];
-        
-        
-        echo "<div id='moduloZona'>";
-            echo "<a href='?page=ciudad'><button>Ver Ciudad</button></a><br>";
-
-            echo "<div class='contenido'>";
-                echo "<div class='seccionMapaZona'>" ;
-                    $id = $_SESSION['loggedIn'];
                     
-                    $sql = "SELECT barrio,zona FROM personajes WHERE id='$id'";
+                    $sql = "SELECT personajes.barrio,personajes.zona,zonas.nombreZona,barrios.nombreBarrio FROM personajes INNER JOIN zonas ON (personajes.zona = zonas.idZ) AND (personajes.barrio = zonas.idB) INNER JOIN barrios ON barrios.idb = zonas.idB WHERE id='$id'";
                     $stmt = $db->query($sql);
                     $result = $stmt->fetchAll();
                     
                     $barrioActual = $result[0]['barrio'];
                     $zonaActual = $result[0]['zona'];
+        
+        
+        echo "<div id='moduloZona'>";
+            echo "<a href='?page=ciudad'><button>Ver Ciudad</button></a><br>";
+            echo $result[0]['nombreZona'] . " (" . $result[0]['nombreBarrio'] . ")";
+            echo "<div class='contenido'>";
+                echo "<div class='seccionMapaZona'>" ;
                     
-                    $sql = "SELECT spots.*, zonas.nombreZona, zonas.textoZona, zonas.imagenZona FROM spots JOIN zonas ON spots.idZ = zonas.idZ WHERE spots.idB='$barrioActual' AND spots.idZ='$zonaActual'";
+                    
+                    $sql = "SELECT spots.*, zonas.nombreZona, zonas.textoZona, zonas.imagenZona FROM spots INNER JOIN zonas ON (spots.idZ = zonas.idZ) AND (spots.idB = zonas.idB) WHERE spots.idB='$barrioActual' AND spots.idZ='$zonaActual'";
                     $stmt = $db->query($sql);
                     $result = $stmt->fetchAll();
                     
@@ -65,6 +65,7 @@
             spotId:spotId
         }).done(function(){
             $("#zonaArea").load("index.php?bPage=zonaFunctions&dibujarZona&nonUI&spotClickado");
+            action="?bPage=actualizaciones&action=actualizarZona&nonUI"
         });
     });
                     

@@ -56,7 +56,7 @@ function registerAccount($username,$password,$email){
                 
                 $id = $db->lastInsertId();
                 $sql = "INSERT INTO personajes (id,nombre,sexo,origen,experiencia,nivel,barrio,zona,destreza,fuerza,agilidad,resistencia,espiritu,estilo,ingenio,percepcion,salud,energia,respeto,social,cash,enBanco) "
-                        . "VALUES ('$id','$username','Mujer','1','0','0','1','1','0','0','0','0','0','0','0','0','100','100','0','0','100','0')";
+                        . "VALUES ('$id','$username','Mujer','1','0','1','1','1','0','0','0','0','0','0','0','0','100','100','0','0','100','0')";
                 $db->query($sql);
                 $_SESSION['loggedIn'] = $id; 
                 header("location: ?page=nuevoPersonaje&message=Registered");
