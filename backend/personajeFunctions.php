@@ -63,12 +63,7 @@
                         echo "<span id='5' class='vehiculoBox objetoBox'>" . "vehiculo". "</span>";
                     echo "</div>";
                 echo "</div>";
-         /*       var_dump($cabezasDB);
-                foreach($cabezasDB as $objetoCabeza){
-                    echo "<div class='equiparBox'>" . $objetoCabeza[0]['nombre'] . "</div>";
-                }
-                
-           */ 
+         
                 echo "<div id='infoObjeto'>";
                 //Consultar que objetos tiene el personaje en cada slot (se ordenan por slot)
                     $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id'";
@@ -100,7 +95,7 @@
         
         <?php
         
-            $sql = "SELECT personajes.*, zonas.*, barrios.* FROM personajes JOIN zonas ON personajes.zona = zonas.idz JOIN barrios ON zonas.idb = barrios.idB WHERE id = '$id'";
+            $sql = "SELECT personajes.*, zonas.*, barrios.* FROM personajes INNER JOIN zonas ON (personajes.zona = zonas.idZ) and (personajes.barrio = zonas.idB) INNER JOIN barrios ON barrios.idB = zonas.idB WHERE id = '$id'";
             $stmt = $db->query($sql);
             $result = $stmt->fetchAll();
 
@@ -115,7 +110,7 @@
         ?>   
         <fieldset>
             <legend style="text-align: center"> Mis Datos</legend>
-            <span class="quarterWidth">Nombre: <?php echo $result[0]['nombre']; ?> </span>
+            <span class="quarterWidth">Nombre: <?php echo $result[0]['nombre'] . " (" . $result[0]['origen'] . ")"; ?> </span>
             <span class="quarterWidth">Experiencia: <?php echo $result[0]['experiencia']; ?></span>
             <span class="quarterWidth">Sexo: <?php echo $result[0]['sexo']; ?></span>
             <span class="quarterWidth">Nivel: <?php echo $result[0]['nivel']; ?></span>
@@ -135,8 +130,8 @@
         </fieldset>
         <fieldset>
             <legend style="text-align: center"> Mi dinero</legend>
-            <span class="quarterWidth">En el bolsillo: <?php echo $result[0]['cash']; ?></span><br>
-            <span class="quarterWidth">En el banco: <?php echo $result[0]['enBanco']; ?></span><br>
+            <span class="quarterWidth">En el bolsillo: <?php echo $result[0]['cash'] . "€"; ?></span><br>
+            <span class="quarterWidth">En el banco: <?php echo $result[0]['enBanco'] . "€"; ?></span><br>
         </fieldset>
         <fieldset>
             <legend style="text-align: center"> Mis habilidades</legend>

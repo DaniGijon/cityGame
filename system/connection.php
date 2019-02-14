@@ -1,6 +1,5 @@
 <?php
     global $db;
-    
     $config = [
         $dbname = "mysql:host=localhost;dbname=citygame;",
         $login = "root",
