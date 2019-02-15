@@ -412,21 +412,7 @@ h1{
 }
 
 /* REFERENTE A DIBUJAR LA CIUDAD */
-#barrio1zona1{ /*Cañamares:Terri*/
-    top: 335px;
-    left: 15px;
-    padding: 5px 0 0 4px;
-    cursor: pointer;
-    border: 1px solid #0f0f0f;
-    position: absolute;
-    width: 130px;
-    height: 105px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-}
-
-#barrio1zona2{/*Cañamares:Asdrúbal*/
+#barrio1zona1{ /*Cañamares:Asdrubal*/
     top: 330px;
     left: 146px;
     padding: 5px 0 0 4px;
@@ -435,6 +421,21 @@ h1{
     position: absolute;
     width: 60px;
     height: 110px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    
+}
+
+#barrio1zona2{/*Cañamares:Terri*/
+    top: 335px;
+    left: 15px;
+    padding: 5px 0 0 4px;
+    cursor: pointer;
+    border: 1px solid #0f0f0f;
+    position: absolute;
+    width: 130px;
+    height: 105px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -740,4 +741,23 @@ h1{
     padding: 10px;
     display: none;
     position: absolute;
+}
+
+/* DENTRO DE UN SPOT */
+.seccionSpotImagen{
+    width: 380px;
+    height: 300px;
+    border-collapse: separate;
+    border-spacing: 0 3px;
+    clear:left;
+    margin: 0 10px;
+}
+
+.seccionSpotOpciones{
+    width: 380px;
+    height: 300px;
+    border-collapse: separate;
+    border-spacing: 0 3px;
+    clear: left;
+    margin: 0 10px;
 }

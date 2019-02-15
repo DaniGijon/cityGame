@@ -35,8 +35,8 @@
                         echo'Caja de Texto';
                         ?>
                 <form action="?bPage=actualizaciones&action=actualizarZona&nonUI" method="post">
-                   <input type="hidden" name="casilla" value="3"> <!-- Value hay que automatizarlo -->
-                   <input type="submit" value="Ir allí">
+                   <input type="hidden" name="casilla" value="2"> <!-- Value hay que automatizarlo -->
+                   <input type="submit" value="Ir allí"> <!-- Hacerle un jQuery para que el jugador confirme que quiere ir alli -->
 		</form>
                         <?php
                     echo "</div>";

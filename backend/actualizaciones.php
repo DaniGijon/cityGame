@@ -1,4 +1,5 @@
 <?php
+//Para viajar de una zona a otra
 function actualizarZona($casilla){
     global $db;
     $id = $_SESSION['loggedIn'];

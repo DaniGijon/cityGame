@@ -65,7 +65,6 @@
             spotId:spotId
         }).done(function(){
             $("#zonaArea").load("index.php?bPage=zonaFunctions&dibujarZona&nonUI&spotClickado");
-            action="?bPage=actualizaciones&action=actualizarZona&nonUI"
         });
     });
                     

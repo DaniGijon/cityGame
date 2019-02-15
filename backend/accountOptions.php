@@ -53,11 +53,19 @@ function registerAccount($username,$password,$email){
             $stmt = $db->prepare($sql);
             $stmt->execute(array($username,$hash,$email));
             if ($stmt->rowCount() > 0){
-                
+                //Creacion del personaje en la base de datos
                 $id = $db->lastInsertId();
                 $sql = "INSERT INTO personajes (id,nombre,sexo,origen,experiencia,nivel,barrio,zona,destreza,fuerza,agilidad,resistencia,espiritu,estilo,ingenio,percepcion,salud,energia,respeto,social,cash,enBanco) "
                         . "VALUES ('$id','$username','Mujer','1','0','1','1','1','0','0','0','0','0','0','0','0','100','100','0','0','100','0')";
                 $db->query($sql);
+                
+                //Creacion del inventario en la base de datos
+                for($i = 0; $i<10; $i++){
+                    $sql = "INSERT INTO inventario (idP,slot,idO)"
+                            . "VALUES ('$id','$i','0')";
+                    $db->query($sql);
+                }
+                
                 $_SESSION['loggedIn'] = $id; 
                 header("location: ?page=nuevoPersonaje&message=Registered");
             }
