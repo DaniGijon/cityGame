@@ -2,12 +2,26 @@
     if(isset($_SESSION['loggedIn'])){
 ?>
     <div id="top">
-        <h1 class="large noMargin floatLeft">PuertoGame</h1>
-        <div id="accountOptions" class="floatRight" >
-            <a href="?bPage=accountOptions&action=logout&nonUI"><button>Logout</button></a><br>
-            <a href="?page=personaje"><button>Mi Personaje</button></a><br>
-            <a href="?page=atacarJugador"><button>Atacar a otro jugador</button></a><br>
-            <a href="?page=zona"><button>Dar una vuelta</button></a><br>
+        <div id="logoTitulo">
+            <h1 class="large noMargin floatLeft">PuertoGame</h1>
+        </div>
+        <div id="opcionesArriba" class="floatRight" >
+            
+            <span id='botonPersonaje' class="botonPersonaje">
+                <a href="?page=personaje"><button>Mi Personaje</button></a><br>
+            </span>
+            <span id='botonDarUnaVuelta' class="botonDarUnaVuelta">
+                <a href="?page=zona"><button>Dar una Vuelta</button></a><br>
+            </span>
+            <span id='botonMensajes' class="botonMensajes">
+                <a href="?page=atacarJugador"><button>Atacar a otro Jugador</button></a><br>
+            </span>
+            <span id='botonRanking' class="botonRanking">
+                <a href="?page=ranking"><button>Ranking</button></a><br>
+            </span>
+            <span id='botonLogout' class='botonLogout'>
+                <a href="?bPage=accountOptions&action=logout&nonUI"><button>Logout</button></a><br>
+            </span>
         </div>
         
     </div>
@@ -17,7 +31,7 @@
         ?>
         <div id="top">
             <h1 class="large noMargin floatLeft">My browser game</h1>
-            <div id="accountOptions" class="floatRight" >
+            <div id="opcionesArriba" class="floatRight" >
                 <a href="?page=register"><button>Register</button></a><br>
                 <a href="?page=login"><button>Login</button></a>
             </div>

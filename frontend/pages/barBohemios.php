@@ -2,7 +2,7 @@
 global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona1Barrio4();
+        comprobarZona1Barrio1();
         
         echo "<div id='moduloZona'>";
             
