@@ -1,4 +1,21 @@
 <?php
+
+function comprobarCoste($coste){
+   global $db;
+   $id = $_SESSION['loggedIn']; 
+   
+   $sql = "SELECT cash FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   if($coste <= $result[0]['cash']){
+       $puedoPagar = 1;
+   }
+   else{
+       $puedoPagar = 0;
+   }
+   return $puedoPagar;
+}
 //Comprobar que el personaje está efectivamente en esa zona
 function comprobarZona1Barrio1(){
     global $db;

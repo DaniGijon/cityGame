@@ -109,8 +109,70 @@ function actualizarZona($casilla){
     
 }
 
+// Cuando realiza una accion en un checkbox de un spot
+function accionSpot($box){
+    include (__ROOT__.'/backend/comprobaciones.php');
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    
+    switch($box){
+        case 'quesadillas':
+            $coste = 10;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = salud+15, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        case 'fajitas':
+            $coste = 18;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = salud+30, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        case 'cafeConLeche':
+            $coste = 2;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET energia = energia+10, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        case 'cafeIrlandes':
+            $coste = 3;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET energia = energia+15, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        default :
+            $box = 'Error: esa opcion no existe';
+    }
+    header("location: ?page=zona&message=$box");
+}
+
 if($_GET['action'] === "actualizarZona"){
     actualizarZona($_POST['casilla']);
+}
+
+if($_GET['action'] === "accionSpot"){
+    accionSpot($_POST['cbox1']);
 }
 
 ?>

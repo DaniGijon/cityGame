@@ -60,7 +60,7 @@
     $(".cajitaSpot").click(function(){
         var spotId = $(this).attr('id');
         alert(spotId);
-        
+     
         $.post("?bPage=zonaFunctions", {
             spotId:spotId
         }).done(function(){
@@ -71,10 +71,11 @@
 </script>
 <?php
     }
-    
+
     function mostrarSpot($spotId){
         echo "<div class='seccionDescripcionZonaImagen'>";
         global $db;
+        var_dump($spotId);
         
         $sql = "SELECT * FROM spots WHERE id = ?";
         $stmt = $db->prepare($sql);
@@ -98,7 +99,7 @@
     }
     
     if(isset($_POST['spotId'])){
-        mostrarSpot($_POST['spotId']);
+       mostrarSpot($_POST['spotId']);
     }
 
 ?>
