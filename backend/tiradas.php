@@ -1,6 +1,6 @@
 <?php
 
-function buscarMonstruos($probabilidad){
+function buscarMonstruos($probabilidadEncontrar){
    global $db;
    $id = $_SESSION['loggedIn']; 
    
@@ -21,7 +21,7 @@ function buscarMonstruos($probabilidad){
                         
                     }
    
-   if($probabilidad <= $atributosBase[0]['percepcion'] + $bonusPercepcion) {
+   if($probabilidadEncontrar <= $atributosBase[0]['percepcion'] + $bonusPercepcion) {
        $encuentroMonstruos = 1;
    }
    else{

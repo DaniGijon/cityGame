@@ -3,6 +3,7 @@
 function zona($box){
     include (__ROOT__.'/backend/comprobaciones.php');
     include (__ROOT__.'/backend/tiradas.php');
+    include (__ROOT__.'/backend/fightFunctions.php');
     global $db;
     $id = $_SESSION['loggedIn'];
     
@@ -12,22 +13,24 @@ function zona($box){
             $zona = 1;
             $barrio = 1;
             $agotamiento = 50;
-            $probabilidad = rand(1, 30);
+            $probabilidadEncontrar = rand(1, 30);
             $puedoHacerlo = comprobarEnergia($agotamiento);
             if($puedoHacerlo === 1){
                 $sql = "UPDATE personajes SET energia = energia-50 WHERE id='$id'";
                 $stmt = $db->query($sql);
-                $encuentroMonstruos = buscarMonstruos($probabilidad);
+                $encuentroMonstruos = buscarMonstruos($probabilidadEncontrar);
                 if($encuentroMonstruos === 1){
-                    $box = "LO ENCONTRE!";
-                    
                     // ¿Cuál monstruo he encontrado?
                     $monstruo = cualMonstruo($zona,$barrio);
-                    
                     $box = $monstruo[0]['nombre'];
+                    
+                    // Atacar al monstruo
+                    $idMonstruo = $monstruo[0]['idM'];
+                    $resultadoBatalla= atacarMonstruo($idMonstruo);
+                    $box = $box . " " . $resultadoBatalla;
                 }
                 else{
-                    $box = "No he encontrado nada";
+                    $box = "No he encontrado ningún monstruo. Quizá necesito aumentar algo más mi Percepción antes de salir en busca de aventuras por esta zona";
                 }
             }
             else{
@@ -38,7 +41,7 @@ function zona($box){
         default :
             $box = 'Error: esa opcion no existe';
     }
-    header("location: ?page=zona&message=$box");
+    header("location: ?page=accion&message=$box");
 }
 
 

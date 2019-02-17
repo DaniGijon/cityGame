@@ -26,24 +26,138 @@
     }
     
     function atacarJugador($id){
+        include (__ROOT__.'/backend/comprobaciones.php');
         global $db;
         $miId = $_SESSION['loggedIn'];
         
-        $opponentResult = getPersonajeRow($id);
-        $yourResult = getPersonajeRow($_SESSION['loggedIn']);
-    
-        if($yourResult[0]['agilidad'] > $opponentResult[0]['agilidad']){
-            hasGanado($id);
+        //Comprobar que tengo energia para hacer esto
+        $agotamiento = 50;
+        $puedoHacerlo = comprobarEnergia($agotamiento);
+        
+        if($puedoHacerlo === 1){
+
+            $miBonusDestreza = 0;
+            $miBonusFuerza = 0;
+            $miBonusAgilidad = 0;
+            $miBonusResistencia = 0;
+            $miBonusEspiritu = 0;
+            $miBonusEstilo = 0;
+            $miBonusIngenio = 0;
+            $miBonusPercepcion = 0;
+
+            $yourResult = getPersonajeRow($miId);
+
+            $suBonusDestreza = 0;
+            $suBonusFuerza = 0;
+            $suBonusAgilidad = 0;
+            $suBonusResistencia = 0;
+            $suBonusEspiritu = 0;
+            $suBonusEstilo = 0;
+            $suBonusIngenio = 0;
+            $suBonusPercepcion = 0;
+
+            $opponentResult = getPersonajeRow($id);
+
+            //Consultar que objetos tiene mi personaje en cada slot (se ordenan por slot)
+            $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$miId'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+
+            foreach ($result as $objetosPersonaje) {
+                $miBonusDestreza = $miBonusDestreza + $objetosPersonaje['destreza'];
+                $miBonusFuerza = $miBonusFuerza + $objetosPersonaje['fuerza'];
+                $miBonusAgilidad = $miBonusAgilidad + $objetosPersonaje['agilidad'];
+                $miBonusResistencia = $miBonusResistencia + $objetosPersonaje['resistencia'];
+                $miBonusEspiritu = $miBonusEspiritu + $objetosPersonaje['espiritu'];
+                $miBonusEstilo = $miBonusEstilo + $objetosPersonaje['estilo'];
+                $miBonusIngenio = $miBonusIngenio + $objetosPersonaje['ingenio'];
+                $miBonusPercepcion = $miBonusPercepcion + $objetosPersonaje['percepcion'];
+            }
+
+            //Consultar que objetos tiene su personaje en cada slot (se ordenan por slot)
+            $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+
+            foreach ($result as $objetosRival) {
+                $suBonusDestreza = $suBonusDestreza + $objetosRival['destreza'];
+                $suBonusFuerza = $suBonusFuerza + $objetosRival['fuerza'];
+                $suBonusAgilidad = $suBonusAgilidad + $objetosRival['agilidad'];
+                $suBonusResistencia = $suBonusResistencia + $objetosRival['resistencia'];
+                $suBonusEspiritu = $suBonusEspiritu + $objetosRival['espiritu'];
+                $suBonusEstilo = $suBonusEstilo + $objetosRival['estilo'];
+                $suBonusIngenio = $suBonusIngenio + $objetosRival['ingenio'];
+                $suBonusPercepcion = $suBonusPercepcion + $objetosRival['percepcion'];
+            }
+
+            if($yourResult[0]['agilidad'] + $miBonusAgilidad > $opponentResult[0]['agilidad'] + $suBonusAgilidad){
+                hasGanado($id);
+            }
+            else{
+                hasPerdido($id);
+            }
+
+            //El atacante pierde energía
+            //Aunque el minimo para atacar sea tener 50, puede ser interesante que a veces no le agote del todo a 0. 
+            $restaEnergia = rand(30,100);
+            $sql = "UPDATE personajes SET energia = CASE WHEN energia-'$restaEnergia' < 0 THEN 0 ELSE energia-'$restaEnergia' END WHERE id='$miId'";
+            $stmt = $db->query($sql);
+            $stmt->fetchAll();
         }
         else{
-            hasPerdido($id);
+                echo "¡Ay! Estoy sin energia ahora mismo para hacer eso";
+            }
+    }
+    
+    function atacarMonstruo($idMonstruo){
+        global $db;
+        $miId = $_SESSION['loggedIn'];
+        
+        $bonusDestreza = 0;
+        $bonusFuerza = 0;
+        $bonusAgilidad = 0;
+        $bonusResistencia = 0;
+        $bonusEspiritu = 0;
+        $bonusEstilo = 0;
+        $bonusIngenio = 0;
+        $bonusPercepcion = 0;
+        
+        $monstruoResult = getMonstruoRow($idMonstruo);
+        $yourResult = getPersonajeRow($miId);
+        
+        //Consultar que objetos tiene el personaje en cada slot (se ordenan por slot)
+        $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$miId'";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+        
+        foreach ($result as $objetosPersonaje) {
+            $bonusDestreza = $bonusDestreza + $objetosPersonaje['destreza'];
+            $bonusFuerza = $bonusFuerza + $objetosPersonaje['fuerza'];
+            $bonusAgilidad = $bonusAgilidad + $objetosPersonaje['agilidad'];
+            $bonusResistencia = $bonusResistencia + $objetosPersonaje['resistencia'];
+            $bonusEspiritu = $bonusEspiritu + $objetosPersonaje['espiritu'];
+            $bonusEstilo = $bonusEstilo + $objetosPersonaje['estilo'];
+            $bonusIngenio = $bonusIngenio + $objetosPersonaje['ingenio'];
+            $bonusPercepcion = $bonusPercepcion + $objetosPersonaje['percepcion'];
         }
         
-        //El atacante pierde energía
-        $restaEnergia = rand(30,100);
-        $sql = "UPDATE personajes SET energia = CASE WHEN energia-'$restaEnergia' < 0 THEN 0 ELSE energia-'$restaEnergia' END WHERE id='$miId'";
-        $stmt = $db->query($sql);
-        $stmt->fetchAll();
+        
+        if($yourResult[0]['agilidad'] + $bonusAgilidad > $monstruoResult[0]['agilidad']){
+            $expGanada = rand($monstruoResult[0]['nivel'] * 10, $monstruoResult[0]['nivel'] * 20);
+            
+            $sql = "UPDATE personajes SET experiencia = personajes.experiencia + '$expGanada' WHERE id='$miId'";
+            $stmt = $db->query($sql);
+            
+            //HAY QUE HACER UNA TIRADA PARA VER SI CONSIGO ADEMAS UN OBJETO
+            
+            return "Toma ya! He ganado al monstruo. Mi experiencia sube $expGanada puntos";
+        }
+        else{
+            $sql = "UPDATE personajes SET salud = '0',barrio = '9', zona = '1' WHERE id='$miId'";
+            $stmt = $db->query($sql);
+        
+            return "Argh! El monstruo me ha hecho polvo. Me ingresan en el hospital de Santa Bárbara donde los médicos intentan recuperar mi salud";
+        }
         
     }
     
@@ -55,6 +169,15 @@
         return $stmt->fetchAll();
     
     } 
+    
+    function getMonstruoRow($idMonstruo){
+        global $db;
+        $sql = "SELECT * FROM monstruos WHERE idM=?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array($idMonstruo));
+        return $stmt->fetchAll();
+    
+    }
     
     
     function hasGanado($id){
@@ -91,7 +214,12 @@
         
         // Actualizo el rival
         $nuevoCash = $opponentResult[0]['cash'] - $dineroPillado;
-        $nuevoRespeto = $opponentResult[0]['respeto'] - $respetoPillado;
+        if($opponentResult[0]['respeto'] >= $respetoPillado){
+            $nuevoRespeto = $opponentResult[0]['respeto'] - $respetoPillado;
+        }
+        else{
+            $nuevoRespeto = 0;
+        }
         $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$id'";
         $stmt = $db->query($sql);
         return $stmt->fetchAll();
@@ -125,7 +253,12 @@
         
         // Actualizo mi jugador
         $nuevoCash = $yourResult[0]['cash'] - $dineroPerdido;
-        $nuevoRespeto = $yourResult[0]['respeto'] - $respetoPerdido;
+        if($yourResult[0]['respeto'] >= $respetoPerdido){
+            $nuevoRespeto = $yourResult[0]['respeto'] - $respetoPerdido;
+        }
+        else{
+            $nuevoRespeto = 0;
+        }
         $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$miId'";
         $stmt = $db->query($sql);
         $stmt->fetchAll();
