@@ -182,11 +182,11 @@
     function listJugadorRival($id){
         global $db;
         
-        $sql = "SELECT nombre,sexo,nivel,respeto,cash FROM personajes WHERE id='$id'";
+        $sql = "SELECT nombre,origen,sexo,nivel,respeto,cash FROM personajes WHERE id='$id'";
         $stmt = $db->query($sql);
         $result = $stmt->fetchAll();
         
-        $nombre = $result[0]['nombre'];
+        $nombre = $result[0]['nombre'] . " (" . $result[0]['origen'] . ")";
         $sexo = $result[0]['sexo'];
         $nivel = $result[0]['nivel'];
         $respeto = $result[0]['respeto'];

@@ -60,12 +60,16 @@
     $(".cajitaSpot").click(function(){
         var spotId = $(this).attr('id');
         alert(spotId);
-     
+        $(".seccionDescripcionZona").toggle();
+        $(".seccionDescripcionSpot").toggle();
+
         $.post("?bPage=zonaFunctions", {
-            spotId:spotId
+
+            spotId: spotId
+
         }).done(function(){
-            $("#zonaArea").load("index.php?bPage=zonaFunctions&dibujarZona&nonUI&spotClickado");
-        });
+               $("#zonaArea").load("index.php?bPage=zonaFunctions&dibujarZona&nonUI&spotClickado")
+        })
     });
                     
 </script>

@@ -426,6 +426,18 @@ h1{
     background: red;
 }
 
+.tipoplaza{
+    background: salmon;
+}
+
+.tipodeporte{
+    background: green;
+}
+
+.tipoaventura{
+    background: orange;
+}
+
 .seccionDescripcionZonaTexto{
     width: 380px;
     height: 155px;

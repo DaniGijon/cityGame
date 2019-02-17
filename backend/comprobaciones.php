@@ -16,6 +16,23 @@ function comprobarCoste($coste){
    }
    return $puedoPagar;
 }
+
+function comprobarEnergia($agotamiento){
+   global $db;
+   $id = $_SESSION['loggedIn']; 
+   
+   $sql = "SELECT energia FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   if($agotamiento <= $result[0]['energia']){
+       $puedoHacerlo = 1;
+   }
+   else{
+       $puedoHacerlo = 0;
+   }
+   return $puedoHacerlo;
+}
 //Comprobar que el personaje está efectivamente en esa zona
 function comprobarZona1Barrio1(){
     global $db;

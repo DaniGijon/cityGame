@@ -33,6 +33,9 @@ function getPage(){
         elseif($_GET['bPage'] === "actualizaciones"){
             include("..\backend\actualizaciones.php");  
         }
+        elseif($_GET['bPage'] === "aventuras"){
+            include("..\backend\aventuras.php");  
+        }
     }
     else{
         if(isset($_SESSION['loggedIn'])){
