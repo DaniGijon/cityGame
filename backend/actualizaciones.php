@@ -119,9 +119,10 @@ function accionSpot($box){
     switch($box){
         case 'quesadillas':
             $coste = 10;
+            $mejoraSalud = 15;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
-                $sql = "UPDATE personajes SET salud = salud+15, cash = cash-$coste WHERE id='$id'";
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
                 $stmt = $db->query($sql);
             }
             else{
@@ -130,9 +131,10 @@ function accionSpot($box){
             break;
         case 'fajitas':
             $coste = 18;
+            $mejoraSalud = 30;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
-                $sql = "UPDATE personajes SET salud = salud+30, cash = cash-$coste WHERE id='$id'";
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
                 $stmt = $db->query($sql);
             }
             else{
@@ -141,9 +143,10 @@ function accionSpot($box){
             break;
         case 'cafeConLeche':
             $coste = 2;
+            $mejoraEnergia = 10;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
-                $sql = "UPDATE personajes SET energia = energia+10, cash = cash-$coste WHERE id='$id'";
+                $sql = "UPDATE personajes SET energia = CASE WHEN energia + '$mejoraEnergia' > 100 THEN 100 ELSE energia + '$mejoraEnergia' END, cash = cash-$coste WHERE id='$id'";
                 $stmt = $db->query($sql);
             }
             else{
@@ -152,9 +155,10 @@ function accionSpot($box){
             break;
         case 'cafeIrlandes':
             $coste = 3;
+            $mejoraEnergia = 15;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
-                $sql = "UPDATE personajes SET energia = energia+15, cash = cash-$coste WHERE id='$id'";
+                $sql = "UPDATE personajes SET energia = CASE WHEN energia + '$mejoraEnergia' > 100 THEN 100 ELSE energia + '$mejoraEnergia' END, cash = cash-$coste WHERE id='$id'";
                 $stmt = $db->query($sql);
             }
             else{

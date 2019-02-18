@@ -38,8 +38,12 @@ function cualMonstruo($zona,$barrio){
    $stmt = $db->query($sql);
    $result = $stmt->fetchAll();
    
-   $rangoNiveles = rand($result[0]['nivel']-2, $result[0]['nivel']+2);
-   
+   if($result[0]['nivel']>2){
+        $rangoNiveles = rand($result[0]['nivel']-2, $result[0]['nivel']+2);
+   }
+   else{
+       $rangoNiveles = rand(1,$result[0]['nivel']+2);
+   }
    $sql = "SELECT * FROM monstruos WHERE nivel='$rangoNiveles' AND zona='$zona' AND barrio='$barrio'";
    $stmt = $db->query($sql);
    $result = $stmt->fetchAll();
