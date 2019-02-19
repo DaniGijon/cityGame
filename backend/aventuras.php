@@ -12,11 +12,11 @@ function zona($box){
         case 'aventuraLosPinos':
             $zona = 1;
             $barrio = 1;
-            $agotamiento = 50;
+            $agotamiento = 30;
             $probabilidadEncontrar = rand(1, 30);
             $puedoHacerlo = comprobarEnergia($agotamiento);
             if($puedoHacerlo === 1){
-                $sql = "UPDATE personajes SET energia = energia-50 WHERE id='$id'";
+                $sql = "UPDATE personajes SET energia = energia-$agotamiento WHERE id='$id'";
                 $stmt = $db->query($sql);
                 $encuentroMonstruos = buscarMonstruos($probabilidadEncontrar);
                 if($encuentroMonstruos === 1){
@@ -27,7 +27,17 @@ function zona($box){
                     // Atacar al monstruo
                     $idMonstruo = $monstruo[0]['idM'];
                     $resultadoBatalla= atacarMonstruo($idMonstruo);
-                    $box = $box . " " . $resultadoBatalla;
+                    if($resultadoBatalla > 0){
+                        //GANO RESPETO? GANO OBJETOS? 
+                        $respetoGanado = rand($monstruo[0]['nivel']*2, $monstruo[0]['nivel']*5);
+                        $sql = "UPDATE personajes SET respeto = respeto+$respetoGanado WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        
+                        $celebracion = "Toma ya! He derrotado al monstruo y gano $resultadoBatalla EXP. <br> Mi respeto sube $respetoGanado puntos";
+                        
+                        
+                    }
+                    $box = "Me enfrento a un " . $box . " ... " . $celebracion;
                 }
                 else{
                     $box = "No he encontrado ningún monstruo. Quizá necesito aumentar algo más mi Percepción antes de salir en busca de aventuras por esta zona";

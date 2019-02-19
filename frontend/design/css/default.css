@@ -438,6 +438,14 @@ h1{
     background: orange;
 }
 
+.tipoapuestas{
+    background: royalblue;
+}
+
+.tipotiendamascotas{
+    background: pink;
+}
+
 .seccionDescripcionZonaTexto{
     width: 380px;
     height: 155px;

@@ -148,15 +148,13 @@
             $sql = "UPDATE personajes SET experiencia = personajes.experiencia + '$expGanada' WHERE id='$miId'";
             $stmt = $db->query($sql);
             
-            //HAY QUE HACER UNA TIRADA PARA VER SI CONSIGO ADEMAS UN OBJETO
-            
-            return "Toma ya! He ganado al monstruo. Mi experiencia sube $expGanada puntos";
+            return $expGanada;
         }
         else{
             $sql = "UPDATE personajes SET salud = '0',barrio = '9', zona = '1' WHERE id='$miId'";
             $stmt = $db->query($sql);
         
-            return "Argh! El monstruo me ha hecho polvo. Me ingresan en el hospital de Santa Bárbara donde los médicos intentan recuperar mi salud";
+            return 0;
         }
         
     }

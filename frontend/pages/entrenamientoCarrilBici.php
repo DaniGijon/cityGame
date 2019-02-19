@@ -2,7 +2,7 @@
 global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona2Barrio6();
+        comprobarZona1Barrio1();
         
         echo "<div id='moduloZona'>";
             
@@ -12,15 +12,14 @@ global $db;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                
                 echo "<div class='seccionSpotOpciones'>";
-                echo "El camarero te saluda con una amable sonrisa, es un lugar acogedor. \"¿Qué desea tomar?\" <br><br>";
+                echo "Un día soleado y tranquilo. Buen momento para subir a la bici y entrenar estas piernas. <br><br>";
                 ?>
 <form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">
-                <input type="checkbox" name="cbox1" value="cafeConLeche"> <label for="cbox3">Cafe con leche (+1 Salud) (2€)</label><br>
-                <input type="checkbox" name="cbox1" value="cafeIrlandes"> <label for="cbox4">Cafe Irlandes (+2 Salud) (3€)</label><br>
-                <label><input type="checkbox" name="cbox1" value="quesadillas"> Quesadillas (+10 Salud) (10€)</label><br>
-                <input type="checkbox" name="cbox1" value="fajitas"> <label for="cbox2">Fajitas (+20 Salud) (18€)</label><br><br>
+                <input type="checkbox" name="cbox1" value="pedaleoSuave"> <label for="cbox3">Pedaleo Suave (Energia Baja)</label><br>
+                <input type="checkbox" name="cbox1" value="pedaleoFuerte"> <label for="cbox4">Ritmito Generoso (Energia Media)</label><br>
+                <label><input type="checkbox" name="cbox1" value="indurain"> ¡Miradme, soy el jodido Induráin! (Energia Alta)</label><br><br>
                 
-                <input type="submit" value="Tomar">
+                <input type="submit" value="Vamos">
 </form>                
                 <script>
                     

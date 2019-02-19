@@ -115,11 +115,23 @@ function accionSpot($box){
     global $db;
     $id = $_SESSION['loggedIn'];
     
+    //Bonus de mejoras de habilidades
+    $mejoraPrincipalMuyAlta = 1.25;
+    $mejoraPrincipalAlta = 0.8;
+    $mejoraPrincipalMedia = 0.5;
+    $mejoraPrincipalBaja = 0.22;
+    $mejoraPrincipalMuyBaja = 0.1;
+    $mejoraSecundariaMuyAlta = 0.625;
+    $mejoraSecundariaAlta = 0.4;
+    $mejoraSecundariaMedia = 0.25;
+    $mejoraSecundariaBaja = 0.11;
+    $mejoraSecundariaMuyBaja = 0.05;
     
     switch($box){
+        //BAR BOHEMIOS
         case 'quesadillas':
             $coste = 10;
-            $mejoraSalud = 15;
+            $mejoraSalud = 10;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
                 $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
@@ -131,7 +143,7 @@ function accionSpot($box){
             break;
         case 'fajitas':
             $coste = 18;
-            $mejoraSalud = 30;
+            $mejoraSalud = 20;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
                 $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
@@ -143,10 +155,10 @@ function accionSpot($box){
             break;
         case 'cafeConLeche':
             $coste = 2;
-            $mejoraEnergia = 10;
+            $mejoraSalud = 1;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
-                $sql = "UPDATE personajes SET energia = CASE WHEN energia + '$mejoraEnergia' > 100 THEN 100 ELSE energia + '$mejoraEnergia' END, cash = cash-$coste WHERE id='$id'";
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
                 $stmt = $db->query($sql);
             }
             else{
@@ -155,16 +167,53 @@ function accionSpot($box){
             break;
         case 'cafeIrlandes':
             $coste = 3;
-            $mejoraEnergia = 15;
+            $mejoraSalud = 2;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
-                $sql = "UPDATE personajes SET energia = CASE WHEN energia + '$mejoraEnergia' > 100 THEN 100 ELSE energia + '$mejoraEnergia' END, cash = cash-$coste WHERE id='$id'";
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
                 $stmt = $db->query($sql);
             }
             else{
                 $box = "No puedo pagar eso";
             }
             break;
+            
+        //CARRIL BICI
+        case 'pedaleoSuave':
+            $agotamiento = 20;
+            $puedoHacerlo = comprobarEnergia($agotamiento);
+            if($puedoHacerlo === 1){
+                
+                $sql = "UPDATE personajes SET energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaBaja/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalBaja/personajes.resistencia WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }else{
+                $box = "¿Bici ahora? Uff... No puedo con mi alma";
+            }
+            break;
+            
+        case 'pedaleoFuerte':
+            $agotamiento = 40;
+            $puedoHacerlo = comprobarEnergia($agotamiento);
+            if($puedoHacerlo === 1){
+                $sql = "UPDATE personajes SET energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaMedia/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalMedia/personajes.resistencia WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }else{
+                $box = "EH, EH, tranqui. No aguanto ese ritmo";
+            }
+            break;
+        
+        case 'indurain':
+            $agotamiento = 60;
+            $puedoHacerlo = comprobarEnergia($agotamiento);
+            if($puedoHacerlo === 1){
+                $sql = "UPDATE personajes SET energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaAlta/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalAlta/personajes.resistencia WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }else{
+                $box = "Pensándolo mejor... no. Induráin debe andar ya por casi los 60 tacos.";
+            }
+            break;
+            
+        
         default :
             $box = 'Error: esa opcion no existe';
     }
