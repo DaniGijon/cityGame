@@ -187,7 +187,7 @@ function accionSpot($box){
                 $sql = "UPDATE personajes SET energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaBaja/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalBaja/personajes.resistencia WHERE id='$id'";
                 $stmt = $db->query($sql);
             }else{
-                $box = "¿Bici ahora? Uff... No puedo con mi alma";
+                $box = "¿Bici ahora? Uff... No puedo con mi alma. Mejor tomar un snack";
             }
             break;
             
@@ -198,7 +198,7 @@ function accionSpot($box){
                 $sql = "UPDATE personajes SET energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaMedia/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalMedia/personajes.resistencia WHERE id='$id'";
                 $stmt = $db->query($sql);
             }else{
-                $box = "EH, EH, tranqui. No aguanto ese ritmo";
+                $box = "EH, EH, tranqui. No aguanto ese ritmo sin antes beber algo";
             }
             break;
         
@@ -209,9 +209,10 @@ function accionSpot($box){
                 $sql = "UPDATE personajes SET energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaAlta/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalAlta/personajes.resistencia WHERE id='$id'";
                 $stmt = $db->query($sql);
             }else{
-                $box = "Pensándolo mejor... no. Induráin debe andar ya por casi los 60 tacos.";
+                $box = "Pensándolo mejor... la única Vuelta que haré va a ser al sofá.";
             }
             break;
+           
             
         
         default :
