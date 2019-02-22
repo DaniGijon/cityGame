@@ -49,6 +49,7 @@
                 echo "</div>";
                 
                 echo "<div class='seccionDescripcionSpot'>";
+                
                     mostrarSpot($spotId);
                 
                 echo "</div>";

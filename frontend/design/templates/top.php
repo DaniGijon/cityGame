@@ -14,7 +14,7 @@
                 <a href="?page=zona"><button>Dar una Vuelta</button></a><br>
             </span>
             <span id='botonMensajes' class="botonMensajes">
-                <a href="?page=atacarJugador"><button>Atacar a otro Jugador</button></a><br>
+                <a href="?page=mensajes"><button>Mensajes</button></a><br>
             </span>
             <span id='botonRanking' class="botonRanking">
                 <a href="?page=ranking"><button>Ranking</button></a><br>

@@ -1,6 +1,7 @@
 <?php
 global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
+        include (__ROOT__.'/backend/fightFunctions.php');
         $id = $_SESSION['loggedIn'];
         comprobarZona1Barrio1();
         
@@ -12,14 +13,10 @@ global $db;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                
                 echo "<div class='seccionSpotOpciones'>";
-                echo "Un día soleado y tranquilo. Buen momento para subir a la bici y entrenar estas piernas. <br><br>";
+                echo "Parece una plaza muy transitada. Me oculto durante un rato a observar. He detectado a los siguientes jugadores:  <br><br>";
+                listRivales();
                 ?>
-<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">
-                <input type="checkbox" name="cbox1" value="pedaleoSuave"> <label for="cbox3">Pedaleo Suave (Energia Baja)</label><br>
-                <input type="checkbox" name="cbox1" value="pedaleoFuerte"> <label for="cbox4">Ritmito Generoso (Energia Media)</label><br>
-                <label><input type="checkbox" name="cbox1" value="indurain"> ¡Soy Induráin en la Vuelta a España! (Energia Alta)</label><br><br>
-                
-                <input type="submit" value="Vamos">
+
 </form>                
                 <script>
                     

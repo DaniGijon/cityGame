@@ -296,7 +296,7 @@ h1{
     height: 100%;
     text-align: center;
     margin-left: 15px;
-    display:none;
+    display:block;
 }
 
 .cajitaSpot{
@@ -422,6 +422,9 @@ h1{
     background: blueviolet;
 }
 
+.tipobanco{
+    background: chartreuse;
+}
 .tipobar{
     background: highlight;
 }

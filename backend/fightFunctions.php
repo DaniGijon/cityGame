@@ -3,7 +3,7 @@
     function listRivales(){
         global $db;
         $id = $_SESSION['loggedIn'];
-        $sql = "SELECT * FROM personajes WHERE id != '$id' AND barrio = (SELECT barrio FROM personajes WHERE id='$id')";
+        $sql = "SELECT * FROM personajes WHERE id != '$id' AND barrio = (SELECT barrio FROM personajes WHERE id='$id') AND zona = (SELECT zona FROM personajes WHERE id='$id')";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         
@@ -22,91 +22,99 @@
         
         listJugadorRival($id);
         
-        echo "<a href='?page=attackPlayer&id=" . $id . "'><button>Attack</button></a>";
+        echo "<a href='?page=attackPlayer&id=" . $id . "'><button>¡Emboscada!</button></a>";
     }
     
     function atacarJugador($id){
         include (__ROOT__.'/backend/comprobaciones.php');
         global $db;
         $miId = $_SESSION['loggedIn'];
+        //Comprobar que mi rival esta en el mismo barrio que yo
+        $estamosJuntos = comprobarZonaBarrioPersonajes($id,$miId);
         
-        //Comprobar que tengo energia para hacer esto
-        $agotamiento = 50;
-        $puedoHacerlo = comprobarEnergia($agotamiento);
-        
-        if($puedoHacerlo === 1){
+        if($estamosJuntos === 1){
 
-            $miBonusDestreza = 0;
-            $miBonusFuerza = 0;
-            $miBonusAgilidad = 0;
-            $miBonusResistencia = 0;
-            $miBonusEspiritu = 0;
-            $miBonusEstilo = 0;
-            $miBonusIngenio = 0;
-            $miBonusPercepcion = 0;
+            //Comprobar que tengo energia para hacer esto
+            $agotamiento = 50;
+            $puedoHacerlo = comprobarEnergia($agotamiento);
 
-            $yourResult = getPersonajeRow($miId);
+            if($puedoHacerlo === 1){
 
-            $suBonusDestreza = 0;
-            $suBonusFuerza = 0;
-            $suBonusAgilidad = 0;
-            $suBonusResistencia = 0;
-            $suBonusEspiritu = 0;
-            $suBonusEstilo = 0;
-            $suBonusIngenio = 0;
-            $suBonusPercepcion = 0;
+                $miBonusDestreza = 0;
+                $miBonusFuerza = 0;
+                $miBonusAgilidad = 0;
+                $miBonusResistencia = 0;
+                $miBonusEspiritu = 0;
+                $miBonusEstilo = 0;
+                $miBonusIngenio = 0;
+                $miBonusPercepcion = 0;
 
-            $opponentResult = getPersonajeRow($id);
+                $yourResult = getPersonajeRow($miId);
 
-            //Consultar que objetos tiene mi personaje en cada slot (se ordenan por slot)
-            $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$miId'";
-            $stmt = $db->query($sql);
-            $result = $stmt->fetchAll();
+                $suBonusDestreza = 0;
+                $suBonusFuerza = 0;
+                $suBonusAgilidad = 0;
+                $suBonusResistencia = 0;
+                $suBonusEspiritu = 0;
+                $suBonusEstilo = 0;
+                $suBonusIngenio = 0;
+                $suBonusPercepcion = 0;
 
-            foreach ($result as $objetosPersonaje) {
-                $miBonusDestreza = $miBonusDestreza + $objetosPersonaje['destreza'];
-                $miBonusFuerza = $miBonusFuerza + $objetosPersonaje['fuerza'];
-                $miBonusAgilidad = $miBonusAgilidad + $objetosPersonaje['agilidad'];
-                $miBonusResistencia = $miBonusResistencia + $objetosPersonaje['resistencia'];
-                $miBonusEspiritu = $miBonusEspiritu + $objetosPersonaje['espiritu'];
-                $miBonusEstilo = $miBonusEstilo + $objetosPersonaje['estilo'];
-                $miBonusIngenio = $miBonusIngenio + $objetosPersonaje['ingenio'];
-                $miBonusPercepcion = $miBonusPercepcion + $objetosPersonaje['percepcion'];
-            }
+                $opponentResult = getPersonajeRow($id);
 
-            //Consultar que objetos tiene su personaje en cada slot (se ordenan por slot)
-            $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id'";
-            $stmt = $db->query($sql);
-            $result = $stmt->fetchAll();
+                //Consultar que objetos tiene mi personaje en cada slot (se ordenan por slot)
+                $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$miId'";
+                $stmt = $db->query($sql);
+                $result = $stmt->fetchAll();
 
-            foreach ($result as $objetosRival) {
-                $suBonusDestreza = $suBonusDestreza + $objetosRival['destreza'];
-                $suBonusFuerza = $suBonusFuerza + $objetosRival['fuerza'];
-                $suBonusAgilidad = $suBonusAgilidad + $objetosRival['agilidad'];
-                $suBonusResistencia = $suBonusResistencia + $objetosRival['resistencia'];
-                $suBonusEspiritu = $suBonusEspiritu + $objetosRival['espiritu'];
-                $suBonusEstilo = $suBonusEstilo + $objetosRival['estilo'];
-                $suBonusIngenio = $suBonusIngenio + $objetosRival['ingenio'];
-                $suBonusPercepcion = $suBonusPercepcion + $objetosRival['percepcion'];
-            }
+                foreach ($result as $objetosPersonaje) {
+                    $miBonusDestreza = $miBonusDestreza + $objetosPersonaje['destreza'];
+                    $miBonusFuerza = $miBonusFuerza + $objetosPersonaje['fuerza'];
+                    $miBonusAgilidad = $miBonusAgilidad + $objetosPersonaje['agilidad'];
+                    $miBonusResistencia = $miBonusResistencia + $objetosPersonaje['resistencia'];
+                    $miBonusEspiritu = $miBonusEspiritu + $objetosPersonaje['espiritu'];
+                    $miBonusEstilo = $miBonusEstilo + $objetosPersonaje['estilo'];
+                    $miBonusIngenio = $miBonusIngenio + $objetosPersonaje['ingenio'];
+                    $miBonusPercepcion = $miBonusPercepcion + $objetosPersonaje['percepcion'];
+                }
 
-            if($yourResult[0]['agilidad'] + $miBonusAgilidad > $opponentResult[0]['agilidad'] + $suBonusAgilidad){
-                hasGanado($id);
+                //Consultar que objetos tiene su personaje en cada slot (se ordenan por slot)
+                $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id'";
+                $stmt = $db->query($sql);
+                $result = $stmt->fetchAll();
+
+                foreach ($result as $objetosRival) {
+                    $suBonusDestreza = $suBonusDestreza + $objetosRival['destreza'];
+                    $suBonusFuerza = $suBonusFuerza + $objetosRival['fuerza'];
+                    $suBonusAgilidad = $suBonusAgilidad + $objetosRival['agilidad'];
+                    $suBonusResistencia = $suBonusResistencia + $objetosRival['resistencia'];
+                    $suBonusEspiritu = $suBonusEspiritu + $objetosRival['espiritu'];
+                    $suBonusEstilo = $suBonusEstilo + $objetosRival['estilo'];
+                    $suBonusIngenio = $suBonusIngenio + $objetosRival['ingenio'];
+                    $suBonusPercepcion = $suBonusPercepcion + $objetosRival['percepcion'];
+                }
+
+                if($yourResult[0]['agilidad'] + $miBonusAgilidad > $opponentResult[0]['agilidad'] + $suBonusAgilidad){
+                    hasGanado($id);
+                }
+                else{
+                    hasPerdido($id);
+                }
+
+                //El atacante pierde energía
+                //Aunque el minimo para atacar sea tener 50, puede ser interesante que a veces no le agote del todo a 0. 
+                $restaEnergia = rand(30,100);
+                $sql = "UPDATE personajes SET energia = CASE WHEN energia-'$restaEnergia' < 0 THEN 0 ELSE energia-'$restaEnergia' END WHERE id='$miId'";
+                $stmt = $db->query($sql);
+                $stmt->fetchAll();
             }
             else{
-                hasPerdido($id);
-            }
-
-            //El atacante pierde energía
-            //Aunque el minimo para atacar sea tener 50, puede ser interesante que a veces no le agote del todo a 0. 
-            $restaEnergia = rand(30,100);
-            $sql = "UPDATE personajes SET energia = CASE WHEN energia-'$restaEnergia' < 0 THEN 0 ELSE energia-'$restaEnergia' END WHERE id='$miId'";
-            $stmt = $db->query($sql);
-            $stmt->fetchAll();
+                    echo "¡Ay! Estoy sin energia ahora mismo para hacer eso";
+                }
         }
         else{
-                echo "¡Ay! Estoy sin energia ahora mismo para hacer eso";
-            }
+            echo "No estamos en la misma zona.";
+        }
     }
     
     function atacarMonstruo($idMonstruo){

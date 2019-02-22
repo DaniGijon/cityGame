@@ -1,5 +1,16 @@
 <?php
 
+function comprobarDinero(){
+   global $db;
+   $id = $_SESSION['loggedIn']; 
+   
+   $sql = "SELECT cash,enBanco FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   return $result;
+}
+
 function comprobarCoste($coste){
    global $db;
    $id = $_SESSION['loggedIn']; 
@@ -32,6 +43,26 @@ function comprobarEnergia($agotamiento){
        $puedoHacerlo = 0;
    }
    return $puedoHacerlo;
+}
+
+function comprobarZonaBarrioPersonajes($id,$miId){
+    global $db;
+     $sql = "SELECT personajes.zona, personajes.barrio FROM personajes WHERE id='$id'";
+     $stmt = $db->query($sql);
+     $resultRival = $stmt->fetchAll();   
+    
+     $sql = "SELECT personajes.zona, personajes.barrio FROM personajes WHERE id='$miId'";
+     $stmt = $db->query($sql);
+     $result = $stmt->fetchAll();
+     
+     if(($result[0]['zona'] == $resultRival[0]['zona'])&&($result[0]['barrio'] == $resultRival[0]['barrio'])){
+         $estamosJuntos = 1;
+     }
+     else{
+         
+         $estamosJuntos = 0;
+     }  
+     return $estamosJuntos;
 }
 //Comprobar que el personaje está efectivamente en esa zona
 function comprobarZona1Barrio1(){

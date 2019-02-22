@@ -1,4 +1,24 @@
 <?php
+
+function actualizarDinero($operacion, $cantidadDeposito, $cantidadRetirada){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    if($operacion === "depositarDinero"){
+        echo "Quiero depositar" . $cantidadDeposito;
+        $sql = "UPDATE personajes SET enBanco=enBanco + $cantidadDeposito, cash=cash-$cantidadDeposito WHERE id='$id'";
+        $stmt = $db->query($sql);
+        header("location: ?page=zona&message=Exito");
+        
+    }
+    elseif ($operacion === "retirarDinero") {
+        echo "Quiero retirar" . $cantidadRetirada;
+        $sql = "UPDATE personajes SET cash=cash+$cantidadRetirada*0.95, enBanco=enBanco-$cantidadRetirada WHERE id='$id'";
+        $stmt = $db->query($sql);
+        header("location: ?page=zona&message=Exito");
+    }
+    
+}
 //Para viajar de una zona a otra
 function actualizarZona($casilla){
     global $db;
@@ -227,6 +247,10 @@ if($_GET['action'] === "actualizarZona"){
 
 if($_GET['action'] === "accionSpot"){
     accionSpot($_POST['cbox1']);
+}
+
+if($_GET['action'] === "actualizarDinero"){
+    actualizarDinero($_POST['cbox1'], $_POST['cantidadDeposito'], $_POST['cantidadRetirada']);
 }
 
 ?>

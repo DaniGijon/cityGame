@@ -2,7 +2,11 @@
 global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona1Barrio1();
+        comprobarZona2Barrio6();
+        
+        $result = comprobarDinero();
+        $dineroEnBanco = $result[0]['enBanco'];
+        $dineroEnCash = $result[0]['cash'];
         
         echo "<div id='moduloZona'>";
             
@@ -12,14 +16,17 @@ global $db;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                
                 echo "<div class='seccionSpotOpciones'>";
-                echo "Un día soleado y tranquilo. Buen momento para subir a la bici y entrenar estas piernas. <br><br>";
-                ?>
-<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">
-                <input type="checkbox" name="cbox1" value="pedaleoSuave"> <label for="cbox3">Pedaleo Suave (Energia Baja)</label><br>
-                <input type="checkbox" name="cbox1" value="pedaleoFuerte"> <label for="cbox4">Ritmito Generoso (Energia Media)</label><br>
-                <label><input type="checkbox" name="cbox1" value="indurain"> ¡Soy Induráin en la Vuelta a España! (Energia Alta)</label><br><br>
+                echo "\"¿Por qué arriesgarse a llevar dinero encima y ser asaltado en plena calle si podemos robarte directamente nosotros?\" <br><br>";
+                echo "Actualmente dispone de " . $dineroEnBanco . "€ en la cuenta bancaria. <br>";
+                echo "Llevas " . $dineroEnCash . "€ en el bolsillo.";
                 
-                <input type="submit" value="Vamos">
+                ?>
+                
+<form id = "selectorOpciones" action="?bPage=actualizaciones&action=actualizarDinero&nonUI" method="post">
+    <br><input type="checkbox" name="cbox1" value="depositarDinero" checked="true"> <label for="cbox3">Meter en banco: <input name="cantidadDeposito" style="width:25%" type=number min="0">€<br></label><br>
+                <input type="checkbox" name="cbox1" value="retirarDinero"> <label for="cbox4">Deseo retirar <input name="cantidadRetirada" style="width:25%" type=number min="0">€ (5% Comisión)</label><br><br>
+                
+                <input type="submit" value="Vale">
 </form>                
                 <script>
                     
