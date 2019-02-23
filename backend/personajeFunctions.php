@@ -27,7 +27,7 @@
                         echo "<span id='0' class='cabezaBox objetoBox'>" . "cabeza" . "</span>";
                     echo "</div>";
                     
-                    
+                    //Objetos que tiene SIN EQUIPAR el personaje
                     echo"<div id='capaBolsa'>";
                         $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7";
                         $stmt = $db->query($sql);
@@ -65,11 +65,11 @@
                 echo "</div>";
          
                 echo "<div id='infoObjeto'>";
-                //Consultar que objetos tiene el personaje en cada slot (se ordenan por slot)
-                    $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id'";
+                //Consultar que objetos tiene EQUIPADO el personaje en cada slot (se ordenan por slot)
+                    $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7 ";
                     $stmt = $db->query($sql);
                     $result = $stmt->fetchAll();
-                    var_dump($objetosDB);
+                    var_dump($result);
                     
                     foreach ($result as $objetosPersonaje) {
                         $bonusDestreza = $bonusDestreza + $objetosPersonaje['destreza'];
@@ -175,8 +175,50 @@
                 $(".objetoBox").mouseleave(function(e){
                     $("#infoObjeto").css("display", "none");
                 });
+                
+                $(".nuevoBoxBolsa").click(function(event){
+                   var id = $(this).attr('id');
+                     
+                   $.post("?bPage=personajeFunctions", {
+                       cosaId: id
+                   }).done(function(){
+                       $("#personajeArea").load("index.php?bPage=personajeFunctions&equipar&nonUI")
+                   })
+                      
+                });
            </script>   
 <?php
+    }
+    
+    function equipar($cosaId){
+        global $db;
+        $id = $_SESSION['loggedIn'];       
+        
+        if($cosaId > 0 && $cosaId < 20 ){
+            $slot = 6; //mascota
+        }
+        else if ($cosaId >= 20 && $cosaId < 100 ){
+            $slot = 5; //vehiculo
+        }
+        else if ($cosaId >= 100 && $cosaId < 200 ){
+            $slot = 0; //cabeza
+        }
+        else if ($cosaId >= 200 && $cosaId < 300 ){
+            $slot = 1; //torso
+        }
+        else if ($cosaId >= 300 && $cosaId < 400 ){
+            $slot = 3; //HABRA QUE ELEGIR MANO PERO DE MOMENTO SE EQUIPA EN DERECHA
+        }
+        else if ($cosaId >= 400 && $cosaId < 500 ){
+            $slot = 2; //pies
+        }
+        else if ($cosaId >= 500){
+            $slot = 7; //bolsa
+        }
+        
+        $sql = "UPDATE inventario SET idO=$cosaId WHERE (idP='$id' AND slot = '$slot')";
+        $stmt = $db->query($sql);
+        
     }
 
     function listJugadorRival($id){
@@ -228,5 +270,9 @@
     
     if(isset($_POST['objetoBolsaId'])){
         equiparCabeza($_POST['objetoBolsaId']);
+    }
+    
+    if(isset($_POST['cosaId'])){
+        equipar($_POST['cosaId']);
     }
 ?>

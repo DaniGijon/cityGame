@@ -1,5 +1,6 @@
 <?php
 
+
 function actualizarDinero($operacion, $cantidadDeposito, $cantidadRetirada){
     global $db;
     $id = $_SESSION['loggedIn'];

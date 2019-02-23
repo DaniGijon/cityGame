@@ -296,7 +296,7 @@ h1{
     height: 100%;
     text-align: center;
     margin-left: 15px;
-    display:block;
+    display:none;
 }
 
 .cajitaSpot{
@@ -789,7 +789,7 @@ h1{
 /* MEJORANDO LA VENTANA DE PERSONAJE */
 
 #infoObjeto{
-    background-color: #ffcc99;
+    background-color:white;
     padding: 10px;
     display: none;
     position: absolute;
