@@ -5,7 +5,6 @@
         
         $id = $_SESSION['loggedIn'];
         
-        
         echo "<div id='moduloZona'>";
             
             echo "<div class='contenido'>";
@@ -40,12 +39,12 @@
 		</form>
                         <?php
                     echo "</div>";
-                echo "</div>";
+                echo "</div>"; // FIN de div seccionDescripcionZona
                 
                 echo "<div class='seccionDescripcionSpot'>";
                     mostrarSpot($spotId);
                 
-                echo "</div>";
+                echo "</div>"; // FIN de div seccionDescripcionZona
                 
             echo "</div>"; //FIN DE div contenido
 

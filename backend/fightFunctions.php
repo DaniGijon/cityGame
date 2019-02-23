@@ -159,6 +159,7 @@
             return $expGanada;
         }
         else{
+            //Salgo derrotado y me llevan al Hospital
             $sql = "UPDATE personajes SET salud = '0',barrio = '9', zona = '1' WHERE id='$miId'";
             $stmt = $db->query($sql);
         
