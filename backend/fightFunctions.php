@@ -62,8 +62,8 @@
 
                 $rivalResult = getPersonajeRow($id);
 
-                //Consultar que objetos tiene mi personaje en cada slot (se ordenan por slot)
-                $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$miId'";
+                //Consultar que objetos tiene equipados mi personaje en cada slot (se ordenan por slot)
+                $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$miId' AND inventario.slot < 8";
                 $stmt = $db->query($sql);
                 $result = $stmt->fetchAll();
 
@@ -78,8 +78,8 @@
                     $miBonusPercepcion = $miBonusPercepcion + $objetosPersonaje['percepcion'];
                 }
 
-                //Consultar que objetos tiene su personaje en cada slot (se ordenan por slot)
-                $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id'";
+                //Consultar que objetos tiene equipados su personaje en cada slot (se ordenan por slot)
+                $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot < 8";
                 $stmt = $db->query($sql);
                 $result = $stmt->fetchAll();
 
@@ -109,6 +109,8 @@
                 $rondas = 10;
                 $miSalud = $miResult[0]['salud'];
                 $rivalSalud = $rivalResult[0]['salud'];
+                $miAturdimiento = 0;
+                $rivalAturdimiento = 0;
                 
                 echo 'Salud inicial: ' . $miResult[0]['nombre'] . ' ' . $miSalud . ' //// ' . $rivalResult[0]['nombre'] . ' ' . $rivalSalud . '<br>';
                 
@@ -117,12 +119,12 @@
                     //Calcular cuanto sacan en esta ronda, y en caso de ser negativo, ponerlos a '0'
                     $rondaMiDestreza = rand($miDestreza-10, $miDestreza+10);
                     $rondaRivalAgilidad = rand($rivalAgilidad-10, $rivalAgilidad+10);
-                    $rondaMiFuerza = rand($miFuerza-10, $miFuerza+10);
-                    $rondaRivalResistencia = rand($rivalResistencia-10, $rivalResistencia+10);
+                    $rondaMiFuerza = rand($miFuerza-5, $miFuerza+5);
+                    $rondaRivalResistencia = rand($rivalResistencia-5, $rivalResistencia+5);
                     $rondaRivalDestreza = rand($rivalDestreza-10, $rivalDestreza+10);
                     $rondaMiAgilidad = rand($miAgilidad-10, $miAgilidad+10);
-                    $rondaRivalFuerza = rand($rivalFuerza-10, $rivalFuerza+10);
-                    $rondaMiResistencia = rand($miResistencia-10, $miResistencia+10);
+                    $rondaRivalFuerza = rand($rivalFuerza-5, $rivalFuerza+5);
+                    $rondaMiResistencia = rand($miResistencia-5, $miResistencia+5);
                     
                     if($rondaMiDestreza < 0){
                         $rondaMiDestreza = 0;
@@ -155,130 +157,1222 @@
                     echo '¡Comienza la ronda ' . $i . '!<br>';
                     $iniciativa = rand(1,2);
                     if($iniciativa === 1){
-                        echo $miResult[0]['nombre'] . ' toma la iniciativa<br>';
-                        echo $miResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaMiDestreza . '<br>';
-                        echo $rivalResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaRivalAgilidad . '<br>';
-                        if($rondaMiDestreza >= $rondaRivalAgilidad){
-                            echo '¡' . $miResult[0]['nombre'] . ' golpea! A ver cuánto daño ha sido... <br>';
-                            
-                            //Ver si ha sido Golpe Crítico
-                            $tiradaCritico = rand(1,5);
-                            if($tiradaCritico < 5){
-                                $daño = $rondaMiFuerza - $rondaRivalResistencia;
-                            }
-                            else{
-                                echo '¡Golpe Crítico!<br>';
-                                $daño = $rondaMiFuerza * 1.5 - $rondaRivalResistencia;
-                            }
-                            if($daño <= 0){
-                                $daño = 0;
-                            }
-                            echo 'Daño = ' . $daño . '<br>';
-                            $rivalSalud = $rivalSalud - $daño;
-                            echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
-                            
-                            if($rivalSalud <= 0){
-                                hasGanado($id);
+                        if($miAturdimiento > 0){
+                            $miAturdimiento = 0;
+                            echo 'En esta ronda ' . $miResult[0]['nombre'] . ' se está recuperando del aturdimiento y no puede atacar. <br>';
+                            echo 'Turno de ' . $rivalResult[0]['nombre'] . '<br>';
+
+                            echo $rivalResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaRivalDestreza . '<br>';
+                            echo $miResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaMiAgilidad . '<br>';
+                            //Acciones segun la diferencia de DES VS AGI
+                            //Caso 1: DES >20 AGI
+                            if(($rondaRivalDestreza - $rondaMiAgilidad) > 20){
+                                echo '¡' . $rivalResult[0]['nombre'] . ' lanza un ataque sorpresa que pilla a ' . $miResult[0]['nombre'] . ' totalmente desprotegido.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //BONO de gran DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaRivalFuerza;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaRivalFuerza * 1.5;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                //BONO de aturdimiento por gran DES vs AGI
+                                $golpeAturdidor = rand(1, 3);
+                                if($golpeAturdidor > 2){
+                                    $miAturdimiento = 1;
+                                    echo '¡Qué golpetazo! ' . $miResult[0]['nombre'] . ' queda en Aturdimiento<br>';
+                                }
+                                echo 'Daño = ' . $daño . '<br>';
+                                $miSalud = $miSalud - $daño;
+                                echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                if($miSalud <= 0){
+                                    hasPerdido($id);
                                 break;
+                                }
+                            }
+                            //Caso 2: DES >10 AGI
+                            elseif(($rondaRivalDestreza - $rondaMiAgilidad) > 10 && ($rondaRivalDestreza - $rondaMiAgilidad) <= 20){
+                                echo '¡' . $rivalResult[0]['nombre'] . ' carga ferozmente contra ' . $miResult[0]['nombre'] . ' que apenas tiene tiempo de defenderse.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //BONO de gran DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaRivalFuerza * 1.4 - $rondaMiResistencia * 0.6;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaRivalFuerza * 1.5 * 1.4 - $rondaMiResistencia * 0.6;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $miSalud = $miSalud - $daño;
+                                echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                if($miSalud <= 0){
+                                    hasPerdido($id);
+                                break;
+                                }
+                            }
+                            //Caso 3: DES >4 AGI
+                            elseif(($rondaRivalDestreza - $rondaMiAgilidad) > 4 && ($rondaRivalDestreza - $rondaMiAgilidad) <= 10){
+                                echo '¡' . $rivalResult[0]['nombre'] . ' ataca con destreza y ' . $miResult[0]['nombre'] . ' se ve en apuros.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //BONO de gran DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaRivalFuerza * 1.2 - $rondaMiResistencia * 0.8;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaRivalFuerza * 1.5 * 1.2 - $rondaMiResistencia * 0.8;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $miSalud = $miSalud - $daño;
+                                echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                if($miSalud <= 0){
+                                    hasPerdido($id);
+                                break;
+                                }
+                            }
+                            //Caso 4: DES [-4,+4] AGI
+                            elseif(($rondaRivalDestreza - $rondaMiAgilidad) > -5 && ($rondaRivalDestreza - $rondaMiAgilidad) < 5 ){
+                                echo '¡' . $rivalResult[0]['nombre'] . ' intenta golpear a ' . $miResult[0]['nombre'] . ' que está preparado.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaRivalFuerza - $rondaMiResistencia;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaRivalFuerza * 1.5 - $rondaMiResistencia;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                               
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $miSalud = $miSalud - $daño;
+                                echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                if($miSalud <= 0){
+                                    hasPerdido($id);
+                                break;
+                                }
+                            }
+                            //Caso 5: DES <-4 AGI
+                            elseif(($rondaRivalDestreza - $rondaMiAgilidad) >= -10 && ($rondaRivalDestreza - $rondaMiAgilidad) <= -5 ){
+                                echo '¡' . $rivalResult[0]['nombre'] . ' prepara un ataque poco diestro contra ' . $miResult[0]['nombre'] . ' que ha leído la intención y se anticipa.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //Penalizacion baja DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaRivalFuerza * 0.8 - $rondaMiResistencia * 1.2;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaRivalFuerza * 1.5 * 0.8 - $rondaMiResistencia * 1.2;
+                                }
+                                
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $miSalud = $miSalud - $daño;
+                                echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                if($miSalud <= 0){
+                                    hasPerdido($id);
+                                break;
+                                }
+                            }
+                            //Caso 6: DES <10 AGI
+                            elseif(($rondaRivalDestreza - $rondaMiAgilidad) >= -20 && ($rondaRivalDestreza - $rondaMiAgilidad) < -10 ){
+                                echo '¡' . $rivalResult[0]['nombre'] . ' intenta una torpe carga contra ' . $miResult[0]['nombre'] . ' que ya le espera en posición muy ventajosa.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //Penalizacion baja DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaRivalFuerza * 0.6 - $rondaMiResistencia * 1.4;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaRivalFuerza * 1.5 * 0.6 - $rondaMiResistencia * 1.4;
+                                }
+                                
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $miSalud = $miSalud - $daño;
+                                echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                if($miSalud <= 0){
+                                    hasPerdido($id);
+                                break;
+                                }
+                            }
+                            //Caso 7: DES <20 AGI
+                            elseif(($rondaRivalDestreza - $rondaMiAgilidad) < -20 ){
+                                echo '¡' . $rivalResult[0]['nombre'] . ' cae al suelo mareado cuando intentaba perseguir a un ' . $miResult[0]['nombre'] . 'mucho más ágil. ¡Qué verguenza!<br>';
+
+                                //Tirada de contrataque
+                                $tiradaContraataque = rand(1,5);
+                                if($tiradaContraataque > 4){
+                                    echo 'Situación aprovechada por ' . $miResult[0]['nombre'] . ' que lanza un contrataque mientras ' . $rivalResult[0]['nombre'] . ' recogía sus cosas del suelo.<br>';
+                                    $daño = ($rondaMiFuerza - $rondaRivalResistencia);
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $rivalSalud = $rivalSalud - $daño;
+                                    echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                    if($rivalSalud <= 0){
+                                        hasGanado($id);
+                                    break;
+                                    }
+                                }
                             }
                         }
                         else{
-                            echo $rivalResult[0]['nombre'] . ' logra esquivar el golpe<br>';
-                        }
-                        echo 'Turno de ' . $rivalResult[0]['nombre'] . '<br>';
-                        
-                        echo $rivalResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaRivalDestreza . '<br>';
-                        echo $miResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaMiAgilidad . '<br>';
-                        if($rondaRivalDestreza >= $rondaMiAgilidad){
-                            echo '¡' . $rivalResult[0]['nombre'] . ' golpea! A ver cuánto daño ha sido... <br>';
+                            echo $miResult[0]['nombre'] . ' toma la iniciativa<br>';
                             
-                            //Ver si ha sido Golpe Crítico
-                            $tiradaCritico = rand(1,5);
-                            if($tiradaCritico < 5){
-                                $daño = $rondaRivalFuerza - $rondaMiResistencia;
+                            echo $miResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaMiDestreza . '<br>';
+                            echo $rivalResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaRivalAgilidad . '<br>';
+                            
+                            //Acciones segun la diferencia de DES VS AGI
+                            //Caso 1: DES >20 AGI
+                            if(($rondaMiDestreza - $rondaRivalAgilidad) > 20){
+                                echo '¡' . $miResult[0]['nombre'] . ' lanza un ataque sorpresa que pilla a ' . $rivalResult[0]['nombre'] . ' totalmente desprotegido.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //BONO de gran DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                //BONO de aturdimiento por gran DES vs AGI
+                                $golpeAturdidor = rand(1, 3);
+                                if($golpeAturdidor > 2){
+                                    $rivalAturdimiento = 1;
+                                    echo '¡Qué golpetazo! ' . $rivalResult[0]['nombre'] . ' queda en Aturdimiento<br>';
+                                }
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 2: DES >10 AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) > 10 && ($rondaMiDestreza - $rondaRivalAgilidad) <= 20){
+                                echo '¡' . $miResult[0]['nombre'] . ' carga ferozmente contra ' . $rivalResult[0]['nombre'] . ' que apenas tiene tiempo de defenderse.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //BONO de gran DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza * 1.4 - $rondaRivalResistencia * 0.6;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5 * 1.4 - $rondaRivalResistencia * 0.6;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 3: DES >4 AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) > 4 && ($rondaMiDestreza - $rondaRivalAgilidad) <= 10){
+                                echo '¡' . $miResult[0]['nombre'] . ' ataca con destreza y ' . $rivalResult[0]['nombre'] . ' se ve en apuros.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //BONO de gran DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza * 1.2 - $rondaRivalResistencia * 0.8;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5 * 1.2 - $rondaRivalResistencia * 0.8;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 4: DES [-4,+4] AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) > -5 && ($rondaMiDestreza - $rondaRivalAgilidad) < 5 ){
+                                echo '¡' . $miResult[0]['nombre'] . ' intenta golpear a ' . $rivalResult[0]['nombre'] . ' que está preparado.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza - $rondaRivalResistencia;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5 - $rondaRivalResistencia;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                               
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 5: DES <-4 AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) >= -10 && ($rondaMiDestreza - $rondaRivalAgilidad) <= -5 ){
+                                echo '¡' . $miResult[0]['nombre'] . ' prepara un ataque poco diestro contra ' . $rivalResult[0]['nombre'] . ' que ha leído la intención y se anticipa.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //Penalizacion baja DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza * 0.8 - $rondaRivalResistencia * 1.2;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5 * 0.8 - $rondaRivalResistencia * 1.2;
+                                }
+                                
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 6: DES <10 AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) >= -20 && ($rondaMiDestreza - $rondaRivalAgilidad) < -10 ){
+                                echo '¡' . $miResult[0]['nombre'] . ' intenta una torpe carga contra ' . $rivalResult[0]['nombre'] . ' que ya le espera en posición muy ventajosa.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //Penalizacion baja DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza * 0.6 - $rondaRivalResistencia * 1.4;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5 * 0.6 - $rondaRivalResistencia * 1.4;
+                                }
+                                
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 7: DES <20 AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) < -20 ){
+                                echo '¡' . $miResult[0]['nombre'] . ' cae al suelo mareado cuando intentaba perseguir a un ' . $rivalResult[0]['nombre'] . 'mucho más ágil. ¡Qué verguenza!<br>';
+
+                                //Tirada de contrataque
+                                $tiradaContraataque = rand(1,5);
+                                if($tiradaContraataque > 4){
+                                    echo 'Situación aprovechada por ' . $rivalResult[0]['nombre'] . ' que lanza un contrataque mientras ' . $miResult[0]['nombre'] . ' recogía sus cosas del suelo.<br>';
+                                    $daño = ($rondaRivalFuerza - $rondaMiResistencia);
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                            }
+                            
+                            
+                            echo 'Turno de ' . $rivalResult[0]['nombre'] . '<br>';
+                            if($rivalAturdimiento > 0){
+                                
+                                $rivalAturdimiento = 0;
+                                echo 'En esta ronda ' . $rivalResult[0]['nombre'] . ' se está recuperando del Aturdimiento y no puede atacar.<br>';
+                                
                             }
                             else{
-                                echo '¡Golpe Crítico!<br>';
-                                $daño = $rondaRivalFuerza * 1.5 - $rondaMiResistencia;
+
+                                //Acciones segun la diferencia de DES VS AGI
+                                //Caso 1: DES >20 AGI
+                                if(($rondaRivalDestreza - $rondaMiAgilidad) > 20){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' lanza un ataque sorpresa que pilla a ' . $miResult[0]['nombre'] . ' totalmente desprotegido.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //BONO de gran DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    
+                                    //BONO de aturdimiento por gran DES vs AGI
+                                    $golpeAturdidor = rand(1, 3);
+                                    if($golpeAturdidor > 2){
+                                        $miAturdimiento = 1;
+                                        echo '¡Qué golpetazo! ' . $miResult[0]['nombre'] . ' queda en Aturdimiento<br>';
+                                    }
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 2: DES >10 AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) > 10 && ($rondaRivalDestreza - $rondaMiAgilidad) <= 20){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' carga ferozmente contra ' . $miResult[0]['nombre'] . ' que apenas tiene tiempo de defenderse.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //BONO de gran DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza * 1.4 - $rondaMiResistencia * 0.6;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5 * 1.4 - $rondaMiResistencia * 0.6;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 3: DES >4 AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) > 4 && ($rondaRivalDestreza - $rondaMiAgilidad) <= 10){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' ataca con destreza y ' . $miResult[0]['nombre'] . ' se ve en apuros.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //BONO de gran DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza * 1.2 - $rondaMiResistencia * 0.8;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5 * 1.2 - $rondaMiResistencia * 0.8;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 4: DES [-4,+4] AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) > -5 && ($rondaRivalDestreza - $rondaMiAgilidad) < 5 ){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' intenta golpear a ' . $miResult[0]['nombre'] . ' que está preparado.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza - $rondaMiResistencia;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5 - $rondaMiResistencia;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+
+
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 5: DES <-4 AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) >= -10 && ($rondaRivalDestreza - $rondaMiAgilidad) <= -5 ){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' prepara un ataque poco diestro contra ' . $miResult[0]['nombre'] . ' que ha leído la intención y se anticipa.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //Penalizacion bajo DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza * 0.8 - $rondaMiResistencia * 1.2;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5 * 0.8 - $rondaMiResistencia * 1.2;
+                                    }
+
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 6: DES <10 AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) >= -20 && ($rondaRivalDestreza - $rondaMiAgilidad) < -10 ){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' intenta una torpe carga contra ' . $miResult[0]['nombre'] . ' que ya le espera en posición muy ventajosa.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //Penalizacion baja DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza * 0.6 - $rondaMiResistencia * 1.4;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5 * 0.6 - $rondaMiResistencia * 1.4;
+                                    }
+
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 7: DES <20 AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) < -20 ){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' cae al suelo mareado cuando intentaba perseguir a un ' . $miResult[0]['nombre'] . 'mucho más ágil. ¡Qué verguenza!<br>';
+
+                                    //Tirada de contrataque
+                                    $tiradaContraataque = rand(1,5);
+                                    if($tiradaContraataque > 4){
+                                        echo 'Situación aprovechada por ' . $miResult[0]['nombre'] . ' que lanza un contrataque mientras ' . $rivalResult[0]['nombre'] . ' recogía sus cosas del suelo.<br>';
+                                        $daño = ($rondaMiFuerza - $rondaRivalResistencia);
+                                        if($daño <= 0){
+                                            $daño = 0;
+                                        }
+                                        echo 'Daño = ' . $daño . '<br>';
+                                        $rivalSalud = $rivalSalud - $daño;
+                                        echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                        if($rivalSalud <= 0){
+                                            hasGanado($id);
+                                        break;
+                                        }
+                                    }
+                                }
                             }
-                            if($daño <= 0){
-                                $daño = 0;
-                            }
-                            echo 'Daño = ' . $daño . '<br>';
-                            $miSalud = $miSalud - $daño;
-                            echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
-                            
-                            if($miSalud <= 0){
-                                hasPerdido($id);
-                            break;
-                            }
-                        }
-                        else{
-                            echo $miResult[0]['nombre'] . 'logra esquivar el golpe<br>';
                         }
                     }
                     else{
-                        echo $rivalResult[0]['nombre'] . ' toma la iniciativa<br>';
                         
-                        echo $rivalResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaRivalDestreza . '<br>';
-                        echo $miResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaMiAgilidad . '<br>';
-                        if($rondaRivalDestreza >= $rondaMiAgilidad){
-                            echo '¡' . $rivalResult[0]['nombre'] . ' golpea! A ver cuánto daño ha sido... <br>';
+                        if($rivalAturdimiento > 0){
+                            $rivalAturdimiento = 0;
+                            echo 'En esta ronda ' . $rivalResult[0]['nombre'] . ' se está recuperando del Aturdimiento y no puede atacar.<br>';
+                            echo 'Turno de ' . $miResult[0]['nombre'] . '<br>';
+
+                            echo $miResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaMiDestreza . '<br>';
+                            echo $rivalResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaRivalAgilidad . '<br>';
                             
-                            //Ver si ha sido Golpe Crítico
-                            $tiradaCritico = rand(1,5);
-                            if($tiradaCritico < 5){
-                                $daño = $rondaRivalFuerza - $rondaMiResistencia;
-                            }
-                            else{
-                                echo '¡Golpe Crítico!<br>';
-                                $daño = $rondaRivalFuerza * 1.5 - $rondaMiResistencia;
-                            }
-                            if($daño <= 0){
-                                $daño = 0;
-                            }
-                            echo 'Daño = ' . $daño . '<br>';
-                            $miSalud = $miSalud - $daño;
-                            echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
-                            
-                            if($miSalud <= 0){
-                                hasPerdido($id);
+                            //Acciones segun la diferencia de DES VS AGI
+                            //Caso 1: DES >20 AGI
+                            if(($rondaMiDestreza - $rondaRivalAgilidad) > 20){
+                                echo '¡' . $miResult[0]['nombre'] . ' lanza un ataque por sorpresa que pilla a ' . $rivalResult[0]['nombre'] . ' totalmente desprotegido.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //BONO de gran DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                //BONO de aturdimiento por gran DES vs AGI
+                                $golpeAturdidor = rand(1, 3);
+                                if($golpeAturdidor > 2){
+                                    $rivalAturdimiento = 1;
+                                    echo '¡Qué golpetazo! ' . $rivalResult[0]['nombre'] . ' queda en Aturdimiento<br>';
+                                }
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
                                 break;
+                                }
                             }
+                            //Caso 2: DES >10 AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) > 10 && ($rondaMiDestreza - $rondaRivalAgilidad) <= 20){
+                                echo '¡' . $miResult[0]['nombre'] . ' carga ferozmente contra ' . $rivalResult[0]['nombre'] . ' que apenas tiene tiempo de defenderse.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //BONO gran DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza * 1.4 - $rondaRivalResistencia * 0.6;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5 *1.4 - $rondaRivalResistencia * 0.6;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 3: DES >4 AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) > 4 && ($rondaMiDestreza - $rondaRivalAgilidad) <= 10){
+                                echo '¡' . $miResult[0]['nombre'] . ' ataca con destreza y ' . $rivalResult[0]['nombre'] . ' se ve en apuros.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //BONO gran DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza * 1.2 - $rondaRivalResistencia * 0.8;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5 * 1.2 - $rondaRivalResistencia * 0.8;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 4: DES [-4,+4] AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) > -5 && ($rondaMiDestreza - $rondaRivalAgilidad) < 5 ){
+                                echo '¡' . $miResult[0]['nombre'] . ' intenta golpear a ' . $rivalResult[0]['nombre'] . ' que está preparado.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza - $rondaRivalResistencia;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5 - $rondaRivalResistencia;
+                                }
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                               
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 5: DES <-4 AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) >= -10 && ($rondaMiDestreza - $rondaRivalAgilidad) <= -5 ){
+                                echo '¡' . $miResult[0]['nombre'] . ' prepara un ataque poco diestro contra ' . $rivalResult[0]['nombre'] . ' que ha leído la intención y se anticipa.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //Penalizacion por baja DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza * 0.8 - $rondaRivalResistencia * 1.2;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5 * 0.8 - $rondaRivalResistencia * 1.2;
+                                }
+                                
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 6: DES <10 AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) >= -20 && ($rondaMiDestreza - $rondaRivalAgilidad) < -10 ){
+                                echo '¡' . $miResult[0]['nombre'] . ' intenta una torpe carga contra ' . $rivalResult[0]['nombre'] . ' que ya le espera en situación muy ventajosa.<br>';
+
+                                //Ver si ha sido Golpe Crítico
+                                //penalizacion baja DES vs AGI
+                                $tiradaCritico = rand(1,5);
+                                if($tiradaCritico < 5){
+                                    $daño = $rondaMiFuerza * 0.6 - $rondaRivalResistencia * 1.4;
+                                }
+                                else{
+                                    echo '¡Golpe Crítico!<br>';
+                                    $daño = $rondaMiFuerza * 1.5 +0.6 - $rondaRivalResistencia * 1.4;
+                                }
+                                
+                                if($daño <= 0){
+                                    $daño = 0;
+                                }
+                                
+                                echo 'Daño = ' . $daño . '<br>';
+                                $rivalSalud = $rivalSalud - $daño;
+                                echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                if($rivalSalud <= 0){
+                                    hasGanado($id);
+                                break;
+                                }
+                            }
+                            //Caso 7: DES <20 AGI
+                            elseif(($rondaMiDestreza - $rondaRivalAgilidad) < -20 ){
+                                echo '¡' . $miResult[0]['nombre'] . ' cae al suelo mareado cuando intentaba perseguir a un ' . $rivalResult[0]['nombre'] . 'mucho más ágil. ¡Qué verguenza!<br>';
+
+                                //Tirada de contrataque
+                                $tiradaContraataque = rand(1,5);
+                                if($tiradaContraataque > 4){
+                                    echo 'Situación aprovechada por ' . $rivalResult[0]['nombre'] . ' que lanza un contrataque mientras ' . $miResult[0]['nombre'] . ' recogía sus cosas del suelo.<br>';
+                                    $daño = ($rondaRivalFuerza - $rondaMiResistencia);
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                            }
+                            
                         }
                         else{
-                            echo $miResult[0]['nombre'] . ' logra esquivar el golpe<br>';
-                        }
-                        echo 'Turno de ' . $miResult[0]['nombre'] . '<br>';
-                        
-                        echo $miResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaMiDestreza . '<br>';
-                        echo $rivalResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaRivalAgilidad . '<br>';
-                        if($rondaMiDestreza >= $rondaRivalAgilidad){
-                            echo '¡' . $miResult[0]['nombre'] . ' golpea! A ver cuánto daño ha sido... <br>';
+                            echo $rivalResult[0]['nombre'] . ' toma la iniciativa<br>';
+
+                            echo $rivalResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaRivalDestreza . '<br>';
+                            echo $miResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaMiAgilidad . '<br>';
                             
-                            //Ver si ha sido Golpe Crítico
-                            $tiradaCritico = rand(1,5);
-                            if($tiradaCritico < 5){
-                                $daño = $rondaMiFuerza - $rondaRivalResistencia;
+                            //Acciones segun la diferencia de DES VS AGI
+                                //Caso 1: DES >20 AGI
+                                if(($rondaRivalDestreza - $rondaMiAgilidad) > 20){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' lanza un ataque sorpresa que pilla a ' . $miResult[0]['nombre'] . ' totalmente desprotegido.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //BONO de gran DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    
+                                    //BONO de aturdimiento por gran DES vs AGI
+                                    $golpeAturdidor = rand(1, 3);
+                                    if($golpeAturdidor > 2){
+                                        $miAturdimiento = 1;
+                                        echo '¡Qué golpetazo! ' . $miResult[0]['nombre'] . ' queda en Aturdimiento<br>';
+                                    }
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 2: DES >10 AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) > 10 && ($rondaRivalDestreza - $rondaMiAgilidad) <= 20){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' carga ferozmente contra ' . $miResult[0]['nombre'] . ' que apenas tiene tiempo de defenderse.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //BONO de gran DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza * 1.4 - $rondaMiResistencia * 0.6;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5 * 1.4 - $rondaMiResistencia * 0.6;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 3: DES >4 AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) > 4 && ($rondaRivalDestreza - $rondaMiAgilidad) <= 10){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' ataca con destreza y ' . $miResult[0]['nombre'] . ' se ve en apuros.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //BONO de gran DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza * 1.2 - $rondaMiResistencia * 0.8;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5 * 1.2 - $rondaMiResistencia * 0.8;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 4: DES [-4,+4] AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) > -5 && ($rondaRivalDestreza - $rondaMiAgilidad) < 5 ){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' intenta golpear a ' . $miResult[0]['nombre'] . ' que está preparado.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza - $rondaMiResistencia;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5 - $rondaMiResistencia;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+
+
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 5: DES <-4 AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) >= -10 && ($rondaRivalDestreza - $rondaMiAgilidad) <= -5 ){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' prepara un ataque poco diestro contra ' . $miResult[0]['nombre'] . ' que ha leído la intención y se anticipa.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //Penalizacion por baja DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza *0.8 - $rondaMiResistencia * 1.2;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5 *0.8 - $rondaMiResistencia * 1.2;
+                                    }
+
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 6: DES <10 AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) >= -20 && ($rondaRivalDestreza - $rondaMiAgilidad) < -10 ){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' intenta una torpe carga contra ' . $miResult[0]['nombre'] . ' que ya le espera en posición muy ventajosa.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //Penalizacion por baja DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaRivalFuerza * 0.6 - $rondaMiResistencia * 1.4;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaRivalFuerza * 1.5 * 0.6 - $rondaMiResistencia * 1.4;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $miSalud = $miSalud - $daño;
+                                    echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                    if($miSalud <= 0){
+                                        hasPerdido($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 7: DES <20 AGI
+                                elseif(($rondaRivalDestreza - $rondaMiAgilidad) < -20 ){
+                                    echo '¡' . $rivalResult[0]['nombre'] . ' cae al suelo mareado cuando intentaba perseguir a un ' . $miResult[0]['nombre'] . 'mucho más ágil. ¡Qué verguenza!<br>';
+
+                                    //Tirada de contrataque
+                                    $tiradaContraataque = rand(1,5);
+                                    if($tiradaContraataque > 4){
+                                        echo 'Situación aprovechada por ' . $miResult[0]['nombre'] . ' que lanza un contrataque mientras ' . $rivalResult[0]['nombre'] . ' recogía sus cosas del suelo.<br>';
+                                        $daño = ($rondaMiFuerza - $rondaRivalResistencia);
+                                        
+                                        if($daño <= 0){
+                                            $daño = 0;
+                                        }
+                                        echo 'Daño = ' . $daño . '<br>';
+                                        $rivalSalud = $rivalSalud - $daño;
+                                        echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                        if($rivalSalud <= 0){
+                                            hasGanado($id);
+                                            break;
+                                        }
+                                    }
+                                }
+                            
+                            if($miAturdimiento > 0){
+                                $miAturdimiento = 0;
+                                echo 'En esta ronda ' . $miResult[0]['nombre'] . ' se está recuperando del Aturdimiento y no puede atacar.<br>';
                             }
                             else{
-                                echo '¡Golpe Crítico!<br>';
-                                $daño = $rondaMiFuerza * 1.5 - $rondaRivalResistencia;
+                                echo 'Turno de ' . $miResult[0]['nombre'] . '<br>';
+
+                                echo $miResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaMiDestreza . '<br>';
+                                echo $rivalResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaRivalAgilidad . '<br>';
+                                
+                                //Acciones segun la diferencia de DES VS AGI
+                                //Caso 1: DES >20 AGI
+                                if(($rondaMiDestreza - $rondaRivalAgilidad) > 20){
+                                    echo '¡' . $miResult[0]['nombre'] . ' lanza un ataque sorpresa que pilla a ' . $rivalResult[0]['nombre'] . ' totalmente desprotegido.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //BONO gran DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaMiFuerza;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaMiFuerza * 1.5;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    //BONO de aturdimiento por gran DES vs AGI
+                                    $golpeAturdidor = rand(1, 3);
+                                    if($golpeAturdidor > 2){
+                                        $rivalAturdimiento = 1;
+                                        echo '¡Qué golpetazo! ' . $rivalResult[0]['nombre'] . ' queda en Aturdimiento<br>';
+                                    }
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $rivalSalud = $rivalSalud - $daño;
+                                    echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                    if($rivalSalud <= 0){
+                                        hasGanado($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 2: DES >10 AGI
+                                elseif(($rondaMiDestreza - $rondaRivalAgilidad) > 10 && ($rondaMiDestreza - $rondaRivalAgilidad) <= 20){
+                                    echo '¡' . $miResult[0]['nombre'] . ' carga ferozmente contra ' . $rivalResult[0]['nombre'] . ' que apenas tiene tiempo de defenderse.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //BONO de gran DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaMiFuerza * 1.4 - $rondaRivalResistencia * 0.6;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaMiFuerza * 1.5 * 1.4 - $rondaRivalResistencia * 0.6;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $rivalSalud = $rivalSalud - $daño;
+                                    echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                    if($rivalSalud <= 0){
+                                        hasGanado($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 3: DES >4 AGI
+                                elseif(($rondaMiDestreza - $rondaRivalAgilidad) > 4 && ($rondaMiDestreza - $rondaRivalAgilidad) <= 10){
+                                    echo '¡' . $miResult[0]['nombre'] . ' ataca con destreza y ' . $rivalResult[0]['nombre'] . ' se ve en apuros.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //BONO de gran DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaMiFuerza * 1.2 - $rondaRivalResistencia * 0.8;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaMiFuerza * 1.5 * 1.2 - $rondaRivalResistencia * 0.8;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $rivalSalud = $rivalSalud - $daño;
+                                    echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                    if($rivalSalud <= 0){
+                                        hasGanado($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 4: DES [-4,+4] AGI
+                                elseif(($rondaMiDestreza - $rondaRivalAgilidad) > -5 && ($rondaMiDestreza - $rondaRivalAgilidad) < 5 ){
+                                    echo '¡' . $miResult[0]['nombre'] . ' intenta golpear a ' . $rivalResult[0]['nombre'] . ' que está preparado.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaMiFuerza - $rondaRivalResistencia;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaMiFuerza * 1.5 - $rondaRivalResistencia;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+
+
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $rivalSalud = $rivalSalud - $daño;
+                                    echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                    if($rivalSalud <= 0){
+                                        hasGanado($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 5: DES <-4 AGI
+                                elseif(($rondaMiDestreza - $rondaRivalAgilidad) >= -10 && ($rondaMiDestreza - $rondaRivalAgilidad) <= -5 ){
+                                    echo '¡' . $miResult[0]['nombre'] . ' prepara un ataque poco diestro contra ' . $rivalResult[0]['nombre'] . ' que ha leído la intención y se anticipa.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //Penalizacion de baja DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaMiFuerza * 0.8 - $rondaRivalResistencia * 1.2;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaMiFuerza * 1.5 * 0.8 - $rondaRivalResistencia * 1.2;
+                                    }
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $rivalSalud = $rivalSalud - $daño;
+                                    echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                    if($rivalSalud <= 0){
+                                        hasGanado($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 6: DES <10 AGI
+                                elseif(($rondaMiDestreza - $rondaRivalAgilidad) >= -20 && ($rondaMiDestreza - $rondaRivalAgilidad) < -10 ){
+                                    echo '¡' . $miResult[0]['nombre'] . ' intenta una torpe carga contra ' . $rivalResult[0]['nombre'] . ' que ya le espera en posición muy ventajosa.<br>';
+
+                                    //Ver si ha sido Golpe Crítico
+                                    //Penalizacion de baja DES vs AGI
+                                    $tiradaCritico = rand(1,5);
+                                    if($tiradaCritico < 5){
+                                        $daño = $rondaMiFuerza * 0.6 - $rondaRivalResistencia * 1.4;
+                                    }
+                                    else{
+                                        echo '¡Golpe Crítico!<br>';
+                                        $daño = $rondaMiFuerza * 1.5 * 0.6 - $rondaRivalResistencia * 1.4;
+                                    }
+
+                                    if($daño <= 0){
+                                        $daño = 0;
+                                    }
+
+                                    echo 'Daño = ' . $daño . '<br>';
+                                    $rivalSalud = $rivalSalud - $daño;
+                                    echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+
+                                    if($rivalSalud <= 0){
+                                        hasGanado($id);
+                                    break;
+                                    }
+                                }
+                                //Caso 7: DES <20 AGI
+                                elseif(($rondaMiDestreza - $rondaRivalAgilidad) < -20 ){
+                                    echo '¡' . $miResult[0]['nombre'] . ' cae al suelo mareado cuando intentaba perseguir a un ' . $rivalResult[0]['nombre'] . 'mucho más ágil. ¡Qué verguenza!<br>';
+
+                                    //Tirada de contrataque
+                                    $tiradaContraataque = rand(1,5);
+                                    if($tiradaContraataque > 4){
+                                        echo 'Situación aprovechada por ' . $rivalResult[0]['nombre'] . ' que lanza un contrataque mientras ' . $miResult[0]['nombre'] . ' recogía sus cosas del suelo.<br>';
+                                        $daño = ($rondaRivalFuerza - $rondaMiResistencia);
+                                        if($daño <= 0){
+                                            $daño = 0;
+                                        }
+                                        echo 'Daño = ' . $daño . '<br>';
+                                        $miSalud = $miSalud - $daño;
+                                        echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+
+                                        if($miSalud <= 0){
+                                            hasPerdido($id);
+                                        break;
+                                        }
+                                    }
+                                }
+                                
                             }
-                            if($daño <= 0){
-                                $daño = 0;
-                            }
-                            echo 'Daño = ' . $daño . '<br>';
-                            $rivalSalud = $rivalSalud - $daño;
-                            echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
-                            
-                            if($rivalSalud <= 0){
-                                hasGanado($id);
-                                break;
-                            }
-                        }
-                        else{
-                            echo $rivalResult[0]['nombre'] . 'logra esquivar el golpe<br>';
                         }
                     }
                     echo 'FIN DE RONDA<br>';
