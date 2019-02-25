@@ -49,7 +49,7 @@
                 $miBonusIngenio = 0;
                 $miBonusPercepcion = 0;
 
-                $yourResult = getPersonajeRow($miId);
+                $miResult = getPersonajeRow($miId);
 
                 $suBonusDestreza = 0;
                 $suBonusFuerza = 0;
@@ -60,7 +60,7 @@
                 $suBonusIngenio = 0;
                 $suBonusPercepcion = 0;
 
-                $opponentResult = getPersonajeRow($id);
+                $rivalResult = getPersonajeRow($id);
 
                 //Consultar que objetos tiene mi personaje en cada slot (se ordenan por slot)
                 $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$miId'";
@@ -93,14 +93,220 @@
                     $suBonusIngenio = $suBonusIngenio + $objetosRival['ingenio'];
                     $suBonusPercepcion = $suBonusPercepcion + $objetosRival['percepcion'];
                 }
+                
+                //Calculados los atributos totales
+                $miDestreza = $miResult[0]['destreza'] + $miBonusDestreza;
+                $miFuerza = $miResult[0]['fuerza'] + $miBonusFuerza;
+                $miAgilidad = $miResult[0]['agilidad'] + $miBonusAgilidad;
+                $miResistencia = $miResult[0]['resistencia'] + $miBonusResistencia;
+                $rivalDestreza = $rivalResult[0]['destreza'] + $suBonusDestreza;
+                $rivalFuerza = $rivalResult[0]['fuerza'] + $suBonusFuerza;
+                $rivalAgilidad = $rivalResult[0]['agilidad'] + $suBonusAgilidad;
+                $rivalResistencia = $rivalResult[0]['resistencia'] + $suBonusResistencia;
+                
+                
+                //COMBATE
+                $rondas = 10;
+                $miSalud = $miResult[0]['salud'];
+                $rivalSalud = $rivalResult[0]['salud'];
+                
+                echo 'Salud inicial: ' . $miResult[0]['nombre'] . ' ' . $miSalud . ' //// ' . $rivalResult[0]['nombre'] . ' ' . $rivalSalud . '<br>';
+                
+                for($i = 1; $i <= $rondas; $i++){
+                    
+                    //Calcular cuanto sacan en esta ronda, y en caso de ser negativo, ponerlos a '0'
+                    $rondaMiDestreza = rand($miDestreza-10, $miDestreza+10);
+                    $rondaRivalAgilidad = rand($rivalAgilidad-10, $rivalAgilidad+10);
+                    $rondaMiFuerza = rand($miFuerza-10, $miFuerza+10);
+                    $rondaRivalResistencia = rand($rivalResistencia-10, $rivalResistencia+10);
+                    $rondaRivalDestreza = rand($rivalDestreza-10, $rivalDestreza+10);
+                    $rondaMiAgilidad = rand($miAgilidad-10, $miAgilidad+10);
+                    $rondaRivalFuerza = rand($rivalFuerza-10, $rivalFuerza+10);
+                    $rondaMiResistencia = rand($miResistencia-10, $miResistencia+10);
+                    
+                    if($rondaMiDestreza < 0){
+                        $rondaMiDestreza = 0;
+                    }
+                    if($rondaRivalAgilidad < 0){
+                        $rondaRivalAgilidad = 0;
+                    }
+                   
+                    if($rondaMiFuerza < 0){
+                        $rondaMiFuerza = 0;
+                    }
+                    if($rondaRivalResistencia < 0){
+                        $rondaRivalResistencia = 0;
+                    }
+                   
+                    if($rondaRivalDestreza < 0){
+                        $rondaRivalDestreza = 0;
+                    }
+                    if($rondaMiAgilidad < 0){
+                        $rondaMiAgilidad = 0;
+                    }
+                    
+                    if($rondaRivalFuerza < 0){
+                       $rondaRivalFuerza = 0;
+                    }
+                    if($rondaMiResistencia < 0){
+                        $rondaMiResistencia = 0;
+                    }
+                    
+                    echo '¡Comienza la ronda ' . $i . '!<br>';
+                    $iniciativa = rand(1,2);
+                    if($iniciativa === 1){
+                        echo $miResult[0]['nombre'] . ' toma la iniciativa<br>';
+                        echo $miResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaMiDestreza . '<br>';
+                        echo $rivalResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaRivalAgilidad . '<br>';
+                        if($rondaMiDestreza >= $rondaRivalAgilidad){
+                            echo '¡' . $miResult[0]['nombre'] . ' golpea! A ver cuánto daño ha sido... <br>';
+                            
+                            //Ver si ha sido Golpe Crítico
+                            $tiradaCritico = rand(1,5);
+                            if($tiradaCritico < 5){
+                                $daño = $rondaMiFuerza - $rondaRivalResistencia;
+                            }
+                            else{
+                                echo '¡Golpe Crítico!<br>';
+                                $daño = $rondaMiFuerza * 1.5 - $rondaRivalResistencia;
+                            }
+                            if($daño <= 0){
+                                $daño = 0;
+                            }
+                            echo 'Daño = ' . $daño . '<br>';
+                            $rivalSalud = $rivalSalud - $daño;
+                            echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+                            
+                            if($rivalSalud <= 0){
+                                hasGanado($id);
+                                break;
+                            }
+                        }
+                        else{
+                            echo $rivalResult[0]['nombre'] . ' logra esquivar el golpe<br>';
+                        }
+                        echo 'Turno de ' . $rivalResult[0]['nombre'] . '<br>';
+                        
+                        echo $rivalResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaRivalDestreza . '<br>';
+                        echo $miResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaMiAgilidad . '<br>';
+                        if($rondaRivalDestreza >= $rondaMiAgilidad){
+                            echo '¡' . $rivalResult[0]['nombre'] . ' golpea! A ver cuánto daño ha sido... <br>';
+                            
+                            //Ver si ha sido Golpe Crítico
+                            $tiradaCritico = rand(1,5);
+                            if($tiradaCritico < 5){
+                                $daño = $rondaRivalFuerza - $rondaMiResistencia;
+                            }
+                            else{
+                                echo '¡Golpe Crítico!<br>';
+                                $daño = $rondaRivalFuerza * 1.5 - $rondaMiResistencia;
+                            }
+                            if($daño <= 0){
+                                $daño = 0;
+                            }
+                            echo 'Daño = ' . $daño . '<br>';
+                            $miSalud = $miSalud - $daño;
+                            echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+                            
+                            if($miSalud <= 0){
+                                hasPerdido($id);
+                            break;
+                            }
+                        }
+                        else{
+                            echo $miResult[0]['nombre'] . 'logra esquivar el golpe<br>';
+                        }
+                    }
+                    else{
+                        echo $rivalResult[0]['nombre'] . ' toma la iniciativa<br>';
+                        
+                        echo $rivalResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaRivalDestreza . '<br>';
+                        echo $miResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaMiAgilidad . '<br>';
+                        if($rondaRivalDestreza >= $rondaMiAgilidad){
+                            echo '¡' . $rivalResult[0]['nombre'] . ' golpea! A ver cuánto daño ha sido... <br>';
+                            
+                            //Ver si ha sido Golpe Crítico
+                            $tiradaCritico = rand(1,5);
+                            if($tiradaCritico < 5){
+                                $daño = $rondaRivalFuerza - $rondaMiResistencia;
+                            }
+                            else{
+                                echo '¡Golpe Crítico!<br>';
+                                $daño = $rondaRivalFuerza * 1.5 - $rondaMiResistencia;
+                            }
+                            if($daño <= 0){
+                                $daño = 0;
+                            }
+                            echo 'Daño = ' . $daño . '<br>';
+                            $miSalud = $miSalud - $daño;
+                            echo $miResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $miSalud . '<br>';
+                            
+                            if($miSalud <= 0){
+                                hasPerdido($id);
+                                break;
+                            }
+                        }
+                        else{
+                            echo $miResult[0]['nombre'] . ' logra esquivar el golpe<br>';
+                        }
+                        echo 'Turno de ' . $miResult[0]['nombre'] . '<br>';
+                        
+                        echo $miResult[0]['nombre'] . ' intenta golpear con una destreza de ' . $rondaMiDestreza . '<br>';
+                        echo $rivalResult[0]['nombre'] . ' quiere esquivar con una agilidad de ' . $rondaRivalAgilidad . '<br>';
+                        if($rondaMiDestreza >= $rondaRivalAgilidad){
+                            echo '¡' . $miResult[0]['nombre'] . ' golpea! A ver cuánto daño ha sido... <br>';
+                            
+                            //Ver si ha sido Golpe Crítico
+                            $tiradaCritico = rand(1,5);
+                            if($tiradaCritico < 5){
+                                $daño = $rondaMiFuerza - $rondaRivalResistencia;
+                            }
+                            else{
+                                echo '¡Golpe Crítico!<br>';
+                                $daño = $rondaMiFuerza * 1.5 - $rondaRivalResistencia;
+                            }
+                            if($daño <= 0){
+                                $daño = 0;
+                            }
+                            echo 'Daño = ' . $daño . '<br>';
+                            $rivalSalud = $rivalSalud - $daño;
+                            echo $rivalResult[0]['nombre'] . ' pierde ' . $daño . ' puntos de Salud. Le quedan ' . $rivalSalud . '<br>';
+                            
+                            if($rivalSalud <= 0){
+                                hasGanado($id);
+                                break;
+                            }
+                        }
+                        else{
+                            echo $rivalResult[0]['nombre'] . 'logra esquivar el golpe<br>';
+                        }
+                    }
+                    echo 'FIN DE RONDA<br>';
+                    if($miSalud <= 0){
+                        hasPerdido($id);
+                        break;
+                    }
+                    elseif($rivalSalud <= 0){
+                        hasGanado($id);
+                        break;
+                    }
+                    else{
+                        echo '(' . $rivalResult[0]['nombre'] . ' ' . $rivalSalud . ' //// ' . $miResult[0]['nombre'] . ' ' . $miSalud . ')<br><br>';
+                    }
+                }
+                
+                $misPuntos = $rivalResult[0]['salud'] - $rivalSalud;
+                $rivalPuntos = $miResult[0]['salud'] - $miSalud;
+                echo $miResult[0]['nombre'] . ' ha provocado ' . $misPuntos . ' puntos de daño a ' . $rivalResult[0]['nombre'] . '<br>';
+                echo $rivalResult[0]['nombre'] . ' ha provocado ' . $rivalPuntos . ' puntos de daño a ' . $miResult[0]['nombre'] . '<br>';
 
-                if($yourResult[0]['agilidad'] + $miBonusAgilidad > $opponentResult[0]['agilidad'] + $suBonusAgilidad){
+                if($misPuntos > $rivalPuntos){
                     hasGanado($id);
                 }
-                else{
+                if($misPuntos < $rivalPuntos){
                     hasPerdido($id);
                 }
-
+                
                 //El atacante pierde energía
                 //Aunque el minimo para atacar sea tener 50, puede ser interesante que a veces no le agote del todo a 0. 
                 $restaEnergia = rand(30,100);
@@ -131,7 +337,7 @@
         $bonusPercepcion = 0;
         
         $monstruoResult = getMonstruoRow($idMonstruo);
-        $yourResult = getPersonajeRow($miId);
+        $miResult = getPersonajeRow($miId);
         
         //Consultar que objetos tiene el personaje en cada slot (se ordenan por slot)
         $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$miId'";
@@ -150,7 +356,7 @@
         }
         
         
-        if($yourResult[0]['agilidad'] + $bonusAgilidad > $monstruoResult[0]['agilidad']){
+        if($miResult[0]['agilidad'] + $bonusAgilidad > $monstruoResult[0]['agilidad']){
             $expGanada = rand($monstruoResult[0]['nivel'] * 10, $monstruoResult[0]['nivel'] * 20);
             
             $sql = "UPDATE personajes SET experiencia = personajes.experiencia + '$expGanada' WHERE id='$miId'";
@@ -189,15 +395,15 @@
     
     function hasGanado($id){
         global $db;
-        $opponentResult = getPersonajeRow($id);
+        $rivalResult = getPersonajeRow($id);
         $miId = $_SESSION['loggedIn'];
-        $yourResult = getPersonajeRow($_SESSION['loggedIn']);
+        $miResult = getPersonajeRow($_SESSION['loggedIn']);
         
         //Calcular el dinero que le gano: entre un 5% y 25% de lo que lleve en cash
-        $dineroPillado = rand(($opponentResult[0]['cash'])*0.05,($opponentResult[0]['cash'])*0.25);
+        $dineroPillado = rand(($rivalResult[0]['cash'])*0.05,($rivalResult[0]['cash'])*0.25);
         
         //Calcular el respeto que le gano
-        $nivelDiferencia = $opponentResult[0]['nivel'] - $yourResult[0]['nivel'];
+        $nivelDiferencia = $rivalResult[0]['nivel'] - $miResult[0]['nivel'];
         if($nivelDiferencia > 2){
             $respetoPillado = rand(80,100);
         }
@@ -210,19 +416,19 @@
         else{
             $respetoPillado = rand(1,9);
         }
-        echo "¡Lo hiciste! Ganas " . $dineroPillado . "€ y " . $respetoPillado . " puntos de Respeto";
+        echo "FIN DE COMBATE <br>¡Lo hiciste! Ganas " . $dineroPillado . "€ y " . $respetoPillado . " puntos de Respeto";
         
         // Actualizo mi jugador
-        $nuevoCash = $yourResult[0]['cash'] + $dineroPillado;
-        $nuevoRespeto = $yourResult[0]['respeto'] + $respetoPillado;
+        $nuevoCash = $miResult[0]['cash'] + $dineroPillado;
+        $nuevoRespeto = $miResult[0]['respeto'] + $respetoPillado;
         $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$miId'";
         $stmt = $db->query($sql);
         $stmt->fetchAll();
         
         // Actualizo el rival
-        $nuevoCash = $opponentResult[0]['cash'] - $dineroPillado;
-        if($opponentResult[0]['respeto'] >= $respetoPillado){
-            $nuevoRespeto = $opponentResult[0]['respeto'] - $respetoPillado;
+        $nuevoCash = $rivalResult[0]['cash'] - $dineroPillado;
+        if($rivalResult[0]['respeto'] >= $respetoPillado){
+            $nuevoRespeto = $rivalResult[0]['respeto'] - $respetoPillado;
         }
         else{
             $nuevoRespeto = 0;
@@ -234,15 +440,15 @@
     
     function hasPerdido($id){
         global $db;
-        $opponentResult = getPersonajeRow($id);
+        $rivalResult = getPersonajeRow($id);
         $miId = $_SESSION['loggedIn'];
-        $yourResult = getPersonajeRow($_SESSION['loggedIn']);
+        $miResult = getPersonajeRow($_SESSION['loggedIn']);
         
         //Calcular el dinero que pierdo: entre un 5% y 25% de lo que llevo en cash
-        $dineroPerdido = rand(($yourResult[0]['cash'])*0.05,($yourResult[0]['cash'])*0.25);
+        $dineroPerdido = rand(($miResult[0]['cash'])*0.05,($miResult[0]['cash'])*0.25);
         
         //Calcular el respeto que pierdo
-        $nivelDiferencia = $yourResult[0]['nivel'] - $opponentResult[0]['nivel'];
+        $nivelDiferencia = $miResult[0]['nivel'] - $rivalResult[0]['nivel'];
         if($nivelDiferencia > 2){
             $respetoPerdido = rand(80,100);
         }
@@ -256,12 +462,12 @@
             $respetoPerdido = rand(1,9);
         }
         
-        echo "Qué desastre... Vuelves a casa llorando, todos se han reído de ti. Pierdes " . $dineroPerdido . "€ y " . $respetoPerdido . " puntos de Respeto";
+        echo "FIN DE COMBATE <br>Qué desastre... Vuelves a casa llorando, todos se han reído de ti. Pierdes " . $dineroPerdido . "€ y " . $respetoPerdido . " puntos de Respeto";
         
         // Actualizo mi jugador
-        $nuevoCash = $yourResult[0]['cash'] - $dineroPerdido;
-        if($yourResult[0]['respeto'] >= $respetoPerdido){
-            $nuevoRespeto = $yourResult[0]['respeto'] - $respetoPerdido;
+        $nuevoCash = $miResult[0]['cash'] - $dineroPerdido;
+        if($miResult[0]['respeto'] >= $respetoPerdido){
+            $nuevoRespeto = $miResult[0]['respeto'] - $respetoPerdido;
         }
         else{
             $nuevoRespeto = 0;
@@ -271,9 +477,9 @@
         $stmt->fetchAll();
         
         //Actualizo el rival
-        $opponentResult = getPersonajeRow($id);
-        $nuevoCash = $opponentResult[0]['cash'] + $dineroPerdido;
-        $nuevoRespeto = $opponentResult[0]['respeto'] + $respetoPerdido;
+        $rivalResult = getPersonajeRow($id);
+        $nuevoCash = $rivalResult[0]['cash'] + $dineroPerdido;
+        $nuevoRespeto = $rivalResult[0]['respeto'] + $respetoPerdido;
         $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$id'";
         $stmt = $db->query($sql);
         return $stmt->fetchAll();   

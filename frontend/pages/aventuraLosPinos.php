@@ -15,7 +15,7 @@ global $db;
                 echo "Un espeso pinar se divisa a pocos kilómetros de aquí. Todos saben que es un bosque encantado en el que habitan criaturas mágicas. <br><br>";
                 ?>
 <form id = "selectorOpciones" action="?bPage=aventuras&action=zona&nonUI" method="post">
-                <label><input type="checkbox" name="cbox1" value="aventuraLosPinos"> Ir en busca de aventuras, fama y objetos (-50 Energía)</label><br>
+                <label><input type="checkbox" name="cbox1" value="aventuraLosPinos"> Ir en busca de aventuras, fama y objetos (-30 Energía)</label><br>
                 
                 <input type="submit" value="¡Jerónimoooo!">
 </form>                

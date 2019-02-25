@@ -18,7 +18,7 @@
             $BonusEspiritu = $BonusEspiritu + $objetosPersonaje['espiritu'];  
         }
         
-        $saludRecuperacion = 1 + ($cadaPersonaje['espiritu'] + $BonusEspiritu) * 0.5;
+        $saludRecuperacion = 1 + ($cadaPersonaje['espiritu'] + $BonusEspiritu) * 0.1;
         $energiaRecuperacion = 5 + ($cadaPersonaje['espiritu'] + $BonusEspiritu) * 0.5;
        
         $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$saludRecuperacion' > 100 THEN 100 ELSE salud + '$saludRecuperacion' END,"

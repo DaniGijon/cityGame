@@ -1,6 +1,6 @@
 <?php
 
-
+//Para las transacciones del BANCO
 function actualizarDinero($operacion, $cantidadDeposito, $cantidadRetirada){
     global $db;
     $id = $_SESSION['loggedIn'];
@@ -174,6 +174,8 @@ function accionSpot($box){
                 $box = "No puedo pagar eso";
             }
             break;
+            
+        //CAFES
         case 'cafeConLeche':
             $coste = 2;
             $mejoraSalud = 1;
