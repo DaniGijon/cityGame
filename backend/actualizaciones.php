@@ -136,6 +136,20 @@ function accionSpot($box){
     global $db;
     $id = $_SESSION['loggedIn'];
     
+    //Consultar que objetos tiene equipados mi personaje en cada slot (se ordenan por slot)
+    $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot < 8";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    foreach($result as $objetosEquipados){
+        if($objetosEquipados['especial'] === 'aturdidor'){
+            $aturdidor = 1;
+        }
+        elseif($objetosEquipados['especial'] === 'mistico'){
+            $mistico = 1;
+        }
+    }
+    
     //Bonus de mejoras de habilidades
     $mejoraPrincipalMuyAlta = 1.25;
     $mejoraPrincipalAlta = 0.8;
@@ -235,7 +249,24 @@ function accionSpot($box){
                 $box = "Pensándolo mejor... la única Vuelta que haré va a ser al sofá.";
             }
             break;
-           
+            
+        //PARROQUIA DE CAÑAMARES
+        case 'plegaria':
+            $agotamiento = 10;
+            $puedoHacerlo = comprobarEnergia($agotamiento);
+            if($puedoHacerlo === 1){
+                if($mistico === 1){
+                    $sql = "UPDATE personajes SET energia = energia-$agotamiento, espiritu = espiritu + $mejoraPrincipalMuyBaja*2/personajes.espiritu WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                }
+                else{
+                    $sql = "UPDATE personajes SET energia = energia-$agotamiento, espiritu = espiritu + $mejoraPrincipalMuyBaja/personajes.espiritu WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                }
+            }else{
+                $box = "No tengo fuerzas. Como entre ahí, me quedo sopa en un banco.";
+            }
+            break;  
             
         
         default :

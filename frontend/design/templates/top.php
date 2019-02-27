@@ -3,7 +3,7 @@
 ?>
     <div id="top">
         <div id="logoTitulo">
-            <h1 class="large noMargin floatLeft">PuertoGame</h1>
+            <h1 class="large noMargin floatLeft">Test</h1>
         </div>
         <div id="opcionesArriba" class="floatRight" >
             
