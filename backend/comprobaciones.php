@@ -28,6 +28,23 @@ function comprobarCoste($coste){
    return $puedoPagar;
 }
 
+function comprobarSalud($salud){
+   global $db;
+   $id = $_SESSION['loggedIn']; 
+   
+   $sql = "SELECT salud FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   if($salud <= $result[0]['salud']){
+       $tengoVida = 1;
+   }
+   else{
+       $tengoVida = 0;
+   }
+   return $tengoVida;
+}
+
 function comprobarEnergia($agotamiento){
    global $db;
    $id = $_SESSION['loggedIn']; 
@@ -74,7 +91,7 @@ function comprobarZona1Barrio1(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '1')){
-         echo 'OK';
+         echo 'OK estás ahi';
      }
      else{
          var_dump($result[0]['barrio']);

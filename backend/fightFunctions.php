@@ -5,15 +5,12 @@
         $id = $_SESSION['loggedIn'];
         $sql = "SELECT * FROM personajes WHERE id != '$id' AND barrio = (SELECT barrio FROM personajes WHERE id='$id') AND zona = (SELECT zona FROM personajes WHERE id='$id')";
         $stmt = $db->prepare($sql);
-        $stmt->execute();
-        
+        $stmt->execute();       
         $result = $stmt->fetchAll();
         
         foreach ($result as $rivales) {
-            echo "<a href='?page=jugadorRival&id=" .$rivales['id'] . "'>" . $rivales['nombre'] . " (Nivel: " . $rivales['nivel'] . ")" . "</a><br>";
-            
-        }
-       
+            echo "<a href='?page=jugadorRival&id=" .$rivales['id'] . "'>" . $rivales['nombre'] . " (Nivel: " . $rivales['nivel'] . ")" . "</a><br>";       
+        }  
     }
     
     function listJugadorObjetivo($id){
@@ -220,7 +217,6 @@
                                     $daño = 0;
                                 }
                                 
-                                
                                 echo 'Daño = ' . $daño . '<br>';
                                 $miSalud = $miSalud - $daño;
                                 if($daño === 0){
@@ -253,7 +249,6 @@
                                     $daño = 0;
                                 }
                                 
-                                
                                 echo 'Daño = ' . $daño . '<br>';
                                 $miSalud = $miSalud - $daño;
                                 if($daño === 0){
@@ -284,7 +279,6 @@
                                 if($daño <= 0){
                                     $daño = 0;
                                 }
-                               
                                 
                                 echo 'Daño = ' . $daño . '<br>';
                                 $miSalud = $miSalud - $daño;
@@ -1584,17 +1578,9 @@
                         }
                     }
                     echo 'FIN DE RONDA<br>';
-                    if($miSalud <= 0){
-                        
-                        break;
-                    }
-                    elseif($rivalSalud <= 0){
-                        hasGanado($id);
-                        break;
-                    }
-                    else{
-                        echo '(' . $rivalResult[0]['nombre'] . ' ' . $rivalSalud . ' //// ' . $miResult[0]['nombre'] . ' ' . $miSalud . ')<br><br>';
-                    }
+                    
+                    echo '(' . $rivalResult[0]['nombre'] . ' ' . $rivalSalud . ' //// ' . $miResult[0]['nombre'] . ' ' . $miSalud . ')<br><br>';
+                    
                 }
                 
                 $misPuntos = $rivalResult[0]['salud'] - $rivalSalud;
@@ -1631,56 +1617,7 @@
         }
     }
     
-    function atacarMonstruo($idMonstruo){
-        global $db;
-        $miId = $_SESSION['loggedIn'];
-        
-        $bonusDestreza = 0;
-        $bonusFuerza = 0;
-        $bonusAgilidad = 0;
-        $bonusResistencia = 0;
-        $bonusEspiritu = 0;
-        $bonusEstilo = 0;
-        $bonusIngenio = 0;
-        $bonusPercepcion = 0;
-        
-        $monstruoResult = getMonstruoRow($idMonstruo);
-        $miResult = getPersonajeRow($miId);
-        
-        //Consultar que objetos tiene el personaje en cada slot (se ordenan por slot)
-        $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$miId'";
-        $stmt = $db->query($sql);
-        $result = $stmt->fetchAll();
-        
-        foreach ($result as $objetosPersonaje) {
-            $bonusDestreza = $bonusDestreza + $objetosPersonaje['destreza'];
-            $bonusFuerza = $bonusFuerza + $objetosPersonaje['fuerza'];
-            $bonusAgilidad = $bonusAgilidad + $objetosPersonaje['agilidad'];
-            $bonusResistencia = $bonusResistencia + $objetosPersonaje['resistencia'];
-            $bonusEspiritu = $bonusEspiritu + $objetosPersonaje['espiritu'];
-            $bonusEstilo = $bonusEstilo + $objetosPersonaje['estilo'];
-            $bonusIngenio = $bonusIngenio + $objetosPersonaje['ingenio'];
-            $bonusPercepcion = $bonusPercepcion + $objetosPersonaje['percepcion'];
-        }
-        
-        
-        if($miResult[0]['agilidad'] + $bonusAgilidad > $monstruoResult[0]['agilidad']){
-            $expGanada = rand($monstruoResult[0]['nivel'] * 10, $monstruoResult[0]['nivel'] * 20);
-            
-            $sql = "UPDATE personajes SET experiencia = personajes.experiencia + '$expGanada' WHERE id='$miId'";
-            $stmt = $db->query($sql);
-            
-            return $expGanada;
-        }
-        else{
-            //Salgo derrotado y me llevan al Hospital
-            $sql = "UPDATE personajes SET salud = '0',barrio = '9', zona = '1' WHERE id='$miId'";
-            $stmt = $db->query($sql);
-        
-            return 0;
-        }
-        
-    }
+    
     
     function getPersonajeRow($id){
         global $db;
@@ -1689,17 +1626,7 @@
         $stmt->execute(array($id));
         return $stmt->fetchAll();
     
-    } 
-    
-    function getMonstruoRow($idMonstruo){
-        global $db;
-        $sql = "SELECT * FROM monstruos WHERE idM=?";
-        $stmt = $db->prepare($sql);
-        $stmt->execute(array($idMonstruo));
-        return $stmt->fetchAll();
-    
     }
-    
     
     function hasGanado($id){
         global $db;

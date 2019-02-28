@@ -39,6 +39,10 @@ function getPage(){
         elseif($_GET['bPage'] === "apuestas"){
             include("..\backend\apuestas.php");  
         }
+        elseif($_GET['bPage'] === "tiradas"){
+            include("..\backend\tiradas.php");  
+        }
+        
     }
     else{
         if(isset($_SESSION['loggedIn'])){
