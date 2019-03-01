@@ -178,9 +178,14 @@ h1{
     line-height:30px;
 }
 
+#infoArriba{
+  height:100px;
+  width:250px;  
+}
+
 #OpcionesArriba{
-    height:100%;
-    width:66%;
+    height:100px;
+    width:300px;
 }
 
 #opcionesArriba button {
@@ -188,33 +193,126 @@ h1{
 }
 
 .botonPersonaje{
-    height:100%;
-    width:20%; 
+    height:100px;
+    width:100px; 
     float:left;
+}
+
+.botonPersonajeImagen{
+  background-image:url("/design/img/botones/miPersonaje.png");
+  background-repeat:no-repeat;
+  height:100px;
+  width:100px;
+  background-position:center;
 }
 
 .botonDarUnaVuelta{
-    height:100%;
-    width:20%; 
+    height:100px;
+    width:100px; 
     float:left;
 }
 
-.botonMensajes{
-    height:100%;
-    width:20%; 
-    float:left;
+.botonDarUnaVueltaImagen{
+  background-image:url("/design/img/botones/darUnaVuelta.png");
+  background-repeat:no-repeat;
+  height:100px;
+  width:100px;
+  background-position:center;
 }
 
 .botonRanking{
-    height:100%;
-    width:20%; 
+    height:100px;
+    width:100px; 
     float:left;
 }
 
+.botonRankingImagen{
+  background-image:url("/design/img/botones/ranking.png");
+  background-repeat:no-repeat;
+  height:100px;
+  width:100px;
+  background-position:center;
+}
+
+.botonManual{
+   height:25px;
+   width:50px;
+   float:left; 
+}
+
 .botonLogout{
-    height:100%;
-    width:20%;
+    height:25px;
+    width:50px;
     float:left;
+}
+
+.nombrePersonaje{
+    height:25px;
+    width:150px;
+    float:left;
+}
+.textoExp{
+   height:25px;
+   width:50px;
+   float:left; 
+   background-image:url("/design/img/botones/exp.png");
+}
+
+.barraExp{
+    height:25px;
+    width:200px;
+    float:left;
+    background-image:url("/design/img/botones/barraExpFondo.png");
+}
+
+#expAhora{
+    height:25px;
+    width:200px;
+    float:left;
+    background-image:url("/design/img/botones/barraExpAhora.png");
+}
+
+.textoSalud{
+   height:25px;
+   width:50px;
+   float:left; 
+   background-image:url("/design/img/botones/corazon.png");
+}
+
+.barraSalud{
+    height:25px;
+    width:200px;
+    float:left;
+    background-image:url("/design/img/botones/barraSaludFondo.png");
+}
+
+#saludAhora{
+    height:25px;
+    width:200px;
+    float:left;
+    background-image:url("/design/img/botones/barraSaludAhora.png");
+}
+
+.textoEnergia{
+   height:25px;
+   width:50px;
+   float:left; 
+   background-image:url("/design/img/botones/energia.png");
+ 
+}
+
+.barraEnergia{
+    height:25px;
+    width:200px;
+    float:left;
+    background-image:url("/design/img/botones/barraEnergiaFondo.png");
+}
+
+#energiaAhora{
+    height:25px;
+    width:200px;
+    float:left;
+    background-image:url("/design/img/botones/barraEnergiaAhora.png");
 }
 
 .contenedor1{

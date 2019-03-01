@@ -1,4 +1,5 @@
 <?php
+
     
     function listPersonajeTodo($id){
             
@@ -135,14 +136,14 @@
         </fieldset>
         <fieldset>
             <legend style="text-align: center"> Mis habilidades</legend>
-            <span class="quarterWidth">Destreza: <?php echo $destreza+$bonusDestreza . ' (' . $result[0]['destreza'] . '+' . $bonusDestreza . ')' ; ?></span><br>
-            <span class="quarterWidth">Fuerza: <?php echo $fuerza+$bonusFuerza . ' (' . $result[0]['fuerza'] . '+' . $bonusFuerza . ')' ; ?></span><br>
-            <span class="quarterWidth">Agilidad: <?php echo $agilidad+$bonusAgilidad . ' (' . $result[0]['agilidad'] . '+' . $bonusAgilidad . ')' ; ?></span><br>
-            <span class="quarterWidth">Resistencia: <?php echo $resistencia+$bonusResistencia . ' (' . $result[0]['resistencia'] . '+' . $bonusResistencia . ')' ; ?></span><br>
-            <span class="quarterWidth">Espiritu: <?php echo $espiritu+$bonusEspiritu . ' (' . $result[0]['espiritu'] . '+' . $bonusEspiritu . ')' ; ?></span><br>
-            <span class="quarterWidth">Estilo: <?php echo $estilo+$bonusEstilo . ' (' . $result[0]['estilo'] . '+' . $bonusEstilo . ')' ; ?></span><br>
-            <span class="quarterWidth">Ingenio: <?php echo $ingenio+$bonusIngenio . ' (' . $result[0]['ingenio'] . '+' . $bonusIngenio . ')' ; ?></span><br>
-            <span class="quarterWidth">Percepcion: <?php echo $percepcion+$bonusPercepcion . ' (' . $result[0]['percepcion'] . '+' . $bonusPercepcion . ')' ; ?></span><br>
+            <span class="quarterWidth">Destreza: <?php echo round($destreza+$bonusDestreza, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['destreza'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusDestreza . ')' ; ?></span><br>
+            <span class="quarterWidth">Fuerza: <?php echo round($fuerza+$bonusFuerza, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['fuerza'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusFuerza . ')' ; ?></span><br>
+            <span class="quarterWidth">Agilidad: <?php echo round($agilidad+$bonusAgilidad, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['agilidad'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusAgilidad . ')' ; ?></span><br>
+            <span class="quarterWidth">Resistencia: <?php echo round($resistencia+$bonusResistencia, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['resistencia'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusResistencia . ')' ; ?></span><br>
+            <span class="quarterWidth">Espiritu: <?php echo round($espiritu+$bonusEspiritu, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['espiritu'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusEspiritu . ')' ; ?></span><br>
+            <span class="quarterWidth">Estilo: <?php echo round($estilo+$bonusEstilo, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['estilo'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusEstilo . ')' ; ?></span><br>
+            <span class="quarterWidth">Ingenio: <?php echo round($ingenio+$bonusIngenio, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['ingenio'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusIngenio . ')' ; ?></span><br>
+            <span class="quarterWidth">Percepcion: <?php echo round($percepcion+$bonusPercepcion, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['percepcion'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusPercepcion . ')' ; ?></span><br>
         </fieldset>
         
     </span>

@@ -58,8 +58,21 @@ function zona($box){
                         else{
                             $mensajeObjeto = '';
                         }
+                        
+                        //Comprobar si subo de nivel
+                        global $db;
+                        $sql = "SELECT nivel FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $personaje = $stmt->fetchAll();
+                        $nuevoNivel = comprobarSuboNivel($id);
+                        if($nuevoNivel != $personaje[0]['nivel'] ){
+                            $sql = "UPDATE personajes SET nivel = personajes.nivel+1 WHERE id='$id'";
+                            $db->query($sql);
+                            $mensajeNivel = " SUBO DE NIVEL!<br>";
+                            
+                        }
 
-                        $celebracion = $celebracion . $mensajeDinero . $mensajeObjeto;
+                        $celebracion = $celebracion . $mensajeNivel . $mensajeDinero . $mensajeObjeto;
                     }
                     else{
                         $sql = "SELECT personajes.salud FROM personajes WHERE id = '$id'";
@@ -1603,6 +1616,15 @@ function getMonstruoRow($idMonstruo){
     $stmt = $db->prepare($sql);
     $stmt->execute(array($idMonstruo));
     return $stmt->fetchAll();       
+}
+
+function comprobarSuboNivel($miId){
+    global $db;
+    $sql = "SELECT nivel, experiencia FROM personajes WHERE id='$miId'";
+    $stmt = $db->query($sql);
+    $personaje = $stmt->fetchAll();
+    $nuevoNivel = 1 + (0.1 * sqrt($personaje[0]['experiencia']));
+    return $nuevoNivel;
 }
 
 if($_GET['action'] === "zona"){

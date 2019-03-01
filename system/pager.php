@@ -42,6 +42,9 @@ function getPage(){
         elseif($_GET['bPage'] === "tiradas"){
             include("..\backend\tiradas.php");  
         }
+        elseif($_GET['bPage'] === "menus"){
+            include("..\backend\menus.php");  
+        }
         
     }
     else{
