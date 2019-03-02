@@ -34,6 +34,7 @@
                         $stmt = $db->query($sql);
                         $objetosDB = $stmt->fetchAll();
                         
+                        echo "<span id='areaCuerpo' style='display:none'></span>";
                         foreach($objetosDB as $obj){
                             echo "<div id='nuevoBoxBolsa'>";
                                 echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br><br>" .
@@ -70,7 +71,6 @@
                     $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7 ";
                     $stmt = $db->query($sql);
                     $result = $stmt->fetchAll();
-                    var_dump($result);
                     
                     foreach ($result as $objetosPersonaje) {
                         $bonusDestreza = $bonusDestreza + $objetosPersonaje['destreza'];
@@ -149,9 +149,9 @@
     </span>
     
     <script>
-                $(".bolsaBox").click(function(event){
+                $(".objetoBox").click(function(event){
                    var id = $(this).attr('id');
-                     
+                    $("#areaCuerpo").text(id); 
                     $("#capaBolsa").css('left',event.pageX);
                     $("#capaBolsa").css('top',event.pageY);
                     $("#capaBolsa").toggle();
@@ -160,10 +160,12 @@
                
                 $(".nuevoBoxBolsa").click(function(){
                    var objetoBolsaId = $(this).attr('id');
+                   var areaCuerpoId = $("#areaCuerpo").text();
                    $.post("?bPage=personajeFunctions", {
-                       objetoBolsaId: objetoBolsaId
+                       objetoBolsaId: objetoBolsaId,
+                       areaCuerpoId: areaCuerpoId
                    }).done(function(){
-                       $("#personajeArea").load("index.php?bPage=personajeFunctions&listPersonajeTodo&nonUI")
+                       $("#personajeArea").load("index.php?bPage=personajeFunctions&equipar&listPersonajeTodo&nonUI")
                    })
                 });
                 
@@ -177,16 +179,7 @@
                     $("#infoObjeto").css("display", "none");
                 });
                 
-                $(".nuevoBoxBolsa").click(function(event){
-                   var id = $(this).attr('id');
-                     
-                   $.post("?bPage=personajeFunctions", {
-                       cosaId: id
-                   }).done(function(){
-                       $("#personajeArea").load("index.php?bPage=personajeFunctions&equipar&nonUI")
-                   })
-                      
-                });
+                
            </script>   
 <?php
     }
@@ -270,10 +263,11 @@
     }
     
     if(isset($_POST['objetoBolsaId'])){
-        equiparCabeza($_POST['objetoBolsaId']);
+        equipar($_POST['objetoBolsaId']);
     }
     
-    if(isset($_POST['cosaId'])){
-        equipar($_POST['cosaId']);
-    }
+    if(isset($_POST['areaCuerpoId'])){
+    createBuilding($_POST['location'],$_POST['buildingId']);
+}
+    
 ?>

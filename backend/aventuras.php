@@ -1623,7 +1623,7 @@ function comprobarSuboNivel($miId){
     $sql = "SELECT nivel, experiencia FROM personajes WHERE id='$miId'";
     $stmt = $db->query($sql);
     $personaje = $stmt->fetchAll();
-    $nuevoNivel = 1 + (0.1 * sqrt($personaje[0]['experiencia']));
+    $nuevoNivel = floor(1 + (0.1 * sqrt($personaje[0]['experiencia'])));
     return $nuevoNivel;
 }
 

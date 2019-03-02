@@ -39,112 +39,117 @@ h1{
     text-align:center;
 }
 
-.bolsaBox:hover{
+.objetoBox:hover{
     background: yellow;
 }
 
 .cabezaBox{
-    width:32%;
+    width:150px;
     border:1px solid black;
     float: left;
-    height:16%;
+    height:149px;
     text-align:center;
-    margin-left: 31%;
+    margin-left: 100px;
 }
 .torsoBox{
-    width:24%;
+    width:110px;
     border:1px solid black;
     float: left;
-    height:20%;
+    height:193px;
     text-align:center;
-    margin-left: 2%;
-    margin-top: 2%;
+    margin-left: 1px;
+    margin-top: 5px;
 }
 
 .piesBox{
-    width:15%;
+    width:110px;
     border:1px solid black;
     float: left;
-    height:10%;
+    height:130px;
     text-align:center;
-    margin-left: 23%;
-    margin-top: 2%;
+    margin-left: 1px;
+    margin-top: 5px;
 }
 
 .derechaBox{
-    width:12%;
+    width:110px;
     border:1px solid black;
     float: left;
-    height:10%;
+    height:193px;
     text-align:center;
-    margin-left: 20%;
-    margin-top: 20%;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 .izquierdaBox{
-    width:12%;
+    width:110px;
     border:1px solid black;
     float: left;
-    height:10%;
+    height:193px;
     text-align:center;
-    margin-left: 2%;
-    margin-top: 20%;
+    margin-left: 1px;
+    margin-top: 5px;
 }
 
 .vehiculoBox{
-    width:15%;
+    width:213px;
     border:1px solid black;
     float: left;
-    height:10%;
+    height:130px;
     text-align:center;
-    margin-left: 23%;
-    margin-top: 2%;
+    margin-left: 1px;
+    margin-top: 5px;
 }
 
 .mascotaBox{
-    width:15%;
+    width:110px;
     border:1px solid black;
     float: left;
-    height:10%;
+    height:130px;
     text-align:center;
-    margin-top: 2%;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 .bolsaBox{
-    width:12%;
+    width:100px;
     border:1px solid black;
     float: left;
-    height:10%;
+    height:193px;
     text-align:center;
-    margin-left: 5%;
-    margin-top: 20%;
+    margin-left: 1px;
+    margin-top: 5px;
 }
 
 #boxHolder{
     width:90%;
     margin:auto;
     
+    
 }
 
 #tercioArriba{
-    width:100%;
+    width:450px;
+    height: 150px;
     margin:auto;
     float: left;
-    
+    background-image:url("/design/img/botones/tercioArriba.png");
 }
 
 #tercioMedio{
-    width:100%;
+    width:450px;
+    height: 200px;
     margin:auto;
     float: left;
-    
+    background-image:url("/design/img/botones/tercioMedio.png");
 }
 
 #tercioAbajo{
-    width:100%;
+    width:450px;
+    height: 150px;
     margin:auto;
     float: left;
-    
+    background-image:url("/design/img/botones/tercioAbajo.png");
 }
 
 #wrapper{
