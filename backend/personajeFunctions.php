@@ -229,13 +229,13 @@
         $currentMoney = $result[0]['cash'];
         
         // Rangos de dinero
-        if($currentMoney < 50){
+        if($currentMoney < 100){
             $currentMoneyText = 'Menos que uno que se está bañando';
         }
-        if($currentMoney >=50 && $currentMoney< 200){
+        if($currentMoney >=100 && $currentMoney< 500){
             $currentMoneyText = 'Pobre';
         }
-        if($currentMoney >= 200){
+        if($currentMoney >= 500){
             $currentMoneyText = 'Rico nuevo';
         }
         
@@ -265,9 +265,9 @@
     if(isset($_POST['objetoBolsaId'])){
         equipar($_POST['objetoBolsaId']);
     }
-    
+ /*   
     if(isset($_POST['areaCuerpoId'])){
-    createBuilding($_POST['location'],$_POST['buildingId']);
-}
-    
+        mostrarObjetos($_POST['areaCuerpoId']);
+    }
+   */ 
 ?>

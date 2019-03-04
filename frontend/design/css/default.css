@@ -133,7 +133,7 @@ h1{
     height: 150px;
     margin:auto;
     float: left;
-    background-image:url("/design/img/botones/tercioArriba.png");
+ 
 }
 
 #tercioMedio{
@@ -141,7 +141,7 @@ h1{
     height: 200px;
     margin:auto;
     float: left;
-    background-image:url("/design/img/botones/tercioMedio.png");
+
 }
 
 #tercioAbajo{
@@ -149,7 +149,7 @@ h1{
     height: 150px;
     margin:auto;
     float: left;
-    background-image:url("/design/img/botones/tercioAbajo.png");
+ 
 }
 
 #wrapper{
