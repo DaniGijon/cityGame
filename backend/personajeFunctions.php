@@ -23,9 +23,13 @@
             <?php
                
                 echo "<div id='boxHolder'>";
+                //Consultar los objetos que lleva equipados
+                $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+                $stmt = $db->query($sql);
+                $objetosEquipados = $stmt->fetchAll();
                 
                     echo "<div id='tercioArriba'>";
-                        echo "<span id='0' class='cabezaBox objetoBox'>" . "cabeza" . "</span>";
+                        echo "<span id='0' class='cabezaBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[0]['imagenObjeto'] . "'></span>";
                     echo "</div>";
                     
                     //Objetos que tiene SIN EQUIPAR el personaje
@@ -37,32 +41,50 @@
                         echo "<span id='areaCuerpo' style='display:none'></span>";
                         foreach($objetosDB as $obj){
                             echo "<div id='nuevoBoxBolsa'>";
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br><br>" .
-                                        "Destreza: " . $obj['destreza'] . "<br>" .
-                                        "Fuerza: " . $obj['fuerza'] ."<br>" .
-                                        "Agilidad: " . $obj['agilidad'] ."<br>" .
-                                        "Resistencia: " . $obj['resistencia'] ."<br>" .
-                                        "Espiritu: " . $obj['espiritu'] ."<br>" .
-                                        "Estilo: " . $obj['estilo'] ."<br>" .
-                                        "Ingenio: " . $obj['ingenio'] ."<br>" .
-                                        "Percepcion: " . $obj['percepcion'] .
-                                        "</div>" ;
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br><br>";
+                                if($obj['destreza'] != 0){
+                                    echo "Destreza: " . $obj['destreza'] . "<br>";
+                                }
+                                if($obj['fuerza'] != 0){
+                                    echo "Fuerza: " . $obj['fuerza'] ."<br>";
+                                }
+                                if($obj['agilidad'] != 0){
+                                    echo "Agilidad: " . $obj['agilidad'] ."<br>";
+                                }
+                                if($obj['resistencia'] != 0){
+                                    echo "Resistencia: " . $obj['resistencia'] ."<br>";
+                                }
+                                if($obj['espiritu'] != 0){
+                                    echo "Espiritu: " . $obj['espiritu'] ."<br>";
+                                }
+                                if($obj['estilo'] != 0){
+                                    echo "Estilo: " . $obj['estilo'] ."<br>" ;
+                                }
+                                if($obj['ingenio'] != 0){
+                                    echo "Ingenio: " . $obj['ingenio'] ."<br>";
+                                }
+                                if($obj['percepcion'] != 0){
+                                    echo "Percepcion: " . $obj['percepcion'];
+                                }
+                                   
+                                  
+                                echo "</div>" ;
                             echo "</div>";
                         }
                     echo "</div>";
                     
                     echo "<div id='tercioMedio'>";
                         
-                        echo "<span id='3' class='derechaBox objetoBox'>" . "derecha". "</span>";
-                        echo "<span id='1' class='torsoBox objetoBox'>" . "torso" . "</span>";        
-                        echo "<span id='4' class='izquierdaBox objetoBox'>" . "izquierda". "</span>";
-                        echo "<span id='7' class='bolsaBox objetoBox'>" . "bolsa". "</span>";
+                        echo "<span id='3' class='derechaBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[3]['imagenObjeto'] . "'></span>";
+                        echo "<span id='1' class='torsoBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[1]['imagenObjeto'] . "'></span>";       
+                        echo "<span id='4' class='izquierdaBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[4]['imagenObjeto'] . "'></span>";
+                        echo "<span id='7' class='bolsaBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[7]['imagenObjeto'] . "'></span>";
                         
                     echo "</div>";
                     echo "<div id='tercioAbajo'>";
-                        echo "<span id='6' class='mascotaBox objetoBox'>" . "mascota". "</span>";
-                        echo "<span id='2' class='piesBox objetoBox'>" . "pies" . "</span>";  
-                        echo "<span id='5' class='vehiculoBox objetoBox'>" . "vehiculo". "</span>";
+                        echo "<span id='6' class='mascotaBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[6]['imagenObjeto'] . "'></span>";
+                        echo "<span id='2' class='piesBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[2]['imagenObjeto'] . "'></span>";  
+                        echo "<span id='5' class='vehiculoBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[5]['imagenObjeto'] . "'></span>";
                     echo "</div>";
                 echo "</div>";
          
@@ -186,7 +208,12 @@
     
     function equipar($cosaId){
         global $db;
-        $id = $_SESSION['loggedIn'];       
+        $id = $_SESSION['loggedIn'];  
+        
+        //Consultar los objetos que lleva equipados
+        $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+        $stmt = $db->query($sql);
+        $objetosEquipados = $stmt->fetchAll();
         
         if($cosaId > 0 && $cosaId < 20 ){
             $slot = 6; //mascota
@@ -210,9 +237,22 @@
             $slot = 7; //bolsa
         }
         
+        //RECOGER EL OBJETO QUE SE VA A DESEQUIPAR
+        $objetoDesequipado = $objetosEquipados[$slot]['id'];
+        
+        //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+        $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '$cosaId'";
+        $stmt = $db->query($sql);
+        $resultado = $stmt->fetchAll();
+        $slotLibre = $resultado[0]['slot'];
+        
+        //EQUIPAR
         $sql = "UPDATE inventario SET idO=$cosaId WHERE (idP='$id' AND slot = '$slot')";
         $stmt = $db->query($sql);
         
+        //DESEQUIPAR EL OBJETO ANTERIOR
+        $sql = "UPDATE inventario SET idO='$objetoDesequipado' WHERE (idP='$id' AND slot = '$slotLibre')";
+        $stmt = $db->query($sql);
     }
 
     function listJugadorRival($id){

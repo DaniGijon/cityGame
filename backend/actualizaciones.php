@@ -216,7 +216,7 @@ function accionSpot($box){
             break;
             
         //CARRIL BICI
-        case 'pedaleoSuave':
+        case 'pedaleo Suave':
             $agotamiento = 20;
             $puedoHacerlo = comprobarEnergia($agotamiento);
             if($puedoHacerlo === 1){
@@ -266,11 +266,160 @@ function accionSpot($box){
             }else{
                 $box = "No tengo fuerzas. Como entre ahí, me quedo sopa en un banco.";
             }
-            break;  
+            break; 
+            
+        case 'Pez':
+            $coste = 10;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 1 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        
+        case 'Hámster':
+            $coste = 30;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 2 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        
+        case 'Gallo':
+            $coste = 36;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 3 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        
+        case 'vPez':
+            $sql = "SELECT precioVenta FROM objetos WHERE objetos.id = '1'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            $recibo = $result[0]['precioVenta'];
+            
+            $sql = "UPDATE personajes SET cash = cash+ '$recibo' WHERE id='$id'";
+            $stmt = $db->query($sql);
+            
+            //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+            $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '1'";
+            $stmt = $db->query($sql);
+            $resultado = $stmt->fetchAll();
+            $slotLibre = $resultado[0]['slot'];
+            
+            //BORRAR EL OBJETO VENDIDO
+            $sql = "UPDATE inventario SET idO='0' WHERE (idP='$id' AND slot = '$slotLibre')";
+            $stmt = $db->query($sql);
+            break;
+        
+        case 'vHámster':
+            $sql = "SELECT precioVenta FROM objetos WHERE objetos.id = '2'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            $recibo = $result[0]['precioVenta'];
+            
+            $sql = "UPDATE personajes SET cash = cash+ '$recibo' WHERE id='$id'";
+            $stmt = $db->query($sql);
+            
+            //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+            $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '2'";
+            $stmt = $db->query($sql);
+            $resultado = $stmt->fetchAll();
+            $slotLibre = $resultado[0]['slot'];
+            
+            //BORRAR EL OBJETO VENDIDO
+            $sql = "UPDATE inventario SET idO='0' WHERE (idP='$id' AND slot = '$slotLibre')";
+            $stmt = $db->query($sql);
+            break;
+        
+        case 'vGallo':
+            $sql = "SELECT precioVenta FROM objetos WHERE objetos.id = '3'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            $recibo = $result[0]['precioVenta'];
+            
+            $sql = "UPDATE personajes SET cash = cash+ '$recibo' WHERE id='$id'";
+            $stmt = $db->query($sql);
+            
+            //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+            $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '3'";
+            $stmt = $db->query($sql);
+            $resultado = $stmt->fetchAll();
+            $slotLibre = $resultado[0]['slot'];
+            
+            //BORRAR EL OBJETO VENDIDO
+            $sql = "UPDATE inventario SET idO='0' WHERE (idP='$id' AND slot = '$slotLibre')";
+            $stmt = $db->query($sql);
+            break;
+        
+        case 'vZapatillas deportivas':
+            $sql = "SELECT precioVenta FROM objetos WHERE objetos.id = '401'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            $recibo = $result[0]['precioVenta'];
+            
+            $sql = "UPDATE personajes SET cash = cash+ '$recibo' WHERE id='$id'";
+            $stmt = $db->query($sql);
+            
+            //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+            $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '401'";
+            $stmt = $db->query($sql);
+            $resultado = $stmt->fetchAll();
+            $slotLibre = $resultado[0]['slot'];
+            
+            //BORRAR EL OBJETO VENDIDO
+            $sql = "UPDATE inventario SET idO='0' WHERE (idP='$id' AND slot = '$slotLibre')";
+            $stmt = $db->query($sql);
+            break;
             
         
         default :
-            $box = 'Error: esa opcion no existe';
+            $box = 'Error: esa opcion no existe:'. $box;
     }
     header("location: ?page=zona&message=$box");
 }

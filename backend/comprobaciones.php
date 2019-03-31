@@ -1,5 +1,35 @@
 <?php
 
+function objetosDesequipados(){
+    global $db;
+    $id = $_SESSION['loggedIn']; 
+   
+    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7";
+    $stmt = $db->query($sql);
+    $objetosDB = $stmt->fetchAll();
+    return $objetosDB;
+}
+
+function comprobarSlotLibre(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    //Slots que tiene SIN EQUIPAR el personaje (Inventario)
+    $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $slotLibre = -1;
+    
+    foreach ($result as $res){
+        if($res['idO'] === '0'){
+            $slotLibre = $res['slot'];
+        }
+    }
+   return $slotLibre;
+   
+}
+
 function comprobarDinero(){
    global $db;
    $id = $_SESSION['loggedIn']; 

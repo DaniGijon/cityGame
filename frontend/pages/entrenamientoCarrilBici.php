@@ -15,7 +15,7 @@ global $db;
                 echo "Un día soleado y tranquilo. Buen momento para subir a la bici y entrenar estas piernas. <br><br>";
                 ?>
 <form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">
-                <input type="checkbox" name="cbox1" value="pedaleoSuave"> <label for="cbox3">Pedaleo Suave (Energia Baja)</label><br>
+                <input type="checkbox" name="cbox1" value="pedaleo Suave"> <label for="cbox3">Pedaleo Suave (Energia Baja)</label><br>
                 <input type="checkbox" name="cbox1" value="pedaleoFuerte"> <label for="cbox4">Ritmito Generoso (Energia Media)</label><br>
                 <label><input type="checkbox" name="cbox1" value="indurain"> ¡Soy Induráin en la Vuelta a España! (Energia Alta)</label><br><br>
                 

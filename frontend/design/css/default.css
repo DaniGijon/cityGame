@@ -40,7 +40,7 @@ h1{
 }
 
 .objetoBox:hover{
-    background: yellow;
+    opacity:0.5;
 }
 
 .cabezaBox{
@@ -133,7 +133,7 @@ h1{
     height: 150px;
     margin:auto;
     float: left;
- 
+    background-image: url("/design/img/botones/tercioArriba.png");
 }
 
 #tercioMedio{
@@ -141,7 +141,7 @@ h1{
     height: 200px;
     margin:auto;
     float: left;
-
+    background-image: url("/design/img/botones/terciomedio.png");
 }
 
 #tercioAbajo{
@@ -149,7 +149,7 @@ h1{
     height: 150px;
     margin:auto;
     float: left;
- 
+    background-image: url("/design/img/botones/tercioAbajo.png");
 }
 
 #wrapper{
@@ -345,7 +345,7 @@ h1{
 #nuevoBoxBolsa{
     width:30%;
     margin:2px;
-    height:200px;
+    height:120px;
     text-align:center;
     float:left;
     background:white;
@@ -892,7 +892,7 @@ h1{
 /* MEJORANDO LA VENTANA DE PERSONAJE */
 
 #infoObjeto{
-    background-color:white;
+    background-color:greenyellow;
     padding: 10px;
     display: none;
     position: absolute;

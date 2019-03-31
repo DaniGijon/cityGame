@@ -6,7 +6,7 @@
 ?>
     <div id="top">
         <div id="logoTitulo">
-            <h1 class="large noMargin floatLeft">Puerto Game</h1>
+            <h1 class="large noMargin floatLeft">PuertoGame</h1>
         </div>
         
         <div id="infoArriba" class="floatRight" >
