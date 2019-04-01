@@ -1,6 +1,7 @@
 <?php
 global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
+        include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
         comprobarZona1Barrio1();
         
@@ -8,15 +9,24 @@ global $db;
             
             echo "<div class='contenido'>";
                 echo "<div class='seccionSpotImagen'>" ;
-                    echo"seccionSpotImagen";
+                    $imagenSpot = getPajareria();
+                    echo $imagenSpot;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                
                 echo "<div class='seccionSpotOpciones'>";
                 echo "\"¡Schwack! ¡Un cliente!\", grita el loro. <br><br>"; 
                 
                 echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
-                    echo '<input type="checkbox" name="cbox1" value="Pez"> <label for="cbox3">Pez (10€)</label><br>';
-                    echo '<input type="checkbox" name="cbox1" value="Hámster"> <label for="cbox4">Hámster (30€)</label><br>';
+                    $imagenPez = getPez();
+                    $imagenHámster = getHámster();
+                    $imagenGallo = getGallo();
+                    echo "<div id='opcionBox'>$imagenPez</div>";
+                    echo "<div id='opcionBox'>$imagenHámster</div>";
+                    echo "<div id='opcionBox'>$imagenGallo</div><br><br><br>";
+                    echo '<input type="checkbox" name="cbox1" value="Pez"> <label for="cbox3">Pez</label>';
+                    
+                    echo '<input type="checkbox" name="cbox1" value="Hámster"> <label for="cbox4">Hámster (30€)</label>';
+                    
                     echo '<input type="checkbox" name="cbox1" value="Gallo"> <label for="cbox4">Gallo (36€)</label><br><br>';
                     
                     echo'<input type="submit" value="Comprar"><br><br>';
@@ -28,7 +38,7 @@ global $db;
                     //CONSULTAR OBJETOS QUE LLEVO DESEQUIPADOS
                     $objetosDesequipados=objetosDesequipados();
                     foreach($objetosDesequipados as $cadaObjeto){
-                        echo "<input type='checkbox' name='cbox1' value='v" . $cadaObjeto['nombre'] . "'> <label for='cbox2'>" . $cadaObjeto['nombre'] . ": " . $cadaObjeto['precioVenta'] . "€</label><br>";
+                        echo "<input type='checkbox' name='cbox1' value='v" . $cadaObjeto['nombre'] . "'> <label for='cbox2'>" . "<img src='/design/img/objetos/" . $cadaObjeto['imagenObjeto'] . "'>" . $cadaObjeto['nombre'] . ": " . $cadaObjeto['precioVenta'] . "€</label><br>";
                     }
                     
                     echo "<br><input type='submit' value='Vender'>";

@@ -251,6 +251,20 @@ h1{
     float:left;
 }
 
+.botonAvances{
+  background-image:url("/design/img/botones/avances.png");
+  background-repeat:no-repeat;
+  height:16px;
+  width:16px;
+  float:left;
+  margin-right: 5px;
+  background-position:center;
+}
+
+.botonAvances:hover{
+    opacity:0.5;
+}
+
 .nombrePersonaje{
     height:25px;
     width:150px;
@@ -412,6 +426,10 @@ h1{
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+}
+
+.cajitaSpot:hover{
+    opacity:0.5;
 }
 
 .filaA{
@@ -910,9 +928,17 @@ h1{
 
 .seccionSpotOpciones{
     width: 380px;
-    height: 300px;
+    height: 100%;
     border-collapse: separate;
     border-spacing: 0 3px;
     clear: left;
     margin: 0 10px;
+}
+
+#OpcionBox{
+    width: 100px;
+    height: 100px;
+    margin: 0 10px;
+    float:left;
+    border:1px solid black;
 }

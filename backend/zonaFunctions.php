@@ -1,5 +1,5 @@
 <?php
-    function dibujarZona(){
+    function dibujarZona($spotID){
         global $db;
         
         $id = $_SESSION['loggedIn'];
@@ -37,9 +37,20 @@
                 
                 echo "<div class='seccionDescripcionZona'>";
                     echo "<div class='seccionDescripcionZonaImagen'>";
-                        
+                        if($spotID === 0){
                         $imagenZona = "<img src='/design/img/zonas/" . $result[0]['imagenZona'] . "'>";
                         echo $imagenZona;
+                        }
+                        else{
+                            echo 'YA LE HA DADO y es: ' . $spotID;
+                            $sql = "SELECT * FROM spots WHERE idS = '$spotID'";
+                            $stmt = $db->query($sql);
+                            $res = $stmt->fetchAll();
+                            
+                            $imagenSpot = "<img src='/design/img/spots/" . $res[0]['imagenSpot'] . "'>";
+                            echo $imagenSpot;
+                            
+                        }
                     
                     echo "</div>";
                     echo "<div class='seccionDescripcionZonaTexto'>";
@@ -48,11 +59,11 @@
                     echo "</div>";
                 echo "</div>";
                 
-                echo "<div class='seccionDescripcionSpot'>";
+            /*    echo "<div class='seccionDescripcionSpot'>";
                 
-                    mostrarSpot($spotId);
+                    mostrarSpot($spotID);
                 
-                echo "</div>";
+                echo "</div>";*/
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona
@@ -61,15 +72,17 @@
     $(".cajitaSpot").click(function(){
         var spotId = $(this).attr('id');
         alert(spotId);
-        $(".seccionDescripcionZona").toggle();
-        $(".seccionDescripcionSpot").toggle();
+        /*$(".seccionDescripcionZona").toggle();
+        $(".seccionDescripcionSpot").toggle();*/
 
         $.post("?bPage=zonaFunctions", {
 
             spotId: spotId
 
         }).done(function(){
-               $("#zonaArea").load("index.php?bPage=zonaFunctions&dibujarZona&nonUI&spotClickado")
+               
+               $("#zonaArea").load("index.php?bPage=zonaFunctions&dibujarZona&nonUI")
+               alert( "llega bien" ); 
         })
     });
                     
@@ -77,18 +90,21 @@
 <?php
     }
 
-    function mostrarSpot($spotId){
+    function mostrarSpot($reciboSpotId){
+        
         echo "<div class='seccionDescripcionZonaImagen'>";
         global $db;
-        var_dump($spotId);
+        var_dump($reciboSpotId);
         
-        $sql = "SELECT * FROM spots WHERE id = ?";
+        $sql = "SELECT * FROM spots WHERE idS = '?'";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($spotId));
+        $stmt->execute(array($reciboSpotId));
+        $res = $stmt->fetch();
+        $cuenta = $stmt->rowCount();
         
         //SI EL OBJETO EXISTE
-        if($stmt->rowCount() > 0){
-            echo 'Me estas pasando idS: ' . $spotId;
+        if($cuenta > 0){
+            echo 'Me estas pasando idS: ' . $reciboSpotId;
         }
         else{
             echo 'Tu padre';
@@ -100,11 +116,11 @@
     }
     
     if(isset($_GET['dibujarZona'])){
-        dibujarZona();
+        dibujarZona(8);
     }
     
     if(isset($_POST['spotId'])){
-       mostrarSpot($_POST['spotId']);
+        dibujarZona($_POST['spotId']);
     }
 
 ?>

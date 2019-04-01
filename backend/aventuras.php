@@ -28,7 +28,7 @@ function zona($box){
                     // Atacar al monstruo
                     $idMonstruo = $monstruo[0]['idM'];
                     $premio= atacarMonstruo($idMonstruo);
-                    var_dump($premio);
+                    
                     if($premio > 0){
                         //GANO RESPETO? GANO OBJETOS? 
                         $respetoGanado = rand($monstruo[0]['nivel']*2, $monstruo[0]['nivel']*5);
@@ -53,7 +53,25 @@ function zona($box){
                         $ganoObjeto = rand(1,5);
                         if($ganoObjeto>4){
                             //HAY QUE MIRAR QUÉ OBJETO SUELTA EL MONSTRUO
-                            $mensajeObjeto = " Le arrebato un objeto que llevaba consigo: MAIZ ";
+                            $mensajeObjeto = " Le arrebato un objeto que llevaba consigo: ";
+                            $nivelMAXObjeto = $monstruo[0]['nivel'];
+                            $sql = "SELECT * FROM objetos WHERE nivelMin > 0 AND nivelMin <= '$nivelMAXObjeto'";
+                            $stmt = $db->query($sql);
+                            $obj = $stmt->fetchAll();
+                            $cantidadObjetosCandidatos = count($obj); 
+                            $objetoObtenido = rand(0, $cantidadObjetosCandidatos-1);
+                            $mensajeObjeto = $mensajeObjeto . $obj[$objetoObtenido]['nombre'];
+                            
+                            //Miro que tenga algun slot libre en el inventario
+                            $slotDondeGuardo = comprobarSlotLibre();
+                            if($slotDondeGuardo === -1){
+                                $mensajeObjeto = $mensajeObjeto . ". No puedo llevarme el botín porque mi inventario está lleno.";
+                            }
+                            else{
+                                $idObjetoObtenido = $obj[$objetoObtenido]['id'];
+                                $sql = "UPDATE inventario SET idO = '$idObjetoObtenido' WHERE idP='$id' AND slot = '$slotDondeGuardo'";
+                                $db->query($sql);
+                            }
                         }
                         else{
                             $mensajeObjeto = '';
@@ -66,7 +84,7 @@ function zona($box){
                         $personaje = $stmt->fetchAll();
                         $nuevoNivel = comprobarSuboNivel($id);
                         if($nuevoNivel != $personaje[0]['nivel'] ){
-                            $sql = "UPDATE personajes SET nivel = personajes.nivel+1 WHERE id='$id'";
+                            $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + 5 WHERE id='$id'";
                             $db->query($sql);
                             $mensajeNivel = " SUBO DE NIVEL!<br>";
                             

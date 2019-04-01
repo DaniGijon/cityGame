@@ -158,14 +158,65 @@
         </fieldset>
         <fieldset>
             <legend style="text-align: center"> Mis habilidades</legend>
-            <span class="quarterWidth">Destreza: <?php echo round($destreza+$bonusDestreza, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['destreza'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusDestreza . ')' ; ?></span><br>
-            <span class="quarterWidth">Fuerza: <?php echo round($fuerza+$bonusFuerza, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['fuerza'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusFuerza . ')' ; ?></span><br>
-            <span class="quarterWidth">Agilidad: <?php echo round($agilidad+$bonusAgilidad, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['agilidad'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusAgilidad . ')' ; ?></span><br>
-            <span class="quarterWidth">Resistencia: <?php echo round($resistencia+$bonusResistencia, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['resistencia'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusResistencia . ')' ; ?></span><br>
-            <span class="quarterWidth">Espiritu: <?php echo round($espiritu+$bonusEspiritu, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['espiritu'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusEspiritu . ')' ; ?></span><br>
-            <span class="quarterWidth">Estilo: <?php echo round($estilo+$bonusEstilo, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['estilo'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusEstilo . ')' ; ?></span><br>
-            <span class="quarterWidth">Ingenio: <?php echo round($ingenio+$bonusIngenio, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['ingenio'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusIngenio . ')' ; ?></span><br>
-            <span class="quarterWidth">Percepcion: <?php echo round($percepcion+$bonusPercepcion, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['percepcion'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusPercepcion . ')' ; ?></span><br>
+            <span class="quarterWidth">Destreza: <?php echo round($destreza+$bonusDestreza, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['destreza'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusDestreza . ')' ;
+            if ($result[0]['avances'] > 0){
+                echo "<span id='botonAvances1' class='botonAvances'>
+                <img src='/design/img/botones/avances.png'><br>
+            </span>";
+            }
+            ?></span><br>
+            <span class="quarterWidth">Fuerza: <?php echo round($fuerza+$bonusFuerza, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['fuerza'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusFuerza . ')' ;
+            if ($result[0]['avances'] > 0){
+                echo "<span id='botonAvances2' class='botonAvances'>
+                <img src='/design/img/botones/avances.png'><br>
+            </span>";
+            }
+            ?></span><br>
+            <span class="quarterWidth">Agilidad: <?php echo round($agilidad+$bonusAgilidad, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['agilidad'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusAgilidad . ')' ;
+            if ($result[0]['avances'] > 0){
+                echo "<span id='botonAvances3' class='botonAvances'>
+                <img src='/design/img/botones/avances.png'><br>
+            </span>";
+            }
+            ?></span><br>
+            <span class="quarterWidth">Resistencia: <?php echo round($resistencia+$bonusResistencia, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['resistencia'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusResistencia . ')' ;
+            if ($result[0]['avances'] > 0){
+                echo "<span id='botonAvances4' class='botonAvances'>
+                <img src='/design/img/botones/avances.png'><br>
+            </span>";
+            }
+            ?></span><br>
+            <span class="quarterWidth">Espiritu: <?php echo round($espiritu+$bonusEspiritu, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['espiritu'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusEspiritu . ')' ;
+            if ($result[0]['avances'] > 0){
+                echo "<span id='botonAvances5' class='botonAvances'>
+                <img src='/design/img/botones/avances.png'><br>
+            </span>";
+            }
+            ?></span><br>
+            <span class="quarterWidth">Estilo: <?php echo round($estilo+$bonusEstilo, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['estilo'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusEstilo . ')' ;
+            if ($result[0]['avances'] > 0){
+                echo "<span id='botonAvances6' class='botonAvances'>
+                <img src='/design/img/botones/avances.png'><br>
+            </span>";
+            }
+            ?></span><br>
+            <span class="quarterWidth">Ingenio(<img src='/design/img/iconos/ingenio.png'>): <?php echo round($ingenio+$bonusIngenio, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['ingenio'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusIngenio . ')' ;
+            if ($result[0]['avances'] > 0){
+                echo "<span id='botonAvances7' class='botonAvances'>
+                <img src='/design/img/botones/avances.png'><br>
+            </span>";
+            }
+            ?></span><br>
+            <span class="quarterWidth">Percepción (<img src='/design/img/iconos/percepcion.png'>): <?php echo round($percepcion+$bonusPercepcion, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['percepcion'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusPercepcion . ')' ;
+            if ($result[0]['avances'] > 0){
+                echo "<span id='botonAvances8' class='botonAvances'>
+                <img src='/design/img/botones/avances.png'><br>
+            </span>";
+            }
+            ?></span><br>
+            
+            <span class="quarterWidth">Avances: <?php echo $result[0]['avances'] . " ";?></span><br>
+
         </fieldset>
         
     </span>
@@ -188,6 +239,15 @@
                        areaCuerpoId: areaCuerpoId
                    }).done(function(){
                        $("#personajeArea").load("index.php?bPage=personajeFunctions&equipar&listPersonajeTodo&nonUI")
+                   })
+                });
+                
+                $(".botonAvances").click(function(){
+                   var avanceId = $(this).attr('id');
+                   $.post("?bPage=personajeFunctions", {
+                       avanceId : avanceId
+                   }).done(function(){
+                       $("#personajeArea").load("index.php?bPage=personajeFunctions&subirHabilidad&listPersonajeTodo&nonUI")
                    })
                 });
                 
@@ -295,6 +355,67 @@
         echo'Respeto: ' . $respetoText . '<br>';
         echo'Dinero: ' . $currentMoneyText . '<br>';
     }  
+    
+    function subirHabilidad($avanceId){
+        global $db;
+        $id = $_SESSION['loggedIn'];
+        
+        $sql = "SELECT * FROM personajes WHERE id='$id'";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+        
+        if($avanceId === 'botonAvances1'){
+           $nuevaHabilidad = $result[0]['destreza'] + 1;
+           $sql = "UPDATE personajes SET destreza='$nuevaHabilidad' WHERE id = '$id'";
+           $db->query($sql);
+        }
+        
+        if($avanceId === 'botonAvances2'){
+           $nuevaHabilidad = $result[0]['fuerza'] + 1;
+           $sql = "UPDATE personajes SET fuerza='$nuevaHabilidad' WHERE id = '$id'";
+           $db->query($sql);
+        }
+        
+        if($avanceId === 'botonAvances3'){
+           $nuevaHabilidad = $result[0]['agilidad'] + 1;
+           $sql = "UPDATE personajes SET agilidad='$nuevaHabilidad' WHERE id = '$id'";
+           $db->query($sql);
+        }
+        
+        if($avanceId === 'botonAvances4'){
+           $nuevaHabilidad = $result[0]['resistencia'] + 1;
+           $sql = "UPDATE personajes SET resistencia='$nuevaHabilidad' WHERE id = '$id'";
+           $db->query($sql);
+        }
+        
+        if($avanceId === 'botonAvances5'){
+           $nuevaHabilidad = $result[0]['espiritu'] + 1;
+           $sql = "UPDATE personajes SET espiritu='$nuevaHabilidad' WHERE id = '$id'";
+           $db->query($sql);
+        }
+        
+        if($avanceId === 'botonAvances6'){
+           $nuevaHabilidad = $result[0]['estilo'] + 1;
+           $sql = "UPDATE personajes SET estilo='$nuevaHabilidad' WHERE id = '$id'";
+           $db->query($sql);
+        }
+        
+        if($avanceId === 'botonAvances7'){
+           $nuevaHabilidad = $result[0]['ingenio'] + 1;
+           $sql = "UPDATE personajes SET ingenio='$nuevaHabilidad' WHERE id = '$id'";
+           $db->query($sql);
+        }
+        
+        if($avanceId === 'botonAvances8'){
+           $nuevaHabilidad = $result[0]['percepcion'] + 1;
+           $sql = "UPDATE personajes SET percepcion='$nuevaHabilidad' WHERE id = '$id'";
+           $db->query($sql);
+        }
+        
+        $nuevosAvances = $result[0]['avances'] - 1;
+        $sql = "UPDATE personajes SET avances='$nuevosAvances' WHERE id = '$id'";
+        $db->query($sql);
+    }
 
     
     if(isset($_GET['listPersonajeTodo'])){
@@ -305,9 +426,9 @@
     if(isset($_POST['objetoBolsaId'])){
         equipar($_POST['objetoBolsaId']);
     }
- /*   
-    if(isset($_POST['areaCuerpoId'])){
-        mostrarObjetos($_POST['areaCuerpoId']);
+    
+    if(isset($_POST['avanceId'])){
+        subirHabilidad($_POST['avanceId']);
     }
-   */ 
+ 
 ?>

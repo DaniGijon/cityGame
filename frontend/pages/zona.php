@@ -7,7 +7,7 @@
     }
     
     echo"<div id='zonaArea'>";
-        dibujarZona();
+        dibujarZona(0);
     echo "</div>";
 
 ?>

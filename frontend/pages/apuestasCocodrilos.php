@@ -4,6 +4,7 @@ if(isset($_GET['message'])){
 }
 global $db;
 include (__ROOT__.'/backend/comprobaciones.php');
+include (__ROOT__.'/backend/getFotos.php');
 $id = $_SESSION['loggedIn'];
 $miDinero = comprobarDinero();
 $dineroEnCash = $miDinero[0]['cash'];
@@ -17,7 +18,7 @@ echo "<div id='moduloZona'>";
 
     echo "<div class='contenido'>";
         echo "<div class='seccionSpotImagen'>" ;
-            $imagenSpot = "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+            $imagenSpot = getApuestasCocodrilos();
             echo $imagenSpot;
         echo "</div>"; //FIN DE div seccionSpotImagen
 
