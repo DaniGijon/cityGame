@@ -103,8 +103,8 @@ function registerAccount($username,$password,$email){
             if ($stmt->rowCount() > 0){
                 //Creacion del personaje en la base de datos
                 $id = $db->lastInsertId();
-                $sql = "INSERT INTO personajes (id,nombre,sexo,origen,experiencia,nivel,barrio,zona,destreza,fuerza,agilidad,resistencia,espiritu,estilo,ingenio,percepcion,salud,energia,respeto,social,cash,enBanco) "
-                        . "VALUES ('$id','$username','Mujer','1','0','1','1','1','1','1','1','1','1','1','1','1','100','100','0','0','100','0')";
+                $sql = "INSERT INTO personajes (id,nombre,sexo,origen,experiencia,nivel,barrio,zona,destreza,fuerza,agilidad,resistencia,espiritu,estilo,ingenio,percepcion,salud,energia,respeto,social,cash,enBanco,avances,survival) "
+                        . "VALUES ('$id','$username','Mujer','1','0','1','1','1','1','1','1','1','1','1','1','1','100','100','0','0','100','0','0','0')";
                 $db->query($sql);
                 
                 //Creacion del inventario en la base de datos

@@ -50,6 +50,9 @@
                 <a href="?page=zona"><button class="botonDarUnaVueltaImagen">Dar una Vuelta</button></a><br>
             </span>
             
+            <span id='botonAlbum' class="botonAlbum">
+                <a href="?page=album"><button class="botonAlbumImagen">Album</button></a><br>
+            </span>
             <span id='botonRanking' class="botonRanking">
                 <a href="?page=ranking"><button class="botonRankingImagen">Ranking</button></a><br>
             </span>

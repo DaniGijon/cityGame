@@ -8,6 +8,14 @@ h1{
     color:blue;
 }
 
+h2{
+    color : skyblue;
+}
+
+h3{
+    color : bisque;
+}
+
 .floatLeft{
     float:left;
 }
@@ -29,6 +37,20 @@ h1{
 
 .noMargin{
     margin:0;
+}
+
+.icono{
+   width: 14px;
+   height : 14px;
+   
+}
+
+.valor{
+   width: 140px;
+   border-bottom: 1px solid black;
+   display : inline-block;
+   text-align : center;
+   
 }
 
 .gridBox{
@@ -225,6 +247,20 @@ h1{
   background-position:center;
 }
 
+.botonAlbum{
+    height:100px;
+    width:100px; 
+    float:left;
+}
+
+.botonAlbumImagen{
+  background-image:url("/design/img/botones/album.png");
+  background-repeat:no-repeat;
+  height:100px;
+  width:100px;
+  background-position:center;
+}
+
 .botonRanking{
     height:100px;
     width:100px; 
@@ -346,7 +382,11 @@ h1{
 .quarterWidth{
     width: 50%;
     float:left;
-   
+}
+
+.todoWidth{
+    width : 100%;
+    float : left;
 }
 
 #capaBolsa{
@@ -560,6 +600,10 @@ h1{
 
 .tipoaventura{
     background: orange;
+}
+
+.tipocerrajeria{
+    background: darkred;
 }
 
 .tipoapuestas{
@@ -938,7 +982,28 @@ h1{
 #OpcionBox{
     width: 100px;
     height: 100px;
-    margin: 0 10px;
+    margin: 10px 10px;
     float:left;
     border:1px solid black;
+}
+
+#albumFicha{
+    width: 300px;
+    height: 300px;
+    margin: 10px 10px;
+    float:left;
+    border:1px solid black;
+}
+
+#fichaDescripcion{
+    width : 95%;
+    height: 140px;
+    padding : 5 10;
+}
+
+#fichaPie{
+    width : 90%;
+    height: 20px;
+    padding : 5 10;
+    text-align : right;
 }

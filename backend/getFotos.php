@@ -11,6 +11,50 @@ function getApuestasCocodrilos(){
 
 }
 
+function getCaras(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='30'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+
+}
+
+function getAviones(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='50'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+
+}
+
+function getLuckia(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='140'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+
+}
+
+function getJoker(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='90'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+
+}
+
 function getPajareria(){
     global $db;
     
@@ -19,7 +63,16 @@ function getPajareria(){
     $result = $stmt->fetchAll();
     
     return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+}
 
+function getCerrajeria(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='7'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
 }
 
 //OBJETOS: MASCOTAS:

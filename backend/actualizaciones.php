@@ -268,6 +268,38 @@ function accionSpot($box){
             }
             break; 
             
+        //CERRAJERIA: ABRIR  
+        case 'cajita oxidada':
+            $coste = 20;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin <= '1'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin <= '1' && nivelMin > '0')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='900'";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;     
+            
         case 'Pez':
             $coste = 10;
             $puedoPagar = comprobarCoste($coste);

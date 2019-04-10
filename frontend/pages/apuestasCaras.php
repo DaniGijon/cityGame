@@ -8,9 +8,9 @@ include (__ROOT__.'/backend/getFotos.php');
 $id = $_SESSION['loggedIn'];
 $miDinero = comprobarDinero();
 $dineroEnCash = $miDinero[0]['cash'];
-comprobarZona1Barrio1();
+comprobarZona1Barrio2();
 
-$sql = "SELECT * FROM spots WHERE idS='2'";
+$sql = "SELECT * FROM spots WHERE idS='30'";
 $stmt = $db->query($sql);
 $result = $stmt->fetchAll();
 
@@ -18,22 +18,17 @@ echo "<div id='moduloZona'>";
 
     echo "<div class='contenido'>";
         echo "<div class='seccionSpotImagen'>" ;
-            $imagenSpot = getApuestasCocodrilos();
+            $imagenSpot = getCaras();
             echo $imagenSpot;
         echo "</div>"; //FIN DE div seccionSpotImagen
 
         echo "<div class='seccionSpotOpciones'>";
-            echo "<br>El \"Ojailén River Grand Prix\" es el evento principal del Campeonato de Carreras de Cocodrilos. ¡Hagan sus apuestas!<br><br>";
+            echo "<br>El juego de Caras y Cruces. ¡Hagan sus apuestas!<br><br>";
             echo " Llevo " . $dineroEnCash . "€ en el bolsillo.";    
             ?>
-<form id = "selectorOpciones" action="?bPage=apuestas&action=cocodrilos&nonUI" method="post">
-                <label> <br>Crocky Balboa (@3.00) <input name="cantidadApuesta1" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Dientes de leche (@4.00) <input name="cantidadApuesta2" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Cai-Man (@5.00) <input name="cantidadApuesta3" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Totodile (@6.00) <input name="cantidadApuesta4" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Rumbera (@8.00) <input name="cantidadApuesta5" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Old Jack (@10.00) <input name="cantidadApuesta6" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Plátano (@41.00) <input name="cantidadApuesta7" style="width:25%" type=number min="0" value =0>€</label><br>
+<form id = "selectorOpciones" action="?bPage=apuestas&action=caras&nonUI" method="post">
+                <label> <br>Caras (@2.00) <input name="cantidadApuesta1" style="width:25%" type=number min="0" value =0>€</label><br>
+                <label> Cruces (@2.00) <input name="cantidadApuesta2" style="width:25%" type=number min="0" value =0>€</label><br>
                 
                 <input type="submit" value="¡Apostar!">
 </form>                

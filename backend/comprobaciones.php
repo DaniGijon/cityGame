@@ -10,6 +10,16 @@ function objetosDesequipados(){
     return $objetosDB;
 }
 
+function objetosDesequipadosCofres(){
+    global $db;
+    $id = $_SESSION['loggedIn']; 
+   
+    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND (inventario.idO >= 900 && inventario.idO <1000)";
+    $stmt = $db->query($sql);
+    $objetosDB = $stmt->fetchAll();
+    return $objetosDB;
+}
+
 function comprobarSlotLibre(){
     global $db;
     $id = $_SESSION['loggedIn'];
@@ -90,6 +100,24 @@ function comprobarEnergia($agotamiento){
        $puedoHacerlo = 0;
    }
    return $puedoHacerlo;
+}
+
+function comprobarEsNuevoPersonaje(){
+   global $db;
+   $id = $_SESSION['loggedIn']; 
+   
+   $sql = "SELECT * FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   if($result[0]['destreza'] === '1' && $result[0]['fuerza'] === '1' && $result[0]['agilidad'] === '1' && $result[0]['resistencia'] === '1'
+           && $result[0]['espiritu'] === '1' && $result[0]['estilo'] === '1' && $result[0]['ingenio'] === '1' && $result[0]['percepcion'] === '1'){
+       $esValido = 1;
+   }
+   else{
+       $esValido = 0;
+   }
+   return $esValido;
 }
 
 function comprobarZonaBarrioPersonajes($id,$miId){

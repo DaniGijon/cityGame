@@ -49,10 +49,26 @@ function cualMonstruo($zona,$barrio){
    $result = $stmt->fetchAll();
    
    return $result;
-   
-   
-    
 }
 
 
-?>
+function cualMonstruoDebil($zona,$barrio){
+   global $db;
+   $id = $_SESSION['loggedIn']; 
+   
+   $sql = "SELECT * FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   if($result[0]['nivel']>2){
+        $rangoNiveles = rand(1, $result[0]['nivel']-2);
+   }
+   else{
+       $rangoNiveles = 1;
+   }
+   $sql = "SELECT * FROM monstruos WHERE nivel='$rangoNiveles' AND zona='$zona' AND barrio='$barrio'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   return $result;
+}

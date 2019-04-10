@@ -18,7 +18,7 @@
     <span class="contenedor1">
         
         <fieldset>
-            <legend style="text-align: center">Mi inventario</legend>
+            <legend style="text-align: center">Mi personaje</legend>
             
             <?php
                
@@ -158,65 +158,119 @@
         </fieldset>
         <fieldset>
             <legend style="text-align: center"> Mis habilidades</legend>
-            <span class="quarterWidth">Destreza: <?php echo round($destreza+$bonusDestreza, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['destreza'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusDestreza . ')' ;
-            if ($result[0]['avances'] > 0){
-                echo "<span id='botonAvances1' class='botonAvances'>
-                <img src='/design/img/botones/avances.png'><br>
-            </span>";
-            }
-            ?></span><br>
-            <span class="quarterWidth">Fuerza: <?php echo round($fuerza+$bonusFuerza, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['fuerza'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusFuerza . ')' ;
-            if ($result[0]['avances'] > 0){
-                echo "<span id='botonAvances2' class='botonAvances'>
-                <img src='/design/img/botones/avances.png'><br>
-            </span>";
-            }
-            ?></span><br>
-            <span class="quarterWidth">Agilidad: <?php echo round($agilidad+$bonusAgilidad, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['agilidad'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusAgilidad . ')' ;
-            if ($result[0]['avances'] > 0){
-                echo "<span id='botonAvances3' class='botonAvances'>
-                <img src='/design/img/botones/avances.png'><br>
-            </span>";
-            }
-            ?></span><br>
-            <span class="quarterWidth">Resistencia: <?php echo round($resistencia+$bonusResistencia, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['resistencia'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusResistencia . ')' ;
-            if ($result[0]['avances'] > 0){
-                echo "<span id='botonAvances4' class='botonAvances'>
-                <img src='/design/img/botones/avances.png'><br>
-            </span>";
-            }
-            ?></span><br>
-            <span class="quarterWidth">Espiritu: <?php echo round($espiritu+$bonusEspiritu, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['espiritu'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusEspiritu . ')' ;
-            if ($result[0]['avances'] > 0){
-                echo "<span id='botonAvances5' class='botonAvances'>
-                <img src='/design/img/botones/avances.png'><br>
-            </span>";
-            }
-            ?></span><br>
-            <span class="quarterWidth">Estilo: <?php echo round($estilo+$bonusEstilo, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['estilo'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusEstilo . ')' ;
-            if ($result[0]['avances'] > 0){
-                echo "<span id='botonAvances6' class='botonAvances'>
-                <img src='/design/img/botones/avances.png'><br>
-            </span>";
-            }
-            ?></span><br>
-            <span class="quarterWidth">Ingenio(<img src='/design/img/iconos/ingenio.png'>): <?php echo round($ingenio+$bonusIngenio, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['ingenio'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusIngenio . ')' ;
-            if ($result[0]['avances'] > 0){
-                echo "<span id='botonAvances7' class='botonAvances'>
-                <img src='/design/img/botones/avances.png'><br>
-            </span>";
-            }
-            ?></span><br>
-            <span class="quarterWidth">Percepción (<img src='/design/img/iconos/percepcion.png'>): <?php echo round($percepcion+$bonusPercepcion, 2, PHP_ROUND_HALF_DOWN) . ' (' . round($result[0]['percepcion'], 2, PHP_ROUND_HALF_DOWN) . '+' . $bonusPercepcion . ')' ;
-            if ($result[0]['avances'] > 0){
-                echo "<span id='botonAvances8' class='botonAvances'>
-                <img src='/design/img/botones/avances.png'><br>
-            </span>";
-            }
-            ?></span><br>
+            <div id="tablaHabilidades">
+            <table border = '0' class='floatLeft'>
+    
+            <tr>
+                <th colspan="2"> <img src='/design/img/iconos/destreza.png'> </th>
+                <th colspan="2"> <img src='/design/img/iconos/fuerza.png'> </th>
+                <th colspan="2"> <img src='/design/img/iconos/agilidad.png'> </th>
+                <th colspan="2"> <img src='/design/img/iconos/resistencia.png'> </th>
+                <th colspan="2"> <img src='/design/img/iconos/espiritu.png'> </th>
+                <th colspan="2"> <img src='/design/img/iconos/estilo.png'> </th>
+                <th colspan="2"> <img src='/design/img/iconos/ingenio.png'> </th>
+                <th colspan="2"> <img src='/design/img/iconos/percepcion.png'> </th>   
+            </tr>    
+                
+            <tr>
+            <?php
+                echo "<th colspan='2'>";
+                if ($result[0]['avances'] > 0){
+                    echo "<span id='botonAvances1' class='botonAvances'>
+                    <img src='/design/img/botones/avances.png'><br></span>";
+                }
+                echo " DES </th>";
+                
+                echo "<th colspan='2'>";
+                if ($result[0]['avances'] > 0){
+                    echo "<span id='botonAvances2' class='botonAvances'>
+                    <img src='/design/img/botones/avances.png'><br></span>";
+                }
+                echo " FUE </th>";
+                
+                echo "<th colspan='2'>";
+                if ($result[0]['avances'] > 0){
+                    echo "<span id='botonAvances3' class='botonAvances'>
+                    <img src='/design/img/botones/avances.png'><br></span>";
+                }
+                echo " AGI </th>";
+                
+                echo "<th colspan='2'>";
+                if ($result[0]['avances'] > 0){
+                    echo "<span id='botonAvances4' class='botonAvances'>
+                    <img src='/design/img/botones/avances.png'><br></span>";
+                }
+                echo " RES </th>";
+                
+                echo "<th colspan='2'>";
+                if ($result[0]['avances'] > 0){
+                    echo "<span id='botonAvances5' class='botonAvances'>
+                    <img src='/design/img/botones/avances.png'><br></span>";
+                }
+                echo " ESP </th>";
+                
+                echo "<th colspan='2'>";
+                if ($result[0]['avances'] > 0){
+                    echo "<span id='botonAvances6' class='botonAvances'>
+                    <img src='/design/img/botones/avances.png'><br></span>";
+                }
+                echo " EST </th>";
+                
+                echo "<th colspan='2'>";
+                if ($result[0]['avances'] > 0){
+                    echo "<span id='botonAvances7' class='botonAvances'>
+                    <img src='/design/img/botones/avances.png'><br></span>";
+                }
+                echo " ING </th>";
+                
+                echo "<th colspan='2'>";
+                if ($result[0]['avances'] > 0){
+                    echo "<span id='botonAvances8' class='botonAvances'>
+                    <img src='/design/img/botones/avances.png'><br></span>";
+                }
+                echo " PER </th>";
+            echo "</tr>";
             
-            <span class="quarterWidth">Avances: <?php echo $result[0]['avances'] . " ";?></span><br>
-
+            echo "<tr>";
+                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($destreza+$bonusDestreza) . "</th>";
+                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($fuerza+$bonusFuerza) . "</th>";
+                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($agilidad+$bonusAgilidad) . "</th>";
+                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($resistencia+$bonusResistencia) . "</th>";
+                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($espiritu+$bonusEspiritu) . "</th>";
+                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($estilo+$bonusEstilo) . "</th>";
+                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($ingenio+$bonusIngenio) . "</th>";
+                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($percepcion+$bonusPercepcion) . "</th>";
+            
+            echo "</tr>";
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['destreza'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:pink'>" . $bonusDestreza . "</th>";
+                
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['fuerza'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:pink'>" . $bonusFuerza . "</th>";
+                
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['agilidad'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:pink'>" . $bonusAgilidad . "</th>";
+                
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['resistencia'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:pink'>" . $bonusResistencia . "</th>";
+                
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['espiritu'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:pink'>" . $bonusEspiritu . "</th>";
+                
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['estilo'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:pink'>" . $bonusEstilo . "</th>";
+                
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['ingenio'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:pink'>" . $bonusIngenio . "</th>";
+                
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['percepcion'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:pink'>" . $bonusPercepcion . "</th>";
+                
+                echo '</table>';
+                echo "</div>";
+            ?>
+        <div id="Avances" class="floatLeft"><br>Avances: <?php echo $result[0]['avances'] . " ";?></div><br>
+    
         </fieldset>
         
     </span>
@@ -293,8 +347,12 @@
         else if ($cosaId >= 400 && $cosaId < 500 ){
             $slot = 2; //pies
         }
-        else if ($cosaId >= 500){
+        else if ($cosaId >= 500 && $cosaId < 600){
             $slot = 7; //bolsa
+        }
+        else{
+            //OBJETOS QUE NO SE PUEDEN EQUIPAR
+            exit();
         }
         
         //RECOGER EL OBJETO QUE SE VA A DESEQUIPAR
@@ -355,6 +413,123 @@
         echo'Respeto: ' . $respetoText . '<br>';
         echo'Dinero: ' . $currentMoneyText . '<br>';
     }  
+    
+    function nuevoPersonaje(){
+        global $db;
+        $id = $_SESSION['loggedIn'];  
+        
+        $sql = "SELECT * FROM personajes WHERE id = '$id'";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+        
+?>
+        Ey! Cuéntame de tí:
+
+<form action="?bPage=accountOptions&action=crearPersonaje&nonUI" method="post">
+    
+    Sexo: 
+    <select name="sexo">
+
+    <option>Hombre</option>
+
+    <option>Mujer</option>
+    
+    </select>
+    <br>
+    ¿En qué barrio vives? 
+    <select name="origen">
+
+    <option>Cañamares</option>
+    <option>Libertad</option>
+    <option>Constitucion</option>
+    <option>El Poblado</option>
+    <option>Santa Ana</option>
+    <option>Centro Sur</option>
+    <option>El Pino</option>
+    <option>El Carmen</option>
+    <option>Fraternidad</option>
+    <option>Ciudad Jardin</option>
+    
+    </select>
+  
+    <input type="submit">
+</form>
+
+    <div id='moduloZona'>
+        <div class='contenido'>
+            <div class='seccionMapaZona'>
+                
+            </div>
+            <div class='seccionDescripcionZona'>
+                <div class='seccionDescripcionZonaImagen'>
+
+                    <table border = '0'><caption>Habilidades Iniciales</caption>
+
+                    <tr>
+                        <th colspan="2"> <img src='/design/img/iconos/destreza.png'> </th>
+                        <th colspan="2"> <img src='/design/img/iconos/fuerza.png'> </th>
+                        <th colspan="2"> <img src='/design/img/iconos/agilidad.png'> </th>
+                        <th colspan="2"> <img src='/design/img/iconos/resistencia.png'> </th>
+                        <th colspan="2"> <img src='/design/img/iconos/espiritu.png'> </th>
+                        <th colspan="2"> <img src='/design/img/iconos/estilo.png'> </th>
+                        <th colspan="2"> <img src='/design/img/iconos/ingenio.png'> </th>
+                        <th colspan="2"> <img src='/design/img/iconos/percepcion.png'> </th>   
+                    </tr>    
+
+                    <tr>
+                    <?php
+                        echo "<th colspan='2'>";
+
+                        echo " DES </th>";
+
+                        echo "<th colspan='2'>";
+
+                        echo " FUE </th>";
+
+                        echo "<th colspan='2'>";
+
+                        echo " AGI </th>";
+
+                        echo "<th colspan='2'>";
+
+                        echo " RES </th>";
+
+                        echo "<th colspan='2'>";
+
+                        echo " ESP </th>";
+
+                        echo "<th colspan='2'>";
+
+                        echo " EST </th>";
+
+                        echo "<th colspan='2'>";
+
+                        echo " ING </th>";
+
+                        echo "<th colspan='2'>";
+
+                        echo " PER </th>";
+                    echo "</tr>";
+
+                    echo "<tr>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['destreza']) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['fuerza']) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['agilidad']) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['resistencia']) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['espiritu']) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['estilo']) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['ingenio']) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['percepcion']) . "</th>";
+
+                    echo "</tr>";
+                echo "</table>";
+            echo "</div>";
+            echo "<div class='seccionDescripcionZonaTexto'>";
+            echo "Los vecinos de Cañamares han desarrollado su Ingenio... (escribir)";
+            echo "</div>"; //FIN NUEVO
+        echo "</div>";
+    echo "</div>";
+    }
     
     function subirHabilidad($avanceId){
         global $db;

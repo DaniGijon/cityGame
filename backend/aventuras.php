@@ -30,6 +30,122 @@ function zona($box){
                     $premio= atacarMonstruo($idMonstruo);
                     
                     if($premio > 0){
+                        //AÑADO EL MONSTRUO DERROTADO AL ALBUM
+                        $sql = "INSERT INTO victorias (idP,idM,cantidad) VALUES ('$id','$idMonstruo',1) ON DUPLICATE KEY UPDATE cantidad=cantidad+1;";
+                        $db->query($sql);
+                        //GANO RESPETO? GANO OBJETOS? 
+                        $respetoGanado = rand($monstruo[0]['nivel']*2, $monstruo[0]['nivel']*5);
+                        $sql = "UPDATE personajes SET respeto = respeto+$respetoGanado WHERE id='$id'";
+                        $db->query($sql);
+                        
+                        $celebracion = "Toma ya! He derrotado al monstruo y gano $premio EXP. <br> Mi respeto sube $respetoGanado puntos.<br>";
+                        
+                        //Gano tambien dinero?
+                        $ganoDinero = rand(1,3);
+                        if($ganoDinero > 2){
+                            $dineroGanado = rand(10,50);
+                            $sql = "UPDATE personajes SET cash = personajes.cash + '$dineroGanado' WHERE id='$id'";
+                            $db->query($sql);
+                            $mensajeDinero = "El monstruo llevaba una bolsita. La abro y miro dentro. Consigo $dineroGanado monedas.<br>";
+                        }
+                        else{
+                            $mensajeDinero = '';
+                        }
+
+                        //Gano tambien objeto?
+                        $ganoObjeto = rand(1,5);
+                        if($ganoObjeto>4){
+                            //HAY QUE MIRAR QUÉ OBJETO SUELTA EL MONSTRUO
+                            $mensajeObjeto = " Le arrebato un objeto que llevaba consigo: ";
+                            $nivelMAXObjeto = $monstruo[0]['nivel'];
+                            $sql = "SELECT * FROM objetos WHERE nivelMin > 0 AND nivelMin <= '$nivelMAXObjeto'";
+                            $stmt = $db->query($sql);
+                            $obj = $stmt->fetchAll();
+                            $cantidadObjetosCandidatos = count($obj); 
+                            $objetoObtenido = rand(0, $cantidadObjetosCandidatos-1);
+                            $mensajeObjeto = $mensajeObjeto . $obj[$objetoObtenido]['nombre'];
+                            
+                            //Miro que tenga algun slot libre en el inventario
+                            $slotDondeGuardo = comprobarSlotLibre();
+                            if($slotDondeGuardo === -1){
+                                $mensajeObjeto = $mensajeObjeto . ". No puedo llevarme el botín porque mi inventario está lleno.";
+                            }
+                            else{
+                                $idObjetoObtenido = $obj[$objetoObtenido]['id'];
+                                $sql = "UPDATE inventario SET idO = '$idObjetoObtenido' WHERE idP='$id' AND slot = '$slotDondeGuardo'";
+                                $db->query($sql);
+                            }
+                        }
+                        else{
+                            $mensajeObjeto = '';
+                        }
+                        
+                        //Comprobar si subo de nivel
+                        global $db;
+                        $sql = "SELECT nivel FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $personaje = $stmt->fetchAll();
+                        $nuevoNivel = comprobarSuboNivel($id);
+                        if($nuevoNivel != $personaje[0]['nivel'] ){
+                            $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + 5 WHERE id='$id'";
+                            $db->query($sql);
+                            $mensajeNivel = " SUBO DE NIVEL!<br>";
+                            
+                        }
+
+                        $celebracion = $celebracion . $mensajeNivel . $mensajeDinero . $mensajeObjeto;
+                    }
+                    else{
+                        $sql = "SELECT personajes.salud FROM personajes WHERE id = '$id'";
+                        $stmt = $db->prepare($sql);
+                        $stmt->execute();       
+                        $result = $stmt->fetchAll();
+                        if($result[0]['salud'] != 0){
+                            $celebracion = "¡Ouch! Eso ha dolido. Me vuelvo a casa a curar mis heridas <br>";
+                        }
+                        else{
+                        //Si me quedo con la vida a cero, me llevan al hospital     
+                        $sql = "UPDATE personajes SET barrio = '9', zona = '1' WHERE id='$id'";
+                        $db->query($sql);
+                        $celebracion = "¡Qué dolor! Me tienen que llevar al centro médico más cercano. Tardarán un tiempo para curar mis heridas. <br>";
+                        }
+                    }
+                    
+                    $box = "Me enfrento a un " . $box . " ... " . $celebracion;
+                }
+                else{
+                    $box = "No he encontrado ningún monstruo. Quizá necesito aumentar algo más mi Percepción antes de salir en busca de aventuras por esta zona";
+                }
+            }
+            else{
+                $box = "¡Ay! No puedo con mi cuerpo ahora mismo";
+            }
+            break;
+            
+            case 'aventuraLosPinosDebil':
+            $zona = 1;
+            $barrio = 1;
+            $agotamiento = 30;
+            $probabilidadEncontrar = rand(1, 30);
+            $puedoHacerlo = comprobarEnergia($agotamiento);
+            $tengoSalud = comprobarSalud(1);
+            if($puedoHacerlo === 1 && $tengoSalud === 1){
+                $sql = "UPDATE personajes SET energia = energia-$agotamiento WHERE id='$id'";
+                $stmt = $db->query($sql);
+                $encuentroMonstruos = buscarMonstruos($probabilidadEncontrar);
+                if($encuentroMonstruos === 1){
+                    // ¿Cuál monstruo he encontrado?
+                    $monstruo = cualMonstruoDebil($zona,$barrio);
+                    $box = $monstruo[0]['nombre'];
+                    
+                    // Atacar al monstruo
+                    $idMonstruo = $monstruo[0]['idM'];
+                    $premio= atacarMonstruo($idMonstruo);
+                    
+                    if($premio > 0){
+                        //AÑADO EL MONSTRUO DERROTADO AL ALBUM
+                        $sql = "INSERT INTO victorias (idP,idM,cantidad) VALUES ('$id','$idMonstruo',1) ON DUPLICATE KEY UPDATE cantidad=cantidad+1;";
+                        $db->query($sql);
                         //GANO RESPETO? GANO OBJETOS? 
                         $respetoGanado = rand($monstruo[0]['nivel']*2, $monstruo[0]['nivel']*5);
                         $sql = "UPDATE personajes SET respeto = respeto+$respetoGanado WHERE id='$id'";
@@ -111,7 +227,7 @@ function zona($box){
                     $box = "Me enfrento a un " . $box . " ... " . $celebracion;
                 }
                 else{
-                    $box = "No he encontrado ningún monstruo. Quizá necesito aumentar algo más mi Percepción antes de salir en busca de aventuras por esta zona";
+                    $box = "Qué agradable paseo! No me ha atacado ningún monstruo.";
                 }
             }
             else{
