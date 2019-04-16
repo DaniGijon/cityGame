@@ -65,6 +65,16 @@ function getPajareria(){
     return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
 }
 
+function getPescaBass(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='31'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+}
+
 function getCerrajeria(){
     global $db;
     
@@ -104,4 +114,27 @@ function getGallo(){
     $result = $stmt->fetchAll();
     
     return "<img src='/design/img/objetos/" . $result[0]['imagenObjeto'] . "'>";
+}
+
+//FOTOS INSIGNIAS
+function getFotoInsignia8(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='8'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/insignias/" . $result[0]['imagen'] . "'>";
+}
+
+function getFotoInsignia31(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='31'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/insignias/" . $result[0]['imagen'] . "'>";
 }

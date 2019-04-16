@@ -53,7 +53,7 @@ function zona($box){
                         }
 
                         //Gano tambien objeto?
-                        $ganoObjeto = rand(1,5);
+                        $ganoObjeto = rand(5,5);
                         if($ganoObjeto>4){
                             //HAY QUE MIRAR QUÉ OBJETO SUELTA EL MONSTRUO
                             $mensajeObjeto = " Le arrebato un objeto que llevaba consigo: ";
@@ -71,9 +71,29 @@ function zona($box){
                                 $mensajeObjeto = $mensajeObjeto . ". No puedo llevarme el botín porque mi inventario está lleno.";
                             }
                             else{
+                                //AÑADIR AL INVENTARIO
                                 $idObjetoObtenido = $obj[$objetoObtenido]['id'];
                                 $sql = "UPDATE inventario SET idO = '$idObjetoObtenido' WHERE idP='$id' AND slot = '$slotDondeGuardo'";
                                 $db->query($sql);
+                                
+                                
+                                //AÑADIR AL ALBUM DE COLECCIONISMO SI ES UN AVION
+                                if($idObjetoObtenido >= '1000'){
+                                    $sql = "INSERT INTO coleccionismo (idP,idO,imagen) VALUES('$id','$idObjetoObtenido','$idObjetoObtenido.png')";
+                                    $db->query($sql);
+                                }
+                                else{
+                                    //AÑADIR AL ALBUM DE COLECCIONISMO SI ES UNA RELIQUIA
+                                    $sql = "SELECT * FROM objetos WHERE id='$idObjetoObtenido'";
+                                    $stmt = $db->query($sql);
+                                    $res = $stmt->fetchAll();
+                                    
+                                    $esReliquia = $res[0]['reliquia'];
+                                    if($esReliquia === '1'){
+                                        $sql = "INSERT INTO coleccionismo (idP,idO,imagen) VALUES('$id','$idObjetoObtenido','$idObjetoObtenido.png')";
+                                        $db->query($sql);
+                                    }
+                                }
                             }
                         }
                         else{
@@ -166,7 +186,7 @@ function zona($box){
                         }
 
                         //Gano tambien objeto?
-                        $ganoObjeto = rand(1,5);
+                        $ganoObjeto = rand(5,5);
                         if($ganoObjeto>4){
                             //HAY QUE MIRAR QUÉ OBJETO SUELTA EL MONSTRUO
                             $mensajeObjeto = " Le arrebato un objeto que llevaba consigo: ";
@@ -183,10 +203,30 @@ function zona($box){
                             if($slotDondeGuardo === -1){
                                 $mensajeObjeto = $mensajeObjeto . ". No puedo llevarme el botín porque mi inventario está lleno.";
                             }
-                            else{
+                             else{
+                                //AÑADIR AL INVENTARIO
                                 $idObjetoObtenido = $obj[$objetoObtenido]['id'];
                                 $sql = "UPDATE inventario SET idO = '$idObjetoObtenido' WHERE idP='$id' AND slot = '$slotDondeGuardo'";
                                 $db->query($sql);
+                                
+                                
+                                //AÑADIR AL ALBUM DE COLECCIONISMO SI ES UN AVION
+                                if($idObjetoObtenido >= '1000'){
+                                    $sql = "INSERT INTO coleccionismo (idP,idO,imagen) VALUES('$id','$idObjetoObtenido','$idObjetoObtenido.png')";
+                                    $db->query($sql);
+                                }
+                                else{
+                                    //AÑADIR AL ALBUM DE COLECCIONISMO SI ES UNA RELIQUIA
+                                    $sql = "SELECT * FROM objetos WHERE id='$idObjetoObtenido'";
+                                    $stmt = $db->query($sql);
+                                    $res = $stmt->fetchAll();
+                                    
+                                    $esReliquia = $res[0]['reliquia'];
+                                    if($esReliquia === '1'){
+                                        $sql = "INSERT INTO coleccionismo (idP,idO,imagen) VALUES('$id','$idObjetoObtenido','$idObjetoObtenido.png')";
+                                        $db->query($sql);
+                                    }
+                                }
                             }
                         }
                         else{

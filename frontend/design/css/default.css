@@ -966,7 +966,7 @@ h3{
     height: 300px;
     border-collapse: separate;
     border-spacing: 0 3px;
-    clear:left;
+    float:left;
     margin: 0 10px;
 }
 
@@ -976,6 +976,15 @@ h3{
     border-collapse: separate;
     border-spacing: 0 3px;
     clear: left;
+    margin: 0 10px;
+}
+
+.seccionSpotInfo{
+    width: 380px;
+    height: 100%;
+    border-collapse: separate;
+    border-spacing: 0 3px;
+    float: right;
     margin: 0 10px;
 }
 
@@ -1007,3 +1016,24 @@ h3{
     padding : 5 10;
     text-align : right;
 }
+
+#vender{
+    display : none;
+}
+
+#bosses{
+    display : none;
+}
+
+#insignias{
+    display : none;
+}
+
+#aeromodelismo{
+    display : none;
+}
+
+#reliquias{
+    display : none;
+}
+

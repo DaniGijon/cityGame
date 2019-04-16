@@ -149,7 +149,7 @@ function comprobarZona1Barrio1(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '1')){
-         echo 'OK estás ahi';
+        
      }
      else{
          var_dump($result[0]['barrio']);
@@ -167,7 +167,7 @@ function comprobarZona2Barrio1(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '2')&&($result[0]['barrio'] == '1')){
-         echo 'OK';
+         
      }
      else{
          var_dump($result[0]['barrio']);
@@ -185,7 +185,7 @@ function comprobarZona1Barrio2(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '2')){
-         echo 'OK';
+         
      }
      else{
          var_dump($result[0]['barrio']);
@@ -203,7 +203,7 @@ function comprobarZona2Barrio2(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '2')&&($result[0]['barrio'] == '2')){
-         echo 'OK';
+        
      }
      else{
          var_dump($result[0]['barrio']);
@@ -221,7 +221,7 @@ function comprobarZona3Barrio2(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '3')&&($result[0]['barrio'] == '2')){
-         echo 'OK';
+        
      }
      else{
          var_dump($result[0]['barrio']);
@@ -239,7 +239,7 @@ function comprobarZona1Barrio3(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '3')){
-         echo 'OK';
+        
      }
      else{
          var_dump($result[0]['barrio']);
@@ -257,7 +257,7 @@ function comprobarZona1Barrio4(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '4')){
-         echo 'OK';
+        
      }
      else{
          var_dump($result[0]['barrio']);
@@ -275,7 +275,7 @@ function comprobarZona1Barrio5(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '5')){
-         echo 'OK';
+         
      }
      else{
          var_dump($result[0]['barrio']);
@@ -293,7 +293,7 @@ function comprobarZona2Barrio5(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '2')&&($result[0]['barrio'] == '5')){
-         echo 'OK';
+        
      }
      else{
          var_dump($result[0]['barrio']);
@@ -311,7 +311,7 @@ function comprobarZona3Barrio5(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '3')&&($result[0]['barrio'] == '5')){
-         echo 'OK';
+        
      }
      else{
          var_dump($result[0]['barrio']);
@@ -329,7 +329,7 @@ function comprobarZona1Barrio6(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '6')){
-         echo 'OK';
+         
      }
      else{
          var_dump($result[0]['barrio']);
@@ -347,7 +347,7 @@ function comprobarZona2Barrio6(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '2')&&($result[0]['barrio'] == '6')){
-         echo 'OK';
+       
      }
      else{
          var_dump($result[0]['barrio']);
@@ -365,7 +365,7 @@ function comprobarZona3Barrio6(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '3')&&($result[0]['barrio'] == '6')){
-         echo 'OK';
+         
      }
      else{
          var_dump($result[0]['barrio']);
@@ -383,7 +383,7 @@ function comprobarZona1Barrio7(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '7')){
-         echo 'OK';
+         
      }
      else{
          var_dump($result[0]['barrio']);
@@ -401,7 +401,7 @@ function comprobarZona1Barrio8(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '8')){
-         echo 'OK';
+         
      }
      else{
          var_dump($result[0]['barrio']);
@@ -419,7 +419,7 @@ function comprobarZona1Barrio9(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '9')){
-         echo 'OK';
+        
      }
      else{
          var_dump($result[0]['barrio']);
@@ -437,7 +437,7 @@ function comprobarZona2Barrio9(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '2')&&($result[0]['barrio'] == '9')){
-         echo 'OK';
+         
      }
      else{
          var_dump($result[0]['barrio']);
@@ -455,7 +455,7 @@ function comprobarZona3Barrio9(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '3')&&($result[0]['barrio'] == '9')){
-         echo 'OK';
+         
      }
      else{
          var_dump($result[0]['barrio']);
@@ -473,7 +473,7 @@ function comprobarZona1Barrio10(){
      $result = $stmt->fetchAll();
      
      if(($result[0]['zona'] == '1')&&($result[0]['barrio'] == '10')){
-         echo 'OK';
+         
      }
      else{
          var_dump($result[0]['barrio']);
@@ -482,4 +482,60 @@ function comprobarZona1Barrio10(){
      }  
 }
 
+//COMPROBAR INSIGNIAS
+function comprobarInsignia8(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='8'";
+     $stmt = $db->query($sql);
+     $result = $stmt->fetchAll();
+     
+     if($result){
+        return $result[0]['fecha'];
+     }
+     else{
+         return 0;
+     }
+}
+
+function comprobarInsignia31(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='31'";
+     $stmt = $db->query($sql);
+     $result = $stmt->fetchAll();
+     
+     if($result){
+        return $result[0]['fecha'];
+     }
+     else{
+         return 0;
+     }
+}
+
+//ACTIVAR CODIGOS INSIGNIAS
+function activarCodigo($codigoInsignia){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    echo "EPPPP";
+    
+    $sql = "SELECT * FROM codigos WHERE clave='$codigoInsignia'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    var_dump($result);
+    
+    $activada = $result[0]['insignia'];
+    
+    $sql = "INSERT INTO insignias (idP, idI, imagen, fecha) VALUES ('$id','$codigoInsignia','$codigoInsignia.png', '5/5/2000')";
+    header("location: ?page=accion&message=Activado!");
+    
+}
+
+
+if(isset($_POST['codigoInsignia'])){
+    activarCodigo($_POST['oodigoInsignia']);
+}
 ?>
