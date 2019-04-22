@@ -4,6 +4,11 @@ global $db;
         include (__ROOT__.'/backend/fightFunctions.php');
         $id = $_SESSION['loggedIn'];
         comprobarZona1Barrio1();
+        $estoyLibre = comprobarEspera();
+        if($estoyLibre === 1){
+            $puedoEmboscar = comprobarEmboscar();
+            if($puedoEmboscar === 1){
+            
         
         echo "<div id='moduloZona'>";
             
@@ -39,5 +44,13 @@ global $db;
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona
+        }
+        else{
+            header("location: ?page=zona&message=Aun no he descansado de mi última emboscada");
+        }
+    }
+    else{
+        header("location: ?page=zona&message=Aun no he descansado de mi última acción");
+    }
         
         

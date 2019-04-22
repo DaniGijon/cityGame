@@ -26,7 +26,7 @@ global $db;
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia31();
+                        $fechaInsignia = comprobarInsignia8();
                         if ($fechaInsignia != '0'){
                             $fotoInsignia = getFotoInsignia8();
                             echo $fotoInsignia . "<br>";
@@ -117,5 +117,6 @@ global $db;
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona
+        
         
         

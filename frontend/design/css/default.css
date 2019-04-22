@@ -205,6 +205,11 @@ h3{
     line-height:30px;
 }
 
+#relojilloFooter{
+    float : right;
+    margin-right: 5px;
+}
+
 #infoArriba{
   height:100px;
   width:250px;  
@@ -415,7 +420,7 @@ h3{
 
 .contenido{
     margin-top:10px;
-    width: 843px;
+    width: 100%;
     min-width: 843px;
     overflow: hidden;
     padding: 0 0 20px;
@@ -953,7 +958,56 @@ h3{
 
 /* MEJORANDO LA VENTANA DE PERSONAJE */
 
-#infoObjeto{
+#infoObjeto0{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+}
+
+#infoObjeto1{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+}
+
+#infoObjeto2{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+}
+
+#infoObjeto3{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+}
+
+#infoObjeto4{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+}
+
+#infoObjeto5{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+}
+
+#infoObjeto6{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+}
+
+#infoObjeto7{
     background-color:greenyellow;
     padding: 10px;
     display: none;
@@ -1035,5 +1089,17 @@ h3{
 
 #reliquias{
     display : none;
+}
+
+#botonReliquias{
+    display:none;
+}
+
+#botonAeromodelismo{
+    display:none;
+}
+
+#seccion2Ranking{
+    display:none;
 }
 

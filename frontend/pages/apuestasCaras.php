@@ -10,7 +10,7 @@ $miDinero = comprobarDinero();
 $dineroEnCash = $miDinero[0]['cash'];
 comprobarZona1Barrio2();
 
-$sql = "SELECT * FROM spots WHERE idS='30'";
+$sql = "SELECT * FROM spots WHERE idS='20'";
 $stmt = $db->query($sql);
 $result = $stmt->fetchAll();
 

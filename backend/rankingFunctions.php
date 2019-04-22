@@ -3,6 +3,13 @@ function dibujarRanking(){
     global $db;
     $id = $_SESSION['loggedIn'];
     
+    //Cabecera selector opciones
+    echo "<div id='botonesComprarVender'>";
+        echo "<button id='seccion1'>Más Respetados</button>";
+        echo "<button id='seccion2'>Más Populares</button>";
+    echo "</div>"; 
+    
+    echo "<div id=seccion1Ranking>";
     //Cojo todos los jugadores y los ordeno de más respeto a menos respeto
     $sql = "SELECT * FROM personajes ORDER BY respeto DESC";
     $stmt = $db->query($sql);
@@ -31,7 +38,9 @@ function dibujarRanking(){
        
     }
     echo "</table>";
+    echo "</div>";
     
+    echo "<div id=seccion2Ranking>";
     //Cojo todos los jugadores y los ordeno de más respeto a menos social
     $sql = "SELECT * FROM personajes ORDER BY social DESC";
     $stmt = $db->query($sql);
@@ -60,4 +69,18 @@ function dibujarRanking(){
        
     }
     echo "</table>";
+    echo "</div>";
+?>
+<script>
+    $("#seccion1").click(function(){
+        $("#seccion2Ranking").hide();
+        $("#seccion1Ranking").show(); 
+    });
+    
+    $("#seccion2").click(function(){
+        $("#seccion1Ranking").hide();
+        $("#seccion2Ranking").show(); 
+    });
+</script>
+<?php
 }

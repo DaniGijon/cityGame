@@ -213,7 +213,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
     if($puedoPagar === 1){
         switch ($ganador) {
             case 0:
-                $box = '¡Ha salido el 0!';
+                $box = "<img src='/design/img/apuestas/0ruleta.png'><br> ¡Ha salido el 0!";
                 if($cantidadApuesta0 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta0 * 36);
@@ -248,7 +248,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 break;
             
             case 1:
-                $box = '¡Ha salido el 1!';
+                $box = "<img src='/design/img/apuestas/1ruleta.png'><br> ¡Ha salido el 1!";
                 if($cantidadApuesta1 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta1 * 36);
@@ -294,7 +294,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 2:
-                $box = '¡Ha salido el 2!';
+                $box = "<img src='/design/img/apuestas/2ruleta.png'><br> ¡Ha salido el 2!"; 
                 if($cantidadApuesta2 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta2 * 36);
@@ -340,7 +340,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 3:
-                $box = '¡Ha salido el 3!';
+                $box = "<img src='/design/img/apuestas/3ruleta.png'><br> ¡Ha salido el 3!";
                 if($cantidadApuesta3 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta3 * 36);
@@ -389,7 +389,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break; 
             case 4:
-                $box = '¡Ha salido el 4!';
+                $box = "<img src='/design/img/apuestas/4ruleta.png'><br> ¡Ha salido el 4!";
                 if($cantidadApuesta4 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta4 * 36);
@@ -435,7 +435,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 5:
-                $box = '¡Ha salido el 5!';
+                $box = "<img src='/design/img/apuestas/5ruleta.png'><br> ¡Ha salido el 5!";
                 if($cantidadApuesta5 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta5 * 36);
@@ -481,7 +481,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 6:
-                $box = '¡Ha salido el 6!';
+                $box = "<img src='/design/img/apuestas/6ruleta.png'><br> ¡Ha salido el 6!";
                 if($cantidadApuesta6 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta6 * 36);
@@ -527,7 +527,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 7:
-                $box = '¡Ha salido el 7!';
+                $box = "<img src='/design/img/apuestas/7ruleta.png'><br> ¡Ha salido el 7!";
                 if($cantidadApuesta7 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta7 * 36);
@@ -573,7 +573,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 8:
-                $box = '¡Ha salido el 8!';
+                $box = "<img src='/design/img/apuestas/8ruleta.png'><br> ¡Ha salido el 8!";
                 if($cantidadApuesta8 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta8 * 36);
@@ -619,7 +619,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;   
             case 9:
-                $box = '¡Ha salido el 9!';
+                $box = "<img src='/design/img/apuestas/9ruleta.png'><br> ¡Ha salido el 9!";
                 if($cantidadApuesta9 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta9 * 36);
@@ -665,7 +665,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 10:
-                $box = '¡Ha salido el 10!';
+                $box = "<img src='/design/img/apuestas/10ruleta.png'><br> ¡Ha salido el 10!";
                 if($cantidadApuesta10 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta10 * 36);
@@ -711,7 +711,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;  
             case 11:
-                $box = '¡Ha salido el 11!';
+                $box = "<img src='/design/img/apuestas/11ruleta.png'><br> ¡Ha salido el 11!";
                 if($cantidadApuesta11 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta11 * 36);
@@ -757,7 +757,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;  
             case 12:
-                $box = '¡Ha salido el 12!';
+                $box = "<img src='/design/img/apuestas/12ruleta.png'><br> ¡Ha salido el 12!";
                 if($cantidadApuesta12 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta12 * 36);
@@ -806,7 +806,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 13:
-                $box = '¡Ha salido el 13!';
+                $box = "<img src='/design/img/apuestas/13ruleta.png'><br> ¡Ha salido el 13!";
                 if($cantidadApuesta13 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta13 * 36);
@@ -852,7 +852,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 14:
-                $box = '¡Ha salido el 14!';
+                $box = "<img src='/design/img/apuestas/14ruleta.png'><br> ¡Ha salido el 14!";
                 if($cantidadApuesta14 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta14 * 36);
@@ -898,7 +898,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 15:
-                $box = '¡Ha salido el 15!';
+                $box = "<img src='/design/img/apuestas/15ruleta.png'><br> ¡Ha salido el 15!";
                 if($cantidadApuesta15 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta15 * 36);
@@ -947,7 +947,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 16:
-                $box = '¡Ha salido el 16!';
+                $box = "<img src='/design/img/apuestas/16ruleta.png'><br> ¡Ha salido el 16!";
                 if($cantidadApuesta16 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta16 * 36);
@@ -993,7 +993,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 17:
-                $box = '¡Ha salido el 17!';
+                $box = "<img src='/design/img/apuestas/17ruleta.png'><br> ¡Ha salido el 17!";
                 if($cantidadApuesta17 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta17 * 36);
@@ -1039,7 +1039,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 18:
-                $box = '¡Ha salido el 18!';
+                $box = "<img src='/design/img/apuestas/18ruleta.png'><br> ¡Ha salido el 18!";
                 if($cantidadApuesta18 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta18 * 36);
@@ -1085,7 +1085,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 19:
-                $box = '¡Ha salido el 19!';
+                $box = "<img src='/design/img/apuestas/19ruleta.png'><br> ¡Ha salido el 19!";
                 if($cantidadApuesta19 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta19 * 36);
@@ -1131,7 +1131,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 20:
-                $box = '¡Ha salido el 20!';
+                $box = "<img src='/design/img/apuestas/20ruleta.png'><br> ¡Ha salido el 20!";
                 if($cantidadApuesta20 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta20 * 36);
@@ -1177,7 +1177,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 21:
-                $box = '¡Ha salido el 21!';
+                $box = "<img src='/design/img/apuestas/21ruleta.png'><br> ¡Ha salido el 21!";
                 if($cantidadApuesta21 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta21 * 36);
@@ -1223,7 +1223,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 22:
-                $box = '¡Ha salido el 22!';
+                $box = "<img src='/design/img/apuestas/22ruleta.png'><br> ¡Ha salido el 22!";
                 if($cantidadApuesta22 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta22 * 36);
@@ -1269,7 +1269,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 23:
-                $box = '¡Ha salido el 23!';
+                $box = "<img src='/design/img/apuestas/23ruleta.png'><br> ¡Ha salido el 23!";
                 if($cantidadApuesta23 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta23 * 36);
@@ -1315,7 +1315,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 24:
-                $box = '¡Ha salido el 24!';
+                $box = "<img src='/design/img/apuestas/24ruleta.png'><br> ¡Ha salido el 24!";
                 if($cantidadApuesta24 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta24 * 36);
@@ -1361,7 +1361,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 25:
-                $box = '¡Ha salido el 25!';
+                $box = "<img src='/design/img/apuestas/25ruleta.png'><br> ¡Ha salido el 25!";
                 if($cantidadApuesta25 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta25 * 36);
@@ -1407,7 +1407,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 26:
-                $box = '¡Ha salido el 26!';
+                $box = "<img src='/design/img/apuestas/26ruleta.png'><br> ¡Ha salido el 26!";
                 if($cantidadApuesta26 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta26 * 36);
@@ -1456,7 +1456,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 27:
-                $box = '¡Ha salido el 27!';
+                $box = "<img src='/design/img/apuestas/27ruleta.png'><br> ¡Ha salido el 27!";
                 if($cantidadApuesta27 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta27 * 36);
@@ -1502,7 +1502,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 28:
-                $box = '¡Ha salido el 28!';
+                $box = "<img src='/design/img/apuestas/28ruleta.png'><br> ¡Ha salido el 28!";
                 if($cantidadApuesta28 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta28 * 36);
@@ -1548,7 +1548,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 29:
-                $box = '¡Ha salido el 29!';
+                $box = "<img src='/design/img/apuestas/29ruleta.png'><br> ¡Ha salido el 29!";
                 if($cantidadApuesta29 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta29 * 36);
@@ -1594,7 +1594,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 30:
-                $box = '¡Ha salido el 30!';
+                $box = "<img src='/design/img/apuestas/30ruleta.png'><br> ¡Ha salido el 30!";
                 if($cantidadApuesta30 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta30 * 36);
@@ -1640,7 +1640,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 31:
-                $box = '¡Ha salido el 31!';
+                $box = "<img src='/design/img/apuestas/31ruleta.png'><br> ¡Ha salido el 31!";
                 if($cantidadApuesta31 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta31 * 36);
@@ -1686,7 +1686,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 32:
-                $box = '¡Ha salido el 32!';
+                $box = "<img src='/design/img/apuestas/32ruleta.png'><br> ¡Ha salido el 32!";
                 if($cantidadApuesta32 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta32 * 36);
@@ -1735,7 +1735,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 33:
-                $box = '¡Ha salido el 33!';
+                $box = "<img src='/design/img/apuestas/33ruleta.png'><br> ¡Ha salido el 33!";
                 if($cantidadApuesta33 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta33 * 36);
@@ -1781,7 +1781,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 34:
-                $box = '¡Ha salido el 34!';
+                $box = "<img src='/design/img/apuestas/34ruleta.png'><br> ¡Ha salido el 34!";
                 if($cantidadApuesta34 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta34 * 36);
@@ -1827,7 +1827,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 35:
-                $box = '¡Ha salido el 35!';
+                $box = "<img src='/design/img/apuestas/35ruleta.png'><br> ¡Ha salido el 35!";
                 if($cantidadApuesta35 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta35 * 36);
@@ -1876,7 +1876,7 @@ function ruleta($cantidadApuesta0, $cantidadApuesta1, $cantidadApuesta2, $cantid
                 }
                 break;
             case 36:
-                $box = '¡Ha salido el 36!';
+                $box = "<img src='/design/img/apuestas/36ruleta.png'><br> ¡Ha salido el 36!";
                 if($cantidadApuesta36 > 0){
                     $box = $box . ' La bola Jackpot es : ' . $bolaJackpot . '<br>';
                     $ingresos = $ingresos + ($cantidadApuesta36 * 36);

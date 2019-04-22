@@ -85,6 +85,50 @@ function comprobarSalud($salud){
    return $tengoVida;
 }
 
+function comprobarEspera(){
+  global $db;
+   $id = $_SESSION['loggedIn']; 
+   
+   date_default_timezone_set('Europe/Madrid');
+   
+   $sql = "SELECT accion FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   $actual = date("Y-m-d H:i:s");
+   $accion = $result[0]['accion'];
+   
+   if($accion < $actual){
+       $estoyLibre = 1;
+   }
+   else{
+       $estoyLibre = 0;
+   }
+   return $estoyLibre;  
+}
+
+function comprobarEmboscar(){
+  global $db;
+   $id = $_SESSION['loggedIn']; 
+   
+   date_default_timezone_set('Europe/Madrid');
+   
+   $sql = "SELECT emboscada FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   $actual = date("Y-m-d H:i:s");
+   $emboscada = $result[0]['emboscada'];
+   
+   if($emboscada < $actual){
+       $puedoEmboscar = 1;
+   }
+   else{
+       $puedoEmboscar = 0;
+   }
+   return $puedoEmboscar;  
+}
+
 function comprobarEnergia($agotamiento){
    global $db;
    $id = $_SESSION['loggedIn']; 
@@ -499,11 +543,11 @@ function comprobarInsignia8(){
      }
 }
 
-function comprobarInsignia31(){
+function comprobarInsignia21(){
     global $db;
     $id = $_SESSION['loggedIn'];
     
-     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='31'";
+     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='21'";
      $stmt = $db->query($sql);
      $result = $stmt->fetchAll();
      

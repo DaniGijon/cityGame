@@ -21,14 +21,14 @@ global $db;
                 
                 echo "<div class='seccionSpotInfo'>";
                     echo "<div class = 'seccionContacto'>";
-                        echo "<iframe src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12457.760775495404!2d-4.10577!3d38.6847317!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x893232c38debc231!2sPescabass+Shop!5e0!3m2!1ses!2ses!4v1555168113378!5m2!1ses!2ses' width='300' height='225' frameborder='0' style='border:0' allowfullscreen></iframe><br>";
+                        echo "<iframe src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12457.997474598287!2d-4.106920338245714!3d38.683372108424635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x893232c38debc231!2sPescabass+Shop!5e0!3m2!1ses!2ses!4v1555848169962!5m2!1ses!2ses' width='300' height='225' frameborder='0' style='border:0' allowfullscreen></iframe><br>";
                         echo "Aqui la info del sitio";
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia31();
+                        $fechaInsignia = comprobarInsignia21();
                         if ($fechaInsignia != '0'){
-                            $fotoInsignia = getFotoInsignia31();
+                            $fotoInsignia = getFotoInsignia21();
                             echo $fotoInsignia . "<br>";
                             echo "Nos visitaste el día: <b>" . date( 'd/m/Y',strtotime($fechaInsignia)) . "</b><br>¡Gracias por venir!";
                         }

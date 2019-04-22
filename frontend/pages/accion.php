@@ -6,9 +6,6 @@
     if(isset($_GET['message'])){
         echo $_GET['message'] . "<br>";
     }
-    /*
-    echo"<div id='zonaArea'>";
-        dibujarZona();
-    echo "</div>";
-*/
+    
+    echo"<a href='?page=zona'><button>Seguir</button></a>";
 ?>

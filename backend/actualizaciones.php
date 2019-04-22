@@ -148,6 +148,9 @@ function accionSpot($box){
         elseif($objetosEquipados['especial'] === 'mistico'){
             $mistico = 1;
         }
+        elseif($objetosEquipados['especial'] === 'recaudador'){
+            $recaudador = 1;
+        }
     }
     
     //Bonus de mejoras de habilidades
@@ -218,11 +221,18 @@ function accionSpot($box){
         //CARRIL BICI
         case 'pedaleo Suave':
             $agotamiento = 20;
+            $coste = 5;
             $puedoHacerlo = comprobarEnergia($agotamiento);
             if($puedoHacerlo === 1){
+                $puedoPagar = comprobarCoste($coste);
+                if($puedoPagar === 1){
                 
-                $sql = "UPDATE personajes SET energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaBaja/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalBaja/personajes.resistencia WHERE id='$id'";
-                $stmt = $db->query($sql);
+                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaBaja/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalBaja/personajes.resistencia WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                }
+                else{
+                    $box = "No llevo dinero para inflar las ruedas.";
+                }
             }else{
                 $box = "¿Bici ahora? Uff... No puedo con mi alma. Mejor tomar un snack";
             }
@@ -230,10 +240,17 @@ function accionSpot($box){
             
         case 'pedaleoFuerte':
             $agotamiento = 40;
+            $coste = 10;
             $puedoHacerlo = comprobarEnergia($agotamiento);
             if($puedoHacerlo === 1){
-                $sql = "UPDATE personajes SET energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaMedia/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalMedia/personajes.resistencia WHERE id='$id'";
-                $stmt = $db->query($sql);
+                $puedoPagar = comprobarCoste($coste);
+                if($puedoPagar === 1){
+                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaMedia/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalMedia/personajes.resistencia WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                }
+                else{
+                    $box = "Necesito dinero para engrasar la cadena.";
+                }
             }else{
                 $box = "EH, EH, tranqui. No aguanto ese ritmo sin antes beber algo";
             }
@@ -241,10 +258,17 @@ function accionSpot($box){
         
         case 'indurain':
             $agotamiento = 60;
+            $coste = 20;
             $puedoHacerlo = comprobarEnergia($agotamiento);
             if($puedoHacerlo === 1){
-                $sql = "UPDATE personajes SET energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaAlta/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalAlta/personajes.resistencia WHERE id='$id'";
-                $stmt = $db->query($sql);
+                $puedoPagar = comprobarCoste($coste);
+                if($puedoPagar === 1){
+                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaAlta/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalAlta/personajes.resistencia WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                }
+                else{
+                    $box = "¿Y si me multan por ir tan rápido? Mejor reunir dinero antes";
+                }
             }else{
                 $box = "Pensándolo mejor... la única Vuelta que haré va a ser al sofá.";
             }
@@ -253,18 +277,57 @@ function accionSpot($box){
         //PARROQUIA DE CAÑAMARES
         case 'plegaria':
             $agotamiento = 10;
-            $puedoHacerlo = comprobarEnergia($agotamiento);
-            if($puedoHacerlo === 1){
-                if($mistico === 1){
-                    $sql = "UPDATE personajes SET energia = energia-$agotamiento, espiritu = espiritu + $mejoraPrincipalMuyBaja*2/personajes.espiritu WHERE id='$id'";
-                    $stmt = $db->query($sql);
+            $coste = 5;
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                $puedoHacerlo = comprobarEnergia($agotamiento);
+                if($puedoHacerlo === 1){
+                    $puedoPagar = comprobarCoste($coste);
+                    if($puedoPagar === 1){
+                        if($mistico === 1){
+                            $sql = "UPDATE personajes SET cash = cash-$coste, energia = energia-$agotamiento, espiritu = espiritu + $mejoraPrincipalMuyBaja*2/personajes.espiritu, accion = ADDTIME(NOW(), '0:5:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        else{
+                            $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, espiritu = espiritu + $mejoraPrincipalMuyBaja/personajes.espiritu, accion = ADDTIME(NOW(), '0:5:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                    }
+                    else{
+                        $box = "Alguna moneda necesito para echar de ofrenda.";
+                    }
+                }else{
+                    $box = "No tengo fuerzas. Como entre ahí, me quedo sopa en un banco.";
                 }
-                else{
-                    $sql = "UPDATE personajes SET energia = energia-$agotamiento, espiritu = espiritu + $mejoraPrincipalMuyBaja/personajes.espiritu WHERE id='$id'";
-                    $stmt = $db->query($sql);
+            }
+            else{
+                $box = "Aún no he descansado de mi ultima acción";
+            }
+            break; 
+        //TRABAJO: EL MURO, GUARDIA DE LA NOCHE
+        case 'guardiaNoche':
+            $agotamiento = 10;
+            $salario = 100;
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                $puedoHacerlo = comprobarEnergia($agotamiento);
+                if($puedoHacerlo === 1){
+                    
+                        if($recaudador === 1){
+                            $sql = "UPDATE personajes SET cash = cash+$salario*1.50, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        else{
+                            $sql = "UPDATE personajes SET cash = cash+$salario, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                    
+                }else{
+                    $box = "No tengo fuerzas. Como me quede dormido quizá me devoren los Salvajes del Norte.";
                 }
-            }else{
-                $box = "No tengo fuerzas. Como entre ahí, me quedo sopa en un banco.";
+            }
+            else{
+                $box = "Aún no he descansado de mi ultima acción";
             }
             break; 
             

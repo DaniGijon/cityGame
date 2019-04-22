@@ -66,6 +66,9 @@
                                 if($obj['percepcion'] != 0){
                                     echo "Percepcion: " . $obj['percepcion'];
                                 }
+                                if($obj['especial'] != 'nada'){
+                                    echo "Especial: " . $obj['especial'];
+                                }
                                    
                                   
                                 echo "</div>" ;
@@ -87,8 +90,7 @@
                         echo "<span id='5' class='vehiculoBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[5]['imagenObjeto'] . "'></span>";
                     echo "</div>";
                 echo "</div>";
-         
-                echo "<div id='infoObjeto'>";
+                
                 //Consultar que objetos tiene EQUIPADO el personaje en cada slot (se ordenan por slot)
                     $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7 ";
                     $stmt = $db->query($sql);
@@ -105,8 +107,285 @@
                         $bonusPercepcion = $bonusPercepcion + $objetosPersonaje['percepcion']; 
                         
                     }
-                    
-                    
+         
+                echo "<div id='infoObjeto0'>";
+                    if($result[0]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> Cabeza </b><br><br>";
+                    }
+                    if($result[0]['destreza'] != 0){
+                        echo "Destreza: " . $result[0]['destreza'] . "<br>";
+                    }
+                    if($result[0]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[0]['fuerza'] ."<br>";
+                    }
+                    if($result[0]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[0]['agilidad'] ."<br>";
+                    }
+                    if($result[0]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[0]['resistencia'] ."<br>";
+                    }
+                    if($result[0]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[0]['espiritu'] ."<br>";
+                    }
+                    if($result[0]['estilo'] != 0){
+                        echo "Estilo: " . $result[0]['estilo'] ."<br>" ;
+                    }
+                    if($result[0]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[0]['ingenio'] ."<br>";
+                    }
+                    if($result[0]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[0]['percepcion'];
+                    }
+                    if($result[0]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[0]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto1'>";
+                    if($result[1]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[1]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> Torso </b><br><br>";
+                    }
+                    if($result[1]['destreza'] != 0){
+                        echo "Destreza: " . $result[1]['destreza'] . "<br>";
+                    }
+                    if($result[1]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[1]['fuerza'] ."<br>";
+                    }
+                    if($result[1]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[1]['agilidad'] ."<br>";
+                    }
+                    if($result[1]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[1]['resistencia'] ."<br>";
+                    }
+                    if($result[1]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[1]['espiritu'] ."<br>";
+                    }
+                    if($result[1]['estilo'] != 0){
+                        echo "Estilo: " . $result[1]['estilo'] ."<br>" ;
+                    }
+                    if($result[1]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[1]['ingenio'] ."<br>";
+                    }
+                    if($result[1]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[1]['percepcion'];
+                    }
+                    if($result[1]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[1]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto2'>";
+                    if($result[2]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[2]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> Pies </b><br><br>";
+                    }
+                    if($result[2]['destreza'] != 0){
+                        echo "Destreza: " . $result[2]['destreza'] . "<br>";
+                    }
+                    if($result[2]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[2]['fuerza'] ."<br>";
+                    }
+                    if($result[2]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[2]['agilidad'] ."<br>";
+                    }
+                    if($result[2]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[2]['resistencia'] ."<br>";
+                    }
+                    if($result[2]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[2]['espiritu'] ."<br>";
+                    }
+                    if($result[2]['estilo'] != 0){
+                        echo "Estilo: " . $result[2]['estilo'] ."<br>" ;
+                    }
+                    if($result[2]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[2]['ingenio'] ."<br>";
+                    }
+                    if($result[2]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[2]['percepcion'];
+                    }
+                    if($result[2]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[2]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto3'>";
+                    if($result[3]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[3]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> Mano Derecha </b><br><br>";
+                    }
+                    if($result[3]['destreza'] != 0){
+                        echo "Destreza: " . $result[3]['destreza'] . "<br>";
+                    }
+                    if($result[3]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[3]['fuerza'] ."<br>";
+                    }
+                    if($result[3]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[3]['agilidad'] ."<br>";
+                    }
+                    if($result[3]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[3]['resistencia'] ."<br>";
+                    }
+                    if($result[3]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[3]['espiritu'] ."<br>";
+                    }
+                    if($result[3]['estilo'] != 0){
+                        echo "Estilo: " . $result[3]['estilo'] ."<br>" ;
+                    }
+                    if($result[3]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[3]['ingenio'] ."<br>";
+                    }
+                    if($result[3]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[3]['percepcion'];
+                    }
+                    if($result[3]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[3]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto4'>";
+                    if($result[4]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[4]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> Mano Izquierda </b><br><br>";
+                    }
+                    if($result[4]['destreza'] != 0){
+                        echo "Destreza: " . $result[4]['destreza'] . "<br>";
+                    }
+                    if($result[4]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[4]['fuerza'] ."<br>";
+                    }
+                    if($result[4]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[4]['agilidad'] ."<br>";
+                    }
+                    if($result[4]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[4]['resistencia'] ."<br>";
+                    }
+                    if($result[4]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[4]['espiritu'] ."<br>";
+                    }
+                    if($result[4]['estilo'] != 0){
+                        echo "Estilo: " . $result[4]['estilo'] ."<br>" ;
+                    }
+                    if($result[4]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[4]['ingenio'] ."<br>";
+                    }
+                    if($result[4]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[4]['percepcion'];
+                    }
+                    if($result[4]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[4]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto5'>";
+                    if($result[5]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[5]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> Vehículo </b><br><br>";
+                    }
+                    if($result[5]['destreza'] != 0){
+                        echo "Destreza: " . $result[5]['destreza'] . "<br>";
+                    }
+                    if($result[5]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[5]['fuerza'] ."<br>";
+                    }
+                    if($result[5]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[5]['agilidad'] ."<br>";
+                    }
+                    if($result[5]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[5]['resistencia'] ."<br>";
+                    }
+                    if($result[5]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[5]['espiritu'] ."<br>";
+                    }
+                    if($result[5]['estilo'] != 0){
+                        echo "Estilo: " . $result[5]['estilo'] ."<br>" ;
+                    }
+                    if($result[5]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[5]['ingenio'] ."<br>";
+                    }
+                    if($result[5]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[5]['percepcion'];
+                    }
+                    if($result[5]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[5]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto6'>";
+                    if($result[6]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[6]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> Mascota </b><br><br>";
+                    }
+                    if($result[6]['destreza'] != 0){
+                        echo "Destreza: " . $result[6]['destreza'] . "<br>";
+                    }
+                    if($result[6]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[6]['fuerza'] ."<br>";
+                    }
+                    if($result[6]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[6]['agilidad'] ."<br>";
+                    }
+                    if($result[6]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[6]['resistencia'] ."<br>";
+                    }
+                    if($result[6]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[6]['espiritu'] ."<br>";
+                    }
+                    if($result[6]['estilo'] != 0){
+                        echo "Estilo: " . $result[6]['estilo'] ."<br>" ;
+                    }
+                    if($result[6]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[6]['ingenio'] ."<br>";
+                    }
+                    if($result[6]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[6]['percepcion'];
+                    }
+                    if($result[6]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[6]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto7'>";
+                    if($result[7]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[7]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> Bolsa </b><br><br>";
+                    }
+                    if($result[7]['destreza'] != 0){
+                        echo "Destreza: " . $result[7]['destreza'] . "<br>";
+                    }
+                    if($result[7]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[7]['fuerza'] ."<br>";
+                    }
+                    if($result[7]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[7]['agilidad'] ."<br>";
+                    }
+                    if($result[7]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[7]['resistencia'] ."<br>";
+                    }
+                    if($result[7]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[7]['espiritu'] ."<br>";
+                    }
+                    if($result[7]['estilo'] != 0){
+                        echo "Estilo: " . $result[7]['estilo'] ."<br>" ;
+                    }
+                    if($result[7]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[7]['ingenio'] ."<br>";
+                    }
+                    if($result[7]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[7]['percepcion'];
+                    }
+                    if($result[7]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[7]['especial'] . "</b>";
+                    }
                 echo "</div>";
             ?>
    
@@ -273,6 +552,68 @@
     
         </fieldset>
         
+         <fieldset>
+            <legend style="text-align: center"> Tiempos de Espera </legend>
+            <?php
+                date_default_timezone_set('Europe/Madrid');
+            
+                $sql = "SELECT accion,viaje,emboscada FROM personajes WHERE id = '$id'";
+                $stmt = $db->query($sql);
+                $result = $stmt->fetchAll();
+                
+                $actual = date("Y-m-d H:i:s");
+                $accion = $result[0]['accion'];
+                $viaje = $result[0]['viaje'];
+                $emboscada = $result[0]['emboscada'];
+                /*
+                echo "Actual : " . $actual . "<br>";
+                echo "Accion : " . $accion . "<br>";
+                echo "Viaje : " . $viaje . "<br>";
+                echo "Emboscada : " . $emboscada . "<br>";
+                */
+                echo "Prox. Acción : ";
+                if($accion < $actual){
+                    echo '¡Ahora!';
+                }
+                else{
+                    $diferenciaAccion = strtotime($accion) - strtotime($actual);
+                    $diferenciaLegibleAccion = date('i\M s\S', $diferenciaAccion);
+                    echo $diferenciaLegibleAccion;
+                }
+                
+                echo "<br>Prox. Viaje : ";
+                if($viaje < $actual && $accion < $actual){
+                    echo '¡Ahora!';
+                }
+                else{
+                    if($viaje > $accion){
+                        $diferenciaViaje = strtotime($viaje) - strtotime($actual);
+                        $diferenciaLegibleViaje = date('i\M s\S', $diferenciaViaje);
+                        echo $diferenciaLegibleViaje;
+                    }
+                    else{
+                        echo $diferenciaLegibleAccion;
+                    }
+                }
+                
+                echo "<br>Prox. Emboscada : ";
+                if($emboscada < $actual && $accion < $actual){
+                    echo '¡Ahora!';
+                }
+                else{
+                    if($emboscada > $accion){
+                        $diferenciaEmboscada = strtotime($emboscada) - strtotime($actual);
+                        $diferenciaLegibleEmboscada = date('i\M s\S', $diferenciaEmboscada);
+                        echo $diferenciaLegibleEmboscada;
+                    }
+                    else{
+                        echo $diferenciaLegibleAccion;
+                    }
+                }
+                
+            ?>
+         </fieldset>
+        
     </span>
     
     <script>
@@ -305,14 +646,84 @@
                    })
                 });
                 
-                $(".objetoBox").mouseenter(function(e){
-                    $("#infoObjeto").css("left", e.pageX + 5);
-                    $("#infoObjeto").css("top", e.pageY + 5);
-                    $("#infoObjeto").css("display", "block");
+                $(".cabezaBox").mouseenter(function(e){
+                    $("#infoObjeto0").css("left", e.pageX + 5);
+                    $("#infoObjeto0").css("top", e.pageY + 5);
+                    $("#infoObjeto0").css("display", "block");
                 });
                 
-                $(".objetoBox").mouseleave(function(e){
-                    $("#infoObjeto").css("display", "none");
+                $(".torsoBox").mouseenter(function(e){
+                    $("#infoObjeto1").css("left", e.pageX + 5);
+                    $("#infoObjeto1").css("top", e.pageY + 5);
+                    $("#infoObjeto1").css("display", "block");
+                });
+                
+                $(".piesBox").mouseenter(function(e){
+                    $("#infoObjeto2").css("left", e.pageX + 5);
+                    $("#infoObjeto2").css("top", e.pageY + 5);
+                    $("#infoObjeto2").css("display", "block");
+                });
+                
+                $(".derechaBox").mouseenter(function(e){
+                    $("#infoObjeto3").css("left", e.pageX + 5);
+                    $("#infoObjeto3").css("top", e.pageY + 5);
+                    $("#infoObjeto3").css("display", "block");
+                });
+                
+                $(".izquierdaBox").mouseenter(function(e){
+                    $("#infoObjeto4").css("left", e.pageX + 5);
+                    $("#infoObjeto4").css("top", e.pageY + 5);
+                    $("#infoObjeto4").css("display", "block");
+                });
+                
+                $(".vehiculoBox").mouseenter(function(e){
+                    $("#infoObjeto5").css("left", e.pageX + 5);
+                    $("#infoObjeto5").css("top", e.pageY + 5);
+                    $("#infoObjeto5").css("display", "block");
+                });
+                
+                $(".mascotaBox").mouseenter(function(e){
+                    $("#infoObjeto6").css("left", e.pageX + 5);
+                    $("#infoObjeto6").css("top", e.pageY + 5);
+                    $("#infoObjeto6").css("display", "block");
+                });
+                
+                $(".bolsaBox").mouseenter(function(e){
+                    $("#infoObjeto7").css("left", e.pageX + 5);
+                    $("#infoObjeto7").css("top", e.pageY + 5);
+                    $("#infoObjeto7").css("display", "block");
+                });
+                
+                $(".cabezaBox").mouseleave(function(e){
+                    $("#infoObjeto0").css("display", "none");
+                });
+                
+                $(".torsoBox").mouseleave(function(e){
+                    $("#infoObjeto1").css("display", "none");
+                });
+                
+                $(".piesBox").mouseleave(function(e){
+                    $("#infoObjeto2").css("display", "none");
+                });
+                
+                $(".derechaBox").mouseleave(function(e){
+                    $("#infoObjeto3").css("display", "none");
+                });
+                
+                $(".izquierdaBox").mouseleave(function(e){
+                    $("#infoObjeto4").css("display", "none");
+                });
+                
+                $(".vehiculoBox").mouseleave(function(e){
+                    $("#infoObjeto5").css("display", "none");
+                });
+                
+                $(".mascotaBox").mouseleave(function(e){
+                    $("#infoObjeto6").css("display", "none");
+                });
+                
+                $(".bolsaBox").mouseleave(function(e){
+                    $("#infoObjeto7").css("display", "none");
                 });
                 
                 

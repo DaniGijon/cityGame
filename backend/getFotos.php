@@ -14,7 +14,7 @@ function getApuestasCocodrilos(){
 function getCaras(){
     global $db;
     
-    $sql = "SELECT * FROM spots WHERE idS='30'";
+    $sql = "SELECT * FROM spots WHERE idS='20'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
@@ -25,7 +25,7 @@ function getCaras(){
 function getAviones(){
     global $db;
     
-    $sql = "SELECT * FROM spots WHERE idS='50'";
+    $sql = "SELECT * FROM spots WHERE idS='41'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
@@ -36,7 +36,7 @@ function getAviones(){
 function getLuckia(){
     global $db;
     
-    $sql = "SELECT * FROM spots WHERE idS='140'";
+    $sql = "SELECT * FROM spots WHERE idS='100'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
@@ -47,7 +47,7 @@ function getLuckia(){
 function getJoker(){
     global $db;
     
-    $sql = "SELECT * FROM spots WHERE idS='90'";
+    $sql = "SELECT * FROM spots WHERE idS='80'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
@@ -68,7 +68,7 @@ function getPajareria(){
 function getPescaBass(){
     global $db;
     
-    $sql = "SELECT * FROM spots WHERE idS='31'";
+    $sql = "SELECT * FROM spots WHERE idS='21'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
@@ -79,6 +79,16 @@ function getCerrajeria(){
     global $db;
     
     $sql = "SELECT * FROM spots WHERE idS='7'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+}
+
+function getMuro(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='160'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
@@ -128,11 +138,11 @@ function getFotoInsignia8(){
     return "<img src='/design/img/insignias/" . $result[0]['imagen'] . "'>";
 }
 
-function getFotoInsignia31(){
+function getFotoInsignia21(){
     global $db;
     $id = $_SESSION['loggedIn'];
     
-    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='31'";
+    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='21'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
