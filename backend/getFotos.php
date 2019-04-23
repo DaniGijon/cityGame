@@ -85,6 +85,26 @@ function getCerrajeria(){
     return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
 }
 
+function getSantaEulalia(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='112'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+}
+
+function getElPaisano(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='120'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+}
+
 function getMuro(){
     global $db;
     
@@ -143,6 +163,28 @@ function getFotoInsignia21(){
     $id = $_SESSION['loggedIn'];
     
     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='21'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/insignias/" . $result[0]['imagen'] . "'>";
+}
+
+function getFotoInsignia112(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='112'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/insignias/" . $result[0]['imagen'] . "'>";
+}
+
+function getFotoInsignia120(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='120'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     

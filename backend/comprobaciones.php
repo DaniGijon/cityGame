@@ -559,6 +559,38 @@ function comprobarInsignia21(){
      }
 }
 
+function comprobarInsignia112(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='112'";
+     $stmt = $db->query($sql);
+     $result = $stmt->fetchAll();
+     
+     if($result){
+        return $result[0]['fecha'];
+     }
+     else{
+         return 0;
+     }
+}
+
+function comprobarInsignia120(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='120'";
+     $stmt = $db->query($sql);
+     $result = $stmt->fetchAll();
+     
+     if($result){
+        return $result[0]['fecha'];
+     }
+     else{
+         return 0;
+     }
+}
+
 //ACTIVAR CODIGOS INSIGNIAS
 function activarCodigo($codigoInsignia){
     global $db;

@@ -124,10 +124,10 @@ function zona($box){
                             $celebracion = "¡Ouch! Eso ha dolido. Me vuelvo a casa a curar mis heridas <br>";
                         }
                         else{
-                        //Si me quedo con la vida a cero, me llevan al hospital     
-                        $sql = "UPDATE personajes SET barrio = '9', zona = '1' WHERE id='$id'";
+                        //Si me quedo con la vida a cero, me viene la ambulancia     
+                        $sql = "UPDATE personajes SET accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
                         $db->query($sql);
-                        $celebracion = "¡Qué dolor! Me tienen que llevar al centro médico más cercano. Tardarán un tiempo para curar mis heridas. <br>";
+                        $celebracion = "¡Qué dolor! Menos mal que la ambulancia estaba cerca. Tardarán un tiempo para curar mis heridas. <br>";
                         }
                     }
                     
@@ -257,10 +257,10 @@ function zona($box){
                             $celebracion = "¡Ouch! Eso ha dolido. Me vuelvo a casa a curar mis heridas <br>";
                         }
                         else{
-                        //Si me quedo con la vida a cero, me llevan al hospital     
-                        $sql = "UPDATE personajes SET barrio = '9', zona = '1' WHERE id='$id'";
+                        //Si me quedo con la vida a cero, me viene la ambulancia     
+                        $sql = "UPDATE personajes SET accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
                         $db->query($sql);
-                        $celebracion = "¡Qué dolor! Al Hospital vamos <br>";
+                        $celebracion = "¡Qué dolor! Enseguida llega la ambulancia a auxiliarme, pero tardarán un rato en darme el alta <br>";
                         }
                     }
                     

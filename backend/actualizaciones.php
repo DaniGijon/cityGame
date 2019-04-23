@@ -130,6 +130,85 @@ function actualizarZona($casilla){
     
 }
 
+function social($operacion, $cantidadDonacion){
+    include (__ROOT__.'/backend/comprobaciones.php');
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    //Consulo el EST y el ING base, que actuaran como potenciadores a los bonus. Tambien el dinero para las donaciones
+    $sql = "SELECT estilo,ingenio,cash FROM personajes WHERE id='$id'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    //Calculo ahora los bonus
+    $bonusEstilo = 0;
+    $bonusIngenio = 0;
+    
+    //Consultar que objetos tiene EQUIPADO el personaje en cada slot (se ordenan por slot)
+    $sql = "SELECT objetos.*, inventario.slot FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7 ";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    foreach ($result as $objetosPersonaje) {
+        $bonusEstilo = $bonusEstilo + $objetosPersonaje['estilo'];
+        $bonusIngenio = $bonusIngenio + $objetosPersonaje['ingenio'];
+    }
+    
+    if($operacion === "conferenciaCentroMujer"){
+        $agotamiento = 25;
+        $estoyLibre = comprobarEspera();
+        if($estoyLibre === 1){
+            $puedoHacerlo = comprobarEnergia($agotamiento);
+            if($puedoHacerlo === 1){
+                //VA A GANAR SOCIAL,una ganancia base + mult por ING + mult por EST
+                $gananciaBase = rand(80,100);
+                $multIngenio = 1 + (($result[0]['ingenio'] + $bonusIngenio)/33); //Porcentaje por 3
+                $multEstilo = 1 + (($result[0]['estilo'] + $bonusEstilo)/100); //Porcentaje por 1
+                
+                $gananciaTotal = floor($gananciaBase * $multEstilo * $multIngenio);
+                
+                $sql = "UPDATE personajes SET social=social + $gananciaTotal, energia=energia-$agotamiento, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";
+                $stmt = $db->query($sql);
+                header("location: ?page=zona&message=Exito, ganas $gananciaTotal puntos de Social");
+            }
+            else{
+                header("location: ?page=zona&message=No tengo energía para soportar 1 hora de conferencia");
+            }
+        }
+        else{
+            header("location: ?page=zona&message=Aun no me he recuperado de la última acción");
+        }
+    }
+    elseif ($operacion === "donacionCentroMujer") {
+        $estoyLibre = comprobarEspera();
+        if($estoyLibre === 1){
+            if($cantidadDonacion >= 100){
+                $puedoPagar = comprobarCoste($cantidadDonacion);
+                if($puedoPagar === 1){
+                    //VA A GANAR SOCIAL, una ganancia base + bonus por donacion
+                    $gananciaBase = rand(10,20);
+                    $bonusDonacion = $cantidadDonacion / 10; //+1 punto por cada 10 monedas
+
+                    $gananciaTotal = $gananciaBase + $bonusDonacion;
+
+                    $sql = "UPDATE personajes SET social=social + $gananciaTotal, cash = cash-$cantidadDonacion WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    header("location: ?page=zona&message=Exito, ganas $gananciaTotal puntos de Social");
+                }
+                else{
+                   header("location: ?page=zona&message=No tengo dinero suficiente"); 
+                }
+            }
+            else{
+               header("location: ?page=zona&message=La donación mínima son 100 monedas"); 
+            }
+        }
+        else{
+            header("location: ?page=zona&message=Aun no me he recuperado de la última acción");
+        }
+    }
+}
+
 // Cuando realiza una accion en un checkbox de un spot
 function accionSpot($box){
     include (__ROOT__.'/backend/comprobaciones.php');
@@ -330,6 +409,79 @@ function accionSpot($box){
                 $box = "Aún no he descansado de mi ultima acción";
             }
             break; 
+        
+        //HOTELES : DESCANSO ENERGIA
+        case 'habitacionSantaEulalia':
+            $coste = 50;
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                $puedoPagar = comprobarCoste($coste);
+                if($puedoPagar === 1){
+                    $sql = "UPDATE personajes SET cash = cash-$coste, energia = 100, accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
+                    $db->query($sql);
+                }
+                else{
+                    $box = "No tengo dinero para pagar eso.";
+                }
+            }
+            else{
+                    $box = "Aún no he descansado de la ultima acción.";
+                }
+            break;
+            
+        case 'suiteSantaEulalia':
+            $coste = 300;
+            $puedoPagar = comprobarCoste($coste);
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                if($puedoPagar === 1){
+                    $sql = "UPDATE personajes SET cash = cash-$coste, energia = 100, accion = ADDTIME(NOW(), '0:5:0') WHERE id='$id'";
+                    $db->query($sql);
+                }
+                else{
+                    $box = "No tengo dinero para pagar eso.";
+                }
+            }
+            else{
+                $box = "Aún no he descansado de la última acción,";
+            }
+            break;
+            
+        case 'clasicoElPaisano':
+            $coste = 50;
+            $puedoPagar = comprobarCoste($coste);
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                if($puedoPagar === 1){
+                    $sql = "UPDATE personajes SET cash = cash-$coste, estilo = estilo + $mejoraPrincipalMedia/personajes.estilo, accion = ADDTIME(NOW(), '0:15:0') WHERE id='$id'";
+                    $db->query($sql);
+                }
+                else{
+                    $box = "No tengo dinero para pagarle al Hudy.";
+                }
+            }
+            else{
+                $box = "Aún no he descansado de la última acción,";
+            }
+            break;
+        
+        case 'hudyElPaisano':
+            $coste = 200;
+            $puedoPagar = comprobarCoste($coste);
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                if($puedoPagar === 1){
+                    $sql = "UPDATE personajes SET cash = cash-$coste, estilo = estilo + $mejoraPrincipalMuyAlta/personajes.estilo, accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
+                    $db->query($sql);
+                }
+                else{
+                    $box = "No tengo dinero para pagarle al Hudy.";
+                }
+            }
+            else{
+                $box = "Aún no he descansado de la última acción,";
+            }
+            break;
             
         //CERRAJERIA: ABRIR  
         case 'cajita oxidada':
@@ -529,6 +681,10 @@ if($_GET['action'] === "accionSpot"){
 
 if($_GET['action'] === "actualizarDinero"){
     actualizarDinero($_POST['cbox1'], $_POST['cantidadDeposito'], $_POST['cantidadRetirada']);
+}
+
+if($_GET['action'] === "social"){
+    social($_POST['cbox1'], $_POST['cantidadDonacion']);
 }
 
 ?>
