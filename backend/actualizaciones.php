@@ -160,16 +160,34 @@ function social($operacion, $cantidadDonacion){
         if($estoyLibre === 1){
             $puedoHacerlo = comprobarEnergia($agotamiento);
             if($puedoHacerlo === 1){
-                //VA A GANAR SOCIAL,una ganancia base + mult por ING + mult por EST
-                $gananciaBase = rand(80,100);
-                $multIngenio = 1 + (($result[0]['ingenio'] + $bonusIngenio)/33); //Porcentaje por 3
-                $multEstilo = 1 + (($result[0]['estilo'] + $bonusEstilo)/100); //Porcentaje por 1
-                
-                $gananciaTotal = floor($gananciaBase * $multEstilo * $multIngenio);
-                
-                $sql = "UPDATE personajes SET social=social + $gananciaTotal, energia=energia-$agotamiento, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";
-                $stmt = $db->query($sql);
-                header("location: ?page=zona&message=Exito, ganas $gananciaTotal puntos de Social");
+                $maxPopularidad = comprobarMaxPopularidad(22);
+                if($maxPopularidad === 1){
+                    //VA A GANAR POPULARIDAD,una ganancia base + mult por ING + mult por EST
+                    $gananciaBase = rand(15,20);
+                    $multIngenio = 1 + (($result[0]['ingenio'] + $bonusIngenio)/33); //Porcentaje por 3
+                    $multEstilo = 1 + (($result[0]['estilo'] + $bonusEstilo)/100); //Porcentaje por 1
+
+                    $gananciaTotal = floor($gananciaBase * $multEstilo * $multIngenio);
+
+                    //Se actualiza la popularidad del sitio
+                    $sql = "UPDATE popularidad SET puntos = CASE WHEN puntos + $gananciaTotal > 100 THEN 100 ELSE puntos + $gananciaTotal END WHERE idP = '$id' AND idS = '22'";       
+                    $db->query($sql);
+
+                    //Consulto mi nuevo porcentaje general de popularidad (AVG)
+                    $sql = "SELECT AVG(puntos) FROM popularidad WHERE idP = '$id'";
+                    $stmt = $db->query($sql);
+                    $result = $stmt->fetchAll();
+
+                    $popularidadAVG = $result[0]['AVG(puntos)'];
+
+                    //Actualizo el personaje
+                    $sql = "UPDATE personajes SET energia=energia-$agotamiento, popularidad = $popularidadAVG, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";       
+                    $db->query($sql);
+                    header("location: ?page=zona&message=Exito, ganas $gananciaTotal puntos de Popularidad");
+                }
+                else{
+                    header("location: ?page=zona&message=Mi Popularidad ya es máxima aquí"); 
+                }
             }
             else{
                 header("location: ?page=zona&message=No tengo energía para soportar 1 hora de conferencia");
@@ -185,15 +203,35 @@ function social($operacion, $cantidadDonacion){
             if($cantidadDonacion >= 100){
                 $puedoPagar = comprobarCoste($cantidadDonacion);
                 if($puedoPagar === 1){
-                    //VA A GANAR SOCIAL, una ganancia base + bonus por donacion
-                    $gananciaBase = rand(10,20);
-                    $bonusDonacion = $cantidadDonacion / 10; //+1 punto por cada 10 monedas
+                    $maxPopularidad = comprobarMaxPopularidad(22);
+                    if($maxPopularidad === 1){
+                        //VA A GANAR POPULARIDAD, una ganancia base + bonus por donacion
+                        $gananciaBase = rand(1,5);
+                        $bonusDonacion = $cantidadDonacion / 10; //+1 punto por cada 10 monedas
 
-                    $gananciaTotal = $gananciaBase + $bonusDonacion;
+                        $gananciaTotal = $gananciaBase + $bonusDonacion;
 
-                    $sql = "UPDATE personajes SET social=social + $gananciaTotal, cash = cash-$cantidadDonacion WHERE id='$id'";
-                    $stmt = $db->query($sql);
-                    header("location: ?page=zona&message=Exito, ganas $gananciaTotal puntos de Social");
+                        //Se actualiza la popularidad del sitio
+                        $sql = "UPDATE popularidad SET puntos = CASE WHEN puntos + $gananciaTotal > 100 THEN 100 ELSE puntos + $gananciaTotal END WHERE idP = '$id' AND idS = '22'";       
+                        $db->query($sql);
+
+                        //Consulto mi nuevo porcentaje general de popularidad (AVG)
+                        $sql = "SELECT AVG(puntos) FROM popularidad WHERE idP = '$id'";
+                        $stmt = $db->query($sql);
+                        $result = $stmt->fetchAll();
+
+                        $popularidadAVG = $result[0]['AVG(puntos)'];
+
+                        //Actualizo el personaje
+                        $sql = "UPDATE personajes SET cash=cash-$cantidadDonacion, popularidad = $popularidadAVG WHERE id='$id'";       
+                        $db->query($sql);
+
+
+                        header("location: ?page=zona&message=Exito, ganas $gananciaTotal puntos de Popularidad");
+                    }
+                    else{
+                        header("location: ?page=zona&message=Mi Popularidad ya es máxima aquí"); 
+                    }
                 }
                 else{
                    header("location: ?page=zona&message=No tengo dinero suficiente"); 

@@ -103,7 +103,7 @@ function registerAccount($username,$password,$email){
             if ($stmt->rowCount() > 0){
                 //Creacion del personaje en la base de datos
                 $id = $db->lastInsertId();
-                $sql = "INSERT INTO personajes (id,nombre,sexo,origen,experiencia,nivel,barrio,zona,destreza,fuerza,agilidad,resistencia,espiritu,estilo,ingenio,percepcion,salud,energia,respeto,social,cash,enBanco,avances,survival) "
+                $sql = "INSERT INTO personajes (id,nombre,sexo,origen,experiencia,nivel,barrio,zona,destreza,fuerza,agilidad,resistencia,espiritu,estilo,ingenio,percepcion,salud,energia,respeto,popularidad,cash,enBanco,avances,survival) "
                         . "VALUES ('$id','$username','Mujer','1','0','1','1','1','1','1','1','1','1','1','1','1','100','100','0','0','100','0','0','0')";
                 $db->query($sql);
                 
@@ -113,6 +113,18 @@ function registerAccount($username,$password,$email){
                             . "VALUES ('$id','$i','0')";
                     $db->query($sql);
                 }
+                
+                //Creacion de los spots de popularidad en la base de datos
+                $arraySpots = array(22,45,65,85,95,105,125,135,155,165); //array con los idS de cada Spot social
+                for($i = 0; $i<10; $i++){
+                    $sql = "INSERT INTO popularidad (idP,idS,popularidad)"
+                            . "VALUES ('$id','$arraySpots[$i]','0')";
+                    $db->query($sql);
+                }
+                
+                //Creacion de un siguientespot en la base de datos
+                $sql = "INSERT INTO siguientespot (idP,idS) VALUES ('$id', '1')";
+                $db->$query($sql);
                 
                 $_SESSION['loggedIn'] = $id; 
                 header("location: ?page=nuevoPersonaje&message=Registered");

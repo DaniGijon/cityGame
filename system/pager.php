@@ -45,6 +45,9 @@ function getPage(){
         elseif($_GET['bPage'] === "menus"){
             include("..\backend\menus.php");  
         }
+        elseif($_GET['bPage'] === "mensajesFunctions"){
+            include("..\backend\mensajesFunctions.php");  
+        }
         
     }
     else{

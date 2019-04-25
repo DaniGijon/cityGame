@@ -41,8 +41,8 @@ function dibujarRanking(){
     echo "</div>";
     
     echo "<div id=seccion2Ranking>";
-    //Cojo todos los jugadores y los ordeno de más respeto a menos social
-    $sql = "SELECT * FROM personajes ORDER BY social DESC";
+    //Cojo todos los jugadores y los ordeno de más a menos popularidad
+    $sql = "SELECT * FROM personajes ORDER BY popularidad DESC";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
@@ -51,7 +51,7 @@ function dibujarRanking(){
     echo "<tr>";
         echo "<th> POS. </th>";
         echo "<th> NOMBRE </th>";
-	echo "<th> SOCIAL </th>";
+	echo "<th> POPULARIDAD </th>";
     echo "</tr>";
     
     for($i=0; $i<10; $i=$i+1){
@@ -64,7 +64,7 @@ function dibujarRanking(){
         else{
         echo "<td>" . $result[$i]['nombre'] . "</td>";
         }
-	echo "<td>" . $result[$i]['social'] . "</td>";
+	echo "<td>" . $result[$i]['popularidad'] . "</td>";
 	echo "</tr>";
        
     }

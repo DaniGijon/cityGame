@@ -1,8 +1,7 @@
 <?php
-    function dibujarZona($spotID){
+    function dibujarZona($id,$spotID){
         global $db;
         
-        $id = $_SESSION['loggedIn'];
                     
                     $sql = "SELECT personajes.barrio,personajes.zona,zonas.nombreZona,barrios.nombreBarrio FROM personajes INNER JOIN zonas ON (personajes.zona = zonas.idZ) AND (personajes.barrio = zonas.idB) INNER JOIN barrios ON barrios.idb = zonas.idB WHERE id='$id'";
                     $stmt = $db->query($sql);
@@ -38,11 +37,10 @@
                 echo "<div class='seccionDescripcionZona'>";
                     echo "<div class='seccionDescripcionZonaImagen'>";
                         if($spotID === 0){
-                        $imagenZona = "<img src='/design/img/zonas/" . $result[0]['imagenZona'] . "'>";
-                        echo $imagenZona;
+                            $imagenZona = "<img src='/design/img/zonas/" . $result[0]['imagenZona'] . "'>";
+                            echo $imagenZona;
                         }
                         else{
-                            echo 'YA LE HA DADO y es: ' . $spotID;
                             $sql = "SELECT * FROM spots WHERE idS = '$spotID'";
                             $stmt = $db->query($sql);
                             $res = $stmt->fetchAll();
@@ -54,8 +52,22 @@
                     
                     echo "</div>";
                     echo "<div class='seccionDescripcionZonaTexto'>";
-                        $descripcionZona = $result[0]['textoZona'];
-                        echo $descripcionZona;
+                        if($spotID === 0){
+                            $descripcionZona = $result[0]['textoZona'];
+                            echo $descripcionZona;
+                        }
+                        else{
+                            $sql = "SELECT * FROM spots WHERE idS = '$spotID'";
+                            $stmt = $db->query($sql);
+                            $res = $stmt->fetchAll();
+                            
+                            $cortoSpot = $res[0]['corto'];
+                            $nombreSpot = $res[0]['nombre'];
+                            echo $nombreSpot;
+                            echo"<a href='?page=$cortoSpot'><button>Ir allí</button></a>";
+                            
+                        }
+                        
                     echo "</div>";
                 echo "</div>";
                 
@@ -71,7 +83,7 @@
 <script>
     $(".cajitaSpot").click(function(){
         var spotId = $(this).attr('id');
-        alert(spotId);
+        
         /*$(".seccionDescripcionZona").toggle();
         $(".seccionDescripcionSpot").toggle();*/
 
@@ -82,7 +94,7 @@
         }).done(function(){
                
                $("#zonaArea").load("index.php?bPage=zonaFunctions&dibujarZona&nonUI")
-               alert( "llega bien" ); 
+                
         })
     });
                     
@@ -115,12 +127,24 @@
         echo "</div>";
     }
     
+    function siguienteSpot($idS){
+        global $db;
+        $id = $_SESSION['loggedIn'];
+        
+        $sql = "UPDATE siguientespot SET idS=$idS WHERE idP='$id'";
+        $db->query($sql);
+    }
+    
     if(isset($_GET['dibujarZona'])){
-        dibujarZona(8);
+        $id = $_SESSION['loggedIn'];
+        include (__ROOT__.'/backend/comprobaciones.php');
+        
+        $spotSeleccionado = getSiguienteSpot($id);
+        dibujarZona($id, $spotSeleccionado);
     }
     
     if(isset($_POST['spotId'])){
-        dibujarZona($_POST['spotId']);
+        siguienteSpot($_POST['spotId']);
     }
 
 ?>

@@ -10,6 +10,11 @@ global $db;
                 echo "<div class='seccionSpotImagen'>" ;
                     echo"seccionSpotImagen";
                 echo "</div>"; //FIN DE div seccionSpotImagen
+                
+                echo "<div class='seccionSpotInfo'>";
+                    $popularidadAqui = getPopularidadCentroMujer();
+                    echo "Tu popularidad aquí es: " . $popularidadAqui . "%";
+                echo "</div>"; //FIN DE div seccionSpotInfo
                
                 echo "<div class='seccionSpotOpciones'>";
                 echo "Esto es el Centro de la Mujer. <br><br>";
@@ -36,7 +41,6 @@ global $db;
                 <?php
                     
                 echo "</div>"; //FIN DE div seccionSpotOpciones
-
                 
             echo "</div>"; //FIN DE div contenido
 

@@ -68,6 +68,32 @@ function comprobarCoste($coste){
    return $puedoPagar;
 }
 
+function comprobarMensaje($idM){
+   global $db;
+   $id = $_SESSION['loggedIn']; 
+   
+   $sql = "SELECT COUNT(*) FROM mensajes WHERE idM='$idM'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   //if para que no hagan trampas
+   if($result[0]['COUNT(*)'] != 1){
+       header("location: ?page=mensajes&message=No puedo leer ese mensaje");
+   }
+   else{
+        $sql = "SELECT * FROM mensajes WHERE idM='$idM'";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+
+        if($result[0]['idP'] === $id){
+            $puedoLeer = 1;
+        }
+        else{
+            $puedoLeer = 0;
+        }
+        return $puedoLeer;
+   }
+}
+
 function comprobarSalud($salud){
    global $db;
    $id = $_SESSION['loggedIn']; 
@@ -127,6 +153,25 @@ function comprobarEmboscar(){
        $puedoEmboscar = 0;
    }
    return $puedoEmboscar;  
+}
+
+function comprobarMaxPopularidad($idS){
+   global $db;
+   $id = $_SESSION['loggedIn']; 
+         
+   $sql = "SELECT puntos FROM popularidad WHERE idP='$id' AND idS='$idS'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   $puntos = $result[0]['puntos'];
+   
+   if($puntos < 100){
+       $puedo = 1;
+   }
+   else{
+       $puedo = 0;
+   }
+   return $puedo;  
 }
 
 function comprobarEnergia($agotamiento){
@@ -524,6 +569,30 @@ function comprobarZona1Barrio10(){
          echo 'Estoy muy lejos de ese lugar';
          header("location: ?page=zona&message=Estoy muy lejos de ese sitio");
      }  
+}
+//GET Siguiente Spot para las Zonas
+function getSiguienteSpot($id){
+    global $db;
+    
+    $sql = "SELECT * FROM siguientespot WHERE idP='$id'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $spotSeleccionado = $result[0]['idS'];
+    return $spotSeleccionado;
+}
+
+//GET Popularidad de cada spot
+function getPopularidadCentroMujer(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    $sql = "SELECT * FROM popularidad WHERE idP='$id' AND idS='22'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $popularidadAqui = $result[0]['puntos'];
+    return $popularidadAqui;
 }
 
 //COMPROBAR INSIGNIAS

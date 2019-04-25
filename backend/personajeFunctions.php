@@ -428,7 +428,13 @@
         <fieldset>
             <legend style="text-align: center"> Fama</legend>
             <span class="quarterWidth">Respeto: <?php echo $result[0]['respeto']; ?></span><br>
-            <span class="quarterWidth">Social: <?php echo $result[0]['social']; ?></span><br>
+            <span class="quarterWidth">Popularidad: <?php 
+            $sql = "SELECT AVG(puntos) FROM popularidad WHERE idP = '$id'";
+            $stmt = $db->query($sql);
+            $resultado = $stmt->fetchAll();
+                
+            $popularidadAVG = $resultado[0]['AVG(puntos)'];
+            echo round($popularidadAVG, 2, PHP_ROUND_HALF_DOWN); ?>%</span><br>
         </fieldset>
         <fieldset>
             <legend style="text-align: center"> Mi dinero</legend>
