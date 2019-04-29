@@ -53,8 +53,11 @@
                     echo "</div>";
                     echo "<div class='seccionDescripcionZonaTexto'>";
                         if($spotID === 0){
-                            $descripcionZona = $result[0]['textoZona'];
-                            echo $descripcionZona;
+                            echo "<span class='textoDescripcionSpot'>";
+                                $descripcionZona = $result[0]['textoZona'];
+                                echo $descripcionZona;
+                            echo "</span>";
+                            
                         }
                         else{
                             $sql = "SELECT * FROM spots WHERE idS = '$spotID'";
@@ -63,19 +66,29 @@
                             
                             $cortoSpot = $res[0]['corto'];
                             $nombreSpot = $res[0]['nombre'];
-                            echo $nombreSpot;
-                            echo"<a href='?page=$cortoSpot'><button>Ir allí</button></a>";
-                            
+                            $iconoSpot = $res[0]['tipo'];
+                            echo "<div class='textoDescripcionSpot'>";
+                                echo $nombreSpot;
+                            echo "</div>";
+                            echo "<br>";
+                            echo "<div class='iconoDescripcionSpot'>";
+                                echo $iconoSpot;
+                            echo "</div>";
+                            echo "<br>";
+                            echo "<div class='caracteristicasDescripcionSpot'>";
+                                echo $res[0]['principal'];
+                                echo "<br>";
+                                echo $res[0]['secundario'];
+                            echo "</div>";
+                            echo "<br>";
+                            echo "<div class='botonDescripcionSpot'>";
+                                echo"<a href='?page=$cortoSpot'><button>Ir allí</button></a>";
+                            echo "</div>";
                         }
                         
                     echo "</div>";
                 echo "</div>";
                 
-            /*    echo "<div class='seccionDescripcionSpot'>";
-                
-                    mostrarSpot($spotID);
-                
-                echo "</div>";*/
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona
@@ -101,31 +114,6 @@
 </script>
 <?php
     }
-
-    function mostrarSpot($reciboSpotId){
-        
-        echo "<div class='seccionDescripcionZonaImagen'>";
-        global $db;
-        var_dump($reciboSpotId);
-        
-        $sql = "SELECT * FROM spots WHERE idS = '?'";
-        $stmt = $db->prepare($sql);
-        $stmt->execute(array($reciboSpotId));
-        $res = $stmt->fetch();
-        $cuenta = $stmt->rowCount();
-        
-        //SI EL OBJETO EXISTE
-        if($cuenta > 0){
-            echo 'Me estas pasando idS: ' . $reciboSpotId;
-        }
-        else{
-            echo 'Tu padre';
-        }
-        echo "</div>";
-        echo "<div class='seccionDescripcionZonaTexto'>";
-            echo 'Texto del spot';
-        echo "</div>";
-    }
     
     function siguienteSpot($idS){
         global $db;
@@ -135,12 +123,41 @@
         $db->query($sql);
     }
     
+    function llegarAZona($idP){
+        global $db;
+        
+        $sql = "SELECT idZ,idB FROM siguienteSpot WHERE idP='$idP'";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+        
+        $llegoAZona = $result[0]['idZ'];
+        $llegoABarrio = $result[0]['idB'];
+        
+        $sql = "UPDATE personajes SET zona=$llegoAZona, barrio=$llegoABarrio WHERE id='$idP'";
+        $db->query($sql);
+        
+    }
+    
     if(isset($_GET['dibujarZona'])){
         $id = $_SESSION['loggedIn'];
         include (__ROOT__.'/backend/comprobaciones.php');
         
         $spotSeleccionado = getSiguienteSpot($id);
         dibujarZona($id, $spotSeleccionado);
+    }
+    
+    if(isset($_GET['llegarAZona'])){
+        $id = $_SESSION['loggedIn'];
+        include (__ROOT__.'/backend/comprobaciones.php');
+        //Comprobar que la zona&barrio DESTINO no es igual a la zona&barrio ACTUAL y en caso OK, llevarle allí
+        $esDistintoSitio = esDistintoSitio($id);
+        if($esDistintoSitio === 1){
+            llegarAZona($id);
+            header("location: ?page=accion&nonUI&message=Llegaste a una nueva Zona");
+        }
+        else{
+            header("location: ?page=accion&nonUI&message=Ya estabas en esa Zona");
+        }
     }
     
     if(isset($_POST['spotId'])){

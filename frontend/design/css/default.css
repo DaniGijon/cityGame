@@ -620,6 +620,7 @@ h3{
 .seccionDescripcionZonaTexto{
     width: 380px;
     height: 155px;
+    margin: 0 10px;
 }
 
 .seccionDescripcionZonaImagen{

@@ -581,6 +581,52 @@ function getSiguienteSpot($id){
     $spotSeleccionado = $result[0]['idS'];
     return $spotSeleccionado;
 }
+//GET siguiente Zona y siguiente Barrio para la ciudad
+function getSiguienteZona($id){
+    global $db;
+    
+    $sql = "SELECT * FROM siguientespot WHERE idP='$id'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $zonaSeleccionada = $result[0]['idZ'];
+    return $zonaSeleccionada;
+}
+
+function getSiguienteBarrio($id){
+    global $db;
+    
+    $sql = "SELECT * FROM siguientespot WHERE idP='$id'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $barrioSeleccionado = $result[0]['idB'];
+    return $barrioSeleccionado;
+}
+
+function esDistintoSitio($idP){
+        global $db;
+        
+        $sql = "SELECT idZ,idB FROM siguienteSpot WHERE idP='$idP'";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+        
+        $voyAZona = $result[0]['idZ'];
+        $voyABarrio = $result[0]['idB'];
+        
+        $sql = "SELECT zona,barrio FROM personajes WHERE id='$idP'";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+        
+        $estoyEnZona = $result[0]['zona'];
+        $estoyEnBarrio = $result[0]['barrio'];
+        
+        if(($voyABarrio === $estoyEnBarrio) && ($voyAZona === $estoyEnZona)){
+            return 0;
+        }
+        return 1;
+}
+
 
 //GET Popularidad de cada spot
 function getPopularidadCentroMujer(){

@@ -11,10 +11,32 @@ function getApuestasCocodrilos(){
 
 }
 
+function getEntrenamientoCarrilBici(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='6'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+
+}
+
 function getCaras(){
     global $db;
     
     $sql = "SELECT * FROM spots WHERE idS='20'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+
+}
+
+function getCentroMujer(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='22'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     

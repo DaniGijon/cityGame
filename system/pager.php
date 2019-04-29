@@ -30,6 +30,9 @@ function getPage(){
         elseif($_GET['bPage'] === "zonaFunctions"){
             include("..\backend\zonaFunctions.php");  
         }
+        elseif($_GET['bPage'] === "ciudadFunctions"){
+            include("..\backend\ciudadFunctions.php");  
+        }
         elseif($_GET['bPage'] === "actualizaciones"){
             include("..\backend\actualizaciones.php");  
         }
@@ -47,6 +50,9 @@ function getPage(){
         }
         elseif($_GET['bPage'] === "mensajesFunctions"){
             include("..\backend\mensajesFunctions.php");  
+        }
+        elseif($_GET['bPage'] === "costesViajes"){
+            include("..\backend\costesViajes.php");  
         }
         
     }

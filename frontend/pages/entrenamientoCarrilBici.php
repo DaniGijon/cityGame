@@ -1,6 +1,7 @@
 <?php
 global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
+        include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
         comprobarZona1Barrio1();
         
@@ -8,11 +9,12 @@ global $db;
             
             echo "<div class='contenido'>";
                 echo "<div class='seccionSpotImagen'>" ;
-                    echo"seccionSpotImagen";
+                    $spotImagen = getEntrenamientoCarrilBici();
+                    echo $spotImagen;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                
                 echo "<div class='seccionSpotOpciones'>";
-                echo "Un día soleado y tranquilo. Buen momento para subir a la bici y entrenar estas piernas. <br><br>";
+                echo "<br>Un día soleado y tranquilo. Buen momento para subir a la bici y entrenar estas piernotas. <br><br>";
                 ?>
 <form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">
                 <input type="checkbox" name="cbox1" value="pedaleo Suave"> <label for="cbox3">Pedaleo Suave (Energia Baja)</label><br>
