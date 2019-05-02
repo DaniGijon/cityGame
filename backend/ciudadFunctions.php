@@ -1,6 +1,6 @@
 <?php
     function dibujarCiudad($id,$zonaID,$barrioID){
-        
+        include (__ROOT__.'/backend/costesViajes.php');
         global $db;
         
         echo "<div id='moduloZona'>";
@@ -70,6 +70,70 @@
                                 echo "<br>";
                                 echo $descripcionZona;
                             echo "</div>";
+                            $precioViaje = calcularCosteViaje($barrioID, $zonaID, $barrioEstoy, $zonaEstoy);
+                            echo "<br><div id='iconosZona'>";
+                                //Mirar qué iconos va a tener
+                                $tieneTiendaArmas = $res[0]['tiendaarmas'];
+                                $tieneTiendaMascotas = $res[0]['tiendamascotas'];
+                                $tieneTiendaVehiculos = $res[0]['tiendavehiculos'];
+                                $tieneTiendaVariedades = $res[0]['tiendavariedades'];
+                                $tieneBanco = $res[0]['banco'];
+                                $tieneHotel = $res[0]['hotel'];
+                                $tieneCerrajeria = $res[0]['cerrajeria'];
+                                $tieneApuestas = $res[0]['apuestas'];
+                                $tieneSocial = $res[0]['social'];
+                                $tieneEstilo = $res[0]['estilo'];
+                                $tieneGimnasio = $res[0]['gimnasio'];
+                                $tieneEntrenamiento = $res[0]['entrenamiento'];
+                                $tieneIglesia = $res[0]['iglesia'];
+                                $tieneCultura = $res[0]['cultura'];
+                                
+                                //Mostrar los iconos
+                                if($tieneTiendaArmas === '1'){
+                                    echo "<div class='iconoZona'>tiendaArmas</div>";
+                                }
+                                if($tieneTiendaMascotas === '1'){
+                                    echo "<div class='iconoZona'>tiendaMascotas</div>";
+                                }
+                                if($tieneTiendaVehiculos === '1'){
+                                    echo "<div class='iconoZona'>tiendaVehiculos</div>";
+                                }
+                                if($tieneTiendaVariedades === '1'){
+                                    echo "<div class='iconoZona'>tiendaVariedades</div>";
+                                }
+                                if($tieneBanco === '1'){
+                                    echo "<div class='iconoZona'>banco</div>";
+                                }
+                                if($tieneHotel === '1'){
+                                    echo "<div class='iconoZona'>hotel</div>";
+                                }
+                                if($tieneCerrajeria === '1'){
+                                    echo "<div class='iconoZona'>cerrajeria</div>";
+                                }
+                                if($tieneApuestas === '1'){
+                                    echo "<div class='iconoZona'>apuestas</div>";
+                                }
+                                if($tieneSocial === '1'){
+                                    echo "<div class='iconoZona'>social</div>";
+                                }
+                                if($tieneEstilo === '1'){
+                                    echo "<div class='iconoZona'>estilo</div>";
+                                }
+                                if($tieneGimnasio === '1'){
+                                    echo "<div class='iconoZona'>gimnasio</div>";
+                                }
+                                if($tieneEntrenamiento === '1'){
+                                    echo "<div class='iconoZona'>entrenamiento</div>";
+                                }
+                                if($tieneIglesia === '1'){
+                                    echo "<div class='iconoZona'>iglesia</div>";
+                                }
+                                if($tieneCultura === '1'){
+                                    echo "<div class='iconoZona'>cultura</div>";
+                                }
+                                
+                            echo "</div>";
+                            echo "<br><br><div id='CosteViaje'>Ir allí te costará : " . $precioViaje . " monedas</div>";
                         }
                         
                     echo "</div>";

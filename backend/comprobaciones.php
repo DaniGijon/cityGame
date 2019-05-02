@@ -133,6 +133,50 @@ function comprobarEspera(){
    return $estoyLibre;  
 }
 
+function puedoViajar(){
+   global $db;
+   $id = $_SESSION['loggedIn']; 
+   
+   date_default_timezone_set('Europe/Madrid');
+   
+   $sql = "SELECT viaje FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   $actual = date("Y-m-d H:i:s");
+   $accion = $result[0]['viaje'];
+   
+   if($accion < $actual){
+       $estoyLibre = 1;
+   }
+   else{
+       $estoyLibre = 0;
+   }
+   return $estoyLibre;  
+}
+
+function TiempoViaje($idP){
+   global $db;
+   
+   $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$idP' AND inventario.slot = '5'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   $vehiculoEquipado = $result[0]['id'];
+   
+   if($vehiculoEquipado === '20'){
+       $tiempoViaje = 55;
+   }
+   elseif($vehiculoEquipado === '21'){
+       $tiempoViaje = 50;
+   }
+   else{
+       $tiempoViaje = 59;
+   }
+   
+   return $tiempoViaje;
+}
+
 function comprobarEmboscar(){
   global $db;
    $id = $_SESSION['loggedIn']; 

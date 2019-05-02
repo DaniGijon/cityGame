@@ -79,10 +79,26 @@ function lectura($idM){
 
         $fechaMensaje = $result[0]['fecha'];
         $asuntoMensaje = $result[0]['asunto'];
+        $imagenMensaje = $result[0]['imagen'];
         $contenidoMensaje = $result[0]['contenido'];
 
         echo "<div id='FechaMensaje'> $fechaMensaje </div>";
         echo "<div id='AsuntoMensaje'> $asuntoMensaje </div>";
+        if($asuntoMensaje === 'Aventura'){
+            if(!$imagenMensaje){
+                $imagenMensaje = 'noMonstruo.png';
+            }
+            echo "<div id='ImagenMensaje'> <img src='/design/img/monstruos/" . $imagenMensaje . "'></div>";
+        }
+        elseif($asuntoMensaje === 'Subiste de Nivel'){
+            echo "<div id='ImagenMensaje'> <img src='/design/img/iconos/subirNivel.png'></div>";
+        }
+        elseif($asuntoMensaje === 'Reliquia Encontrada'){
+            echo "<div id='ImagenMensaje'> <img src='/design/img/iconos/reliquiaEncontrada.png'></div>";
+        }
+        elseif($asuntoMensaje === 'Popularidad'){
+            echo "<div id='ImagenMensaje'> <img src='/design/img/iconos/popularidad.png'></div>";
+        }
         echo "<div id='ContenidoMensaje'> $contenidoMensaje </div>";
 
         //Marcar como Leido

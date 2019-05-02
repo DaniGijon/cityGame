@@ -1,6 +1,7 @@
 <?php
 global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
+        include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
         comprobarZona1Barrio1();
         
@@ -8,7 +9,8 @@ global $db;
             
             echo "<div class='contenido'>";
                 echo "<div class='seccionSpotImagen'>" ;
-                    echo"seccionSpotImagen";
+                    $imagenSpot = getLosPinos();
+                    echo $imagenSpot;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                
                 echo "<div class='seccionSpotOpciones'>";

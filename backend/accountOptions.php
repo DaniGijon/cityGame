@@ -123,8 +123,12 @@ function registerAccount($username,$password,$email){
                 }
                 
                 //Creacion de un siguientespot en la base de datos
-                $sql = "INSERT INTO siguientespot (idP,idS) VALUES ('$id', '1')";
-                $db->$query($sql);
+                $sql = "INSERT INTO siguientespot (idP,idS,idZ,idB) VALUES ('$id', '1', '1', '1')";
+                $db->query($sql);
+                
+                //Crearle un mensaje de Bienvenida
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Bienvenida','Dar la bienvenida al juego y explicar un poco','bienvenida.png')";
+                $db->query($sql);
                 
                 $_SESSION['loggedIn'] = $id; 
                 header("location: ?page=nuevoPersonaje&message=Registered");

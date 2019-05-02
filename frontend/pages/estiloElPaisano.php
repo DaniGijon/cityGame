@@ -73,5 +73,5 @@ global $db;
         
             }
             else{
-                header("location: ?page=zona&message=Aun no he descansado de mi última acción");
+                header("location: ?page=zona&nonUI&message=Aun no he descansado de mi última acción");
             }

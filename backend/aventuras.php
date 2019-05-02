@@ -25,6 +25,9 @@ function zona($box){
                     $monstruo = cualMonstruo($zona,$barrio);
                     $box = $monstruo[0]['nombre'];
                     
+                    //Foto del monstruo
+                    $imagenMonstruo = $monstruo[0]['imagenMonstruo'];
+
                     // Atacar al monstruo
                     $idMonstruo = $monstruo[0]['idM'];
                     $premio= atacarMonstruo($idMonstruo);
@@ -92,6 +95,10 @@ function zona($box){
                                     if($esReliquia === '1'){
                                         $sql = "INSERT INTO coleccionismo (idP,idO,imagen) VALUES('$id','$idObjetoObtenido','$idObjetoObtenido.png')";
                                         $db->query($sql);
+                                        
+                                        //Generar un mensaje de Informe de reliquia
+                                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Reliquia Encontrada','Al derrotar a ese monstruo notas un pequeño brillo debajo de su cuerpo. Te acercas para observar mejor... <br>¡Encuentras $nombreObjetoObtenido! Toda una Reliquia.','reliquiaEncontrada.png')";
+                                        $db->query($sql);
                                     }
                                 }
                             }
@@ -102,6 +109,7 @@ function zona($box){
                         
                         //Comprobar si subo de nivel
                         global $db;
+                        $mensajeNivel = '';
                         $sql = "SELECT nivel FROM personajes WHERE id='$id'";
                         $stmt = $db->query($sql);
                         $personaje = $stmt->fetchAll();
@@ -109,7 +117,10 @@ function zona($box){
                         if($nuevoNivel != $personaje[0]['nivel'] ){
                             $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + 5 WHERE id='$id'";
                             $db->query($sql);
-                            $mensajeNivel = " SUBO DE NIVEL!<br>";
+                            $mensajeNivel = " SUBO DE NIVEL<br>";
+                            //Generar mensaje del informe de la subida de nivel
+                            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes 5 Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
+                            $db->query($sql);
                             
                         }
 
@@ -127,7 +138,7 @@ function zona($box){
                         //Si me quedo con la vida a cero, me viene la ambulancia     
                         $sql = "UPDATE personajes SET accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
                         $db->query($sql);
-                        $celebracion = "¡Qué dolor! Menos mal que la ambulancia estaba cerca. Tardarán un tiempo para curar mis heridas. <br>";
+                        $celebracion = "¡Qué dolor! Por suerte la ambulancia estaba cerca. Estaré 30 Minutos en observación hasta que sanen mis heridas. <br>";
                         }
                     }
                     
@@ -139,6 +150,8 @@ function zona($box){
             }
             else{
                 $box = "¡Ay! No puedo con mi cuerpo ahora mismo";
+                header("location: ?page=accion&message=$box");
+                exit;
             }
             break;
             
@@ -157,6 +170,9 @@ function zona($box){
                     // ¿Cuál monstruo he encontrado?
                     $monstruo = cualMonstruoDebil($zona,$barrio);
                     $box = $monstruo[0]['nombre'];
+                    
+                    //Foto del monstruo
+                    $imagenMonstruo = $monstruo[0]['imagenMonstruo'];
                     
                     // Atacar al monstruo
                     $idMonstruo = $monstruo[0]['idM'];
@@ -196,7 +212,8 @@ function zona($box){
                             $obj = $stmt->fetchAll();
                             $cantidadObjetosCandidatos = count($obj); 
                             $objetoObtenido = rand(0, $cantidadObjetosCandidatos-1);
-                            $mensajeObjeto = $mensajeObjeto . $obj[$objetoObtenido]['nombre'];
+                            $nombreObjetoObtenido = $obj[$objetoObtenido]['nombre'];
+                            $mensajeObjeto = $mensajeObjeto . $nombreObjetoObtenido;
                             
                             //Miro que tenga algun slot libre en el inventario
                             $slotDondeGuardo = comprobarSlotLibre();
@@ -223,7 +240,12 @@ function zona($box){
                                     
                                     $esReliquia = $res[0]['reliquia'];
                                     if($esReliquia === '1'){
+                                        //Añadir al Album Coleccionismo
                                         $sql = "INSERT INTO coleccionismo (idP,idO,imagen) VALUES('$id','$idObjetoObtenido','$idObjetoObtenido.png')";
+                                        $db->query($sql);
+                                        
+                                        //Generar un mensaje de Informe de reliquia
+                                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Reliquia Encontrada','Al derrotar a ese monstruo notas un pequeño brillo debajo de su cuerpo. Te acercas para observar mejor... <br>¡Encuentras $nombreObjetoObtenido! Toda una Reliquia.','reliquiaEncontrada.png')";
                                         $db->query($sql);
                                     }
                                 }
@@ -235,6 +257,7 @@ function zona($box){
                         
                         //Comprobar si subo de nivel
                         global $db;
+                        $mensajeNivel = '';
                         $sql = "SELECT nivel FROM personajes WHERE id='$id'";
                         $stmt = $db->query($sql);
                         $personaje = $stmt->fetchAll();
@@ -242,7 +265,11 @@ function zona($box){
                         if($nuevoNivel != $personaje[0]['nivel'] ){
                             $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + 5 WHERE id='$id'";
                             $db->query($sql);
-                            $mensajeNivel = " SUBO DE NIVEL!<br>";
+                            $mensajeNivel = " SUBO DE NIVEL<br>";
+                            
+                            //Generar mensaje del informe de la subida de nivel
+                            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes 5 Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
+                            $db->query($sql);
                             
                         }
 
@@ -260,26 +287,34 @@ function zona($box){
                         //Si me quedo con la vida a cero, me viene la ambulancia     
                         $sql = "UPDATE personajes SET accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
                         $db->query($sql);
-                        $celebracion = "¡Qué dolor! Enseguida llega la ambulancia a auxiliarme, pero tardarán un rato en darme el alta <br>";
+                        $celebracion = "¡Qué dolor! Enseguida llega la ambulancia a auxiliarme, pero tardarán 30 Minutos en darme el alta <br>";
                         }
                     }
                     
                     $box = "Me enfrento a un " . $box . " ... " . $celebracion;
                 }
                 else{
+                    
                     $box = "Qué agradable paseo! No me ha atacado ningún monstruo.";
                 }
             }
             else{
                 $box = "¡Ay! No puedo con mi cuerpo ahora mismo";
+                header("location: ?page=accion&message=$box");
+                exit;
             }
             break;
             
         default:
             $box = "Error: esa opcion no existe";
+            header("location: ?page=accion&message=$box");
+            exit;
     }
     
-    header("location: ?page=accion&message=$box");
+    //Generar mensaje del informe de la aventura 
+    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Aventura','$box','$imagenMonstruo')";
+    $db->query($sql);
+    header("location: ?page=mensajes");
 }
 
 
@@ -1771,6 +1806,7 @@ function ganas($miId,$monstruoResult){
         $expGanada = rand($monstruoResult[0]['nivel'] * 10, $monstruoResult[0]['nivel'] * 20);
         $sql = "UPDATE personajes SET experiencia = personajes.experiencia + '$expGanada' WHERE id='$miId'";
         $db->query($sql);
+                     
         
         return $expGanada;
 }

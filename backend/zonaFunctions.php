@@ -81,9 +81,7 @@
                                 echo $res[0]['secundario'];
                             echo "</div>";
                             echo "<br>";
-                            echo "<div class='botonDescripcionSpot'>";
-                                echo"<a href='?page=$cortoSpot'><button>Ir allí</button></a>";
-                            echo "</div>";
+                            
                         }
                         
                     echo "</div>";
@@ -94,11 +92,9 @@
         echo "</div>"; //FIN DE div moduloZona
 ?>
 <script>
-    $(".cajitaSpot").click(function(){
+ /*   $(".cajitaSpot").click(function(){
         var spotId = $(this).attr('id');
         
-        /*$(".seccionDescripcionZona").toggle();
-        $(".seccionDescripcionSpot").toggle();*/
 
         $.post("?bPage=zonaFunctions", {
 
@@ -110,6 +106,27 @@
                 
         })
     });
+ */   
+ $(function() {
+    $(".cajitaSpot").hover(function(){
+        var spotId = $(this).attr('id');
+        
+
+        $.post("?bPage=zonaFunctions", {
+
+            spotId: spotId
+
+        }).done(function(){
+               
+               $("#zonaArea").load("index.php?bPage=zonaFunctions&dibujarZona&nonUI")
+                
+        })
+    });
+    
+    $(".cajitaSpot").click(function(){
+       $("#zonaArea").load("index.php?bPage=zonaFunctions&llegarASpot&nonUI")
+    });
+});
                     
 </script>
 <?php
@@ -123,18 +140,33 @@
         $db->query($sql);
     }
     
-    function llegarAZona($idP){
+    function llegarAZona($idP, $voyABarrio, $voyAZona, $costeViaje){
+        include_once (__ROOT__.'/backend/comprobaciones.php');
+        global $db;
+        //Mirar mi Vehiculo para saber cuanto va a ser el tiempoViaje        
+        $tiempoViaje = TiempoViaje($idP);
+        
+        $sql = "UPDATE personajes SET cash = cash-$costeViaje, zona=$voyAZona, barrio=$voyABarrio, viaje = ADDTIME(NOW(), '0:$tiempoViaje:0') WHERE id='$idP'";
+        $db->query($sql);
+        
+    }
+    
+    function llegarASpot($idP){
         global $db;
         
-        $sql = "SELECT idZ,idB FROM siguienteSpot WHERE idP='$idP'";
+        $sql = "SELECT idS FROM siguientespot WHERE idP='$idP'";
         $stmt = $db->query($sql);
         $result = $stmt->fetchAll();
         
-        $llegoAZona = $result[0]['idZ'];
-        $llegoABarrio = $result[0]['idB'];
+        $llegoASpot = $result[0]['idS'];
         
-        $sql = "UPDATE personajes SET zona=$llegoAZona, barrio=$llegoABarrio WHERE id='$idP'";
-        $db->query($sql);
+        $sql = "SELECT corto FROM spots WHERE idS = '$llegoASpot'";
+        $stmt = $db->query($sql);
+        $res = $stmt->fetchAll();
+                            
+        $cortoSpot = $res[0]['corto'];
+        
+        return $cortoSpot;
         
     }
     
@@ -149,15 +181,53 @@
     if(isset($_GET['llegarAZona'])){
         $id = $_SESSION['loggedIn'];
         include (__ROOT__.'/backend/comprobaciones.php');
+        include (__ROOT__.'/backend/costesViajes.php');
+        global $db;
         //Comprobar que la zona&barrio DESTINO no es igual a la zona&barrio ACTUAL y en caso OK, llevarle allí
         $esDistintoSitio = esDistintoSitio($id);
         if($esDistintoSitio === 1){
-            llegarAZona($id);
-            header("location: ?page=accion&nonUI&message=Llegaste a una nueva Zona");
+            //Comprobar que puede viajar
+            $puedoViajar = puedoViajar();
+            if($puedoViajar === 1){
+                $sql = "SELECT barrio,zona FROM personajes WHERE id='$id'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                            
+                $estoyEnZona = $resultado[0]['zona'];
+                $estoyEnBarrio = $resultado[0]['barrio'];
+                
+                $sql = "SELECT idB,idZ FROM siguientespot WHERE idP='$id'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $voyABarrio = $resultado[0]['idB'];
+                $voyAZona = $resultado[0]['idZ'];
+                
+                $costeViaje = calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona);
+                $puedoPagar = comprobarCoste($costeViaje);
+                if($puedoPagar === 1){
+                    llegarAZona($id, $voyABarrio, $voyAZona, $costeViaje);
+                    header("location: ?page=accion&nonUI&message=Llegaste a una nueva Zona");
+                }
+                else{
+                    header("location: ?page=accion&nonUI&message=No tengo dinero para ir hasta allí");
+                }
+            }
+            else{
+                header("location: ?page=accion&nonUI&message=Aún no he descansado de mi último viaje");
+            }
         }
         else{
             header("location: ?page=accion&nonUI&message=Ya estabas en esa Zona");
         }
+    }
+    
+    if(isset($_GET['llegarASpot'])){
+        $id = $_SESSION['loggedIn'];
+        
+        $cortoSpot = llegarASpot($id);
+        header("location: ?page=$cortoSpot&nonUI");
+        
     }
     
     if(isset($_POST['spotId'])){

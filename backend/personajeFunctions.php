@@ -400,15 +400,20 @@
             $sql = "SELECT personajes.*, zonas.*, barrios.* FROM personajes INNER JOIN zonas ON (personajes.zona = zonas.idZ) and (personajes.barrio = zonas.idB) INNER JOIN barrios ON barrios.idB = zonas.idB WHERE id = '$id'";
             $stmt = $db->query($sql);
             $result = $stmt->fetchAll();
+            
+            
+            $sql = "SELECT * FROM personajes WHERE id = '$id'";
+            $stmt = $db->query($sql);
+            $habilidadesBase = $stmt->fetchAll();
 
-            $destreza = $result[0]['destreza'];
-            $fuerza = $result[0]['fuerza'];
-            $agilidad = $result[0]['agilidad'];
-            $resistencia = $result[0]['resistencia'];
-            $espiritu = $result[0]['espiritu'];
-            $estilo = $result[0]['estilo'];
-            $ingenio = $result[0]['ingenio'];
-            $percepcion = $result[0]['percepcion'];
+            $destreza = $habilidadesBase[0]['destreza'];
+            $fuerza = $habilidadesBase[0]['fuerza'];
+            $agilidad = $habilidadesBase[0]['agilidad'];
+            $resistencia = $habilidadesBase[0]['resistencia'];
+            $espiritu = $habilidadesBase[0]['espiritu'];
+            $estilo = $habilidadesBase[0]['estilo'];
+            $ingenio = $habilidadesBase[0]['ingenio'];
+            $percepcion = $habilidadesBase[0]['percepcion'];
         ?>   
         <fieldset>
             <legend style="text-align: center"> Mis Datos</legend>
@@ -527,28 +532,29 @@
                 echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($percepcion+$bonusPercepcion) . "</th>";
             
             echo "</tr>";
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['destreza'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+            
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['destreza'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
                 echo "<th style='width:50px; background-color:pink'>" . $bonusDestreza . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['fuerza'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['fuerza'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
                 echo "<th style='width:50px; background-color:pink'>" . $bonusFuerza . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['agilidad'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['agilidad'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
                 echo "<th style='width:50px; background-color:pink'>" . $bonusAgilidad . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['resistencia'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['resistencia'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
                 echo "<th style='width:50px; background-color:pink'>" . $bonusResistencia . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['espiritu'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['espiritu'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
                 echo "<th style='width:50px; background-color:pink'>" . $bonusEspiritu . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['estilo'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['estilo'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
                 echo "<th style='width:50px; background-color:pink'>" . $bonusEstilo . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['ingenio'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['ingenio'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
                 echo "<th style='width:50px; background-color:pink'>" . $bonusIngenio . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($result[0]['percepcion'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['percepcion'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
                 echo "<th style='width:50px; background-color:pink'>" . $bonusPercepcion . "</th>";
                 
                 echo '</table>';

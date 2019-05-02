@@ -1,9 +1,42 @@
 <?php
 //SPOTS
+function getPilanconBurros(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='1'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+
+}
+
 function getApuestasCocodrilos(){
     global $db;
     
     $sql = "SELECT * FROM spots WHERE idS='2'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+
+}
+
+function getUnAlto(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='3'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+
+}
+
+function getLosPinos(){
+    global $db;
+    
+    $sql = "SELECT * FROM spots WHERE idS='5'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     

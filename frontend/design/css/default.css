@@ -148,6 +148,12 @@ h3{
     margin:auto;
 }
 
+
+.iconoZona{
+    float: left;
+    margin-left: 5px;
+}
+
 #tercioArriba{
     width:450px;
     height: 150px;

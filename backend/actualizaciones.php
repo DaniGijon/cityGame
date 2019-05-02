@@ -183,7 +183,10 @@ function social($operacion, $cantidadDonacion){
                     //Actualizo el personaje
                     $sql = "UPDATE personajes SET energia=energia-$agotamiento, popularidad = $popularidadAVG, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";       
                     $db->query($sql);
-                    header("location: ?page=zona&message=Exito, ganas $gananciaTotal puntos de Popularidad");
+                    //GENERO UN INFORME DE POPULARIDAD
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Popularidad','Tus últimos actos sociales están teniendo repercusión. Los habitantes de Puertollano cada vez hablan mejor de tí. <br> Tu popularidad ha ascendido $gananciaTotal puntos en esta zona.','popularidad.png')";
+                    $db->query($sql);
+                    header("location: ?page=mensajes");
                 }
                 else{
                     header("location: ?page=zona&message=Mi Popularidad ya es máxima aquí"); 
@@ -225,9 +228,11 @@ function social($operacion, $cantidadDonacion){
                         //Actualizo el personaje
                         $sql = "UPDATE personajes SET cash=cash-$cantidadDonacion, popularidad = $popularidadAVG WHERE id='$id'";       
                         $db->query($sql);
-
-
-                        header("location: ?page=zona&message=Exito, ganas $gananciaTotal puntos de Popularidad");
+                        
+                        //GENERO UN INFORME DE POPULARIDAD
+                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Popularidad','Tus últimos actos sociales están teniendo repercusión. Los habitantes de Puertollano cada vez hablan mejor de tí. <br> Tu popularidad ha ascendido $gananciaTotal puntos en esta zona.','popularidad.png')";
+                        $db->query($sql);
+                        header("location: ?page=mensajes");
                     }
                     else{
                         header("location: ?page=zona&message=Mi Popularidad ya es máxima aquí"); 
@@ -343,9 +348,31 @@ function accionSpot($box){
             if($puedoHacerlo === 1){
                 $puedoPagar = comprobarCoste($coste);
                 if($puedoPagar === 1){
-                
-                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaBaja/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalBaja/personajes.resistencia WHERE id='$id'";
+                    //Consulta para hacer el informe
+                    $sql = "SELECT agilidad,resistencia FROM personajes WHERE id='$id'";
                     $stmt = $db->query($sql);
+                    $habilidades = $stmt->fetchAll();
+                    
+                    $agilidadPrevia = $habilidades[0]['agilidad'];
+                    $resistenciaPrevia = $habilidades[0]['resistencia'];
+                    
+                    //MEJORAR PERSONAJE y COBRARLE LOS PRECIOS Y ENERGIA CONSUMIDA
+                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaBaja/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalBaja/personajes.resistencia, accion = ADDTIME(NOW(), '0:15:0') WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    
+                    //INFORME DE ENTRENAMIENTO
+                    $sql = "SELECT agilidad,resistencia FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $habilidades = $stmt->fetchAll();
+                    
+                    $agilidadPosterior = $habilidades[0]['agilidad'];
+                    $resistenciaPosterior = $habilidades[0]['resistencia'];
+                    
+                    $mejoraAgilidad = round($agilidadPosterior - $agilidadPrevia, 2, PHP_ROUND_HALF_DOWN);
+                    $mejoraResistencia = round($resistenciaPosterior - $resistenciaPrevia, 2, PHP_ROUND_HALF_DOWN);
+                    
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Mejora de Habilidad','Qué buen ratito de pedaleo. He mejorado $mejoraResistencia puntos de Resistencia y también $mejoraAgilidad puntos de Agilidad.','entrenamiento.png')";
+                    $db->query($sql);
                 }
                 else{
                     $box = "No llevo dinero para inflar las ruedas.";
@@ -362,8 +389,29 @@ function accionSpot($box){
             if($puedoHacerlo === 1){
                 $puedoPagar = comprobarCoste($coste);
                 if($puedoPagar === 1){
-                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaMedia/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalMedia/personajes.resistencia WHERE id='$id'";
+                    //Consulta para hacer el informe
+                    $sql = "SELECT agilidad,resistencia FROM personajes WHERE id='$id'";
                     $stmt = $db->query($sql);
+                    $habilidades = $stmt->fetchAll();
+                    
+                    $agilidadPrevia = $habilidades[0]['agilidad'];
+                    $resistenciaPrevia = $habilidades[0]['resistencia'];
+                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaMedia/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalMedia/personajes.resistencia, accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    
+                    //INFORME DE ENTRENAMIENTO
+                    $sql = "SELECT agilidad,resistencia FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $habilidades = $stmt->fetchAll();
+                    
+                    $agilidadPosterior = $habilidades[0]['agilidad'];
+                    $resistenciaPosterior = $habilidades[0]['resistencia'];
+                    
+                    $mejoraAgilidad = round($agilidadPosterior - $agilidadPrevia, 2, PHP_ROUND_HALF_DOWN);
+                    $mejoraResistencia = round($resistenciaPosterior - $resistenciaPrevia, 2, PHP_ROUND_HALF_DOWN);
+                    
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Mejora de Habilidad','Buen ritmito de piernas. He mejorado $mejoraResistencia puntos de Resistencia y también $mejoraAgilidad puntos de Agilidad.','entrenamiento.png')";
+                    $db->query($sql);
                 }
                 else{
                     $box = "Necesito dinero para engrasar la cadena.";
@@ -380,8 +428,30 @@ function accionSpot($box){
             if($puedoHacerlo === 1){
                 $puedoPagar = comprobarCoste($coste);
                 if($puedoPagar === 1){
-                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaAlta/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalAlta/personajes.resistencia WHERE id='$id'";
+                    //Consulta para hacer el informe
+                    $sql = "SELECT agilidad,resistencia FROM personajes WHERE id='$id'";
                     $stmt = $db->query($sql);
+                    $habilidades = $stmt->fetchAll();
+                    
+                    $agilidadPrevia = $habilidades[0]['agilidad'];
+                    $resistenciaPrevia = $habilidades[0]['resistencia'];
+                    
+                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaAlta/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalAlta/personajes.resistencia, accion = ADDTIME(NOW(), '0:45:0') WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    
+                    //INFORME DE ENTRENAMIENTO
+                    $sql = "SELECT agilidad,resistencia FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $habilidades = $stmt->fetchAll();
+                    
+                    $agilidadPosterior = $habilidades[0]['agilidad'];
+                    $resistenciaPosterior = $habilidades[0]['resistencia'];
+                    
+                    $mejoraAgilidad = round($agilidadPosterior - $agilidadPrevia, 2, PHP_ROUND_HALF_DOWN);
+                    $mejoraResistencia = round($resistenciaPosterior - $resistenciaPrevia, 2, PHP_ROUND_HALF_DOWN);
+                    
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Mejora de Habilidad','¡De aquí a correr el Tour! He mejorado $mejoraResistencia puntos de Resistencia y también $mejoraAgilidad puntos de Agilidad.','entrenamiento.png')";
+                    $db->query($sql);
                 }
                 else{
                     $box = "¿Y si me multan por ir tan rápido? Mejor reunir dinero antes";
@@ -401,6 +471,13 @@ function accionSpot($box){
                 if($puedoHacerlo === 1){
                     $puedoPagar = comprobarCoste($coste);
                     if($puedoPagar === 1){
+                        //Consulta para hacer el informe
+                        $sql = "SELECT espiritu FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $habilidades = $stmt->fetchAll();
+
+                        $espirituPrevia = $habilidades[0]['espiritu'];
+                        
                         if($mistico === 1){
                             $sql = "UPDATE personajes SET cash = cash-$coste, energia = energia-$agotamiento, espiritu = espiritu + $mejoraPrincipalMuyBaja*2/personajes.espiritu, accion = ADDTIME(NOW(), '0:5:0') WHERE id='$id'";
                             $stmt = $db->query($sql);
@@ -409,6 +486,18 @@ function accionSpot($box){
                             $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, espiritu = espiritu + $mejoraPrincipalMuyBaja/personajes.espiritu, accion = ADDTIME(NOW(), '0:5:0') WHERE id='$id'";
                             $stmt = $db->query($sql);
                         }
+                        //INFORME DE ENTRENAMIENTO
+                        $sql = "SELECT espiritu FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $habilidades = $stmt->fetchAll();
+
+                        $espirituPosterior = $habilidades[0]['espiritu'];
+
+                        $mejoraEspiritu = round($espirituPosterior - $espirituPrevia, 2, PHP_ROUND_HALF_DOWN);
+                        
+
+                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Mejora de Habilidad','Me siento en algo más de tranquilidad ahora. He mejorado $mejoraEspiritu puntos de Espíritu.','rezo.png')";
+                        $db->query($sql);
                     }
                     else{
                         $box = "Alguna moneda necesito para echar de ofrenda.";
@@ -429,7 +518,13 @@ function accionSpot($box){
             if($estoyLibre === 1){
                 $puedoHacerlo = comprobarEnergia($agotamiento);
                 if($puedoHacerlo === 1){
-                    
+                        //Consulta para hacer el informe
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPrevio = $dinero[0]['cash'];
+                        //HACER EL PAGO
                         if($recaudador === 1){
                             $sql = "UPDATE personajes SET cash = cash+$salario*1.50, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";
                             $stmt = $db->query($sql);
@@ -438,6 +533,18 @@ function accionSpot($box){
                             $sql = "UPDATE personajes SET cash = cash+$salario, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";
                             $stmt = $db->query($sql);
                         }
+                        //GENERAR EL INFORME DE COBRO
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPosterior = $dinero[0]['cash'];
+                        
+                        $mejoraCash = round($cashPosterior - $cashPrevio, 2, PHP_ROUND_HALF_DOWN);
+                        
+
+                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cobro','¡Aquí está el cobro por 1 hora de duro trabajo! Ahora mi bolsillo pesa un poco más, exactamente $mejoraCash monedas más.','cobro.png')";
+                        $db->query($sql);
                     
                 }else{
                     $box = "No tengo fuerzas. Como me quede dormido quizá me devoren los Salvajes del Norte.";
@@ -491,7 +598,26 @@ function accionSpot($box){
             $estoyLibre = comprobarEspera();
             if($estoyLibre === 1){
                 if($puedoPagar === 1){
+                    //Consulta para hacer el informe
+                    $sql = "SELECT estilo FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $estilo = $stmt->fetchAll();
+
+                    $estiloPrevio = $estilo[0]['estilo'];
+                    
                     $sql = "UPDATE personajes SET cash = cash-$coste, estilo = estilo + $mejoraPrincipalMedia/personajes.estilo, accion = ADDTIME(NOW(), '0:15:0') WHERE id='$id'";
+                    $db->query($sql);
+                    
+                    //GENERAR EL INFORME DE COBRO
+                    $sql = "SELECT estilo FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $estilo = $stmt->fetchAll();
+
+                    $estiloPosterior = $estilo[0]['estilo'];
+                        
+                    $mejoraEstilo = round($estiloPosterior - $estiloPrevio, 2, PHP_ROUND_HALF_DOWN);
+                    
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Mejora de Habilidad','¡Yeah! Qué obra de arte, me encanta el nuevo corte. Mi estilo sube $mejoraEstilo puntos.','estilo.png')";
                     $db->query($sql);
                 }
                 else{
@@ -509,7 +635,25 @@ function accionSpot($box){
             $estoyLibre = comprobarEspera();
             if($estoyLibre === 1){
                 if($puedoPagar === 1){
+                    //Consulta para hacer el informe
+                    $sql = "SELECT estilo FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $estilo = $stmt->fetchAll();
+
+                    $estiloPrevio = $estilo[0]['estilo'];
                     $sql = "UPDATE personajes SET cash = cash-$coste, estilo = estilo + $mejoraPrincipalMuyAlta/personajes.estilo, accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
+                    $db->query($sql);
+                    
+                    //GENERAR EL INFORME DE COBRO
+                    $sql = "SELECT estilo FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $estilo = $stmt->fetchAll();
+
+                    $estiloPosterior = $estilo[0]['estilo'];
+                        
+                    $mejoraEstilo = round($estiloPosterior - $estiloPrevio, 2, PHP_ROUND_HALF_DOWN);
+                    
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Mejora de Habilidad','¡Mi peinado es ahora el del mismísimo Hudy! Algún día contaré esto a mis nietos. Mi estilo sube $mejoraEstilo puntos.','estilo.png')";
                     $db->query($sql);
                 }
                 else{
@@ -547,6 +691,16 @@ function accionSpot($box){
                 //Actualizo el dinero
                 $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
                 $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','El dependiente pasa largo rato mirando la caja bloqueada... parece estar pensando. Al fin entra a la trastienda a por las herramientas. Se escucha cómo pronuncia unas palabras mágicas ¡a la vez que saca una maza! Un instante después, la caja está abierta ante tus ojos. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
                 
             }else{
                 $box = "No tengo dinero para pagar eso.";
