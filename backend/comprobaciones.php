@@ -671,7 +671,6 @@ function esDistintoSitio($idP){
         return 1;
 }
 
-
 //GET Popularidad de cada spot
 function getPopularidadCentroMujer(){
     global $db;

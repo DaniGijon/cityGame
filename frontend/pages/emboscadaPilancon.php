@@ -48,11 +48,11 @@ global $db;
         echo "</div>"; //FIN DE div moduloZona
         }
         else{
-            header("location: ?page=zona&message=Aun no he descansado de mi última emboscada");
+            header("location: ?page=zona&nonUI&message=Aun no he descansado de mi última emboscada");
         }
     }
     else{
-        header("location: ?page=zona&message=Aun no he descansado de mi última acción");
+        header("location: ?page=zona&nonUI&message=Aun no he descansado de mi última acción");
     }
         
         

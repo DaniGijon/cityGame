@@ -558,6 +558,7 @@
                 echo "<th style='width:50px; background-color:pink'>" . $bonusPercepcion . "</th>";
                 
                 echo '</table>';
+                
                 echo "</div>";
             ?>
         <div id="Avances" class="floatLeft"><br>Avances: <?php echo $result[0]['avances'] . " ";?></div><br>
@@ -835,22 +836,162 @@
         echo'Nivel: ' . $nivel . '<br>';
         echo'Respeto: ' . $respetoText . '<br>';
         echo'Dinero: ' . $currentMoneyText . '<br>';
-    }  
+    } 
     
-    function nuevoPersonaje(){
-        global $db;
-        $id = $_SESSION['loggedIn'];  
+    function getDestrezaInicial($idB){
+    switch($idB){
+        case '3':
+            $desInicial = 3;
+            break;
+        case '9':
+            $desInicial = 2;
+            break;
+        default:
+            $desInicial = 1;
+    }
+    
+    return $desInicial;
+}
+
+function getFuerzaInicial($idB){
+    switch($idB){
+        case '7':
+            $fueInicial = 2;
+            break;
+        case '9':
+            $fueInicial = 3;
+            break;
+        default:
+            $fueInicial = 1;
+    }
+    
+    return $fueInicial;
+}
+
+function getAgilidadInicial($idB){
+    switch($idB){
+        case '1':
+            $agiInicial = 2;
+            break;
+        case '3':
+            $agiInicial = 2;
+            break;
+        case '7':
+            $agiInicial = 3;
+            break;
+        default:
+            $agiInicial = 1;
+    }
+    
+    return $agiInicial;
+}
+
+function getResistenciaInicial($idB){
+    switch($idB){
+        case '5':
+            $resInicial = 3;
+            break;
+        case '8':
+            $resInicial = 3;
+            break;
+        default:
+            $resInicial = 1;
+    }
+    
+    return $resInicial;
+}
+
+function getEspirituInicial($idB){
+    switch($idB){
+        case '2':
+            $espInicial = 2;
+            break;
+        case '5':
+            $espInicial = 2;
+            break;
+        default:
+            $espInicial = 1;
+    }
+    
+    return $espInicial;
+}
+
+function getEstiloInicial($idB){
+    switch($idB){
+        case '6':
+            $estInicial = 2;
+            break;
+        case '10':
+            $estInicial = 3;
+            break;
+        default:
+            $estInicial = 1;
+    }
+    
+    return $estInicial;
+}
+
+function getIngenioInicial($idB){
+    switch($idB){
+        case '2':
+            $ingInicial = 3;
+            break;
+        case '4':
+            $ingInicial = 3;
+            break;
+        default:
+            $ingInicial = 1;
+    }
+    
+    return $ingInicial;
+}
+
+function getPercepcionInicial($idB){
+    switch($idB){
+        case '1':
+            $perInicial = 3;
+            break;
+        case '6':
+            $perInicial = 3;
+            break;
+        case '8':
+            $perInicial = 2;
+            break;
+        default:
+            $perInicial = 1;
+    }
+    
+    return $perInicial;
+}
+
+function getBancoInicial($idB){
+    switch($idB){
+        case '4':
+            $banInicial = 200;
+            break;
+        case '10':
+            $banInicial = 200;
+            break;
         
-        $sql = "SELECT * FROM personajes WHERE id = '$id'";
-        $stmt = $db->query($sql);
-        $result = $stmt->fetchAll();
+        default:
+            $banInicial = 0;
+    }
+    
+    return $banInicial;
+}
+    
+function nuevoPersonaje($idP,$idB){
+        
+    global $db;
+    $id = $_SESSION['loggedIn'];  
+        
+    $sql = "SELECT * FROM personajes WHERE id = '$id'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
         
 ?>
-        Ey! Cuéntame de tí:
-
 <form action="?bPage=accountOptions&action=crearPersonaje&nonUI" method="post">
     
-    Sexo: 
     <select name="sexo">
 
     <option>Hombre</option>
@@ -859,7 +1000,6 @@
     
     </select>
     <br>
-    ¿En qué barrio vives? 
     <select name="origen">
 
     <option>Cañamares</option>
@@ -875,18 +1015,57 @@
     
     </select>
   
-    <input type="submit">
-</form>
+   
+    ¡Hmmm! Una nueva sabandija en la ciudad. Cuéntame de tí:<br><br>
+    <div id='sexos'>
+        <div id='sexoTitulo'>Sexo:</div>
+        <div id='Hombre' class='selectorSexo'></div>
+        <div id='Mujer' class='selectorSexo'></div>
+    </div>
+
+    <div id='barrios'>
+        <div id='barriosTitulo'>¿En qué barrio vives?</div>
+    </div>
+      
 
     <div id='moduloZona'>
         <div class='contenido'>
-            <div class='seccionMapaZona'>
-                
-            </div>
+            <?php
+            
+            
+            echo "<div class='seccionMapaCiudad'>" ;
+                    
+                    $sql = "SELECT * FROM barrios";
+                    $stmt = $db->query($sql);
+                    $resultado = $stmt->fetchAll();
+                    
+                    foreach ($resultado as $barrios) {
+                       echo "<div id = 'barrio" . $barrios['idB'] . "' class='barrio" . $barrios['idB'] . " cuadritoBarrio'>";
+                       echo $barrios['nombreBarrio'];
+                       echo "</div>";
+                    }
+                echo "</div>"; //FIN DE div seccionMapaCiudad
+            ?>
             <div class='seccionDescripcionZona'>
-                <div class='seccionDescripcionZonaImagen'>
+                <div class='seccionPersonajilloInicial'>
+                    
+                    <div id='dibujilloPersonaje'>
+                        <?php
+                        $sql = "SELECT sexo FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $sexo = $stmt->fetchAll();
+                        
+                        $sexoPersonaje = $sexo[0]['sexo'];
+                        if($sexoPersonaje === 'Mujer'){
+                           echo "<img src='/design/img/iconos/personajilloMujer.png'>";
+                        }
+                        else{
+                            echo "<img src='/design/img/iconos/personajilloHombre.png'>";
+                        }
+                        ?>
+                    </div>
 
-                    <table border = '0'><caption>Habilidades Iniciales</caption>
+                    <table border = '0' class='floatLeft'><caption>Habilidades Iniciales</caption>
 
                     <tr>
                         <th colspan="2"> <img src='/design/img/iconos/destreza.png'> </th>
@@ -897,6 +1076,7 @@
                         <th colspan="2"> <img src='/design/img/iconos/estilo.png'> </th>
                         <th colspan="2"> <img src='/design/img/iconos/ingenio.png'> </th>
                         <th colspan="2"> <img src='/design/img/iconos/percepcion.png'> </th>   
+                        
                     </tr>    
 
                     <tr>
@@ -932,26 +1112,126 @@
                         echo "<th colspan='2'>";
 
                         echo " PER </th>";
+                        
+                       
                     echo "</tr>";
+                    
+                    $destrezaInicial = getDestrezaInicial($idB);
+                    $fuerzaInicial = getFuerzaInicial($idB);
+                    $agilidadInicial = getAgilidadInicial($idB);
+                    $resistenciaInicial = getResistenciaInicial($idB);
+                    $espirituInicial = getEspirituInicial($idB);
+                    $estiloInicial = getEstiloInicial($idB);
+                    $ingenioInicial = getIngenioInicial($idB);
+                    $percepcionInicial = getPercepcionInicial($idB);
 
                     echo "<tr>";
-                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['destreza']) . "</th>";
-                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['fuerza']) . "</th>";
-                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['agilidad']) . "</th>";
-                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['resistencia']) . "</th>";
-                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['espiritu']) . "</th>";
-                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['estilo']) . "</th>";
-                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['ingenio']) . "</th>";
-                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . floor($result[0]['percepcion']) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . getDestrezaInicial($idB) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . getFuerzaInicial($idB) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . getAgilidadInicial($idB) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . getResistenciaInicial($idB) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . getEspirituInicial($idB) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . getEstiloInicial($idB) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . getIngenioInicial($idB) . "</th>";
+                        echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . getPercepcionInicial($idB) . "</th>";
 
                     echo "</tr>";
                 echo "</table>";
+                
+                echo "<table border = '0' class='floatRight' style='margin-left:10px'><caption>Dinero</caption>";
+    
+                echo "<tr>";
+                    echo "<th colspan='2'> <br> </th>";
+                    echo "<th colspan='2'> <br> </th>";
+                echo "</tr>";  
+                
+                echo "<tr>";
+                    echo "<th colspan='2'> <img src='/design/img/iconos/moneda.png'> </th>";
+                    echo "<th colspan='2'> <img src='/design/img/iconos/cajaFuerte.png'> </th>";
+                echo "</tr>";  
+                
+                echo "<tr>";
+                    echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . 100 . "</th>";
+                    echo "<th colspan='2' style='background-color:yellowgreen'; width:50px>" . getBancoInicial($idB) . "</th>";
+                echo "</tr>";
+                
+                echo "</table>";
             echo "</div>";
             echo "<div class='seccionDescripcionZonaTexto'>";
-            echo "Los vecinos de Cañamares han desarrollado su Ingenio... (escribir)";
+            
+            $sql = "SELECT * FROM barrios WHERE idB = '$idB'";
+            $stmt = $db->query($sql);            
+            $siguiente = $stmt->fetchAll();
+            
+            $mostrarDescripcionInicio = $siguiente[0]['descripcionInicio'];
+            
+            echo $mostrarDescripcionInicio;
+            
+            echo "<br><br><input type='submit' value='VALE'>";
             echo "</div>"; //FIN NUEVO
+            
+            echo "</form>"; 
         echo "</div>";
     echo "</div>";
+    ?>
+<script>
+$(function() {
+    $(".cuadritoBarrio").hover(function(){
+        var barrioId = $(this).attr('id');
+        
+
+        $.post("?bPage=personajeFunctions", {
+
+            barrioId: barrioId
+
+        }).done(function(){
+               
+               $("#nuevoPersonajeArea").load("index.php?bPage=personajeFunctions&nuevoPersonaje&nonUI")
+                
+        })
+    });
+    
+    $(".cuadritoBarrio").click(function(){
+       $("#nuevoPersonajeArea").load("index.php?bPage=personajeFunctions&seleccionInicio&nonUI")
+    });
+});
+
+$(function() {
+    $(".selectorSexo").hover(function(){
+        var sexo = $(this).attr('id');
+        
+
+        $.post("?bPage=personajeFunctions", {
+
+            sexo: sexo
+
+        }).done(function(){
+               
+               $("#nuevoPersonajeArea").load("index.php?bPage=personajeFunctions&nuevoPersonaje&nonUI")
+                
+        })
+    });
+    
+    $(".selectorSexo").click(function(){
+        var sexo = $(this).attr('id');
+        
+
+        $.post("?bPage=personajeFunctions", {
+
+            sexoClick: sexo
+
+        }).done(function(){
+               
+               $("#nuevoPersonajeArea").load("index.php?bPage=personajeFunctions&nuevoPersonaje&nonUI")
+                
+        })
+    });
+});
+
+                   
+</script> 
+                        
+    <?php
     }
     
     function subirHabilidad($avanceId){
@@ -1014,6 +1294,63 @@
         $sql = "UPDATE personajes SET avances='$nuevosAvances' WHERE id = '$id'";
         $db->query($sql);
     }
+    
+    function siguienteBarrio($barrioId){
+        global $db;
+        $id = $_SESSION['loggedIn'];
+        
+        //HACER EL SWITCH
+        switch($barrioId){
+            case 'barrio1':
+                $idB = 1;
+                break;
+            case 'barrio2':
+                $idB = 2;
+                break;
+            case 'barrio3':
+                $idB = 3;
+                break;
+            case 'barrio4':
+                $idB = 4;
+                break;
+            case 'barrio5':
+                $idB = 5;
+                break;
+            case 'barrio6':
+                $idB = 6;
+                break;
+            case 'barrio7':
+                $idB = 7;
+                break;
+            case 'barrio8':
+                $idB = 8;
+                break;
+            case 'barrio9':
+                $idB = 9;
+                break;
+            case 'barrio10':
+                $idB = 10;
+                break;
+        
+            default:
+                echo "ERROR";
+        }
+        
+        $sql = "UPDATE siguientespot SET idB=$idB WHERE idP='$id'";
+        $db->query($sql);
+    }
+    
+    function selectorSexo($sexo){
+        global $db;
+        $id = $_SESSION['loggedIn'];
+        
+        $sql = "UPDATE personajes SET sexo='$sexo' WHERE id='$id'";
+        $db->query($sql);
+    }
+    
+    function seleccionInicio($idP){
+        //GUARDAR QUE HA SELECCIONADO ESE INICIO
+    }
 
     
     if(isset($_GET['listPersonajeTodo'])){
@@ -1028,5 +1365,25 @@
     if(isset($_POST['avanceId'])){
         subirHabilidad($_POST['avanceId']);
     }
+    
+    if(isset($_GET['nuevoPersonaje'])){
+        
+        $id = $_SESSION['loggedIn'];
+        include (__ROOT__.'/backend/comprobaciones.php');
+        
+        $barrioSeleccionado = getSiguienteBarrio($id);
+        nuevoPersonaje($id,$barrioSeleccionado);
+    }
  
+    if(isset($_POST['barrioId'])){
+        siguienteBarrio($_POST['barrioId']);
+    }
+    
+    if(isset($_POST['sexo'])){
+        selectorSexo($_POST['sexo']);
+    }
+    
+    if(isset($_POST['sexoClick'])){
+        selectorSexo($_POST['sexoClick']);
+    }
 ?>

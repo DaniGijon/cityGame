@@ -1609,8 +1609,7 @@
                         //Aunque el minimo para atacar sea tener 50, puede ser interesante que a veces no le agote del todo a 0. 
                         $restaEnergia = rand(30,100);
                         $sql = "UPDATE personajes SET emboscada = ADDTIME(NOW(), '1:0:0'), energia = CASE WHEN energia-'$restaEnergia' < 0 THEN 0 ELSE energia-'$restaEnergia' END WHERE id='$miId'";
-                        $stmt = $db->query($sql);
-                        $stmt->fetchAll();
+                        $db->query($sql);
                     }
                     else{
                             echo "¡Ay! Estoy sin energia ahora mismo para hacer eso";
@@ -1663,7 +1662,7 @@
         else{
             $respetoPillado = rand(1,9);
         }
-        echo "FIN DE COMBATE <br>¡Lo hiciste! Ganas " . $dineroPillado . "€ y " . $respetoPillado . " puntos de Respeto";
+        echo "FIN DE COMBATEEE <br>¡Lo hiciste! Ganas " . $dineroPillado . "€ y " . $respetoPillado . " puntos de Respeto";
         
         // Actualizo mi jugador
         $nuevoCash = $miResult[0]['cash'] + $dineroPillado;
@@ -1680,6 +1679,18 @@
         else{
             $nuevoRespeto = 0;
         }
+       
+        //INFORMAR A AMBOS JUGADORES CON MENSAJE
+        $idRival = $rivalResult[0]['id'];
+        $nombreRival = $rivalResult[0]['nombre'];
+        $idYo = $miResult[0]['id'];
+        $nombreYo = $miResult[0]['nombre'];
+                
+        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$idYo','Emboscada','En el silencio de la noche, $nombreRival camina apresuradamente de camino a casa. Al pasar por delante de un montón de cajas apiladas escucha un chasquido. Se gira en la oscuridad y todo lo que alcanza a ver es el cañón de una Desert Eagle 12.7mm empuñada por $nombreYo.<br>¡Comienza la Batalla!<br>Cuando al fín cesa el ruido y el humo se disipa, queda sobre el asfalto el cuerpo de $nombreRival herido, mientras $nombreYo huye de la escena con un botín de $dineroPillado Monedas y $respetoPillado Puntos de Respeto que $nombreRival echará en falta.','emboscada.png'),"
+                . "('$idRival','Emboscada','áéíóúñ!ÁÉÍÓÚ En el silencio de la noche, $nombreRival camina apresuradamente de camino a casa. Al pasar por delante de un montón de cajas apiladas escucha un chasquido. Se gira en la oscuridad y todo lo que alcanza a ver es el cañón de una Desert Eagle 12.7mm empuñada por $nombreYo.<br>¡Comienza la Batalla!<br>Cuando al fín cesa el ruido y el humo se disipa, queda sobre el asfalto el cuerpo de $nombreRival herido, mientras $nombreYo huye de la escena con un botín de $dineroPillado Monedas y $respetoPillado Puntos de Respeto que $nombreRival echará en falta.','emboscada.png')";
+        $db->query($sql);
+        
+        //Actualizo el dinero y el respeto
         $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$id'";
         $stmt = $db->query($sql);
         return $stmt->fetchAll();

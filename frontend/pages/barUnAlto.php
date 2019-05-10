@@ -14,7 +14,7 @@ global $db;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                
                 echo "<div class='seccionSpotOpciones'>";
-                echo "El aroma a café es muy agradable al entrar. ¿Cuál tomaré para comenzar el día a tope? <br><br>";
+                echo "La terraza del \"Un Alto\" es una de mis paradas favoritas cada vez que vengo a este barrio. ¿Qué me apetece tomar? <br><br>";
                 ?>
 <form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">
                 <input type="checkbox" name="cbox1" value="cafeConLeche"> <label for="cbox3">Cafe con leche (+1 Salud) (2€)</label><br>

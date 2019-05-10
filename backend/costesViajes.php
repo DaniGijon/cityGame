@@ -32,7 +32,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
          elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Asdrubal a La Copa
             $costeViaje = 90;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Asdrubal a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Asdrubal a Ayuntamiento
             $costeViaje = 50;
         }
         elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Asdrubal a San Gregorio
@@ -88,7 +88,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
          elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Terri a La Copa
             $costeViaje = 110;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Terri a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Terri a Ayuntamiento
             $costeViaje = 70;
         }
         elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Terri a San Gregorio
@@ -144,7 +144,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
          elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Gran Capitan a La Copa
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Gran Capitan a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Gran Capitan a Ayuntamiento
             $costeViaje = 50;
         }
         elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Gran Capitan a San Gregorio
@@ -200,7 +200,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
          elseif($voyABarrio === '5' && $voyAZona === '3'){ //de San Jose a La Copa
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de San Jose a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de San Jose a Ayuntamiento
             $costeViaje = 70;
         }
         elseif($voyABarrio === '6' && $voyAZona === '2'){ //de San Jose a San Gregorio
@@ -256,7 +256,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
          elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Pozo Norte a La Copa
             $costeViaje = 90;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Pozo Norte a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Pozo Norte a Ayuntamiento
             $costeViaje = 70;
         }
         elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Pozo Norte a San Gregorio
@@ -312,7 +312,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
          elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Abulagar a La Copa
             $costeViaje = 110;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Abulagar a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Abulagar a Ayuntamiento
             $costeViaje = 90;
         }
         elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Abulagar a San Gregorio
@@ -368,7 +368,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
          elseif($voyABarrio === '5' && $voyAZona === '3'){ //de El Poblado a La Copa
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de El Poblado a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de El Poblado a Ayuntamiento
             $costeViaje = 90;
         }
         elseif($voyABarrio === '6' && $voyAZona === '2'){ //de El Poblado a San Gregorio
@@ -424,7 +424,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
          elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Salesianos a La Copa
             $costeViaje = 50;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Salesianos a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Salesianos a Ayuntamiento
             $costeViaje = 70;
         }
         elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Salesianos a San Gregorio
@@ -480,7 +480,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
          elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Tauro a La Copa
             $costeViaje = 50;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Tauro a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Tauro a Ayuntamiento
             $costeViaje = 70;
         }
         elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Tauro a San Gregorio
@@ -536,7 +536,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
          elseif($voyABarrio === '5' && $voyAZona === '2'){ //de La Copa a Tauro
             $costeViaje = 50;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de La Copa a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de La Copa a Ayuntamiento
             $costeViaje = 70;
         }
         elseif($voyABarrio === '6' && $voyAZona === '2'){ //de La Copa a San Gregorio
@@ -564,59 +564,59 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
             $costeViaje = 90;
         }      
     }
-    elseif($estoyEnBarrio === '6' && $estoyEnZona === '1'){ //si estoy en Viacrucis
-        if($voyABarrio === '1' && $voyAZona === '1'){ //de Viacrucis a Asdrubal
+    elseif($estoyEnBarrio === '6' && $estoyEnZona === '1'){ //si estoy en Ayuntamiento
+        if($voyABarrio === '1' && $voyAZona === '1'){ //de Ayuntamiento a Asdrubal
             $costeViaje = 50;
         }
-        elseif($voyABarrio === '1' && $voyAZona === '2'){ //de Viacrucis a Terri
+        elseif($voyABarrio === '1' && $voyAZona === '2'){ //de Ayuntamiento a Terri
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '2' && $voyAZona === '1'){ //de Viacrucis a Gran Capitan
+        elseif($voyABarrio === '2' && $voyAZona === '1'){ //de Ayuntamiento a Gran Capitan
             $costeViaje = 50;
         }
-         elseif($voyABarrio === '2' && $voyAZona === '2'){ //de Viacrucis a San Jose
+         elseif($voyABarrio === '2' && $voyAZona === '2'){ //de Ayuntamiento a San Jose
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '2' && $voyAZona === '3'){ //de Viacrucis a Pozo Norte
+        elseif($voyABarrio === '2' && $voyAZona === '3'){ //de Ayuntamiento a Pozo Norte
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '3' && $voyAZona === '1'){ //de Viacrucis a Abulagar
+        elseif($voyABarrio === '3' && $voyAZona === '1'){ //de Ayuntamiento a Abulagar
             $costeViaje = 90;
         }
-        elseif($voyABarrio === '4' && $voyAZona === '1'){ //de Viacrucis a El Poblado
+        elseif($voyABarrio === '4' && $voyAZona === '1'){ //de Ayuntamiento a El Poblado
             $costeViaje = 90;
         }
-        elseif($voyABarrio === '5' && $voyAZona === '1'){ //de Viacrucis a Salesianos
+        elseif($voyABarrio === '5' && $voyAZona === '1'){ //de Ayuntamiento a Salesianos
             $costeViaje = 70;
         }
-         elseif($voyABarrio === '5' && $voyAZona === '2'){ //de Viacrucis a Tauro
+         elseif($voyABarrio === '5' && $voyAZona === '2'){ //de Ayuntamiento a Tauro
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Viacrucis a La Copa
+        elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Ayuntamiento a La Copa
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Viacrucis a San Gregorio
+        elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Ayuntamiento a San Gregorio
             $costeViaje = 50;
         }
-         elseif($voyABarrio === '6' && $voyAZona === '3'){ //de Viacrucis a El Bosque
+         elseif($voyABarrio === '6' && $voyAZona === '3'){ //de Ayuntamiento a El Bosque
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '7' && $voyAZona === '1'){ //de Viacrucis a El Pino
+        elseif($voyABarrio === '7' && $voyAZona === '1'){ //de Ayuntamiento a El Pino
             $costeViaje = 50;
         }
-        elseif($voyABarrio === '8' && $voyAZona === '1'){ //de Viacrucis a El Carmen
+        elseif($voyABarrio === '8' && $voyAZona === '1'){ //de Ayuntamiento a El Carmen
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '9' && $voyAZona === '1'){ //de Viacrucis a Las 600
+        elseif($voyABarrio === '9' && $voyAZona === '1'){ //de Ayuntamiento a Las 600
             $costeViaje = 90;
         }
-        elseif($voyABarrio === '9' && $voyAZona === '2'){ //de Viacrucis a PAU
+        elseif($voyABarrio === '9' && $voyAZona === '2'){ //de Ayuntamiento a PAU
             $costeViaje = 110;
         }
-         elseif($voyABarrio === '9' && $voyAZona === '3'){ //de Viacrucis a Recinto Ferial
+         elseif($voyABarrio === '9' && $voyAZona === '3'){ //de Ayuntamiento a Recinto Ferial
             $costeViaje = 110;
         }
-        elseif($voyABarrio === '10' && $voyAZona === '1'){ //de Viacrucis a Ciudad Jardin
+        elseif($voyABarrio === '10' && $voyAZona === '1'){ //de Ayuntamiento a Ciudad Jardin
             $costeViaje = 110;
         }      
     }
@@ -651,7 +651,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
         elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Paseo San Gregorio a La Copa
             $costeViaje = 50;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Paseo San Gregorio a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Paseo San Gregorio a Ayuntamiento
             $costeViaje = 50;
         }
          elseif($voyABarrio === '6' && $voyAZona === '3'){ //de Paseo San Gregorio a El Bosque
@@ -707,7 +707,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
         elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Paseo El Bosque a La Copa
             $costeViaje = 50;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Paseo El Bosque a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Paseo El Bosque a Ayuntamiento
             $costeViaje = 70;
         }
          elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Paseo El Bosque a Paseo San Gregorio
@@ -763,7 +763,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
         elseif($voyABarrio === '5' && $voyAZona === '3'){ //de El Pino a La Copa
             $costeViaje = 90;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de El Pino a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de El Pino a Ayuntamiento
             $costeViaje = 50;
         }
          elseif($voyABarrio === '6' && $voyAZona === '2'){ //de El Pino a Paseo San Gregorio
@@ -819,7 +819,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
         elseif($voyABarrio === '5' && $voyAZona === '3'){ //de El Carmen a La Copa
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de El Carmen a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de El Carmen a Ayuntamiento
             $costeViaje = 70;
         }
          elseif($voyABarrio === '6' && $voyAZona === '2'){ //de El Carmen a Paseo San Gregorio
@@ -875,7 +875,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
         elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Las 600 a La Copa
             $costeViaje = 70;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Las 600 a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Las 600 a Ayuntamiento
             $costeViaje = 90;
         }
          elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Las 600 a Paseo San Gregorio
@@ -931,7 +931,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
         elseif($voyABarrio === '5' && $voyAZona === '3'){ //de PAU a La Copa
             $costeViaje = 90;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de PAU a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de PAU a Ayuntamiento
             $costeViaje = 110;
         }
          elseif($voyABarrio === '6' && $voyAZona === '2'){ //de PAU a Paseo San Gregorio
@@ -987,7 +987,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
         elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Recinto Ferial a La Copa
             $costeViaje = 90;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Recinto Ferial a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Recinto Ferial a Ayuntamiento
             $costeViaje = 110;
         }
          elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Recinto Ferial a Paseo San Gregorio
@@ -1043,7 +1043,7 @@ function calcularCosteViaje($voyABarrio, $voyAZona, $estoyEnBarrio, $estoyEnZona
         elseif($voyABarrio === '5' && $voyAZona === '3'){ //de Ciudad Jardin a La Copa
             $costeViaje = 90;
         }
-        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Ciudad Jardin a Viacrucis
+        elseif($voyABarrio === '6' && $voyAZona === '1'){ //de Ciudad Jardin a Ayuntamiento
             $costeViaje = 110;
         }
          elseif($voyABarrio === '6' && $voyAZona === '2'){ //de Ciudad Jardin a Paseo San Gregorio

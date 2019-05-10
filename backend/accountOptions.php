@@ -37,33 +37,33 @@ function crearPersonaje($sexo,$origen){
             break;
     }
     
-    if($numeroOrigen === 1){ //CAÑAMARES: AGI + PER
-       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', agilidad='3', percepcion='2' WHERE id='$id'";
+    if($numeroOrigen === 1){ //CAÑAMARES: PER + AGI
+       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', percepcion='3', agilidad='2' WHERE id='$id'";
         $stmt = $db->query($sql);
         header("location: ?page=loggedIn&message=Exito"); 
     } 
-    elseif($numeroOrigen === 2){ //LIBERTAD: PER y RES
-       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', percepcion='3', resistencia='2' WHERE id='$id'";
+    elseif($numeroOrigen === 2){ //LIBERTAD: ING y ESP
+       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', ingenio='3', espiritu='2' WHERE id='$id'";
         $stmt = $db->query($sql);
         header("location: ?page=loggedIn&message=Exito"); 
     } 
-    elseif($numeroOrigen === 3){ //CONSTITUCION: AGI + DES
-       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', agilidad='3', destreza='2' WHERE id='$id'";
+    elseif($numeroOrigen === 3){ //CONSTITUCION: DES + AGI
+       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', destreza='3', agilidad='2' WHERE id='$id'";
         $stmt = $db->query($sql);
         header("location: ?page=loggedIn&message=Exito"); 
     } 
     elseif($numeroOrigen === 4){ //EL POBLADO: Dinero EnBanco + ING
-       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', enBanco='100', ingenio='2' WHERE id='$id'";
+       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', enBanco='200', ingenio='3' WHERE id='$id'";
         $stmt = $db->query($sql);
         header("location: ?page=loggedIn&message=Exito"); 
     }
-    elseif($numeroOrigen === 5){ //SANTA ANA: ESP + RES
-       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', espiritu='3', resistencia='2' WHERE id='$id'";
+    elseif($numeroOrigen === 5){ //SANTA ANA: RES + ESP
+       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', resistencia='3', espiritu='2' WHERE id='$id'";
         $stmt = $db->query($sql);
         header("location: ?page=loggedIn&message=Exito"); 
     } 
-    elseif($numeroOrigen === 6){ //CENTRO SUR: ING + ESP
-       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', ingenio='3', espiritu='2' WHERE id='$id'";
+    elseif($numeroOrigen === 6){ //CENTRO SUR: PER + EST
+       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', percepcion='3', estilo='2' WHERE id='$id'";
         $stmt = $db->query($sql);
         header("location: ?page=loggedIn&message=Exito"); 
     } 
@@ -77,13 +77,13 @@ function crearPersonaje($sexo,$origen){
         $stmt = $db->query($sql);
         header("location: ?page=loggedIn&message=Exito"); 
     }
-    elseif($numeroOrigen === 9){ //FRATERNIDAD: DES + ING
-       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', destreza='3', ingenio='2' WHERE id='$id'";
+    elseif($numeroOrigen === 9){ //FRATERNIDAD: FUE + DES
+       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', fuerza='3', destreza='2' WHERE id='$id'";
         $stmt = $db->query($sql);
         header("location: ?page=loggedIn&message=Exito"); 
     } 
-    elseif($numeroOrigen === 10){ //CIUDAD JARDIN: EST + DES
-       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', estilo='3', destreza='2' WHERE id='$id'";
+    elseif($numeroOrigen === 10){ //CIUDAD JARDIN: EST + Dinero en Banco
+       $sql = "UPDATE personajes SET sexo='$sexo', origen='$numeroOrigen', barrio='$numeroOrigen', estilo='3', enBanco='200' WHERE id='$id'";
         $stmt = $db->query($sql);
         header("location: ?page=loggedIn&message=Exito"); 
     }

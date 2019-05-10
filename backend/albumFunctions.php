@@ -85,7 +85,7 @@ function dibujarAlbum(){
                 $barrio = 'Centro Sur';
                 switch($res[0]['zona']){
                     case '1':
-                        $zona = 'Viacrucis';
+                        $zona = 'Ayuntamiento';
                         break;
                     case '2':
                         $zona = 'Paseo S.Gregorio';
@@ -200,7 +200,7 @@ function dibujarAlbum(){
                 $barrio = 'Centro Sur';
                 switch($res[0]['zona']){
                     case '1':
-                        $zona = 'Viacrucis';
+                        $zona = 'Ayuntamiento';
                         break;
                     case '2':
                         $zona = 'Paseo S.Gregorio';
