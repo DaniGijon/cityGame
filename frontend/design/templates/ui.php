@@ -6,6 +6,7 @@
         <div id="wrapper">
             <?php 
                 include("top.php");
+                include("menuLateral.php");
             ?>
             <div id="main">
                 <?php 

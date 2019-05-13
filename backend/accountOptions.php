@@ -115,7 +115,7 @@ function registerAccount($username,$password,$email){
                 }
                 
                 //Creacion de los spots de popularidad en la base de datos
-                $arraySpots = array(22,45,65,85,95,105,125,135,155,165); //array con los idS de cada Spot social
+                $arraySpots = array(22,45,65,85,95,105,135,155,165,175); //array con los idS de cada Spot social
                 for($i = 0; $i<10; $i++){
                     $sql = "INSERT INTO popularidad (idP,idS,popularidad)"
                             . "VALUES ('$id','$arraySpots[$i]','0')";

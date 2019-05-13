@@ -6,7 +6,10 @@
         echo "<div id='moduloZona'>";
             
             echo "<div class='contenido'>";
-                echo "<a href='?page=zona'><button>Volver a Zona</button></a><br><br>";
+            echo "<span class='contenedor1'>";
+                echo "<span class = 'irA'>";
+                    echo "Ir a Otra Zona";
+                echo "</span>";
                 
                 echo "<div class='seccionMapaCiudad'>" ;
                     
@@ -21,7 +24,9 @@
                        echo "</div>";
                     }
                 echo "</div>"; //FIN DE div seccionMapaCiudad
-               
+                echo "</span>"; //FIN DE CONTENEDOR1
+                
+                echo "<span class='contenedor2'>";
                 echo "<div class='seccionDescripcionZona'>";
                     echo "<div class='seccionDescripcionZonaImagen'>";
                         //Lo necesitare a continuacion
@@ -133,11 +138,12 @@
                                 }
                                 
                             echo "</div>";
-                            echo "<br><br><div id='CosteViaje'>Ir allí te costará : " . $precioViaje . " monedas</div>";
+                            echo "<div id='CosteViaje'>Ir allí te costará : " . $precioViaje . " monedas</div>";
                         }
                         
                     echo "</div>";
                 echo "</div>"; // FIN de div seccionDescripcionZona
+                 echo "</span>"; //FIN DE contenedor2
                
             echo "</div>"; //FIN DE div contenido
 
@@ -145,6 +151,12 @@
         
         ?>
 <script>
+$(".irA").click(function(event){                   
+                   
+        window.location = 'index.php?page=zona';
+                      
+});
+    
 $(function() {
     $(".cuadritoZona").hover(function(){
         var barriozonaId = $(this).attr('id');

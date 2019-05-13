@@ -12,12 +12,18 @@
         
         
         echo "<div id='moduloZona'>";
-            echo "<a href='?page=ciudad'><button>Ver Ciudad</button></a><br>";
-            echo $result[0]['nombreZona'] . " (" . $result[0]['nombreBarrio'] . ")";
+            
+            
             echo "<div class='contenido'>";
+                echo "<span class='contenedor1'>";
+                echo "<div class = 'tituloZona'>";
+                    echo $result[0]['nombreZona'] . " <br>(" . $result[0]['nombreBarrio'] . ")";
+                echo "</div>";
+                echo "<span class = 'irA'>";
+                    echo "Ir a Otra Zona";
+                echo "</span>";
                 echo "<div class='seccionMapaZona'>" ;
-                    
-                    
+                
                     $sql = "SELECT spots.*, zonas.nombreZona, zonas.textoZona, zonas.imagenZona FROM spots INNER JOIN zonas ON (spots.idZ = zonas.idZ) AND (spots.idB = zonas.idB) WHERE spots.idB='$barrioActual' AND spots.idZ='$zonaActual'";
                     $stmt = $db->query($sql);
                     $result = $stmt->fetchAll();
@@ -26,14 +32,14 @@
                        echo "<div id = '" . $spots['idS'] . "' class='cajitaSpot fila" . $spots['fila'] . " columna" . $spots['columna'] .
                             " tipo" . $spots['tipo'] .   
                        "'>";
-                       echo $spots['nombre'];
+                       /*echo $spots['nombre'];*/
                        echo "</div>";
                     }
 
                 echo "</div>"; //FIN DE div seccionMapa
+                echo "</span>"; //FIN DE CONTENEDOR1
                 
-                
-                
+                echo "<span class='contenedor2'>";
                 echo "<div class='seccionDescripcionZona'>";
                     echo "<div class='seccionDescripcionZonaImagen'>";
                         if($spotID === 0){
@@ -86,27 +92,20 @@
                         
                     echo "</div>";
                 echo "</div>";
+                echo "</span>"; //FIN DE contenedor2
                 
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona
 ?>
 <script>
- /*   $(".cajitaSpot").click(function(){
-        var spotId = $(this).attr('id');
-        
+$(".irA").click(function(event){                   
+                   
+        window.location = 'index.php?page=ciudad';
+                      
+});
 
-        $.post("?bPage=zonaFunctions", {
 
-            spotId: spotId
-
-        }).done(function(){
-               
-               $("#zonaArea").load("index.php?bPage=zonaFunctions&dibujarZona&nonUI")
-                
-        })
-    });
- */   
  $(function() {
     $(".cajitaSpot").hover(function(){
         var spotId = $(this).attr('id');

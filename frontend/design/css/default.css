@@ -194,7 +194,22 @@ h3{
     border-bottom:1px solid black;
 }
 
+#menuLateral{
+    position: absolute;
+    top: 101px;
+    z-index: 100;
+    width: 120px;
+    min-height: 624px;
+    background: url("/design/img/botones/corazon.png") /*repeat-y*/;
+    background-position: top left;
+    background-attachment: local;
+    overflow: hidden;
+}
+
 #main{
+    position : relative;
+    margin-left : 120px;
+    display : block;
     background:#dadada;
     flex-grow:1;
     overflow-y:auto;
@@ -214,14 +229,23 @@ h3{
     margin-right: 5px;
 }
 
+.ulMenuLateral{
+    padding : 10;
+    margin : 0;
+}
+
+.botonMenuLateral{
+    margin-top: 10px;
+}
+
 #infoArriba{
   height:100px;
-  width:250px;  
+  width:500px;  
 }
 
 #OpcionesArriba{
     height:100px;
-    width:300px;
+    width:400px;
 }
 
 #opcionesArriba button {
@@ -229,6 +253,7 @@ h3{
 }
 
 .botonPersonaje{
+    margin-top: 5px;
     height:100px;
     width:100px; 
     float:left;
@@ -243,6 +268,7 @@ h3{
 }
 
 .botonDarUnaVuelta{
+    margin-top: 5px;
     height:100px;
     width:100px; 
     float:left;
@@ -256,7 +282,23 @@ h3{
   background-position:center;
 }
 
+.botonMensajes{
+    margin-top: 5px;
+    height:100px;
+    width:100px; 
+    float:left;
+}
+
+.botonMensajesImagen{
+  background-image:url("/design/img/botones/mensajes.png");
+  background-repeat:no-repeat;
+  height:100px;
+  width:100px;
+  background-position:center;
+}
+
 .botonAlbum{
+    margin-top: 5px;
     height:100px;
     width:100px; 
     float:left;
@@ -271,6 +313,7 @@ h3{
 }
 
 .botonRanking{
+    margin-top: 5px;
     height:100px;
     width:100px; 
     float:left;
@@ -291,9 +334,10 @@ h3{
 }
 
 .botonLogout{
-    height:25px;
+    height:50px;
     width:50px;
-    float:left;
+    float:right;
+    background-image:url("/design/img/iconos/logout.png");
 }
 
 .botonAvances{
@@ -310,79 +354,239 @@ h3{
     opacity:0.5;
 }
 
+.burbujaPersonaje{
+   top:0px;
+   height:100px;
+   width:100px;
+   float:left; 
+}
+
 .nombrePersonaje{
-    height:25px;
-    width:150px;
+    top:0px;
+    height:20px;
+    width:100px;
     float:left;
 }
-.textoExp{
-   height:25px;
-   width:50px;
+
+.avatar{
+   top:20px;
+   height:58px;
+   width:100px;
    float:left; 
+}
+
+.miniTop{
+    height: 20px;
+    width : 20px;
+    margin-right: 30px;
+    float : left;
+}
+
+#capaDinero{
+    display:none;
+    width:200px;
+    height:50px;
+    position:absolute;
+}
+
+.iconoCash{
+   height:20px;
+   width:20px;
+   float:left;
+   background-image:url("/design/img/iconos/monedaTop.png");
+}
+
+.textoCash{
+   height:20px;
+   width:80px;
+   float:left;
+   background: white;
+}
+
+.iconoBanco{
+   height:20px;
+   width:20px;
+   float:left;
+   background-image:url("/design/img/iconos/cajaFuerteTop.png");
+}
+
+.textoBanco{
+   height:20px;
+   width:80px;
+   float:left;
+   background: white;
+}
+
+#capaTiempo{
+    display:none;
+    width:400px;
+    height:50px;
+    position:absolute;
+}
+
+.cajitaSeccionTop{
+   height:50px;
+   width:100px;
+   float:left;
+   margin-left: 5px;
+   border: 1px solid black;
+   margin-bottom:5px;
+}
+
+.nivelSeccionTop{
+   height:25px;
+   margin-top:20px;
+}
+
+.iconoNivel{
+   height:25px;
+   width:33px;
+   float:left;
+   background-image:url("/design/img/botones/nivel.png");
+}
+
+.textoNivel{
+   height:25px;
+   width:67px;
+   float:left;
+   text-align: center;
+}
+
+.respetoSeccionTop{
+   height:25px;
+   margin-top:20px;
+}
+
+.iconoRespeto{
+   height:25px;
+   width:33px;
+   float:left;
    background-image:url("/design/img/botones/exp.png");
 }
 
+.textoRespeto{
+   height:25px;
+   width:67px;
+   float:left;
+   text-align: center;
+}
+
+.popularidadSeccionTop{
+   height:25px;
+   margin-top:20px;
+}
+
+.iconoPopularidad{
+   height:25px;
+   width:33px;
+   float:left;
+   background-image:url("/design/img/iconos/popularidadIcono.png");
+}
+
+.textoPopularidad{
+   height:25px;
+   width:67px;
+   float:left;
+   text-align: center;
+}
+
+.experienciaSeccionTop{
+   height:50px;
+   width:100px;
+   float:left;
+}
+
+.iconoExp{
+   height:25px;
+   width:33px;
+   float:left;
+   background-image:url("/design/img/botones/exp.png");
+}
+
+.textoExp{
+   height:25px;
+   width:67px;
+   float:left;
+   text-align: center;
+}
+
 .barraExp{
-    height:25px;
-    width:200px;
+    height:20px;
+    width:100px;
     float:left;
     background-image:url("/design/img/botones/barraExpFondo.png");
 }
 
 #expAhora{
-    height:25px;
-    width:200px;
+    height:20px;
+    width:100px;
     float:left;
     background-image:url("/design/img/botones/barraExpAhora.png");
 }
 
-.textoSalud{
+.iconoSalud{
    height:25px;
-   width:50px;
+   width:33px;
    float:left; 
    background-image:url("/design/img/botones/corazon.png");
 }
 
+.textoSalud{
+   height:25px;
+   width:67px;
+   float:left; 
+   text-align: center;
+}
+
 .barraSalud{
-    height:25px;
-    width:200px;
+    height:20px;
+    width:100px;
     float:left;
     background-image:url("/design/img/botones/barraSaludFondo.png");
 }
 
 #saludAhora{
-    height:25px;
-    width:200px;
+    height:20px;
+    width:100px;
     float:left;
     background-image:url("/design/img/botones/barraSaludAhora.png");
 }
 
-.textoEnergia{
+.iconoEnergia{
    height:25px;
-   width:50px;
+   width:33px;
    float:left; 
    background-image:url("/design/img/botones/energia.png");
- 
+}
+
+.textoEnergia{
+   height:25px;
+   width:67px;
+   float:left;
+   text-align: center;
 }
 
 .barraEnergia{
-    height:25px;
-    width:200px;
+    height:20px;
+    width:100px;
     float:left;
     background-image:url("/design/img/botones/barraEnergiaFondo.png");
 }
 
 #energiaAhora{
-    height:25px;
-    width:200px;
+    height:20px;
+    width:100px;
     float:left;
     background-image:url("/design/img/botones/barraEnergiaAhora.png");
 }
+
+
 
 .contenedor1{
     width: 50%;
     float: left;
 }
+
 .contenedor2{
     width: 50%;
     float: left;
@@ -430,19 +634,43 @@ h3{
     padding: 0 0 20px;
 }
 
+.tituloZona{
+    width: 100px;
+    height: 50px;
+    background-image: url("/design/img/iconos/cartelZona.png");
+    background-repeat: repeat-y;
+    text-align: center;
+    float : left;
+    position: relative;
+    margin : auto;
+    color: white;
+}
+
+.irA{
+   width: 300px; 
+   height : 50px;
+   float : left;
+   background-image: url("/design/img/iconos/cartelIrACiudad.png");
+   text-align: center;
+   color: white;
+}
+
 .seccionMapaCiudad{
     float:left;
     position: relative;
-    width: 443px;
+    width: 440px;
     height: 455px;
     background-image: url("/design/img/mapas/puertollano.png");
 }
 
 .seccionMapaZona{
+    top: 20px;
+    margin:auto;
     float:left;
     position: relative;
-    width: 443px;
+    width: 440px;
     height: 455px;
+    text-align: center;
     background:yellowgreen;
 }
 
@@ -453,6 +681,7 @@ h3{
     height: 100%;
     text-align: center;
     margin-left: 15px;
+    margin-top: 75px;
 }
 
 .seccionDescripcionSpot{
@@ -620,7 +849,7 @@ h3{
 }
 
 .tipotiendamascotas{
-    background: pink;
+    background-image: url("/design/img/iconos/etiquetaTiendaMascotas.png");
 }
 
 .seccionDescripcionZonaTexto{
