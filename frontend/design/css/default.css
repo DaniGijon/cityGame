@@ -580,8 +580,6 @@ h3{
     background-image:url("/design/img/botones/barraEnergiaAhora.png");
 }
 
-
-
 .contenedor1{
     width: 50%;
     float: left;
@@ -653,6 +651,11 @@ h3{
    background-image: url("/design/img/iconos/cartelIrACiudad.png");
    text-align: center;
    color: white;
+}
+
+#seccionMessage{
+    background:#dadada;
+    height: 50px;
 }
 
 .seccionMapaCiudad{
@@ -1377,8 +1380,6 @@ h3{
 
 /* DENTRO DE UN SPOT */
 .seccionSpotImagen{
-    width: 380px;
-    height: 300px;
     border-collapse: separate;
     border-spacing: 0 3px;
     float:left;
@@ -1391,7 +1392,7 @@ h3{
     border-collapse: separate;
     border-spacing: 0 3px;
     clear: left;
-    margin: 0 10px;
+    margin-left: 10px;
 }
 
 .seccionSpotInfo{
@@ -1403,11 +1404,64 @@ h3{
     margin: 0 10px;
 }
 
-#OpcionBox{
+.mapaMini{
+    background-image: url("/design/img/iconos/mapaMini.png");
+    float:left;
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+}
+
+.telefonoMini{
+    background-image: url("/design/img/iconos/telefonoMini.png");
+    float:left;
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+}
+
+.relojMini{
+    background-image: url("/design/img/iconos/relojMini.png");
+    float:left;
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+}
+
+.seccionInsignia{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.fotoInsignia{
+    width : 80px;
+    height : 60px;
+    padding-left:40%;
+}
+
+.textoInsignia{
+    background: white;
+    margin-top:10px;
+}
+
+.opcionesTienda{
+    float: left;
+    margin-right: 5px;
+}
+
+.submitTienda{
+    clear : left; 
+}
+
+#botonesComprarVender{
+    padding-top: 10px;
+}
+
+.opcionBox{
     width: 100px;
     height: 100px;
     margin: 10px 10px;
-    float:left;
+    background: yellow;
     border:1px solid black;
 }
 
@@ -1502,4 +1556,94 @@ h3{
 
 .textoLibertad, .textoConstitucion, .textoElPoblado, .textoSantaAna, .textoLasMercedes, .textoElCarmen, .textoCentroSur, .textoFraternidad, .textoCiudadJardin{
     display: none;
+}
+
+.tituloSpot{
+    text-align: center;
+}
+
+.relojMini{
+    background-image: url("/design/img/iconos/relojArena.png");
+    background-repeat: repeat-x;
+    width: 20px;
+    height: 20px;
+    float:left;
+    margin-right: 2px;
+}
+
+.monedaTienda{
+    background-image: url("/design/img/iconos/monedaTop.png");
+    background-repeat: repeat-x;
+    width: 20px;
+    height: 20px;
+    float:left;
+    margin-right: 2px;
+}
+
+.corazonTienda{
+    background-image: url("/design/img/iconos/corazonMini.png");
+    background-repeat: repeat-x;
+    width: 20px;
+    height: 20px;
+    float:left; 
+    margin-left: 6px;
+    margin-right: 2px;
+}
+
+.precioTienda{
+    float:left;
+}
+
+.vidaTienda{
+    float:left;
+}
+
+.tagTiendaComprar{
+    width: 75px;
+    height:33px;
+     border-radius: 15px 50px;
+     background : yellow;
+}
+
+.tagTiendaVender{
+    width: 75px;
+    height:33px;
+     border-radius: 15px 50px;
+     background : white;
+}
+
+.submitTienda{
+    padding-top: 15px;
+}
+.botonBarComprar{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/submitCarrilBici.png");
+}
+.botonTiendaComprar{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/botonTiendaComprar.png");
+}
+
+.botonTiendaVender{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/submitCarrilBici.png");
+}
+
+.botonCerrajeria{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/llave.png");
+}
+
+.opcionSpot{
+    display : none;
+}
+
+.botonCarrilBici{
+    width: 53px;
+    height:33px;
+    background-image: url("/design/img/botones/submitCarrilBici.png");
 }

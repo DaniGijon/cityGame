@@ -316,7 +316,7 @@ function accionSpot($box){
             
         //CAFES
         case 'cafeConLeche':
-            $coste = 2;
+            $coste = 10;
             $mejoraSalud = 1;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
@@ -328,8 +328,8 @@ function accionSpot($box){
             }
             break;
         case 'cafeIrlandes':
-            $coste = 3;
-            $mejoraSalud = 2;
+            $coste = 25;
+            $mejoraSalud = 3;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
                 $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
@@ -341,48 +341,8 @@ function accionSpot($box){
             break;
             
         //CARRIL BICI
-        case 'pedaleo Suave':
-            $agotamiento = 20;
-            $coste = 5;
-            $puedoHacerlo = comprobarEnergia($agotamiento);
-            if($puedoHacerlo === 1){
-                $puedoPagar = comprobarCoste($coste);
-                if($puedoPagar === 1){
-                    //Consulta para hacer el informe
-                    $sql = "SELECT agilidad,resistencia FROM personajes WHERE id='$id'";
-                    $stmt = $db->query($sql);
-                    $habilidades = $stmt->fetchAll();
-                    
-                    $agilidadPrevia = $habilidades[0]['agilidad'];
-                    $resistenciaPrevia = $habilidades[0]['resistencia'];
-                    
-                    //MEJORAR PERSONAJE y COBRARLE LOS PRECIOS Y ENERGIA CONSUMIDA
-                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaBaja/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalBaja/personajes.resistencia, accion = ADDTIME(NOW(), '0:15:0') WHERE id='$id'";
-                    $stmt = $db->query($sql);
-                    
-                    //INFORME DE ENTRENAMIENTO
-                    $sql = "SELECT agilidad,resistencia FROM personajes WHERE id='$id'";
-                    $stmt = $db->query($sql);
-                    $habilidades = $stmt->fetchAll();
-                    
-                    $agilidadPosterior = $habilidades[0]['agilidad'];
-                    $resistenciaPosterior = $habilidades[0]['resistencia'];
-                    
-                    $mejoraAgilidad = round($agilidadPosterior - $agilidadPrevia, 2, PHP_ROUND_HALF_DOWN);
-                    $mejoraResistencia = round($resistenciaPosterior - $resistenciaPrevia, 2, PHP_ROUND_HALF_DOWN);
-                    
-                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Mejora de Habilidad','Qué buen ratito de pedaleo. He mejorado $mejoraResistencia puntos de Resistencia y también $mejoraAgilidad puntos de Agilidad.','entrenamiento.png')";
-                    $db->query($sql);
-                }
-                else{
-                    $box = "No llevo dinero para inflar las ruedas.";
-                }
-            }else{
-                $box = "¿Bici ahora? Uff... No puedo con mi alma. Mejor tomar un snack";
-            }
-            break;
-            
-        case 'pedaleoFuerte':
+        
+        case 'ritmitoGeneroso':
             $agotamiento = 40;
             $coste = 10;
             $puedoHacerlo = comprobarEnergia($agotamiento);
@@ -417,11 +377,11 @@ function accionSpot($box){
                     $box = "Necesito dinero para engrasar la cadena.";
                 }
             }else{
-                $box = "EH, EH, tranqui. No aguanto ese ritmo sin antes beber algo";
+                $box = "EH, EH, tranqui. No aguanto ese ritmo sin antes dormir una siestita";
             }
             break;
         
-        case 'indurain':
+        case 'vueltaBici':
             $agotamiento = 60;
             $coste = 20;
             $puedoHacerlo = comprobarEnergia($agotamiento);
@@ -454,7 +414,7 @@ function accionSpot($box){
                     $db->query($sql);
                 }
                 else{
-                    $box = "¿Y si me multan por ir tan rápido? Mejor reunir dinero antes";
+                    $box = "¿Y si me multan por ir tan rápido? Mejor reunir algo de dinero antes";
                 }
             }else{
                 $box = "Pensándolo mejor... la única Vuelta que haré va a ser al sofá.";
@@ -666,7 +626,7 @@ function accionSpot($box){
             break;
             
         //CERRAJERIA: ABRIR  
-        case 'cajita oxidada':
+        case 'Cajita oxidada':
             $coste = 20;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
@@ -858,7 +818,7 @@ function accionSpot($box){
             
         
         default :
-            $box = 'Error: esa opcion no existe:'. $box;
+            $box = 'Debes marcar una de las Opciones'. $box;
     }
     header("location: ?page=zona&message=$box");
 }

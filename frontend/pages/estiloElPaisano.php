@@ -24,9 +24,9 @@ global $db;
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia120();
+                        $fechaInsignia = comprobarInsignia(120);
                         if ($fechaInsignia != '0'){
-                            $fotoInsignia = getFotoInsignia120();
+                            $fotoInsignia = getFotoInsignia(120);
                             echo $fotoInsignia . "<br>";
                             echo "Nos visitaste el día: <b>" . date( 'd/m/Y',strtotime($fechaInsignia)) . "</b><br>¡Gracias por venir!";
                         }

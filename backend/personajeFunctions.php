@@ -443,8 +443,8 @@
         </fieldset>
         <fieldset>
             <legend style="text-align: center"> Mi dinero</legend>
-            <span class="quarterWidth">En el bolsillo: <?php echo $result[0]['cash'] . "€"; ?></span><br>
-            <span class="quarterWidth">En el banco: <?php echo $result[0]['enBanco'] . "€"; ?></span><br>
+            <span class="quarterWidth">En bolsillo: <?php echo $result[0]['cash'] . "<img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>"; ?></span>
+            <span class="quarterWidth">En banco: <?php echo $result[0]['enBanco'] . "<img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>"; ?></span><br>
         </fieldset>
         <fieldset>
             <legend style="text-align: center"> Mis habilidades</legend>

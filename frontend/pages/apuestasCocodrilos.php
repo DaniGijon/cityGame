@@ -17,6 +17,7 @@ $result = $stmt->fetchAll();
 echo "<div id='moduloZona'>";
 
     echo "<div class='contenido'>";
+    echo "<span class='contenedor1'>";
         echo "<div class='seccionSpotImagen'>" ;
             $imagenSpot = getApuestasCocodrilos();
             echo $imagenSpot;
@@ -24,17 +25,101 @@ echo "<div id='moduloZona'>";
 
         echo "<div class='seccionSpotOpciones'>";
             echo "<br>El \"Ojailén River Grand Prix\" es el evento principal del Campeonato de Carreras de Cocodrilos. ¡Hagan sus apuestas!<br><br>";
-            echo " Llevo " . $dineroEnCash . "€ en el bolsillo.";    
+              
             ?>
 <form id = "selectorOpciones" action="?bPage=apuestas&action=cocodrilos&nonUI" method="post">
-                <label> <br>Crocky Balboa (@3.00) <input name="cantidadApuesta1" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Dientes de leche (@4.00) <input name="cantidadApuesta2" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Cai-Man (@5.00) <input name="cantidadApuesta3" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Totodile (@6.00) <input name="cantidadApuesta4" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Rumbera (@8.00) <input name="cantidadApuesta5" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Old Jack (@10.00) <input name="cantidadApuesta6" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Plátano (@41.00) <input name="cantidadApuesta7" style="width:25%" type=number min="0" value =0>€</label><br>
-                
+    <table border = '0' style = 'text-align:center'>
+        <tr>
+            <th>Corredor</th>
+            <th>Premio</th>
+            <th>Cantidad a Apostar</th>
+        </tr>
+        
+        <tr>
+            <td>
+                Crocky Balboa
+            </td>
+            <td>
+                x3
+            </td>
+            <td>
+                <label><input name="cantidadApuesta1" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                Dientes de Leche
+            </td>
+            <td>
+                x4
+            </td>
+            <td>
+                <label><input name="cantidadApuesta2" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                Cai-Man
+            </td>
+            <td>
+                x5
+            </td>
+            <td>
+                <label><input name="cantidadApuesta3" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                Totodile
+            </td>
+            <td>
+                x6
+            </td>
+            <td>
+                <label><input name="cantidadApuesta4" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                Rumbera
+            </td>
+            <td>
+                x8
+            </td>
+            <td>
+                <label><input name="cantidadApuesta5" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+               Old-Jack
+            </td>
+            <td>
+                x10
+            </td>
+            <td>
+                <label><input name="cantidadApuesta6" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                Plátano
+            </td>
+            <td>
+                x41
+            </td>
+            <td>
+                <label><input name="cantidadApuesta7" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+            </td>
+        </tr>
+            
+    </table>
                 <input type="submit" value="¡Apostar!">
 </form>                
                 <script>
@@ -51,10 +136,15 @@ echo "<div id='moduloZona'>";
                 </script>
 
                 <?php
+                
+                echo " Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";  
                     
                 echo "</div>"; //FIN DE div seccionSpotOpciones
 
-                
+             echo "</span>";
+             echo "<span class='contenedor2'>";
+             echo "Aqui una tarjeta con info de cada corredor";
+             echo "</span>";
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona

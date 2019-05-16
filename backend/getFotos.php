@@ -202,44 +202,12 @@ function getGallo(){
 }
 
 //FOTOS INSIGNIAS
-function getFotoInsignia8(){
-    global $db;
-    $id = $_SESSION['loggedIn'];
-    
-    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='8'";
-    $stmt = $db->query($sql);
-    $result = $stmt->fetchAll();
-    
-    return "<img src='/design/img/insignias/" . $result[0]['imagen'] . "'>";
-}
 
-function getFotoInsignia21(){
+function getFotoInsignia($idI){
     global $db;
     $id = $_SESSION['loggedIn'];
     
-    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='21'";
-    $stmt = $db->query($sql);
-    $result = $stmt->fetchAll();
-    
-    return "<img src='/design/img/insignias/" . $result[0]['imagen'] . "'>";
-}
-
-function getFotoInsignia112(){
-    global $db;
-    $id = $_SESSION['loggedIn'];
-    
-    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='112'";
-    $stmt = $db->query($sql);
-    $result = $stmt->fetchAll();
-    
-    return "<img src='/design/img/insignias/" . $result[0]['imagen'] . "'>";
-}
-
-function getFotoInsignia120(){
-    global $db;
-    $id = $_SESSION['loggedIn'];
-    
-    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='120'";
+    $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='$idI'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     

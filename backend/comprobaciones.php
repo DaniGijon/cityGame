@@ -684,12 +684,25 @@ function getPopularidadCentroMujer(){
     return $popularidadAqui;
 }
 
+//Get nombre del Spot
+function getNombreSpot($idS){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+    $sql = "SELECT nombre FROM spots WHERE idS='$idS'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $nombreSpot = $result[0]['nombre'];
+    return $nombreSpot;
+}
+
 //COMPROBAR INSIGNIAS
-function comprobarInsignia8(){
+function comprobarInsignia($idI){
     global $db;
     $id = $_SESSION['loggedIn'];
     
-     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='8'";
+     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='$idI'";
      $stmt = $db->query($sql);
      $result = $stmt->fetchAll();
      
@@ -701,60 +714,11 @@ function comprobarInsignia8(){
      }
 }
 
-function comprobarInsignia21(){
-    global $db;
-    $id = $_SESSION['loggedIn'];
-    
-     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='21'";
-     $stmt = $db->query($sql);
-     $result = $stmt->fetchAll();
-     
-     if($result){
-        return $result[0]['fecha'];
-     }
-     else{
-         return 0;
-     }
-}
-
-function comprobarInsignia112(){
-    global $db;
-    $id = $_SESSION['loggedIn'];
-    
-     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='112'";
-     $stmt = $db->query($sql);
-     $result = $stmt->fetchAll();
-     
-     if($result){
-        return $result[0]['fecha'];
-     }
-     else{
-         return 0;
-     }
-}
-
-function comprobarInsignia120(){
-    global $db;
-    $id = $_SESSION['loggedIn'];
-    
-     $sql = "SELECT * FROM insignias WHERE idP='$id' AND idI='120'";
-     $stmt = $db->query($sql);
-     $result = $stmt->fetchAll();
-     
-     if($result){
-        return $result[0]['fecha'];
-     }
-     else{
-         return 0;
-     }
-}
-
+/*
 //ACTIVAR CODIGOS INSIGNIAS
 function activarCodigo($codigoInsignia){
     global $db;
     $id = $_SESSION['loggedIn'];
-    
-    echo "EPPPP";
     
     $sql = "SELECT * FROM codigos WHERE clave='$codigoInsignia'";
     $stmt = $db->query($sql);
@@ -771,5 +735,5 @@ function activarCodigo($codigoInsignia){
 
 if(isset($_POST['codigoInsignia'])){
     activarCodigo($_POST['oodigoInsignia']);
-}
+}*/
 ?>
