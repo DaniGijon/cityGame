@@ -15,7 +15,7 @@ global $db;
             
             echo "<div class='contenido'>";
                 echo "<div class='seccionSpotImagen'>" ;
-                    $imagenSpot = getPilanconBurros();
+                    $imagenSpot = getFotoSpot(1);
                     echo $imagenSpot;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                

@@ -15,11 +15,14 @@ $stmt = $db->query($sql);
 $result = $stmt->fetchAll();
 
 echo "<div id='moduloZona'>";
+            echo "<span class = 'tituloSpot'>";
+                echo "<h4>" . getNombreSpot(2) . "</h4>";
+            echo "</span>"; 
 
     echo "<div class='contenido'>";
     echo "<span class='contenedor1'>";
         echo "<div class='seccionSpotImagen'>" ;
-            $imagenSpot = getApuestasCocodrilos();
+            $imagenSpot = getFotoSpot(2);
             echo $imagenSpot;
         echo "</div>"; //FIN DE div seccionSpotImagen
 

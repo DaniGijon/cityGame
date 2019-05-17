@@ -19,7 +19,7 @@ echo "<div id='moduloZona'>";
 
     echo "<div class='contenido'>";
         echo "<div class='seccionSpotImagen'>" ;
-            $imagenSpot = getJoker();
+            $imagenSpot = getFotoSpot(80);
             echo $imagenSpot;
         echo "</div>"; //FIN DE div seccionSpotImagen
 

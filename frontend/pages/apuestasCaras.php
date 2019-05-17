@@ -17,21 +17,49 @@ $result = $stmt->fetchAll();
 echo "<div id='moduloZona'>";
 
     echo "<div class='contenido'>";
+    echo "<span class='contenedor1'>";
         echo "<div class='seccionSpotImagen'>" ;
-            $imagenSpot = getCaras();
+            $imagenSpot = getFotoSpot(20);
             echo $imagenSpot;
         echo "</div>"; //FIN DE div seccionSpotImagen
 
         echo "<div class='seccionSpotOpciones'>";
             echo "<br>El juego de Caras y Cruces. ¡Hagan sus apuestas!<br><br>";
-            echo " Llevo " . $dineroEnCash . "€ en el bolsillo.";    
             ?>
 <form id = "selectorOpciones" action="?bPage=apuestas&action=caras&nonUI" method="post">
-                <label> <br>Caras (@2.00) <input name="cantidadApuesta1" style="width:25%" type=number min="0" value =0>€</label><br>
-                <label> Cruces (@2.00) <input name="cantidadApuesta2" style="width:25%" type=number min="0" value =0>€</label><br>
-                
-                <input type="submit" value="¡Apostar!">
-</form>                
+    <table border = '0' style = 'text-align:center'>
+        <tr>
+            <th>Elijo</th>
+            <th>Premio</th>
+            <th>Cantidad a Apostar</th>
+        </tr>
+        
+        <tr>
+            <td>
+                Caras
+            </td>
+            <td>
+                x2
+            </td>
+            <td>
+                <label><input name="cantidadApuesta1" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                Cruces
+            </td>
+            <td>
+                x2
+            </td>
+            <td>
+                <label><input name="cantidadApuesta2" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="¡Apostar!">
+</form>                      
                 <script>
                     
                     $(":checkbox").change(function(){
@@ -46,9 +74,14 @@ echo "<div id='moduloZona'>";
                 </script>
 
                 <?php
-                    
+                
+                echo " Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";  
+                 
                 echo "</div>"; //FIN DE div seccionSpotOpciones
-
+                echo "</span>";
+                echo "<span class='contenedor2'>";
+                    echo "Aqui una tarjeta con info de este tipo de juego";
+                echo "</span>";
                 
             echo "</div>"; //FIN DE div contenido
 

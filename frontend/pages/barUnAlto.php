@@ -13,7 +13,7 @@ global $db;
             echo "<div class='contenido'>";
                 echo "<span class='contenedor1'>"; 
                     echo "<div class='seccionSpotImagen'>" ;
-                        $imagenSpot = getUnAlto();
+                        $imagenSpot = getFotoSpot(3);
                         echo $imagenSpot;
                     echo "</div>"; //FIN DE div seccionSpotImagen
 

@@ -2085,14 +2085,20 @@ function avionesFormulario(){
     $result = $stmt->fetchAll(); 
     
     echo "<form id = 'selectorOpciones' action='?bPage=apuestas&action=avionesInscripcion&nonUI' method='post'>";
-    foreach ($result as $avion){
-            echo "<input type='checkbox' name='cbox1' value='" . $avion['nombre'] . "'> <label for='cbox3'>" . $avion['nombre'] . "<img src='/design/img/objetos/" . $avion['imagenObjeto'] . "'></label><br>";
+        foreach ($result as $avion){
+                echo "<div class='opcionesTienda'>";
+                    echo "<label><input type='checkbox' name='cbox1' value='" . $avion['nombre'] . "'>" . $avion['nombre'] . "<div id='opcionBox'><img src='/design/img/objetos/" . $avion['imagenObjeto'] . "'></div></label>";
+                echo "</div>";
+                
+        }
+        echo "<div class='opcionesTienda'>";
+            echo "<label><input type='checkbox' name='cbox1' value='Avioneta de Alquiler' checked='true'>" . "Avioneta Alquiler" . "<div id='opcionBox'><img src='/design/img/objetos/1001.png'></div></label>";
+        echo "</div>";
 
-    }
-                echo "<input type='checkbox' name='cbox1' value='Avioneta de Alquiler' checked='true'> <label for='cbox3'>Avioneta de Alquiler<img src='/design/img/objetos/1001.png'></label><br>";
-
- 
-    echo "<br><br>El coste de participación es : 50€ <input type='submit' value='Inscribirse'>";  
+        echo "<div class='submitTienda'>";
+            echo "El coste de participación es : 50€ <br><input type='submit' class='botonCarrilBici' value=' '>";
+        echo "</div>";
+    echo "</form>"; 
 }
 
 function avionesHistorial(){

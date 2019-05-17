@@ -1638,6 +1638,18 @@ h3{
     background-image: url("/design/img/botones/llave.png");
 }
 
+.botonParroquia{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/submitCarrilBici.png");
+}
+
+.botonAventura{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/submitCarrilBici.png");
+}
+
 .opcionSpot{
     display : none;
 }

@@ -15,7 +15,7 @@ echo "<div id='moduloZona'>";
 
     echo "<div class='contenido'>";
         echo "<div class='seccionSpotImagen'>" ;
-            $imagenSpot = getLuckia();
+            $imagenSpot = getFotoSpot(100);
             echo $imagenSpot;
         echo "</div>"; //FIN DE div seccionSpotImagen
 

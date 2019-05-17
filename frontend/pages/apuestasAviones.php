@@ -15,10 +15,14 @@ $timeStamp = avionesVerFecha();
 $premio = avionesVerPremio();
 
 echo "<div id='moduloZona'>";
+    echo "<span class = 'tituloSpot'>";
+        echo "<h4>" . getNombreSpot(41) . "</h4>";
+    echo "</span>";
 
     echo "<div class='contenido'>";
+        echo "<span class='contenedor1'>"; 
         echo "<div class='seccionSpotImagen'>" ;
-            $imagenSpot = getAviones();
+            $imagenSpot = getFotoSpot(41);
             echo $imagenSpot;
         echo "</div>"; //FIN DE div seccionSpotImagen
 
@@ -29,22 +33,9 @@ echo "<div id='moduloZona'>";
             date_default_timezone_set('Europe/Madrid');
             // Darle formato a la fecha y hora
             $inicio = date( "d/m/Y H:i:s", strtotime($timeStamp));
-            echo "La próxima batalla es: <b>" . $inicio . "</b><br><br>";    
-            echo " <b>BOTE PREMIO ACUMULADO: " . $premio . "€</b><br><br>"; 
+             
             ?>
-<center><table>
-    <tr>
-        <td>
-            En este SURVIVAL gana la última nave que siga en vuelo. Elige bien con qué modelo volar y prepara tu estrategia.
-        </td>
-    </tr>
-        
-    <tr>
-        <td height="1" bgcolor="black">
-        </td>
-    </tr>
-    <tr>
-        <td>
+
             <?php
                 $estoyInscrito = avionesEstoyInscrito();
                 if($estoyInscrito === '1'){
@@ -54,25 +45,7 @@ echo "<div id='moduloZona'>";
                     //consultar que aviones tengo y hacer el formulario
                     avionesFormulario();
                 }
-                ?>
-        </form>     
-        
-        </td>
-    </tr>
-    <tr>
-        <td height="1" bgcolor="black">
-        </td>
-    </tr>
-    <tr>
-        <td> <br>
-            <?php
-                avionesHistorial();
-                
-            ?>
-        </td>
-    </tr>
-      
-    </table></center>
+                ?>       
                 <script>
                     
                     $(":checkbox").change(function(){
@@ -89,7 +62,22 @@ echo "<div id='moduloZona'>";
                 <?php
                     
                 echo "</div>"; //FIN DE div seccionSpotOpciones
-
+            
+            echo "</span>"; //Fin de Contenedor1
+                    
+                    echo "<span class='contenedor2'>";
+                        
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    echo "La próxima batalla es: <b>" . $inicio . "</b><br><br>";    
+                                    echo " <b>BOTE PREMIO ACUMULADO: " . $premio . "€</b><br><br>";
+                                echo "</div>";
+                                
+                                echo "<div class='seccionDescripcionZonaTexto'>";
+                                    avionesHistorial();
+                                echo "</div>"; //Fin descripcionZonaTexto
+                            echo "</div>"; //FIN opcionSpot2
+                       
+                    echo "</span>"; //FIN de contenedor2
                 
             echo "</div>"; //FIN DE div contenido
 

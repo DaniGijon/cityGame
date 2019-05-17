@@ -13,7 +13,7 @@ global $db;
             
             echo "<div class='contenido'>";
                 echo "<div class='seccionSpotImagen'>" ;
-                    $imagenSpot = getElPaisano();
+                    $imagenSpot = getFotoSpot(120);
                     echo $imagenSpot;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                 

@@ -6,83 +6,132 @@ global $db;
         comprobarZona1Barrio2();
         
         echo "<div id='moduloZona'>";
+            echo "<span class = 'tituloSpot'>";
+                echo "<h4>" . getNombreSpot(21) . "</h4>";
+            echo "</span>";
             
             echo "<div class='contenido'>";
-            //Cabecera selector opciones
-                echo "<div id='botonesComprarVender'>";
-                    echo "<button id='botonComprar'>Comprar</button>";
-                    echo "<button id='botonVender'>Vender</button>";
-                echo "</div>"; 
+            
+            echo "<span class='contenedor1'>"; 
                     
                 echo "<div class='seccionSpotImagen'>" ;
-                    $imagenSpot = getPescaBass();
+                    $imagenSpot = getFotoSpot(21);
                     echo $imagenSpot;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                 
+                echo "<div class='seccionSpotOpciones'>";   
+                    //Cabecera selector opciones
+                    echo "<div id='botonesComprarVender'>";
+                        echo "<button id='botonComprar' class='tagTiendaComprar'>Comprar</button>";
+                        echo "<button id='botonVender' class='tagTiendaVender'>Vender</button>";
+                       echo "</div>";
+                    echo "<div id='comprar'>";
+                            echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
+                            echo "<div class='textoDependiente'>";
+                                echo "\"Bienvenido a PescaBass. ¿En qué puedo ayudarle?\" <br><br>";
+                            echo "</div>";
+                            $imagenPez = getPez();
+                            $imagenHamster = getHámster();
+                            $imagenGallo = getGallo();
+                           
+                            echo "<div class='opcionesTienda'>";
+                                echo '<input type="checkbox" name="cbox1" value="Pez">Pez<label for="cbox3"><div id="opcionBox">' . $imagenPez . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label>';
+                            echo "</div>";
+                            echo "<div class='opcionesTienda'>";
+                                echo '<input type="checkbox" name="cbox1" value="Hámster">Hámster<label for="cbox4"><div id="opcionBox">' . $imagenHamster . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label>';
+                            echo "</div>";
+                            echo "<div class='opcionesTienda'>";
+                                echo '<input type="checkbox" name="cbox1" value="Gallo"> Gallo<label for="cbox4"><div id="opcionBox">' . $imagenGallo . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label><br><br>';
+                            echo "</div>";  
+                            echo "<div class='submitTienda'>";
+                                echo'<input type="submit" class="botonTiendaComprar" value=" ">';
+                            echo "</div>";
+                           /* $miDinero = comprobarDinero();
+                            $dineroEnCash = $miDinero[0]['cash'];
+                            echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; */
+                            echo "</form>";                 
+                    echo "</div>";
+
+                    echo "<div id='vender'>";
+
+                            echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
+                            echo "<div class='textoDependiente'>";
+                                echo "\"Está bien, veamos qué traes en tu mochila\" <br><br>";
+                            echo "</div>";
+                            //CONSULTAR OBJETOS QUE LLEVO DESEQUIPADOS
+                            $objetosDesequipados=objetosDesequipados();
+                            foreach($objetosDesequipados as $cadaObjeto){
+                                if($cadaObjeto['id'] === '0'){
+                                    
+                                }
+                                else{
+                                    echo "<div class='opcionesTienda'>";
+                                     echo '<input type="checkbox" name="cbox1" value="v' . $cadaObjeto['nombre'] . '">'. $cadaObjeto['nombre'] . '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/objetos/' . $cadaObjeto['imagenObjeto'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $cadaObjeto["precioVenta"] . '</div></label>';
+                                    echo "</div>";
+                                }
+                            }
+
+                            echo "<div class='submitTienda'>";
+                                echo'<input type="submit" class="botonTiendaVender" value=" ">';
+                            echo "</div>";
+                            /*echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; */
+                            echo '</form>';
+                    echo "</div>";
+                echo "</div>"; //FIN seccionSpotOpciones
+                
+                echo "</span>"; //FIN Contenedor1
+                
+                echo "<span class='contenedor2'>";
+                
                 echo "<div class='seccionSpotInfo'>";
                     echo "<div class = 'seccionContacto'>";
-                        echo "<iframe src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12457.997474598287!2d-4.106920338245714!3d38.683372108424635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x893232c38debc231!2sPescabass+Shop!5e0!3m2!1ses!2ses!4v1555848169962!5m2!1ses!2ses' width='300' height='225' frameborder='0' style='border:0' allowfullscreen></iframe><br>";
-                        echo "Aqui la info del sitio";
+                        echo "<div class = 'mapaCallejero'>";
+                            echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.1127920150756845%2C38.681749373255805%2C-4.098994731903077%2C38.687603430912894&amp;layer=mapnik&amp;marker=38.684672389459415%2C-4.105891227591201" style="border: 1px solid black"></iframe><br/><br>';    
+                        echo "</div>";
+                        echo "<div class = 'infoSpot'>";
+                            echo "<table border = '0' style = 'text-align:left'>";
+                                echo "<tr>";
+                                    echo "<td><div class='mapaMini'></div> C/Gran Capitán, 12<br></td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                echo "<td><div class='telefonoMini'></div> 926 41 23 68<br></td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                echo "<td><div class='relojMini'></div> 10:00 - 14:00, 17:30 - 20:30 Lunes-Viernes<br>10:00 - 14:00 Sábado-Domingo</td>";
+                                echo "</tr>";
+                            echo "</table>";
+                        echo "</div>";
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";
                         $fechaInsignia = comprobarInsignia(21);
                         if ($fechaInsignia != '0'){
                             $fotoInsignia = getFotoInsignia(21);
-                            echo $fotoInsignia . "<br>";
-                            echo "Nos visitaste el día: <b>" . date( 'd/m/Y',strtotime($fechaInsignia)) . "</b><br>¡Gracias por venir!";
+                            echo "<div class='fotoInsignia'>";
+                                echo $fotoInsignia . "<br>";
+                            echo "</div>";
+                            echo "<span class='textoInsignia'>";
+                                echo "Nos visitaste el día: <b>" . date( 'd/m/Y',strtotime($fechaInsignia)) . "</b><br>¡Gracias por venir!";
+                            echo "</span>";
                         }
                         else{
-                            echo "Aqui la foto de la insignia vacia<br>";
-                            echo "<form action='?bPage=comprobaciones&action=activarCodigo' method='post'>";
+                            echo "<div class='fotoInsignia'>";
+                                echo "<img src='/design/img/insignias/insigniaVacia'><br>";
+                            echo "</div>";
+                            echo "<div class='textoInsignia'>";
+                                echo "Visítanos y pide al dependiente tu Código de Activación";
+                            echo "</div>";
+                          /*  echo "<form action='?bPage=comprobaciones&action=activarCodigo' method='post'>";
                                 echo "Introduce el código: <input type='text' name='codigoInsignia'><br>";
                                 echo "<input type='submit'>";
-                            echo "</form>";
+                            echo "</form>";*/
                         }
                     echo "</div>";
                 echo "</div>";
-
-                echo "<div class='seccionSpotOpciones'>";               
-                echo "<div id='comprar'>";
-                        echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
-                        echo "\"Bienvenido a PescaBass. ¿En qué puedo ayudarle?\" <br><br>";
-                        $imagenPez = getPez();
-                        $imagenHámster = getHámster();
-                        $imagenGallo = getGallo();
-                        echo "<div id='opcionBox'>$imagenPez</div>";
-                        echo "<div id='opcionBox'>$imagenHámster</div>";
-                        echo "<div id='opcionBox'>$imagenGallo</div><br><br><br>";
-                        echo '<input type="checkbox" name="cbox1" value="Pez"> <label for="cbox3">Pez</label>';
-
-                        echo '<input type="checkbox" name="cbox1" value="Hámster"> <label for="cbox4">Hámster (30€)</label>';
-
-                        echo '<input type="checkbox" name="cbox1" value="Gallo"> <label for="cbox4">Gallo (36€)</label><br><br>';
-
-                        echo'<input type="submit" value="Comprar"><br><br>';
-                        $miDinero = comprobarDinero();
-                        $dineroEnCash = $miDinero[0]['cash'];
-                        echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; 
-                        echo "</form>";                 
-                echo "</div>";
                 
-                echo "<div id='vender'>";
-                       
-                        echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
-                        echo "\"Así que quieres vender. Déjame echar un vistazo dentro de tu mochila, quizá tengas algo valioso.\" <br><br>";
-                        //CONSULTAR OBJETOS QUE LLEVO DESEQUIPADOS
-                        $objetosDesequipados=objetosDesequipados();
-                        foreach($objetosDesequipados as $cadaObjeto){
-                            echo "<input type='checkbox' name='cbox1' value='v" . $cadaObjeto['nombre'] . "'> <label for='cbox2'>" . "<img src='/design/img/objetos/" . $cadaObjeto['imagenObjeto'] . "'>" . $cadaObjeto['nombre'] . ": " . $cadaObjeto['precioVenta'] . "€</label><br>";
-                        }
+                echo "</span>"; //FIN Contenedor2
+                
 
-                        echo "<br><input type='submit' value='Vender'><br><br>";
-                        echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; 
-                        echo '</form>';
-                echo "</div>";
-            echo "</div>";
-        
-        
-                    
 ?>
                 <script>
                     
@@ -99,11 +148,15 @@ global $db;
                     $("#botonVender").click(function(){
                         $("#comprar").hide();
                         $("#vender").show();
+                        $("#botonVender").css("background-color", "yellow");
+                        $("#botonComprar").css("background-color", "white");
                     });
 
                       $("#botonComprar").click(function(){
                         $("#comprar").show();
                         $("#vender").hide();
+                        $("#botonComprar").css("background-color", "yellow");
+                        $("#botonVender").css("background-color", "white");
                     });
                     
                 </script>
@@ -117,5 +170,6 @@ global $db;
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona
+        
         
         

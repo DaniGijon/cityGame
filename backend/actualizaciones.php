@@ -421,6 +421,55 @@ function accionSpot($box){
             }
             break;
             
+        //FOGATA RITUAL ASDRÚBAL
+        case 'ritual':
+            $agotamiento = 30;
+            $coste = 0;
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                $puedoHacerlo = comprobarEnergia($agotamiento);
+                if($puedoHacerlo === 1){
+                    $puedoPagar = comprobarCoste($coste);
+                    if($puedoPagar === 1){
+                        //Consulta para hacer el informe
+                        $sql = "SELECT espiritu FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $habilidades = $stmt->fetchAll();
+
+                        $espirituPrevia = $habilidades[0]['espiritu'];
+                        
+                        if($mistico === 1){
+                            $sql = "UPDATE personajes SET cash = cash-$coste, energia = energia-$agotamiento, espiritu = espiritu + $mejoraPrincipalMuyAlta*2/personajes.espiritu, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        else{
+                            $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, espiritu = espiritu + $mejoraPrincipalMuyAlta/personajes.espiritu, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        //INFORME DE ENTRENAMIENTO
+                        $sql = "SELECT espiritu FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $habilidades = $stmt->fetchAll();
+
+                        $espirituPosterior = $habilidades[0]['espiritu'];
+
+                        $mejoraEspiritu = round($espirituPosterior - $espirituPrevia, 2, PHP_ROUND_HALF_DOWN);
+                        
+
+                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Mejora de Habilidad','Me siento en algo más de tranquilidad ahora. He mejorado $mejoraEspiritu puntos de Espíritu.','rezo.png')";
+                        $db->query($sql);
+                    }
+                    else{
+                        $box = "Alguna moneda necesito para echar de ofrenda.";
+                    }
+                }else{
+                    $box = "No tengo energía para controlar el ritual. Como entre ahí, algún espíritu maligno podría poseer mi cuerpo.";
+                }
+            }
+            else{
+                $box = "Aún no he descansado de mi ultima acción";
+            }
+            break; 
         //PARROQUIA DE CAÑAMARES
         case 'plegaria':
             $agotamiento = 10;
@@ -470,6 +519,166 @@ function accionSpot($box){
                 $box = "Aún no he descansado de mi ultima acción";
             }
             break; 
+            
+        case 'tragoVino':
+            $coste = 40;
+            $mejoraSalud = 10;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagarme el trago de Vino";
+            }
+            break;
+            
+        case 'guarroAsao':
+            $coste = 150;
+            $mejoraSalud = 50;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No me quedan monedas suficientes";
+            }
+            break;
+        
+        //TRABAJO: CORREDOR DE APUESTAS
+        case 'qualy':
+            $agotamiento = 10;
+            $salario = 15;
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                $puedoHacerlo = comprobarEnergia($agotamiento);
+                if($puedoHacerlo === 1){
+                        //Consulta para hacer el informe
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPrevio = $dinero[0]['cash'];
+                        //HACER EL PAGO
+                        if($recaudador === 1){
+                            $sql = "UPDATE personajes SET cash = cash+$salario*1.50, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '0:15:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        else{
+                            $sql = "UPDATE personajes SET cash = cash+$salario, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '0:15:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        //GENERAR EL INFORME DE COBRO
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPosterior = $dinero[0]['cash'];
+                        
+                        $mejoraCash = round($cashPosterior - $cashPrevio, 2, PHP_ROUND_HALF_DOWN);
+                        
+
+                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cobro','¡Aquí está el cobro por 15 minutos de duro trabajo! Ahora mi bolsillo pesa un poco más, exactamente $mejoraCash monedas más.','cobro.png')";
+                        $db->query($sql);
+                    
+                }else{
+                    $box = "¿Tú quieres que me muera ahí al sol? Mejor descansar un poco.";
+                }
+            }
+            else{
+                $box = "Aún no he descansado de mi ultima acción";
+            }
+            break; 
+            
+        case 'carrera':
+            $agotamiento = 20;
+            $salario = 40;
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                $puedoHacerlo = comprobarEnergia($agotamiento);
+                if($puedoHacerlo === 1){
+                        //Consulta para hacer el informe
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPrevio = $dinero[0]['cash'];
+                        //HACER EL PAGO
+                        if($recaudador === 1){
+                            $sql = "UPDATE personajes SET cash = cash+$salario*1.50, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        else{
+                            $sql = "UPDATE personajes SET cash = cash+$salario, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        //GENERAR EL INFORME DE COBRO
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPosterior = $dinero[0]['cash'];
+                        
+                        $mejoraCash = round($cashPosterior - $cashPrevio, 2, PHP_ROUND_HALF_DOWN);
+                        
+
+                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cobro','¡Aquí está el cobro por 30 minutos de duro trabajo! Ahora mi bolsillo pesa un poco más, exactamente $mejoraCash monedas más.','cobro.png')";
+                        $db->query($sql);
+                    
+                }else{
+                    $box = "Uff.. no aguanto yo ahora mismo ahí fuera como no me tumbe antes un rato.";
+                }
+            }
+            else{
+                $box = "Aún no he descansado de mi ultima acción";
+            }
+            break;
+            
+        case 'series':
+            $agotamiento = 40;
+            $salario = 100;
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                $puedoHacerlo = comprobarEnergia($agotamiento);
+                if($puedoHacerlo === 1){
+                        //Consulta para hacer el informe
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPrevio = $dinero[0]['cash'];
+                        //HACER EL PAGO
+                        if($recaudador === 1){
+                            $sql = "UPDATE personajes SET cash = cash+$salario*1.50, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        else{
+                            $sql = "UPDATE personajes SET cash = cash+$salario, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        //GENERAR EL INFORME DE COBRO
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPosterior = $dinero[0]['cash'];
+                        
+                        $mejoraCash = round($cashPosterior - $cashPrevio, 2, PHP_ROUND_HALF_DOWN);
+                        
+
+                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cobro','¡Aquí está el cobro por 1 hora de duro trabajo! Ahora mi bolsillo pesa un poco más, exactamente $mejoraCash monedas más.','cobro.png')";
+                        $db->query($sql);
+                    
+                }else{
+                    $box = "¿1 Hora? Con tan poca energía no aguantaría ahora mismo ni 1 Minuto.";
+                }
+            }
+            else{
+                $box = "Aún no he descansado de mi ultima acción";
+            }
+            break;
+            
         //TRABAJO: EL MURO, GUARDIA DE LA NOCHE
         case 'guardiaNoche':
             $agotamiento = 10;

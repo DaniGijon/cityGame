@@ -15,7 +15,7 @@ global $db;
                 echo "<div class='contenido'>";
                 echo "<span class='contenedor1'>"; 
                     echo "<div class='seccionSpotImagen'>" ;
-                        $spotImagen = getEntrenamientoCarrilBici();
+                        $spotImagen = getFotoSpot(6);
                         echo $spotImagen;
                     echo "</div>"; //FIN DE div seccionSpotImagen
 

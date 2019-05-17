@@ -9,30 +9,34 @@ global $db;
 
             echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(4) . "</h4>";
+                echo "<h4>" . getNombreSpot(0) . "</h4>";
             echo "</span>";
 
                 echo "<div class='contenido'>";
                 echo "<span class='contenedor1'>"; 
                     echo "<div class='seccionSpotImagen'>" ;
-                        $spotImagen = getFotoSpot(4);
+                        $spotImagen = getFotoSpot(0);
                         echo $spotImagen;
                     echo "</div>"; //FIN DE div seccionSpotImagen
 
                     echo "<div class='seccionSpotOpciones'>";
-                    echo "<br>Me adentro en la angosta parroquia de Cañamares. Un lugar para el rezo y la oración. <br><br>";
+                    echo "<br>Son muchos los espectadores que vienen a ver carreras y nosotros les ofrecemos una diversión extra.<br>Trabaja como Agente de Apuestas y recibe un porcentaje.<br><br>";
                     
                     echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='plegaria'>Plegaria<div id='opcionBox'><img src='/design/img/entrenamiento/plegaria.png'></div><div class='relojMini'></div><div class='precioTienda'>15M</div></label>";
+                            echo "<label><input type='checkbox' name='cbox1' value='qualy'>Qualy<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>15M</div></label>";
                         echo "</div>";
                         
                         echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='ponerVelitas'>Poner Velitas<div id='opcionBox'><img src='/design/img/entrenamiento/ponerVelitas.png'></div><div class='relojMini'></div><div class='precioTienda'>30M</div></label>";
+                            echo "<label><input type='checkbox' name='cbox1' value='carrera'>Carrera<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>30M</div></label>";
+                        echo "</div>";
+                        
+                        echo "<div class='opcionesTienda'>";
+                            echo "<label><input type='checkbox' name='cbox1' value='series'>Series<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>1H</div></label>";
                         echo "</div>";
                         
                         echo "<div class='submitTienda'>";
-                            echo "<input type='submit' class='botonParroquia' value=' '>";
+                            echo "<input type='submit' class='botonCarrilBici' value=' '>";
                         echo "</div>";
                     echo "</form>";           
             ?>
@@ -51,14 +55,20 @@ global $db;
                         $(":checkbox").click(function(){
                             var valor = $(this).val();
                             
-                            if (valor === 'plegaria') {
+                            if (valor === 'qualy') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
+                                $(".opcionSpot3").hide();
                             }
-                            else if (valor === 'ponerVelitas'){
+                            else if (valor === 'carrera'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
-
+                                $(".opcionSpot3").hide();
+                            }
+                            else if (valor === 'series'){
+                                $(".opcionSpot3").show();
+                                $(".opcionSpot1").hide();
+                                $(".opcionSpot2").hide();
                             }
                         });
                         
@@ -74,13 +84,13 @@ global $db;
                         
                             echo "<div class='opcionSpot1 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
-                                    $imagenSpot = "<img src='/design/img/entrenamiento/carrilBici1.png'>";
+                                    $imagenSpot = "<img src='/design/img/especial/ritual.png'>";
                                     echo $imagenSpot;
                                 echo "</div>";
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                         
                                     echo "<span class='textoDescripcionSpot'>";
-                                        $descripcionZona = "Un ritmito generoso con subidas y descensos, cambios de ritmo y un intercambio de superficie asfalto-tierra que me hará sudar como pollo a la parrilla.";
+                                        $descripcionZona = "¡Capta rápido apostantes para la Qualy que está a punto de empezar!";
                                         echo $descripcionZona;
                                     echo "</span>";
                                 echo "</div>"; //Fin seccionDescripcionZonaTexto
@@ -88,17 +98,31 @@ global $db;
                             
                             echo "<div class='opcionSpot2 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
-                                    $imagenSpot = "<img src='/design/img/entrenamiento/carrilBici2.png'>";
+                                    $imagenSpot = "<img src='/design/img/especial/tragoVino.png'>";
                                     echo $imagenSpot;
                                 echo "</div>";
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                         
                                     echo "<span class='textoDescripcionSpot'>";
-                                        $descripcionZona = "¡Voy a saco! Me vengo arriba ya. Las agujetas mañana serán bestiales, pero ya sabes: \"No Pain, No Gain\".";
+                                        $descripcionZona = "Coloca apuestas para la próxima carrera que empezará en 30 Minutos";
                                         echo $descripcionZona;
                                     echo "</span>";
                                 echo "</div>"; //Fin descripcionZonaTexto
                             echo "</div>"; //FIN opcionSpot2
+                            
+                             echo "<div class='opcionSpot3 opcionSpot'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    $imagenSpot = "<img src='/design/img/especial/guarroAsao.png'>";
+                                    echo $imagenSpot;
+                                echo "</div>";
+                                echo "<div class='seccionDescripcionZonaTexto'>";
+                        
+                                    echo "<span class='textoDescripcionSpot'>";
+                                        $descripcionZona = "¡Cómo controlas! Haz negocio para las próximas series de carreras";
+                                        echo $descripcionZona;
+                                    echo "</span>";
+                                echo "</div>"; //Fin descripcionZonaTexto
+                            echo "</div>"; //FIN opcionSpot3
                        
                     echo "</span>"; //FIN de contenedor2
 
