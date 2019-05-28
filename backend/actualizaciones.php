@@ -315,7 +315,7 @@ function accionSpot($box){
             break;
             
         //CAFES
-        case 'cafeConLeche':
+        case 'cafeGo':
             $coste = 10;
             $mejoraSalud = 1;
             $puedoPagar = comprobarCoste($coste);
@@ -834,7 +834,7 @@ function accionSpot($box){
             }
             break;
             
-        //CERRAJERIA: ABRIR  
+        //CERRAJERIAS y EXPOLIADOR: ABRIR  
         case 'Cajita oxidada':
             $coste = 20;
             $puedoPagar = comprobarCoste($coste);
@@ -876,6 +876,124 @@ function accionSpot($box){
             }
             break;     
             
+        case 'GCajita oxidada':
+            $coste = 0;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin <= '1'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin <= '1' && nivelMin > '0')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='900'";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','El dependiente pasa largo rato mirando la caja bloqueada... parece estar pensando. Al fin entra a la trastienda a por las herramientas. Se escucha cómo pronuncia unas palabras mágicas ¡a la vez que saca una maza! Un instante después, la caja está abierta ante tus ojos. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;
+         
+        //Mascaras VENDEDOR DE MASCARAS
+        case 'mascaraConejo':
+            $coste = 1000;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 102 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        
+        case 'mascaraBomba':
+            $coste = 1000;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 103 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql);
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+            
+        case 'mascaraMejora':
+            $coste = 1000;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 104 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                    //Reliquia
+                    $sql = "INSERT INTO coleccionismo (idP, idO, imagen) VALUES ('$id', '104', '104.png')";
+                    $db->query($sql); 
+                    
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Reliquia Encontrada','Al llegar a casa me pruebo esa máscara que compré hace un rato. Hago tonterías delante del espejo y... espera, hay algo grabado en su interior: \"Made in Hyrule\"','reliquiaEncontrada.png')";                    
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        //Todo Para Tu Mascota   
         case 'Pez':
             $coste = 10;
             $puedoPagar = comprobarCoste($coste);
@@ -944,7 +1062,77 @@ function accionSpot($box){
                 $box = "No puedo pagar eso";
             }
             break;
+        //PescaBass
+        case 'cañaPesca':
+            $coste = 130;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 307 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+            
+        case 'sombreroPescador':
+            $coste = 100;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 109 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+            
+        case 'botasPescador':
+            $coste = 100;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 407 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
         
+        //VENTAS
         case 'vPez':
             $sql = "SELECT precioVenta FROM objetos WHERE objetos.id = '1'";
             $stmt = $db->query($sql);

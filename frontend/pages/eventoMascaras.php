@@ -7,15 +7,15 @@ global $db;
         
         echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(21) . "</h4>";
+                echo "<h4>" . getNombreSpot(29) . "</h4>";
             echo "</span>";
             
             echo "<div class='contenido'>";
             
             echo "<span class='contenedor1'>"; 
-                    /*
+                /*    
                 echo "<div class='seccionSpotImagen'>" ;
-                    $imagenSpot = getFotoSpot(21);
+                    $imagenSpot = getFotoSpot(29);
                     echo $imagenSpot;
                 echo "</div>"; //FIN DE div seccionSpotImagen
                 */
@@ -25,51 +25,52 @@ global $db;
                         echo "<button id='botonComprar' class='tagTiendaComprar'>Comprar</button>";
                         echo "<button id='botonVender' class='tagTiendaVender'>Vender</button>";
                     echo "</div>";
-                    echo "<div class='semiTransparente'>";  
+                    echo "<div class='semiTransparente'>";   
                         echo "<div id='comprar'>";
                                 echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                                 echo "<div class='textoDependiente'>";
-                                    echo "\"¡Hola! Bienvenido a PescaBass: Lo coges, pagas y te vas JAJA\"";
+                                    echo "\"Viajo por todas partes en busca de máscaras... Pruébate alguna.\"";
                                 echo "</div>"; //FIN textoDependiente
                                 echo "<div class='imagenDependiente'>";
-                                    echo '<img src="/design/img/dependientes/pescaBass.png">';
+                                    echo '<img src="/design/img/dependientes/mascaras.png">';
                                 echo "</div>"; //FIN imagenDependiente
-                                $imagenCañaPesca = getFotoObjeto(307);
-                                $imagenSombreroPescador = getFotoObjeto(109);
-                                $imagenBotasPescador = getFotoObjeto(407);
+                                $imagenMascaraConejo = getFotoObjeto(102);
+                                $imagenMascaraBomba = getFotoObjeto(103);
+                                $imagenMascaraMejora = getFotoObjeto(104);
 
                                 echo "<div class='opcionesTienda'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
-                                        echo '<input type="checkbox" name="cbox1" value="cañaPesca">';
+                                        echo '<input type="checkbox" name="cbox1" value="mascaraConejo">';
                                     echo "</div>";
                                     echo "<div class='opcionesTiendaTitulo'>";
-                                        echo 'Caña de Pesca';
+                                        echo 'Capucha de Conejo';
                                     echo "</div>";
-                                    echo '<label for="cbox3"><div id="opcionBox">' . $imagenCañaPesca . '</div><div class="monedaTienda"></div><div class="precioTienda">130</div></label>';
+                                    echo '<label for="cbox3"><div id="opcionBox">' . $imagenMascaraConejo . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label>';
                                 echo "</div>";
-                                
                                 echo "<div class='opcionesTienda'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
-                                        echo '<input type="checkbox" name="cbox1" value="sombreroPescador">';
+                                        echo '<input type="checkbox" name="cbox1" value="mascaraBomba">';
                                     echo "</div>";
                                     echo "<div class='opcionesTiendaTitulo'>";
-                                        echo 'Sombrero Pescador';
+                                        echo 'Máscara Explosiva';
                                     echo "</div>";
-                                    echo '<label for="cbox3"><div id="opcionBox">' . $imagenSombreroPescador . '</div><div class="monedaTienda"></div><div class="precioTienda">100</div></label>';
+                                    echo '<label for="cbox4"><div id="opcionBox">' . $imagenMascaraBomba . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label>';
                                 echo "</div>";
-                                
                                 echo "<div class='opcionesTienda'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
-                                        echo '<input type="checkbox" name="cbox1" value="botasPescador">';
+                                        echo '<input type="checkbox" name="cbox1" value="mascaraMejora">';
                                     echo "</div>";
                                     echo "<div class='opcionesTiendaTitulo'>";
-                                        echo 'Botas de Pescador';
+                                        echo 'Máscara de Mejora';
                                     echo "</div>";
-                                    echo '<label for="cbox3"><div id="opcionBox">' . $imagenBotasPescador . '</div><div class="monedaTienda"></div><div class="precioTienda">100</div></label>';
-                                echo "</div>";
+                                    echo '<label for="cbox4"><div id="opcionBox">' . $imagenMascaraMejora . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label>';
+                                echo "</div>";  
                                 echo "<div class='submitTienda'>";
                                     echo'<input type="submit" class="botonTiendaComprar" value=" ">';
                                 echo "</div>";
+                               /* $miDinero = comprobarDinero();
+                                $dineroEnCash = $miDinero[0]['cash'];
+                                echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; */
                                 echo "</form>";                 
                         echo "</div>";
 
@@ -77,10 +78,10 @@ global $db;
 
                                 echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                                 echo "<div class='textoDependiente'>";
-                                    echo "\"¡Ajá! Así que vienes para encasquetarme cosas... JAJAJA ¡Qué sinvergüenza!\"";
+                                    echo "\"Está bien. Veamos qué traes en tu mochila\"";
                                 echo "</div>"; //FIN textoDependiente
                                 echo "<div class='imagenDependiente'>";
-                                    echo '<img src="/design/img/dependientes/pescaBass.png">';
+                                    echo '<img src="/design/img/dependientes/mascaras.png">';
                                 echo "</div>"; //FIN imagenDependiente
                                 //CONSULTAR OBJETOS QUE LLEVO DESEQUIPADOS
                                 $objetosDesequipados=objetosDesequipados();
@@ -102,63 +103,59 @@ global $db;
                                 }
 
                                 echo "<div class='submitTienda'>";
-                                    echo "<input type='submit' class='botonCarrilBici' value=' '>";
+                                    echo'<input type="submit" class="botonTiendaVender" value=" ">';
                                 echo "</div>";
                                 /*echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; */
                                 echo '</form>';
                         echo "</div>";
-                    echo "</div>"; //Fin SemiTransparente
+                    echo "</div>"; //FIN Semitransparente
                 echo "</div>"; //FIN seccionSpotOpciones
                 
                 echo "</span>"; //FIN Contenedor1
                 
                 echo "<span class='contenedor2'>";
                 
-                echo "<div class='seccionSpotInfo'>";
-                    echo "<div class = 'seccionContacto'>";
-                        echo "<div class = 'mapaCallejero'>";
-                            echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.1127920150756845%2C38.681749373255805%2C-4.098994731903077%2C38.687603430912894&amp;layer=mapnik&amp;marker=38.684672389459415%2C-4.105891227591201" style="border: 1px solid black"></iframe><br/><br>';    
-                        echo "</div>";
-                        echo "<div class = 'infoSpot'>";
-                            echo "<table border = '0' style = 'text-align:left'>";
-                                echo "<tr>";
-                                    echo "<td><div class='mapaMini'></div> C/Gran Capitán, 12<br></td>";
-                                echo "</tr>";
-                                echo "<tr>";
-                                echo "<td><div class='telefonoMini'></div> 926 41 23 68<br></td>";
-                                echo "</tr>";
-                                echo "<tr>";
-                                echo "<td><div class='relojMini'></div> 10:00 - 14:00, 17:30 - 20:30 Lunes-Viernes<br>10:00 - 14:00 Sábado-Domingo</td>";
-                                echo "</tr>";
-                            echo "</table>";
-                        echo "</div>";
-                    echo "</div>";
-                    
-                    echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia(21);
-                        if ($fechaInsignia != '0'){
-                            $fotoInsignia = getFotoInsignia(21);
-                            echo "<div class='fotoInsignia'>";
-                                echo $fotoInsignia . "<br>";
-                            echo "</div>";
-                            echo "<span class='textoInsignia'>";
-                                echo "Nos visitaste el día: <b>" . date( 'd/m/Y',strtotime($fechaInsignia)) . "</b><br>¡Gracias por venir!";
-                            echo "</span>";
-                        }
-                        else{
-                            echo "<div class='fotoInsignia'>";
-                                echo "<img src='/design/img/insignias/insigniaVacia'><br>";
-                            echo "</div>";
-                            echo "<div class='textoInsignia'>";
-                                echo "Visítanos y pide al dependiente tu Código de Activación";
-                            echo "</div>";
-                          /*  echo "<form action='?bPage=comprobaciones&action=activarCodigo' method='post'>";
-                                echo "Introduce el código: <input type='text' name='codigoInsignia'><br>";
-                                echo "<input type='submit'>";
-                            echo "</form>";*/
-                        }
-                    echo "</div>";
-                echo "</div>";
+                            echo "<div class='opcionSpot1 opcionSpot'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    $imagenSpot = "<img src='/design/img/especial/ritual.png'>";
+                                    echo $imagenSpot;
+                                echo "</div>";
+                                echo "<div class='seccionDescripcionZonaTexto'>";
+                        
+                                    echo "<span class='textoDescripcionSpot'>";
+                                        $descripcionZona = "\"¡La capucha del Conejo! Guau, vaya cacho de orejas. ¿Seré digno de su poder salvaje?\"";
+                                        echo $descripcionZona;
+                                    echo "</span>";
+                                echo "</div>"; //Fin seccionDescripcionZonaTexto
+                            echo "</div>"; //FIN opcionSpot1
+                            
+                            echo "<div class='opcionSpot2 opcionSpot'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    $imagenSpot = "<img src='/design/img/especial/tragoVino.png'>";
+                                    echo $imagenSpot;
+                                echo "</div>";
+                                echo "<div class='seccionDescripcionZonaTexto'>";
+                        
+                                    echo "<span class='textoDescripcionSpot'>";
+                                        $descripcionZona = "\"¡Esto va a ser la Bomba!\"";
+                                        echo $descripcionZona;
+                                    echo "</span>";
+                                echo "</div>"; //Fin descripcionZonaTexto
+                            echo "</div>"; //FIN opcionSpot2
+                            
+                             echo "<div class='opcionSpot3 opcionSpot'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    $imagenSpot = "<img src='/design/img/especial/guarroAsao.png'>";
+                                    echo $imagenSpot;
+                                echo "</div>";
+                                echo "<div class='seccionDescripcionZonaTexto'>";
+                        
+                                    echo "<span class='textoDescripcionSpot'>";
+                                        $descripcionZona = "\"♪♫♬ Aa-aa-ay. Corazón espinado ♪♫♬\".";
+                                        echo $descripcionZona;
+                                    echo "</span>";
+                                echo "</div>"; //Fin descripcionZonaTexto
+                            echo "</div>"; //FIN opcionSpot3
                 
                 echo "</span>"; //FIN Contenedor2
                 
@@ -176,17 +173,37 @@ global $db;
 
                     });
                     
+                    $(":checkbox").click(function(){
+                            var valor = $(this).val();
+                            
+                            if (valor === 'mascaraConejo') {
+                                $(".opcionSpot1").show();
+                                $(".opcionSpot2").hide();
+                                $(".opcionSpot3").hide();
+                            }
+                            else if (valor === 'mascaraBomba'){
+                                $(".opcionSpot2").show();
+                                $(".opcionSpot1").hide();
+                                $(".opcionSpot3").hide();
+                            }
+                            else if (valor === 'mascaraMejora'){
+                                $(".opcionSpot3").show();
+                                $(".opcionSpot1").hide();
+                                $(".opcionSpot2").hide();
+                            }
+                    });
+                    
                     $("#botonVender").click(function(){
                         $("#comprar").hide();
                         $("#vender").show();
-                        $("#botonVender").css("background-color", "yellow");
+                        $("#botonVender").css("background-color", "rgba(255, 249, 192, 0.7)");
                         $("#botonComprar").css("background-color", "white");
                     });
 
                       $("#botonComprar").click(function(){
                         $("#comprar").show();
                         $("#vender").hide();
-                        $("#botonComprar").css("background-color", "yellow");
+                        $("#botonComprar").css("background-color", "rgba(255, 249, 192, 0.7)");
                         $("#botonVender").css("background-color", "white");
                     });
                     
@@ -204,3 +221,4 @@ global $db;
         
         
         
+

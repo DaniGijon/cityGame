@@ -297,6 +297,21 @@ h3{
   background-position:center;
 }
 
+.seccion1{
+    border-radius: 15px 50px;
+    background: yellow;
+}
+
+.seccion2{
+    border-radius: 15px 50px;
+    background: white;
+}
+
+.seccion3{
+    border-radius: 15px 50px;
+    background: white;
+}
+
 .botonAlbum{
     margin-top: 5px;
     height:100px;
@@ -630,6 +645,7 @@ h3{
     min-width: 843px;
     overflow: hidden;
     padding: 0 0 20px;
+
 }
 
 .tituloZona{
@@ -695,6 +711,21 @@ h3{
     text-align: center;
     margin-left: 15px;
     display:none;
+}
+.secundarioPeque{
+    border:2px solid black;
+    border-radius: 30px;
+    width: 190px;
+    height: 190px;
+}
+
+#ImagenMensaje{
+    margin:10px 50px;
+}
+
+#ContenidoMensaje{
+    text-align: left;
+    margin: 10px;
 }
 
 .cajitaSpot{
@@ -1327,6 +1358,7 @@ h3{
     padding: 10px;
     display: none;
     position: absolute;
+    border-radius: 10px;
 }
 
 #infoObjeto1{
@@ -1334,6 +1366,7 @@ h3{
     padding: 10px;
     display: none;
     position: absolute;
+    border-radius: 10px;
 }
 
 #infoObjeto2{
@@ -1341,6 +1374,7 @@ h3{
     padding: 10px;
     display: none;
     position: absolute;
+    border-radius: 10px;
 }
 
 #infoObjeto3{
@@ -1348,6 +1382,7 @@ h3{
     padding: 10px;
     display: none;
     position: absolute;
+    border-radius: 10px;
 }
 
 #infoObjeto4{
@@ -1355,6 +1390,7 @@ h3{
     padding: 10px;
     display: none;
     position: absolute;
+    border-radius: 10px;
 }
 
 #infoObjeto5{
@@ -1362,6 +1398,7 @@ h3{
     padding: 10px;
     display: none;
     position: absolute;
+    border-radius: 10px;
 }
 
 #infoObjeto6{
@@ -1369,6 +1406,7 @@ h3{
     padding: 10px;
     display: none;
     position: absolute;
+    border-radius: 10px;
 }
 
 #infoObjeto7{
@@ -1376,6 +1414,31 @@ h3{
     padding: 10px;
     display: none;
     position: absolute;
+    border-radius: 10px;
+}
+
+#infoReliquia104{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+    border-radius: 10px;
+}
+
+#infoReliquia107{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+    border-radius: 10px;
+}
+
+#infoReliquia108{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+    border-radius: 10px;
 }
 
 /* DENTRO DE UN SPOT */
@@ -1383,7 +1446,7 @@ h3{
     border-collapse: separate;
     border-spacing: 0 3px;
     float:left;
-    margin: 0 10px;
+    margin: 0px 10px 10px 10px;
 }
 
 .seccionSpotOpciones{
@@ -1444,9 +1507,28 @@ h3{
     margin-top:10px;
 }
 
+.insigniaBox{
+    width: 76px;
+    height: 60px;
+    margin: 10px 10px;
+    border:1px solid white;
+}
+
 .opcionesTienda{
     float: left;
     margin-right: 5px;
+    width:100px;
+    border-radius: 10px;
+    background: goldenrod;
+}
+
+.opcionesTiendaCheckbox{
+    float: left;
+}
+
+.opcionesTiendaTitulo{
+    background: lightskyblue;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .submitTienda{
@@ -1465,12 +1547,18 @@ h3{
     border:1px solid black;
 }
 
+.miniAlbum{
+    width: 50px;
+    height: 50px;
+    float:left;
+    /*border:1px solid black;*/
+}
+
 #albumFicha{
-    width: 300px;
-    height: 300px;
+    width: 76px;
+    height: 60px;
     margin: 10px 10px;
     float:left;
-    border:1px solid black;
 }
 
 #fichaDescripcion{
@@ -1578,6 +1666,7 @@ h3{
     height: 20px;
     float:left;
     margin-right: 2px;
+    border-radius: 0px 0px 0px 10px;
 }
 
 .corazonTienda{
@@ -1588,6 +1677,27 @@ h3{
     float:left; 
     margin-left: 6px;
     margin-right: 2px;
+}
+
+.semiTransparente{
+    background : rgba(255, 249, 192, 0.7); 
+    padding : 20px;
+    border-radius: 0px 10px 10px 10px;
+}
+
+.textoDependiente{
+    background : rgba(255, 255, 255, 0.7); 
+    padding : 10px 20px 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    float : left;
+    width : 220px;
+}
+
+.imagenDependiente{
+ border-radius: 90px;
+ overflow: hidden;
+ margin-bottom: 10px;
 }
 
 .precioTienda{
@@ -1601,15 +1711,18 @@ h3{
 .tagTiendaComprar{
     width: 75px;
     height:33px;
-     border-radius: 15px 50px;
-     background : yellow;
+     border-radius: 15px 15px 0px 0px;
+     background : rgba(255, 249, 192, 0.7); 
+     border-bottom: 0px;
+     border-left: 0px;
 }
 
 .tagTiendaVender{
     width: 75px;
     height:33px;
-     border-radius: 15px 50px;
+     border-radius: 15px 15px 0px 0px;
      background : white;
+     border-bottom: 0px;
 }
 
 .submitTienda{
@@ -1620,6 +1733,13 @@ h3{
     height:33px;
     background-image: url("/design/img/botones/submitCarrilBici.png");
 }
+
+.botonApostar{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/botonTiendaComprar.png");
+}
+
 .botonTiendaComprar{
     width: 100px;
     height:33px;

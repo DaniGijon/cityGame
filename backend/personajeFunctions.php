@@ -660,50 +660,50 @@
                 });
                 
                 $(".cabezaBox").mouseenter(function(e){
-                    $("#infoObjeto0").css("left", e.pageX + 5);
-                    $("#infoObjeto0").css("top", e.pageY + 5);
+                    $("#infoObjeto0").css("left", e.pageX - 150);
+                    $("#infoObjeto0").css("top", e.pageY - 100);
                     $("#infoObjeto0").css("display", "block");
                 });
                 
                 $(".torsoBox").mouseenter(function(e){
-                    $("#infoObjeto1").css("left", e.pageX + 5);
-                    $("#infoObjeto1").css("top", e.pageY + 5);
+                    $("#infoObjeto1").css("left", e.pageX - 150);
+                    $("#infoObjeto1").css("top", e.pageY - 100);
                     $("#infoObjeto1").css("display", "block");
                 });
                 
                 $(".piesBox").mouseenter(function(e){
-                    $("#infoObjeto2").css("left", e.pageX + 5);
-                    $("#infoObjeto2").css("top", e.pageY + 5);
+                    $("#infoObjeto2").css("left", e.pageX - 150);
+                    $("#infoObjeto2").css("top", e.pageY - 100);
                     $("#infoObjeto2").css("display", "block");
                 });
                 
                 $(".derechaBox").mouseenter(function(e){
-                    $("#infoObjeto3").css("left", e.pageX + 5);
-                    $("#infoObjeto3").css("top", e.pageY + 5);
+                    $("#infoObjeto3").css("left", e.pageX - 150);
+                    $("#infoObjeto3").css("top", e.pageY - 100);
                     $("#infoObjeto3").css("display", "block");
                 });
                 
                 $(".izquierdaBox").mouseenter(function(e){
-                    $("#infoObjeto4").css("left", e.pageX + 5);
-                    $("#infoObjeto4").css("top", e.pageY + 5);
+                    $("#infoObjeto4").css("left", e.pageX - 150);
+                    $("#infoObjeto4").css("top", e.pageY - 100);
                     $("#infoObjeto4").css("display", "block");
                 });
                 
                 $(".vehiculoBox").mouseenter(function(e){
-                    $("#infoObjeto5").css("left", e.pageX + 5);
-                    $("#infoObjeto5").css("top", e.pageY + 5);
+                    $("#infoObjeto5").css("left", e.pageX - 150);
+                    $("#infoObjeto5").css("top", e.pageY - 100);
                     $("#infoObjeto5").css("display", "block");
                 });
                 
                 $(".mascotaBox").mouseenter(function(e){
-                    $("#infoObjeto6").css("left", e.pageX + 5);
-                    $("#infoObjeto6").css("top", e.pageY + 5);
+                    $("#infoObjeto6").css("left", e.pageX + - 150);
+                    $("#infoObjeto6").css("top", e.pageY + - 100);
                     $("#infoObjeto6").css("display", "block");
                 });
                 
                 $(".bolsaBox").mouseenter(function(e){
-                    $("#infoObjeto7").css("left", e.pageX + 5);
-                    $("#infoObjeto7").css("top", e.pageY + 5);
+                    $("#infoObjeto7").css("left", e.pageX - 150);
+                    $("#infoObjeto7").css("top", e.pageY - 100);
                     $("#infoObjeto7").css("display", "block");
                 });
                 

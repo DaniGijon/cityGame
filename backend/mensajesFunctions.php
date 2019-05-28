@@ -2,49 +2,56 @@
 function dibujarMensajes($id){
     global $db;
     
-    echo "<div id=TablaMensajes>";
-    //Cojo todos los jugadores y los ordeno de más respeto a menos respeto
-    $sql = "SELECT * FROM mensajes WHERE idP = '$id' ORDER BY fecha DESC";
-    $stmt = $db->query($sql);
-    $result = $stmt->fetchAll();
+    echo "<span class = 'tituloSpot'>";
+        echo "<h4>" . "Buzón de Mensajes" . "</h4>";
+    echo "</span>";
     
-    echo "<table border = '1' style=text-align:center><caption>Bandeja de Entrada</caption>";
+    echo "<div class='contenido'>";
+        echo "<span class='contenedor1'>"; 
     
-    echo "<tr>";
-        echo "<th> FECHA </th>";
-        echo "<th> ASUNTO </th>";
-	echo "<th> MENSAJE </th>";
-        echo "<th> BORRAR </th>";
-    echo "</tr>";
-    
-    for($i=0; $i< sizeof($result); $i=$i+1){
-        if($result[$i] === null){
-            echo "<tr></tr>";
-        }
-        else{
+            echo "<div id=TablaMensajes>";
+            //Cojo todos los jugadores y los ordeno de más respeto a menos respeto
+            $sql = "SELECT * FROM mensajes WHERE idP = '$id' ORDER BY fecha DESC";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
 
-            if($result[$i]['leido']==='0'){
-                echo "<tr bgcolor='yellow'>";
-            }
-            else{
-                echo "<tr>";
-            }
-            echo "<td>" . $result[$i]['fecha'] . "</td>";
+            echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
 
-            echo "<td>" . $result[$i]['asunto'] . "</td>";
-
-            $idMensaje = $result[$i]['idM'];
-            echo "<td>" . "<a href='?page=leer&message=$idMensaje'> Leer </a>" . "</td>";
-            
-            echo "<td> <span id=$idMensaje class='borrar'>X</span> </td>";
+            echo "<tr>";
+                echo "<th style='Stext-align:center; border-radius: 15px'> FECHA </th>";
+                echo "<th style='Stext-align:center; border-radius: 15px'> ASUNTO </th>";
+                echo "<th style='Stext-align:center; border-radius: 15px; width: 80px;'> LEER </th>";
+                echo "<th style='Stext-align:center; border-radius: 15px'> BORRAR </th>";
             echo "</tr>";
-        }
-       
-    }
-    echo "</table>";
-    echo "</div>";
-    
-    ?>
+
+            for($i=0; $i<10 /* sizeof($result)*/; $i=$i+1){
+                if(isset($result[$i])){
+                    echo "<tr>";
+                        echo "<td colspan='100%' bgcolor='black' height='2'></td>";
+                    echo "</tr>";
+
+                    if($result[$i]['leido']==='0'){
+                        echo "<tr id ='" . $result[$i]['asunto'] . "' class = 'cajitaMensaje' bgcolor='yellow'>";
+                    }
+                    else{
+                        echo "<tr id ='" . $result[$i]['asunto'] . "' class = 'cajitaMensaje'>";
+                    }
+                    echo "<td>" . date("d-m-y | H:i:s", strtotime($result[$i]['fecha'])) . "</td>";
+
+                    echo "<td>" . $result[$i]['asunto'] . "</td>";
+
+                    $idMensaje = $result[$i]['idM'];
+                    echo "<td>" . "<a href='?page=leer&message=$idMensaje'> Leer </a>" . "</td>";
+
+                    echo "<td> <span id=$idMensaje class='borrar'>X</span> </td>";
+                    echo "</tr>";
+                }
+
+            }
+            echo "</table>";
+            echo "</div>"; //FIN DIV tablaMensajes
+            
+               ?>
 <script>
                 $(".borrar").click(function(event){
                     var mensajeId = $(this).attr('id');
@@ -58,9 +65,143 @@ function dibujarMensajes($id){
                         $("#mensajesArea").load("index.php?bPage=mensajesFunctions&borrarMensaje&dibujarMensajes&nonUI")
                     })
                 });    
+                
+                $(".cajitaMensaje").hover(function(){
+                    var tipo = $(this).attr('id');
+                            
+                    if (tipo === 'Subiste de Nivel') {
+                        $(".opcionSpot1").show();
+                        $(".opcionSpot2").hide();
+                        $(".opcionSpot3").hide();
+                        $(".opcionSpot4").hide();
+                        $(".opcionSpot5").hide();
+                        $(".opcionSpot6").hide();
+                        $(".opcionSpot7").hide();
+                        $(".opcionSpot8").hide();
+                        $(".opcionSpot9").hide();
+                        $(".opcionSpot10").hide();
+                        $(".opcionSpot11").hide();
+                        $(".opcionSpot12").hide();
+                    }
+                    
+                    else if (tipo === 'Cobro') {
+                        $(".opcionSpot2").show();
+                        $(".opcionSpot1").hide();
+                        $(".opcionSpot3").hide();
+                        $(".opcionSpot4").hide();
+                        $(".opcionSpot5").hide();
+                        $(".opcionSpot6").hide();
+                        $(".opcionSpot7").hide();
+                        $(".opcionSpot8").hide();
+                        $(".opcionSpot9").hide();
+                        $(".opcionSpot10").hide();
+                        $(".opcionSpot11").hide();
+                        $(".opcionSpot12").hide();
+                    }
+                   
+                });
                
 </script>
 <?php
+    
+        echo "</span>"; //Fin de Contenedor1
+                    
+        echo "<span class='contenedor2'>";
+            echo "<div class='opcionSpot1 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    echo "<div class='secundarioPeque'>";
+                        $imagenSpot = "<img src='/design/img/mensajes/asuntoSubisteDeNivel.png'>";
+                        echo $imagenSpot;
+                    echo "</div>";
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot1
+            
+            echo "<div class='opcionSpot2 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    echo "<div class='secundarioPeque'>";
+                        $imagenSpot = "<img src='/design/img/mensajes/asuntoCobro.png'>";
+                        echo $imagenSpot;
+                    echo "</div>";
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot2
+            
+            echo "<div class='opcionSpot3 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    $imagenSpot = "<img src='/design/img/especial/subirNivel.png'>";
+                    echo $imagenSpot;
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot3
+            
+            echo "<div class='opcionSpot4 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    $imagenSpot = "<img src='/design/img/especial/subirNivel.png'>";
+                    echo $imagenSpot;
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot4
+            
+            echo "<div class='opcionSpot5 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    $imagenSpot = "<img src='/design/img/especial/subirNivel.png'>";
+                    echo $imagenSpot;
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot5
+            
+            echo "<div class='opcionSpot6 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    $imagenSpot = "<img src='/design/img/especial/subirNivel.png'>";
+                    echo $imagenSpot;
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot6
+            
+            echo "<div class='opcionSpot7 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    $imagenSpot = "<img src='/design/img/especial/subirNivel.png'>";
+                    echo $imagenSpot;
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot7
+            
+            echo "<div class='opcionSpot8 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    $imagenSpot = "<img src='/design/img/especial/subirNivel.png'>";
+                    echo $imagenSpot;
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot8
+            
+            echo "<div class='opcionSpot9 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    $imagenSpot = "<img src='/design/img/especial/subirNivel.png'>";
+                    echo $imagenSpot;
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot9
+            
+            echo "<div class='opcionSpot10 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    $imagenSpot = "<img src='/design/img/especial/subirNivel.png'>";
+                    echo $imagenSpot;
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot10
+            
+            echo "<div class='opcionSpot11 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    $imagenSpot = "<img src='/design/img/especial/subirNivel.png'>";
+                    echo $imagenSpot;
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot11
+            
+            echo "<div class='opcionSpot12 opcionSpot'>";
+                echo "<div class='seccionDescripcionZonaImagen'>";
+                    $imagenSpot = "<img src='/design/img/especial/subirNivel.png'>";
+                    echo $imagenSpot;
+                echo "</div>";
+            echo "</div>"; //FIN opcionSpot12
+            
+            
+        echo "</span>"; //FIN de contenedor2
+
+
+    echo "</div>"; //FIN DE div contenido
+    
+ 
 }
 
 function lectura($idM){
@@ -69,7 +210,6 @@ function lectura($idM){
     global $db;
     $id = $_SESSION['loggedIn'];
     
-    echo "Qieres leer el mensaje con idM : " . $idM;
     $puedoLeerlo = comprobarMensaje($idM);
     if ($puedoLeerlo === 1){
 
@@ -81,25 +221,49 @@ function lectura($idM){
         $asuntoMensaje = $result[0]['asunto'];
         $imagenMensaje = $result[0]['imagen'];
         $contenidoMensaje = $result[0]['contenido'];
+        
+         echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
 
-        echo "<div id='FechaMensaje'> $fechaMensaje </div>";
-        echo "<div id='AsuntoMensaje'> $asuntoMensaje </div>";
-        if($asuntoMensaje === 'Aventura'){
-            if(!$imagenMensaje){
-                $imagenMensaje = 'noMonstruo.png';
-            }
-            echo "<div id='ImagenMensaje'> <img src='/design/img/monstruos/" . $imagenMensaje . "'></div>";
-        }
-        elseif($asuntoMensaje === 'Subiste de Nivel'){
-            echo "<div id='ImagenMensaje'> <img src='/design/img/iconos/subirNivel.png'></div>";
-        }
-        elseif($asuntoMensaje === 'Reliquia Encontrada'){
-            echo "<div id='ImagenMensaje'> <img src='/design/img/iconos/reliquiaEncontrada.png'></div>";
-        }
-        elseif($asuntoMensaje === 'Popularidad'){
-            echo "<div id='ImagenMensaje'> <img src='/design/img/iconos/popularidad.png'></div>";
-        }
-        echo "<div id='ContenidoMensaje'> $contenidoMensaje </div>";
+            echo "<tr>";
+                echo "<td>";
+                    echo "<div id='FechaMensaje'>";
+                        echo date('d-m-y | H:i:s', strtotime($fechaMensaje));
+                    echo "</div>";
+                echo "</td>";
+            echo "</tr>";
+            
+            echo "<tr>";
+                echo "<td>";
+                    echo "<div id='AsuntoMensaje'> $asuntoMensaje </div>";
+                echo "</td>";
+            echo "</tr>";
+            
+            echo "<tr>";
+                echo "<td>";
+                    if($asuntoMensaje === 'Aventura'){
+                        if(!$imagenMensaje){
+                            $imagenMensaje = 'noMonstruo.png';
+                        }
+                        echo "<div id='ImagenMensaje'> <img src='/design/img/monstruos/" . $imagenMensaje . "'></div>";
+                    }
+                    elseif($asuntoMensaje === 'Subiste de Nivel'){
+                        echo "<div id='ImagenMensaje'> <img src='/design/img/iconos/subirNivel.png'></div>";
+                    }
+                    elseif($asuntoMensaje === 'Reliquia Encontrada'){
+                        echo "<div id='ImagenMensaje'> <img src='/design/img/iconos/reliquiaEncontrada.png'></div>";
+                    }
+                    elseif($asuntoMensaje === 'Popularidad'){
+                        echo "<div id='ImagenMensaje'> <img src='/design/img/iconos/popularidad.png'></div>";
+                    }
+                echo "</td>";
+            echo "</tr>";
+            
+            echo "<tr>";
+                echo "<td>";
+                     echo "<div id='ContenidoMensaje'> $contenidoMensaje </div>";
+                echo "</td>";
+            echo "</tr>";
+        echo "</table>";
 
         //Marcar como Leido
         $sql = "UPDATE mensajes SET leido = 1 WHERE idM='$idM'";

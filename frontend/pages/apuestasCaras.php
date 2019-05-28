@@ -15,16 +15,25 @@ $stmt = $db->query($sql);
 $result = $stmt->fetchAll();
 
 echo "<div id='moduloZona'>";
+    echo "<span class = 'tituloSpot'>";
+        echo "<h4>" . getNombreSpot(20) . "</h4>";
+    echo "</span>";
 
     echo "<div class='contenido'>";
     echo "<span class='contenedor1'>";
-        echo "<div class='seccionSpotImagen'>" ;
+      /* echo "<div class='seccionSpotImagen'>" ;
             $imagenSpot = getFotoSpot(20);
             echo $imagenSpot;
-        echo "</div>"; //FIN DE div seccionSpotImagen
+        echo "</div>"; //FIN DE div seccionSpotImagen */
 
         echo "<div class='seccionSpotOpciones'>";
-            echo "<br>El juego de Caras y Cruces. ¡Hagan sus apuestas!<br><br>";
+        echo "<div class='semiTransparente'>"; 
+            echo "<div class='textoDependiente'>";
+                echo "Un corro de gente jugando a Caras y Cruces. ¡Esperadme!";
+            echo "</div>";
+            echo "<div class='imagenDependiente'>";
+                echo '<img src="/design/img/dependientes/yoHombre.png">';
+            echo "</div>"; //FIN imagenDependiente
             ?>
 <form id = "selectorOpciones" action="?bPage=apuestas&action=caras&nonUI" method="post">
     <table border = '0' style = 'text-align:center'>
@@ -42,7 +51,7 @@ echo "<div id='moduloZona'>";
                 x2
             </td>
             <td>
-                <label><input name="cantidadApuesta1" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+                <label><input name="cantidadApuesta1" style="width:70%; border-radius:10px;" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
             </td>
         </tr>
         
@@ -54,11 +63,14 @@ echo "<div id='moduloZona'>";
                 x2
             </td>
             <td>
-                <label><input name="cantidadApuesta2" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+                <label><input name="cantidadApuesta2" style="width:70%; border-radius:10px;" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
             </td>
         </tr>
     </table>
-    <input type="submit" value="¡Apostar!">
+    <div class='submitTienda'>
+        <input type="submit" class="botonApostar" value=" ">
+    </div>
+    
 </form>                      
                 <script>
                     
@@ -76,7 +88,7 @@ echo "<div id='moduloZona'>";
                 <?php
                 
                 echo " Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";  
-                 
+                echo "</div>";
                 echo "</div>"; //FIN DE div seccionSpotOpciones
                 echo "</span>";
                 echo "<span class='contenedor2'>";

@@ -157,7 +157,9 @@ function puedoViajar(){
 
 function TiempoViaje($idP){
    global $db;
+   $id = $_SESSION['loggedIn'];
    
+   //Mirar que Transporte tiene equipado   
    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$idP' AND inventario.slot = '5'";
    $stmt = $db->query($sql);
    $result = $stmt->fetchAll();
@@ -172,6 +174,17 @@ function TiempoViaje($idP){
    }
    else{
        $tiempoViaje = 59;
+   }
+   
+   //Mirar si lleva algun objeto con la especialidad VELOZ
+   $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+   $stmt = $db->query($sql);
+   $objetosEquipados = $stmt->fetchAll();
+   
+   foreach ($objetosEquipados as $cadaObjeto) {
+       if($cadaObjeto['especial']==='veloz'){
+           $tiempoViaje = $tiempoViaje-10;
+       }
    }
    
    return $tiempoViaje;
@@ -695,6 +708,46 @@ function getNombreSpot($idS){
     
     $nombreSpot = $result[0]['nombre'];
     return $nombreSpot;
+}
+
+function getMonstruosDerrotados($idP){
+    global $db;
+    
+    $sql = "SELECT cantidad FROM victorias WHERE idP='$idP'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $victorias = 0;
+    
+    foreach($result as $cadaMonstruo){
+        $victorias += $cadaMonstruo['cantidad'];
+    }
+    
+    return $victorias;
+}
+
+function getReliquiasEncontradas($idP){
+    global $db;
+    
+    $sql = "SELECT COUNT(*) FROM coleccionismo WHERE idP = '$idP'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $reliquias = $result[0]['COUNT(*)'];
+    
+    return $reliquias;
+}
+
+function getInsigniasConseguidas($idP){
+    global $db;
+    
+    $sql = "SELECT COUNT(*) FROM insignias WHERE idP = '$idP'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $insignias = $result[0]['COUNT(*)'];
+    
+    return $insignias;
 }
 
 //COMPROBAR INSIGNIAS

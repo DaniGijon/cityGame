@@ -115,11 +115,23 @@ function zona($box){
                         $personaje = $stmt->fetchAll();
                         $nuevoNivel = comprobarSuboNivel($id);
                         if($nuevoNivel != $personaje[0]['nivel'] ){
-                            $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + 5 WHERE id='$id'";
+                            $avances = 5;
+                            //Mirar si lleva algun objeto con la especialidad VELOZ
+                            $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+                            $stmt = $db->query($sql);
+                            $objetosEquipados = $stmt->fetchAll();
+
+                            foreach ($objetosEquipados as $cadaObjeto) {
+                                if($cadaObjeto['especial']==='avance extra'){
+                                    $avances = $avances + 1;
+                                }   
+                            }
+                            
+                            $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + $avances WHERE id='$id'";
                             $db->query($sql);
                             $mensajeNivel = " SUBO DE NIVEL<br>";
                             //Generar mensaje del informe de la subida de nivel
-                            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes 5 Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
+                            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes $avances Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
                             $db->query($sql);
                             
                         }
@@ -263,12 +275,25 @@ function zona($box){
                         $personaje = $stmt->fetchAll();
                         $nuevoNivel = comprobarSuboNivel($id);
                         if($nuevoNivel != $personaje[0]['nivel'] ){
-                            $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + 5 WHERE id='$id'";
+                            $avances = 5;
+                            //Mirar si lleva algun objeto con la especialidad VELOZ
+                            $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+                            $stmt = $db->query($sql);
+                            $objetosEquipados = $stmt->fetchAll();
+
+                            foreach ($objetosEquipados as $cadaObjeto) {
+                                if($cadaObjeto['especial']==='avance extra'){
+                                    $avances = $avances + 1;
+                                }   
+                            }
+                            
+                            $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + $avances WHERE id='$id'";
                             $db->query($sql);
+                            
                             $mensajeNivel = " SUBO DE NIVEL<br>";
                             
                             //Generar mensaje del informe de la subida de nivel
-                            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes 5 Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
+                            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes $avances Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
                             $db->query($sql);
                             
                         }

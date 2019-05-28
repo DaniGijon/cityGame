@@ -5,8 +5,11 @@ function dibujarRanking(){
     
     //Cabecera selector opciones
     echo "<div id='botonesComprarVender'>";
-        echo "<button id='seccion1'>Más Respetados</button>";
-        echo "<button id='seccion2'>Más Populares</button>";
+        echo "<button id='seccion1'>Top Respetados</button>";
+        echo "<button id='seccion2'>Top Populares</button>";
+        echo "<button id='seccion3'>Top Safari</button>";
+        echo "<button id='seccion4'>Top Coleccionistas</button>";
+        echo "<button id='seccion5'>Top Clientes</button>";
     echo "</div>"; 
     
     echo "<div id=seccion1Ranking>";
@@ -15,30 +18,50 @@ function dibujarRanking(){
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
-    echo "<table border = '1'><caption>10 MÁS RESPETADOS</caption>";
+    echo "<div class='tablaTopRespetados'>";
+    
+    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br><caption>10 Más Respetados</caption>";
     
     echo "<tr>";
-        echo "<th> POS. </th>";
-        echo "<th> NOMBRE </th>";
-	echo "<th> RESPETO </th>";
+        echo "<th style='text-align:center; border-radius: 15px'> POS. </th>";
+        echo "<th style='text-align:center; border-radius: 15px'> NOMBRE </th>";
+	echo "<th style='text-align:center; border-radius: 15px'> RESPETO </th>";
     echo "</tr>";
     
     for($i=0; $i<10; $i=$i+1){
         echo "<tr>";
-        $pos = $i + 1;
-        echo "<td>" . $pos . "º</td>";
-        if($result[$i]['id'] === $id){
-            echo "<td bgcolor='yellow'>" . $result[$i]['nombre'] . "</td>";
+            echo "<td colspan='100%' bgcolor='black' height='2'></td>";
+        echo "</tr>";  
+        
+        if($result[$i]['id'] === $id ){ //Si soy yo
+            echo "<tr style='background:pink;'>";
         }
         else{
-        echo "<td>" . $result[$i]['nombre'] . "</td>";
+            if($i===0){
+                echo "<tr style='background:gold;'>";
+            }
+            elseif($i===1){
+                echo "<tr style='background:silver;'>";
+            }
+            elseif($i===2){
+                echo "<tr style='background:orange;'>";
+            }
+            else{
+                echo "<tr>";
+            }
         }
+        $pos = $i + 1;
+        echo "<td>" . $pos . "º</td>";
+        
+        echo "<td>" . $result[$i]['nombre'] . "</td>";
+        
 	echo "<td>" . $result[$i]['respeto'] . "</td>";
 	echo "</tr>";
        
     }
     echo "</table>";
     echo "</div>";
+    echo "</div>"; //Fin seccion1Ranking
     
     echo "<div id=seccion2Ranking>";
     //Cojo todos los jugadores y los ordeno de más a menos popularidad
@@ -46,30 +69,51 @@ function dibujarRanking(){
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
-    echo "<table border = '1'><caption>10 MÁS POPULARES</caption>";
+    echo "<div class='tablaTopPopulares'>";
+    
+    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br><caption>10 Más Populares</caption>";
     
     echo "<tr>";
-        echo "<th> POS. </th>";
-        echo "<th> NOMBRE </th>";
-	echo "<th> POPULARIDAD </th>";
+        echo "<th style='text-align:center; border-radius: 15px'> POS. </th>";
+        echo "<th style='text-align:center; border-radius: 15px'> NOMBRE </th>";
+	echo "<th style='text-align:center; border-radius: 15px'> POPULARIDAD </th>";
     echo "</tr>";
-    
     for($i=0; $i<10; $i=$i+1){
         echo "<tr>";
-        $pos = $i + 1;
-        echo "<td>" . $pos . "º</td>";
-        if($result[$i]['id'] === $id){
-            echo "<td bgcolor='yellow'>" . $result[$i]['nombre'] . "</td>";
+            echo "<td colspan='100%' bgcolor='black' height='2'></td>";
+        echo "</tr>";  
+        
+        if($result[$i]['id'] === $id ){ //Si soy yo
+            echo "<tr style='background:pink;'>";
         }
         else{
-        echo "<td>" . $result[$i]['nombre'] . "</td>";
+            if($i===0){
+                echo "<tr style='background:gold;'>";
+            }
+            elseif($i===1){
+                echo "<tr style='background:silver;'>";
+            }
+            elseif($i===2){
+                echo "<tr style='background:orange;'>";
+            }
+            else{
+                echo "<tr>";
+            }
         }
-	echo "<td>" . $result[$i]['popularidad'] . "</td>";
+        $pos = $i + 1;
+        echo "<td>" . $pos . "º</td>";
+        
+        echo "<td>" . $result[$i]['nombre'] . "</td>";
+        
+	echo "<td>" . $result[$i]['popularidad'] . "%</td>";
 	echo "</tr>";
        
     }
     echo "</table>";
     echo "</div>";
+    echo "</div>"; //Fin seccion2
+    
+
 ?>
 <script>
     $("#seccion1").click(function(){

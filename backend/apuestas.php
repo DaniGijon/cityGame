@@ -137,7 +137,7 @@ function caras($cantidadApuesta1, $cantidadApuesta2){
     global $db;
     $id = $_SESSION['loggedIn'];
     
-    $ganador = rand(1,3);
+    $ganador = rand(1,2);
     $ingresos = 0;
     $gastos = $cantidadApuesta1 + $cantidadApuesta2;
     //Comprobar que tengo suficiente dinero para apostar
@@ -174,12 +174,6 @@ function caras($cantidadApuesta1, $cantidadApuesta2){
             else{
                 $box = $box . ' Pierdes ' . $gastos . "€.";
             }
-        }
-        else{
-            $box = '¡Cara y Cruz! Empate <br>';
-            $ingresos = $cantidadApuesta1 + $cantidadApuesta2;
-            $beneficio = $ingresos - $gastos;
-            
         }
     
         $sql = "UPDATE personajes SET cash=cash + $ingresos - $gastos WHERE id='$id'";

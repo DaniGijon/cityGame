@@ -12,54 +12,79 @@ global $db;
             
             echo "<div class='contenido'>";
             echo "<span class='contenedor1'>"; 
+            /*
                 echo "<div class='seccionSpotImagen'>" ;
                     $imagenSpot = getFotoSpot(22);
                     echo $imagenSpot;
                 echo "</div>"; //FIN DE div seccionSpotImagen
-                
+             */   
                
                 echo "<div class='seccionSpotOpciones'>";
-                echo "Esto es el Centro de la Mujer. <br><br>";
-                
-                echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=social&nonUI' method='post'>";
-                        echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='conferenciaCentroMujer'>Conferencia<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>15M</div></label>";
-                        echo "</div>";
-                        
-                        echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='donacionCentroMujer'>Donar pasta<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='monedaTienda'></div><div class='precioTienda'><input name='cantidadDonacion' style='width:45%' type=number min='100'></div></label>";
-                        echo "</div>";
-                        
-                        echo "<div class='submitTienda'>";
-                            echo "<input type='submit' class='botonCarrilBici' value=' '>";
-                        echo "</div>";
-                    echo "</form>";  
-                ?>
-             
-                <script>
-                    
-                    $(":checkbox").change(function(){
-                       var $box = $(this);
-                      
-                       $box.parents('#selectorOpciones').find(':checkbox').each(function(){
-                          $(this).prop('checked', false); 
-                       });
-                       $box.prop("checked", true);
+                    echo "<div class='semiTransparente'>";
+                        echo "<div class='textoDependiente'>";
+                            echo "Estoy terminando de arreglarme, cariño. Enseguida empezamos la conferencia.\"";
+                        echo "</div>"; //FIN textoDependiente
+                        echo "<div class='imagenDependiente'>";
+                            echo '<img src="/design/img/dependientes/centroMujer.png">';
+                        echo "</div>"; //FIN imagenDependiente
 
-                    });
-                </script>
+                    echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=social&nonUI' method='post'>";
+                            echo "<div class='opcionesTienda'>";
+                                echo "<div class='opcionesTiendaCheckbox'>";
+                                    echo '<input type="checkbox" name="cbox1" value="conferenciaCentroMujer">';
+                                echo "</div>";
+                                echo "<label for='cbox1'>";
+                                echo "<div class='opcionesTiendaTitulo'>";
+                                    echo 'Conferencia';
+                                echo "</div>";
+                                echo "<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>15M</div></label>";
+                            echo "</div>";
 
-                <?php
-                    
+                            echo "<div class='opcionesTienda'>";
+                            
+                            echo '<div class="opcionesTiendaCheckbox"><input type="checkbox" name="cbox1" value="donacionCentroMujer"></div><label for="cbox4"><div class="opcionesTiendaTitulo">Donar pasta</div><div id="opcionBox"><img src="/design/img/entrenamiento/ritmitoGeneroso.png"></div><div class="monedaTienda"></div><div class="precioTiendaInput"><input name="cantidadDonacion" style="width:70%; border-radius:10px;" type=number min="100"></div></label>';
+                            echo "</div>";
+                            /*
+                                echo "<div class='opcionesTiendaCheckbox'>";
+                                    echo '<input type="checkbox" name="cbox1" value="donacionCentroMujer">';
+                                echo "</div>";
+                                echo "<div class='opcionesTiendaTitulo'>";
+                                    echo 'Donar Pasta';
+                                echo "</div>";
+                                echo "<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='monedaTienda'></div><div class='precioTiendaInput'><label for='cbox1'><input name='cantidadDonacion' style='width:70%; border-radius:10px;' type=number min='100'></div></label>";
+                            echo "</div>";
+*/
+                            echo "<div class='submitTienda'>";
+                                echo "<input type='submit' class='botonCarrilBici' value=' '>";
+                            echo "</div>";
+                        echo "</form>";  
+                    ?>
+
+                    <script>
+
+                        $(":checkbox").change(function(){
+                           var $box = $(this);
+
+                           $box.parents('#selectorOpciones').find(':checkbox').each(function(){
+                              $(this).prop('checked', false); 
+                           });
+                           $box.prop("checked", true);
+
+                        });
+                    </script>
+
+                    <?php
+                echo "</div>"; //Fin semiTransparente   
                 echo "</div>"; //FIN DE div seccionSpotOpciones
                 echo "</span>"; //FIN Contenedor1
                 
                 echo "<span class='contenedor2'>";
                 
                 echo "<div class='seccionSpotInfo'>";
+                echo "<div class='semiTransparente'>";
                    $popularidadAqui = getPopularidadCentroMujer();
                    echo "<div class='popularidadLetras'>";
-                        echo "Tu Popularidad aquí es de: ";
+                        echo "<h4>Tu Popularidad aquí es de: </h4>";
                    echo "</div>";
                    echo "<div class='popularidadEstrellas'>";
                         if($popularidadAqui < 10){
@@ -97,11 +122,11 @@ global $db;
                         }
                    echo "</div>";
                    echo "<div class='populatidadTexto'>";
-                        echo $popularidadAqui . "%";
+                        echo "<h4>" . $popularidadAqui . "%</h4>";
                    echo "</div>";
                     
                 echo "</div>";
-                
+                echo "</div>";
                 echo "</span>"; //FIN Contenedor2
                 
             echo "</div>"; //FIN DE div contenido
