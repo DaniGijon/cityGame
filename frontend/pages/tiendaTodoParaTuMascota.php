@@ -13,38 +13,60 @@ global $db;
             echo "<div class='contenido'>";
             
             echo "<span class='contenedor1'>"; 
-                    
+             /*       
                 echo "<div class='seccionSpotImagen'>" ;
                     $imagenSpot = getFotoSpot(8);
                     echo $imagenSpot;
                 echo "</div>"; //FIN DE div seccionSpotImagen
-                
+            */    
                 echo "<div class='seccionSpotOpciones'>";   
                     //Cabecera selector opciones
                     echo "<div id='botonesComprarVender'>";
                         echo "<button id='botonComprar' class='tagTiendaComprar'>Comprar</button>";
                         echo "<button id='botonVender' class='tagTiendaVender'>Vender</button>";
-                       echo "</div>";
-                    echo "<div id='comprar'>";
+                    echo "</div>";
+                    echo "<div class='semiTransparente'>";
+                        echo "<div id='comprar'>";
                             echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                             echo "<div class='textoDependiente'>";
-                                echo "\"Schwak!\", grita el loro. \"¿Qué necesitas?\" <br><br>";
+                                echo "\"¡Schwak, un cliente!\"";
                             echo "</div>";
-                            $imagenPez = getPez();
-                            $imagenHamster = getHámster();
-                            $imagenGallo = getGallo();
+                            echo "<div class='imagenDependiente'>";
+                                echo '<img src="/design/img/dependientes/todoMascota.png">';
+                            echo "</div>"; //FIN imagenDependiente
+                            $imagenPez = getFotoObjeto(1);
+                            $imagenHamster = getFotoObjeto(2);
+                            $imagenGallo = getFotoObjeto(3);
                            
                             echo "<div class='opcionesTienda'>";
-                                echo '<input type="checkbox" name="cbox1" value="Pez">Pez<label for="cbox3"><div id="opcionBox">' . $imagenPez . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label>';
+                                echo "<div class='opcionesTiendaCheckbox'>";
+                                    echo '<input type="checkbox" name="cbox1" value="Pez">';
+                                echo "</div>";
+                                echo "<div class='opcionesTiendaTitulo'>";
+                                    echo 'Pez';
+                                echo "</div>";
+                                echo '<label for="cbox3"><div id="opcionBox">' . $imagenPez . '</div><div class="monedaTienda"></div><div class="precioTienda">50</div></label>';
                             echo "</div>";
                             echo "<div class='opcionesTienda'>";
-                                echo '<input type="checkbox" name="cbox1" value="Hámster">Hámster<label for="cbox4"><div id="opcionBox">' . $imagenHamster . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label>';
+                                echo "<div class='opcionesTiendaCheckbox'>";
+                                    echo '<input type="checkbox" name="cbox1" value="Hámster">';
+                                echo "</div>";
+                                echo "<div class='opcionesTiendaTitulo'>";
+                                    echo 'Hámster';
+                                echo "</div>";
+                                echo '<label for="cbox3"><div id="opcionBox">' . $imagenHamster . '</div><div class="monedaTienda"></div><div class="precioTienda">120</div></label>';
                             echo "</div>";
                             echo "<div class='opcionesTienda'>";
-                                echo '<input type="checkbox" name="cbox1" value="Gallo"> Gallo<label for="cbox4"><div id="opcionBox">' . $imagenGallo . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label><br><br>';
-                            echo "</div>";  
+                                echo "<div class='opcionesTiendaCheckbox'>";
+                                    echo '<input type="checkbox" name="cbox1" value="Gallo">';
+                                echo "</div>";
+                                echo "<div class='opcionesTiendaTitulo'>";
+                                    echo 'Gallo';
+                                echo "</div>";
+                                echo '<label for="cbox3"><div id="opcionBox">' . $imagenGallo . '</div><div class="monedaTienda"></div><div class="precioTienda">200</div></label>';
+                            echo "</div>";
                             echo "<div class='submitTienda'>";
-                                echo'<input type="submit" class="botonTiendaComprar" value=" ">';
+                                    echo'<input type="submit" class="botonTiendaComprar" value=" ">';
                             echo "</div>";
                            /* $miDinero = comprobarDinero();
                             $dineroEnCash = $miDinero[0]['cash'];
@@ -56,8 +78,11 @@ global $db;
 
                             echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                             echo "<div class='textoDependiente'>";
-                                echo "\"Schwak! ¿Traes algo ahí, payo?\" <br><br>";
-                            echo "</div>";
+                                echo "\"¿Me traes una galletita?\"";
+                            echo "</div>"; //FIN textoDependiente
+                            echo "<div class='imagenDependiente'>";
+                                echo '<img src="/design/img/dependientes/todoMascota.png">';
+                            echo "</div>"; //FIN imagenDependiente
                             //CONSULTAR OBJETOS QUE LLEVO DESEQUIPADOS
                             $objetosDesequipados=objetosDesequipados();
                             foreach($objetosDesequipados as $cadaObjeto){
@@ -66,8 +91,14 @@ global $db;
                                 }
                                 else{
                                     echo "<div class='opcionesTienda'>";
-                                     echo '<input type="checkbox" name="cbox1" value="v' . $cadaObjeto['nombre'] . '">'. $cadaObjeto['nombre'] . '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/objetos/' . $cadaObjeto['imagenObjeto'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $cadaObjeto["precioVenta"] . '</div></label>';
-                                    echo "</div>";
+                                            echo "<div class='opcionesTiendaCheckbox'>";
+                                                echo '<input type="checkbox" name="cbox1" value="v' . $cadaObjeto['nombre'] . '">';
+                                            echo "</div>";
+                                            echo "<div class='opcionesTiendaTitulo'>";
+                                                echo $cadaObjeto['nombre'];
+                                            echo "</div>";
+                                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/objetos/' . $cadaObjeto['imagenObjeto'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $cadaObjeto["precioVenta"] . '</div></label>';
+                                        echo "</div>";
                                 }
                             }
 
@@ -77,6 +108,7 @@ global $db;
                             /*echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; */
                             echo '</form>';
                     echo "</div>";
+                    echo "</div>"; //Fin SemiTransparente
                 echo "</div>"; //FIN seccionSpotOpciones
                 
                 echo "</span>"; //FIN Contenedor1
@@ -88,6 +120,7 @@ global $db;
                         echo "<div class = 'mapaCallejero'>";
                             echo "<iframe width='300' height='225' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.openstreetmap.org/export/embed.html?bbox=-4.115635156631471%2C38.677528124665%2C-4.101837873458863%2C38.682972148759305&amp;layer=mapnik&amp;marker=38.68025651175634%2C-4.108749389779405' style='border: 1px solid black'></iframe><br/><br>";    
                         echo "</div>";
+                        echo "<div class = 'semiTransparente'>";
                         echo "<div class = 'infoSpot'>";
                             echo "<table border = '0' style = 'text-align:left'>";
                                 echo "<tr>";
@@ -101,6 +134,7 @@ global $db;
                                 echo "</tr>";
                             echo "</table>";
                         echo "</div>";
+                        echo "</div>"; //FIN Semitransparente
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";

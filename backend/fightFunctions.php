@@ -3,14 +3,30 @@
     function listRivales(){
         global $db;
         $id = $_SESSION['loggedIn'];
-        $sql = "SELECT * FROM personajes WHERE id != '$id' AND barrio = (SELECT barrio FROM personajes WHERE id='$id') AND zona = (SELECT zona FROM personajes WHERE id='$id')";
+        $sql = "SELECT id, nivel, nombre FROM personajes WHERE id != '$id' AND barrio = (SELECT barrio FROM personajes WHERE id='$id') AND zona = (SELECT zona FROM personajes WHERE id='$id')";
         $stmt = $db->prepare($sql);
         $stmt->execute();       
         $result = $stmt->fetchAll();
         
-        foreach ($result as $rivales) {
-            echo "<a href='?page=jugadorRival&id=" .$rivales['id'] . "'>" . $rivales['nombre'] . " (Nivel: " . $rivales['nivel'] . ")" . "</a><br>";       
-        }  
+        $sql = "SELECT COUNT(*) FROM personajes WHERE id != '$id' AND barrio = (SELECT barrio FROM personajes WHERE id='$id') AND zona = (SELECT zona FROM personajes WHERE id='$id')";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();       
+        $total = $stmt->fetchAll();
+        
+        $limiteMax = $total[0]['COUNT(*)']-1;
+        
+        $propuesta = rand(0, $limiteMax);
+        
+        echo "<div class='opcionesTienda'>";
+            echo "<div class='opcionesTiendaTitulo' style='text-align:center'>";
+                echo "<a href='?page=jugadorRival&id=" . $result[$propuesta]['id'] . "'>"  . $result[$propuesta]['nombre'];
+            echo "</div>";
+            echo '<div id="opcionBox">' . '<img src="/design/img/objetos/307.png">' . '</div><div class="nivelIcono"></div><div class="precioTienda">' . $result[$propuesta]['nivel'] . '</div></a>';
+        
+        echo "</div>";
+        echo "<div class='submitTienda'>";
+            echo "<a href='?page=zona'><button class='botonVolver'></button></a>";
+        echo "</div>";
     }
     
     function listJugadorObjetivo($id){
@@ -18,8 +34,9 @@
         include(__ROOT__."/backend/personajeFunctions.php");
         
         listJugadorRival($id);
-        
-        echo "<a href='?page=attackPlayer&id=" . $id . "'><button>¡Emboscada!</button></a>";
+     
+        echo "<a href='?page=attackPlayer&id=" . $id . "'><button class='botonEmboscada'></button></a>";
+    
     }
     
     function atacarJugador($id){
@@ -1686,8 +1703,8 @@
         $idYo = $miResult[0]['id'];
         $nombreYo = $miResult[0]['nombre'];
                 
-        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$idYo','Emboscada','En el silencio de la noche, $nombreRival camina apresuradamente de camino a casa. Al pasar por delante de un montón de cajas apiladas escucha un chasquido. Se gira en la oscuridad y todo lo que alcanza a ver es el cañón de una Desert Eagle 12.7mm empuñada por $nombreYo.<br>¡Comienza la Batalla!<br>Cuando al fín cesa el ruido y el humo se disipa, queda sobre el asfalto el cuerpo de $nombreRival herido, mientras $nombreYo huye de la escena con un botín de $dineroPillado Monedas y $respetoPillado Puntos de Respeto que $nombreRival echará en falta.','emboscada.png'),"
-                . "('$idRival','Emboscada','áéíóúñ!ÁÉÍÓÚ En el silencio de la noche, $nombreRival camina apresuradamente de camino a casa. Al pasar por delante de un montón de cajas apiladas escucha un chasquido. Se gira en la oscuridad y todo lo que alcanza a ver es el cañón de una Desert Eagle 12.7mm empuñada por $nombreYo.<br>¡Comienza la Batalla!<br>Cuando al fín cesa el ruido y el humo se disipa, queda sobre el asfalto el cuerpo de $nombreRival herido, mientras $nombreYo huye de la escena con un botín de $dineroPillado Monedas y $respetoPillado Puntos de Respeto que $nombreRival echará en falta.','emboscada.png')";
+        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$idYo','Emboscada','En el silencio de la noche, $nombreRival camina apresuradamente de camino a casa. Al pasar por delante de un montón de cajas apiladas escucha un chasquido. Se gira en la oscuridad y todo lo que alcanza a ver es la sombra de un bate de béisbol empuñado por $nombreYo.<br>¡Comienza la Batalla!<br>Cuando al fín cesa el ruido y el humo se disipa, queda sobre el asfalto el cuerpo de $nombreRival herido, mientras $nombreYo huye de la escena con un botín de $dineroPillado Monedas y $respetoPillado Puntos de Respeto que $nombreRival echará en falta.','emboscada.png'),"
+                . "('$idRival','Emboscada','áéíóúñ!ÁÉÍÓÚ En el silencio de la noche, $nombreRival camina apresuradamente de camino a casa. Al pasar por delante de un montón de cajas apiladas escucha un chasquido. Se gira en la oscuridad y todo lo que alcanza a ver es la sombra de un bate de béisbol empuñado por $nombreYo.<br>¡Comienza la Batalla!<br>Cuando al fín cesa el ruido y el humo se disipa, queda sobre el asfalto el cuerpo de $nombreRival herido, mientras $nombreYo huye de la escena con un botín de $dineroPillado Monedas y $respetoPillado Puntos de Respeto que $nombreRival echará en falta.','emboscada.png')";
         $db->query($sql);
         
         //Actualizo el dinero y el respeto

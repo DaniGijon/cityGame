@@ -12,21 +12,44 @@ global $db;
             
             echo "<div class='contenido'>";
                 echo "<span class='contenedor1'>"; 
+                /*
                     echo "<div class='seccionSpotImagen'>" ;
                         $imagenSpot = getFotoSpot(3);
                         echo $imagenSpot;
                     echo "</div>"; //FIN DE div seccionSpotImagen
-
+*/
                     echo "<div class='seccionSpotOpciones'>";
-                    echo "La terraza del \"Un Alto\" es una de mis paradas favoritas cada vez que vengo a este barrio. ¡Veamos qué tomar! <br><br>";
-                
+                    echo "<div class='semiTransparente'>"; 
+                        echo "<div class='textoDependiente'>";
+                            echo "La terraza del \"Un Alto\" es de mis paradas favoritas cada vez que vengo a este barrio.";
+                        echo "</div>"; //FIN textoDependiente
+                        echo "<div class='imagenDependiente'>";
+                            echo '<img src="/design/img/dependientes/yoHombre.png">';
+                        echo "</div>"; //FIN imagenDependiente
+                        
+                    
                     echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
-                        echo "<div class='opcionesTienda'>";
-                            echo '<input type="checkbox" name="cbox1" value="cafeGo">Café & GO<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">10</div><div class="corazonTienda"></div><div class="vidaTienda">+1</div></label>';
+                    echo "<div class='opcionesTienda'>";
+                        echo "<div class='opcionesTiendaCheckbox'>";
+                            echo '<input type="checkbox" name="cbox1" value="cafeGO">';
                         echo "</div>";
-                        echo "<div class='opcionesTienda'>";
-                            echo '<input type="checkbox" name="cbox1" value="cafeIrlandes">Café Irlandés<label for="cbox4"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
+                        echo "<div class='opcionesTiendaTitulo'>";
+                            echo 'Café para llevar';
                         echo "</div>";
+                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">10</div><div class="corazonTienda"></div><div class="vidaTienda">+1</div></label>';
+                    echo "</div>";
+                    
+                    echo "<div class='opcionesTienda'>";
+                        echo "<div class='opcionesTiendaCheckbox'>";
+                            echo '<input type="checkbox" name="cbox1" value="cafeIrlandes">';
+                        echo "</div>";
+                        echo "<div class='opcionesTiendaTitulo'>";
+                            echo 'Café Irlandés';
+                        echo "</div>";
+                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
+                    echo "</div>";
+                       
+                       
                         echo "<div class='submitTienda'>";
                             echo'<input type="submit" class="botonTiendaComprar" value=" ">';
                         echo "</div>";
@@ -46,7 +69,7 @@ global $db;
                 </script>
 
                 <?php
-                    
+                 echo "</div>"; //fin de semiTransparente   
                 echo "</div>"; //FIN DE div seccionSpotOpciones
                 
             echo "</span>"; //FIN Contenedor1

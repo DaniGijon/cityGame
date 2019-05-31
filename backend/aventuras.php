@@ -276,7 +276,7 @@ function zona($box){
                         $nuevoNivel = comprobarSuboNivel($id);
                         if($nuevoNivel != $personaje[0]['nivel'] ){
                             $avances = 5;
-                            //Mirar si lleva algun objeto con la especialidad VELOZ
+                            //Mirar si lleva algun objeto con la especialidad avance extra
                             $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
                             $stmt = $db->query($sql);
                             $objetosEquipados = $stmt->fetchAll();

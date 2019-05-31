@@ -143,11 +143,18 @@ h3{
     margin-top: 5px;
 }
 
+#opcionMano{
+    background: white;
+    width: 200px;
+    height: 200px;
+    float: left;
+    position:absolute;
+}
+
 #boxHolder{
     width:90%;
     margin:auto;
 }
-
 
 .iconoZona{
     float: left;
@@ -1606,6 +1613,18 @@ h3{
     display:none;
 }
 
+#seccion3Ranking{
+    display:none;
+}
+
+#seccion4Ranking{
+    display:none;
+}
+
+#seccion5Ranking{
+    display:none;
+}
+
 #sexos{
     height: 110px;
     width: 110px;
@@ -1659,6 +1678,17 @@ h3{
     margin-right: 2px;
 }
 
+.nivelIcono{
+   background-image: url("/design/img/iconos/nivelIcono.png");
+   background-repeat: repeat-x;
+   width: 20px;
+   height: 20px;
+   float:left;
+   margin-right: 2px;
+   border-radius: 0px 0px 0px 10px;
+   clear : both; 
+}
+
 .monedaTienda{
     background-image: url("/design/img/iconos/monedaTop.png");
     background-repeat: repeat-x;
@@ -1667,6 +1697,7 @@ h3{
     float:left;
     margin-right: 2px;
     border-radius: 0px 0px 0px 10px;
+    clear : both;
 }
 
 .corazonTienda{
@@ -1683,6 +1714,7 @@ h3{
     background : rgba(255, 249, 192, 0.7); 
     padding : 20px;
     border-radius: 0px 10px 10px 10px;
+    float : left;
 }
 
 .textoDependiente{
@@ -1732,6 +1764,19 @@ h3{
     width: 100px;
     height:33px;
     background-image: url("/design/img/botones/submitCarrilBici.png");
+}
+
+.botonVolver{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/botonTiendaComprar.png");
+}
+
+.botonEmboscada{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/submitCarrilBici.png");
+    margin-top: 10px;
 }
 
 .botonApostar{

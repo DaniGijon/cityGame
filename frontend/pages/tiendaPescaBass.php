@@ -119,6 +119,7 @@ global $db;
                         echo "<div class = 'mapaCallejero'>";
                             echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.1127920150756845%2C38.681749373255805%2C-4.098994731903077%2C38.687603430912894&amp;layer=mapnik&amp;marker=38.684672389459415%2C-4.105891227591201" style="border: 1px solid black"></iframe><br/><br>';    
                         echo "</div>";
+                        echo "<div class = 'semiTransparente'>";
                         echo "<div class = 'infoSpot'>";
                             echo "<table border = '0' style = 'text-align:left'>";
                                 echo "<tr>";
@@ -132,6 +133,7 @@ global $db;
                                 echo "</tr>";
                             echo "</table>";
                         echo "</div>";
+                        echo "</div>";//fin semiTransparente
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";

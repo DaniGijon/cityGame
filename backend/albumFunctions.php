@@ -15,7 +15,8 @@ function dibujarAlbum(){
        
     echo "<div id='monstruos'>";
     
-    echo '<br>MONSTRUOS DERROTADOS: ' . getMonstruosDerrotados($id) . '<br><br>';
+    echo '<br>MONSTRUOS DERROTADOS: ' . getMonstruosDerrotados($id);
+    echo '<br>ESPECIES DERROTADAS: ' . getEspeciesDerrotadas($id) . ' / 209';
     
     echo "<div class='tablaMonstruosDerrotados'>";
     

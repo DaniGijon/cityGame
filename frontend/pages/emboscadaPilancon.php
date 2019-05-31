@@ -12,16 +12,29 @@ global $db;
             
         
         echo "<div id='moduloZona'>";
+            echo "<span class = 'tituloSpot'>";
+                echo "<h4>" . getNombreSpot(1) . "</h4>";
+            echo "</span>";
             
             echo "<div class='contenido'>";
-                echo "<div class='seccionSpotImagen'>" ;
-                    $imagenSpot = getFotoSpot(1);
-                    echo $imagenSpot;
-                echo "</div>"; //FIN DE div seccionSpotImagen
-               
-                echo "<div class='seccionSpotOpciones'>";
-                echo "Parece una plaza muy transitada. Me oculto durante un rato a observar. He detectado a los siguientes jugadores:  <br><br>";
-                listRivales();
+                echo "<span class='contenedor1'>";
+                /*
+                    echo "<div class='seccionSpotImagen'>" ;
+                        $imagenSpot = getFotoSpot(1);
+                        echo $imagenSpot;
+                    echo "</div>"; //FIN DE div seccionSpotImagen
+*/
+                    echo "<div class='seccionSpotOpciones'>";
+                        echo "<div class='semiTransparente'>"; 
+                            echo "<div class='textoDependiente'>";
+                                echo "Me oculto durante un rato a observar jugadores incautos:";
+                            echo "</div>"; //FIN textoDependiente
+                            echo "<div class='imagenDependiente'>";
+                                echo '<img src="/design/img/dependientes/yoHombre.png">';
+                            echo "</div>"; //FIN imagenDependiente
+                            
+                            listRivales();
+                            
                 ?>
 
 </form>                
@@ -40,9 +53,20 @@ global $db;
 
                 <?php
                     
+                    echo "</div>"; //Fin de semiTransparente    
                 echo "</div>"; //FIN DE div seccionSpotOpciones
-
                 
+            echo "</span>"; //FIN DE contenedor1    
+            echo "<span class='contenedor2'>";
+                
+                
+            echo "</span>"; //FIN Contenedor2
+            
+            echo "<div class='seccionSpotImagen'>" ;
+                        $imagenSpot = getFotoSpot(1);
+                        echo $imagenSpot;
+                    echo "</div>"; //FIN DE div seccionSpotImagen
+            
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona

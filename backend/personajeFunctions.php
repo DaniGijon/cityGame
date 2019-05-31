@@ -628,6 +628,19 @@
          </fieldset>
         
     </span>
+
+    <div id="opcionMano" style="display:none;">
+        <div id="manoTexto">
+            ¿En qué mano quieres equiparlo?
+        </div>
+        <div id="manoIzq" class="cualMano">
+            Mano Izquierda
+        </div>
+        <div id="manoDer" class="cualMano">
+            Mano Derecha
+        </div>
+    </div>
+    
     
     <script>
                 $(".objetoBox").click(function(event){
@@ -642,12 +655,30 @@
                 $(".nuevoBoxBolsa").click(function(){
                    var objetoBolsaId = $(this).attr('id');
                    var areaCuerpoId = $("#areaCuerpo").text();
-                   $.post("?bPage=personajeFunctions", {
-                       objetoBolsaId: objetoBolsaId,
-                       areaCuerpoId: areaCuerpoId
-                   }).done(function(){
-                       $("#personajeArea").load("index.php?bPage=personajeFunctions&equipar&listPersonajeTodo&nonUI")
-                   })
+                   if(objetoBolsaId >=300 && objetoBolsaId < 400){
+                       $("#opcionMano").css('left',event.pageX);
+                       $("#opcionMano").css('top',event.pageY);
+                       $("#opcionMano").toggle();
+                       
+                       $(".cualMano").click(function(){
+                            var manoId = $(this).attr('id');
+
+                            $.post("?bPage=personajeFunctions", {
+                                    objetoBolsaId: objetoBolsaId,
+                                    areaCuerpoId: manoId
+                                }).done(function(){
+                                    $("#personajeArea").load("index.php?bPage=personajeFunctions&equipar&listPersonajeTodo&nonUI")
+                                })
+                        })
+                   }
+                   else{
+                        $.post("?bPage=personajeFunctions", {
+                            objetoBolsaId: objetoBolsaId,
+                            areaCuerpoId: areaCuerpoId
+                        }).done(function(){
+                            $("#personajeArea").load("index.php?bPage=personajeFunctions&equipar&listPersonajeTodo&nonUI")
+                        })
+                   }
                 });
                 
                 $(".botonAvances").click(function(){
@@ -744,7 +775,7 @@
 <?php
     }
     
-    function equipar($cosaId){
+    function equipar($cosaId, $areaCuerpoId){
         global $db;
         $id = $_SESSION['loggedIn'];  
         
@@ -765,8 +796,13 @@
         else if ($cosaId >= 200 && $cosaId < 300 ){
             $slot = 1; //torso
         }
-        else if ($cosaId >= 300 && $cosaId < 400 ){
-            $slot = 3; //HABRA QUE ELEGIR MANO PERO DE MOMENTO SE EQUIPA EN DERECHA
+        else if ($cosaId >= 300 && $cosaId < 400){
+            if($areaCuerpoId === 'manoDer'){
+                $slot = 3; //mano derecha
+            }
+            elseif($areaCuerpoId === 'manoIzq'){
+                $slot = 4; //mano izquierda
+            }
         }
         else if ($cosaId >= 400 && $cosaId < 500 ){
             $slot = 2; //pies
@@ -795,6 +831,59 @@
         //DESEQUIPAR EL OBJETO ANTERIOR
         $sql = "UPDATE inventario SET idO='$objetoDesequipado' WHERE (idP='$id' AND slot = '$slotLibre')";
         $stmt = $db->query($sql);
+        
+        //COMPROBAR SI AUMENTO SLOTS DE INVENTARIO (EN CASO DE EQUIPAR UNA MOCHILA)
+        if($slot == 7){
+            if($cosaId >=500 && $cosaId <=501){
+                $extra = 1;
+            }
+            elseif($cosaId >=502 && $cosaId <=503){
+                $extra = 2;
+            }
+            elseif($cosaId >=504 && $cosaId <=505){
+                $extra = 3;
+            }
+            elseif($cosaId >=506 && $cosaId <=507){
+                $extra = 4;
+            }
+            elseif($cosaId >=508 && $cosaId <=509){
+                $extra = 5;
+            }
+            elseif($cosaId >=510 && $cosaId <=511){
+                $extra = 6;
+            }
+            elseif($cosaId >=512 && $cosaId <=512){
+                $extra = 7;
+            }
+            elseif($cosaId >=513 && $cosaId <=513){
+                $extra = 8;
+            }
+            
+            $sql = "SELECT COUNT(*) FROM inventario WHERE (idP = '$id' && slot > '9')";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            $extraAnterior = $result[0]['COUNT(*)']; //cantidad de slots extra que yo ya tenía
+            
+            if($extra > $extraAnterior){
+                //Meterle Slots Extra
+                $nuevos = $extra - $extraAnterior;
+                for($i=1; $i<=$nuevos; $i++){
+                    $nuevoSlot = 9 + $extraAnterior + $i;
+                    $sql = "INSERT INTO inventario (idP, slot, idO) VALUES ('$id', '$nuevoSlot', '0')";
+                    $db->query($sql);
+                }
+            }
+            elseif($extra < $extraAnterior){
+                //Quitarle slots
+                $nuevos = $extraAnterior - $extra;
+                for($i=1; $i<=$nuevos; $i++){
+                    $slotEliminado = 10 + $extraAnterior - $i;
+                    $sql = "DELETE FROM inventario WHERE idP = '$id' AND slot = '$slotEliminado'";
+                    $db->query($sql);
+                }
+                
+            }
+        }
     }
 
     function listJugadorRival($id){
@@ -804,7 +893,7 @@
         $stmt = $db->query($sql);
         $result = $stmt->fetchAll();
         
-        $nombre = $result[0]['nombre'] . " (" . $result[0]['origen'] . ")";
+        $nombre = $result[0]['nombre'];
         $sexo = $result[0]['sexo'];
         $nivel = $result[0]['nivel'];
         $respeto = $result[0]['respeto'];
@@ -831,11 +920,51 @@
         if($respeto >= 200){
             $respetoText = 'De Usted';
         }
-        echo'Nombre: ' . $nombre . '<br>';
-        echo'Sexo: ' . $sexo . '<br>';
-        echo'Nivel: ' . $nivel . '<br>';
-        echo'Respeto: ' . $respetoText . '<br>';
-        echo'Dinero: ' . $currentMoneyText . '<br>';
+        
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br></caption>";
+    
+        echo "<tr>";
+            echo "<th style='text-align:center; border-radius: 15px' colspan='100%'>" . $nombre . "</th>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<td colspan='100%' bgcolor='black' height='2'></td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Sexo" . "</th>";
+            echo "<td style='text-align:center; border-radius: 15px'>" . $sexo . "</td>";
+        echo "</tr>";
+             
+        echo "<tr>";
+            echo "<td colspan='100%' bgcolor='black' height='2'></td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Nivel" . "</th>";
+            echo "<td style='text-align:center; border-radius: 15px'>" . $nivel . "</td>";
+        echo "</tr>";
+             
+        echo "<tr>";
+            echo "<td colspan='100%' bgcolor='black' height='2'></td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Respeto" . "</th>";
+            echo "<td style='text-align:center; border-radius: 15px'>" . $respetoText . "</td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<td colspan='100%' bgcolor='black' height='2'></td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Dinero" . "</th>";
+            echo "<td style='text-align:center; border-radius: 15px'>" . $currentMoneyText . "</td>";
+        echo "</tr>";
+         
+        echo "</table>";
+        
     } 
     
     function getDestrezaInicial($idB){
@@ -1359,7 +1488,7 @@ $(function() {
     }
     
     if(isset($_POST['objetoBolsaId'])){
-        equipar($_POST['objetoBolsaId']);
+        equipar($_POST['objetoBolsaId'], $_POST['areaCuerpoId']);
     }
     
     if(isset($_POST['avanceId'])){

@@ -38,8 +38,11 @@ function cualMonstruo($zona,$barrio){
    $stmt = $db->query($sql);
    $result = $stmt->fetchAll();
    
-   if($result[0]['nivel']>2){
+   if($result[0]['nivel']>2 && $result[0]['nivel']<10){
         $rangoNiveles = rand($result[0]['nivel']-2, $result[0]['nivel']+2);
+   }
+   elseif($result[0]['nivel']>=10){
+       $rangoNiveles = rand(9, 11);
    }
    else{
        $rangoNiveles = rand(1,$result[0]['nivel']+2);
@@ -60,8 +63,11 @@ function cualMonstruoDebil($zona,$barrio){
    $stmt = $db->query($sql);
    $result = $stmt->fetchAll();
    
-   if($result[0]['nivel']>2){
+   if($result[0]['nivel']>2 && $result[0]['nivel']<11){
         $rangoNiveles = rand(1, $result[0]['nivel']-2);
+   }
+   elseif($result[0]['nivel']>=11){
+       $rangoNiveles = rand(1, 8);
    }
    else{
        $rangoNiveles = 1;

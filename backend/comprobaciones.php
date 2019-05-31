@@ -726,6 +726,16 @@ function getMonstruosDerrotados($idP){
     return $victorias;
 }
 
+function getEspeciesDerrotadas($idP){
+    global $db;
+    
+    $sql = "SELECT COUNT(*) FROM victorias WHERE idP='$idP'";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    return $result[0]['COUNT(*)'];
+}
+
 function getReliquiasEncontradas($idP){
     global $db;
     

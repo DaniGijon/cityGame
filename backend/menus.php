@@ -157,7 +157,21 @@
         $sql = "SELECT * FROM personajes WHERE id='$miId'";
         $stmt = $db->query($sql);
         $personaje = $stmt->fetchAll();
-        return $personaje[0]['nivel'];
+        
+        $miNivelActual = $personaje[0]['nivel'];
+        $miExpActual = $personaje[0]['experiencia'];
+        
+        for ($i=1; $i<=100; $i++){
+            if($miNivelActual == $i){
+                $inicio = (($i-1)*10) * (($i-1)*10);
+                $final = ($i*10)*($i*10);
+                break;
+            }
+            
+        }
+        $progreso = (($miExpActual - $inicio) * 100) / ($final-$inicio);
+        
+        return $progreso;
     }
     
     function getBarraSalud($miId){
