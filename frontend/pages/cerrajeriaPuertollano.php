@@ -13,27 +13,42 @@ global $db;
             
             echo "<div class='contenido'>";
             echo "<span class='contenedor1'>";
-                echo "<div class='seccionSpotImagen'>" ;
-                    $imagenSpot = getFotoSpot(7);
-                    echo $imagenSpot;
-                echo "</div>"; //FIN DE div seccionSpotImagen
+                $cofres=objetosDesequipadosCofres();
                
                 echo "<div class='seccionSpotOpciones'>";
-                echo "\"¡Vaya! Eso de ahí parece bloqueado. Hagamos un trato: yo podría abrirlo si tú también abres tu bolsa de monedas\" <br><br>"; 
-                
-                echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
-                    //CONSULTAR OBJETOS DE TIPO COFRE QUE LLEVO DESEQUIPADOS
-                    $cofres=objetosDesequipadosCofres();
-                    
+                echo "<div class='semiTransparente'>"; 
+                echo "<div class='textoDependiente'>";
                     if(!$cofres){
                         echo "¡Largo, sabandija! No tienes nada para desbloquear.<br>";
-                        echo "<br><a href='?page=zona'><button class='botonVolver'>Volver</button></a><br>";
                     }
                     else{
+                        echo "\"¡Vaya, eso parece bloqueado!<br>Yo podría abrirlo si tú también abres tu bolsa de monedas\". <br><br>";
+                    }
+                echo "</div>"; //FIN textoDependiente
+                echo "<div class='imagenDependiente'>";
+                    echo '<img src="/design/img/dependientes/fogataRitual.png">';
+                echo "</div>"; //FIN imagenDependiente
+               
+                
+                    //CONSULTAR OBJETOS DE TIPO COFRE QUE LLEVO DESEQUIPADOS
+
+                    if(!$cofres){
+                        
+                        echo "<br><a href='?page=zona'><button class='botonVolver'></button></a><br>";
+                    }
+                    else{
+                        echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                         foreach($cofres as $cadaObjeto){
                             echo "<div class='opcionesTienda'>";
-                                echo "<input type='checkbox' name='cbox1' value='" . $cadaObjeto['nombre'] . "'>" . $cadaObjeto['nombre'] . "<label for='cbox2'><div id='opcionBox'>" . "<img src='/design/img/objetos/" . $cadaObjeto['imagenObjeto'] . "'>" . "</div><div class='monedaTienda'></div><div class='precioTienda'>" . $cadaObjeto['precioCompra'] . "</div></label>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="' . $cadaObjeto['nombre'] . '">';
                             echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo $cadaObjeto['nombre'];
+                            echo "</div>";
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/objetos/' . $cadaObjeto['imagenObjeto'] . '">' . '</div><div class="monedaTienda"></div><div class="precioTienda">' . $cadaObjeto["precioVenta"] . '</div></label>';
+                        echo "</div>";
+                            
                         }
 
                         echo "<div class='submitTienda'>";
@@ -56,7 +71,7 @@ global $db;
                 </script>
 
                 <?php
-                    
+                echo "</div>"; //Fin de semiTransparente  
                 echo "</div>"; //FIN DE div seccionSpotOpciones
 
                     echo "</span>"; //FIN Contenedor1
@@ -67,6 +82,7 @@ global $db;
                     echo "<div class = 'mapaCallejero'>";
                         echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.116472005844117%2C38.67974766141164%2C-4.10267472267151%2C38.68560188282012&amp;layer=mapnik&amp;marker=38.68267929952015%2C-4.109571218359633" style="border: 1px solid black"></iframe><br/>';
                     echo "</div>";
+                    echo "<div class = 'semiTransparente'>";
                     echo "<div class = 'infoSpot'>";
                         echo "<table border = '0' style = 'text-align:left'>";
                             echo "<tr>";
@@ -80,6 +96,7 @@ global $db;
                             echo "</tr>";
                         echo "</table>";
                     echo "</div>";
+                    echo "</div>"; //FIN Semitransparente
                 echo "</div>";
                     
                 echo "<div class = 'seccionInsignia'>";

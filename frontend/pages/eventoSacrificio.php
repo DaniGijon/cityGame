@@ -3,51 +3,65 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona1Barrio1();
+        comprobarZona2Barrio2();
         $estoyLibre = comprobarEspera();
         if($estoyLibre === 1){
 
             echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(4) . "</h4>";
+                echo "<h4>" . getNombreSpot(39) . "</h4>";
             echo "</span>";
 
                 echo "<div class='contenido'>";
-                echo "<span class='contenedor1'>"; 
-                    
+                echo "<span class='contenedor1'>";
 
                     echo "<div class='seccionSpotOpciones'>";
-                    echo "<div class='semiTransparente'>"; 
+                     echo "<div class='semiTransparente'>"; 
                         echo "<div class='textoDependiente'>";
-                            echo "\"Porque ahí pone <i>incienso</i> que si no, juraría que este colocón tonto es por el olorzaco a marihuana\".";
+                            echo "\"Esta noche oficiamos Sacrificios. Y Barra Libre de 23h a 05h\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
-                            echo '<img src="/design/img/dependientes/yoHombre.png">';
+                            echo '<img src="/design/img/dependientes/fogataRitual.png">';
                         echo "</div>"; //FIN imagenDependiente
                     
                     echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="plegaria">';
+                                echo '<input type="checkbox" name="cbox1" value="sacrificio">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Entonar Plegaria';
+                                echo 'Darme en Sacrificio';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">15M</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="corazonTienda"></div><div class="precioTienda">↓</div><div class="energiaTienda"></div><div class="vidaTienda">+20</div></label>';
                         echo "</div>";
                         
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="ponerVelitas">';
+                                echo '<input type="checkbox" name="cbox1" value="barraLibre">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Poner Velitas';
+                                echo 'Barra Libre de Copas';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">30M</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="corazonTienda"></div><div class="precioTienda">↓↓</div><div class="energiaTienda"></div><div class="vidaTienda">+50</div></label>';
                         echo "</div>";
                         
+                        //Esta solo la muestro si no he comenzado la mision o si la tengo comenzada pero no completada
+                        $mostrar = comprobarMision(1);
+                        if ($mostrar === 1){
+                            echo "<div class='opcionesTienda'>";
+                                echo "<div class='opcionesTiendaCheckbox'>";
+                                    echo '<input type="checkbox" name="cbox1" value="misionMaimonides">';
+                                echo "</div>";
+                                echo "<div class='opcionesTiendaTitulo'>";
+                                    echo 'Hablar con Mendigo';
+                                echo "</div>";
+                                echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="monedaTienda"></div><div class="precioTienda">3 etapas</div></label>';
+                            echo "</div>";
+                        }
+                        
+                        
                         echo "<div class='submitTienda'>";
-                            echo "<input type='submit' class='botonParroquia' value=' '>";
+                            echo "<input type='submit' class='botonCarrilBici' value=' '>";
                         echo "</div>";
                     echo "</form>";           
             ?>
@@ -66,16 +80,24 @@ global $db;
                         $(":checkbox").click(function(){
                             var valor = $(this).val();
                             
-                            if (valor === 'plegaria') {
+                            if (valor === 'sacrificio') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
+                                $(".opcionSpot3").hide();
                                 $(".opcionSpot0").hide();
                             }
-                            else if (valor === 'ponerVelitas'){
+                            else if (valor === 'barraLibre'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
+                                $(".opcionSpot3").hide();
                                 $(".opcionSpot0").hide();
-
+                                
+                            }
+                            else if (valor === 'misionMaimonides'){
+                                $(".opcionSpot3").show();
+                                $(".opcionSpot1").hide();
+                                $(".opcionSpot2").hide();
+                                $(".opcionSpot0").hide();
                             }
                         });
                         
@@ -83,16 +105,15 @@ global $db;
                     </script>
 
                     <?php
-                    echo "</div>"; //Fin de semiTransparente
+                    echo "</div>"; //FIN DE semiTransparente
                     echo "</div>"; //FIN DE div seccionSpotOpciones
                     echo "</span>"; //Fin de Contenedor1
                     
                     echo "<span class='contenedor2'>";
-                    
                              echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
                                     echo "<div class='seccionSpotImagen'>" ;
-                                        $spotImagen = getFotoSpot(4);
+                                        $spotImagen = getFotoSpot(169);
                                         echo $spotImagen;
                                     echo "</div>";
                                 echo "</div>";
@@ -101,33 +122,54 @@ global $db;
                         
                             echo "<div class='opcionSpot1 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
-                                    $imagenSpot = "<img src='/design/img/entrenamiento/carrilBici1.png'>";
+                                    $imagenSpot = "<img src='/design/img/especial/ritual.png'>";
                                     echo $imagenSpot;
                                 echo "</div>";
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Sabes que no soy aficionado a rezar, pero si estás ahí arriba: ¡Sálvame Superman!";
+                                            $descripcionZona = "\"Un pequeño trago traerá de vuelta esa energía que malgastaste afilando mazas\".";
                                             echo $descripcionZona;
                                         echo "</span>";
-                                    echo "</div>";
+                                    echo "</div>"; //Fin semiTransparente
                                 echo "</div>"; //Fin seccionDescripcionZonaTexto
                             echo "</div>"; //FIN opcionSpot1
                             
                             echo "<div class='opcionSpot2 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
-                                    $imagenSpot = "<img src='/design/img/entrenamiento/carrilBici2.png'>";
+                                    $imagenSpot = "<img src='/design/img/especial/tragoVino.png'>";
                                     echo $imagenSpot;
                                 echo "</div>";
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Molan los dibujos que me salen con las velitas que voy encendiendo.";
+                                            $descripcionZona = "\"Sabor amargo para un sueño dulce y reparador\".";
                                             echo $descripcionZona;
                                         echo "</span>";
-                                    echo "</div>";
+                                     echo "</div>"; //Fin de semiTransparente
                                 echo "</div>"; //Fin descripcionZonaTexto
                             echo "</div>"; //FIN opcionSpot2
+                            
+                             echo "<div class='opcionSpot3 opcionSpot'>";
+                                $progreso = comprobarProgreso(1);
+                                if($progreso >= 1 && $progreso <=3){
+                                    echo "<div class='seccionDescripcionZonaImagen'>";
+                                    $imagenSpot = "<img src='/design/img/especial/guarroAsao.png'>";
+                                    echo $imagenSpot;
+                                echo "</div>";
+                                echo "<div class='seccionDescripcionZonaTexto'>";
+                                    echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
+                                        echo "<span class='textoDescripcionSpot'>";
+                                            $descripcionZona = getDescripcionMision(1, $progreso);
+                                            echo $descripcionZona;
+                                            $recompensa = getRecompensaMision(1, $progreso);
+                                            echo $recompensa;
+                                        echo "</span>";
+                                    echo "</div>"; //Fin de semiTransparente
+                                echo "</div>"; //Fin descripcionZonaTexto
+                                }
+                                
+                            echo "</div>"; //FIN opcionSpot3
                        
                     echo "</span>"; //FIN de contenedor2
 

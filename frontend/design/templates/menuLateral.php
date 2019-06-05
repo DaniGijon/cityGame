@@ -18,6 +18,9 @@
                 <span id='botonMensajes' class="botonMensajes">
                     <a href="?page=mensajes"><button class="botonMensajesImagen">Mensajes</button></a><br>
                 </span>
+                <span id='botonMensajes' class="botonMisiones">
+                    <a href="?page=misiones"><button class="botonMisionesImagen">Misiones</button></a><br>
+                </span>
                 <span id='botonAlbum' class="botonAlbum">
                     <a href="?page=album"><button class="botonAlbumImagen">Album</button></a><br>
                 </span>

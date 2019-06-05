@@ -10,10 +10,6 @@ $miDinero = comprobarDinero();
 $dineroEnCash = $miDinero[0]['cash'];
 comprobarZona1Barrio1();
 
-$sql = "SELECT * FROM spots WHERE idS='2'";
-$stmt = $db->query($sql);
-$result = $stmt->fetchAll();
-
 echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
                 echo "<h4>" . getNombreSpot(2) . "</h4>";
@@ -21,13 +17,20 @@ echo "<div id='moduloZona'>";
 
     echo "<div class='contenido'>";
     echo "<span class='contenedor1'>";
-        echo "<div class='seccionSpotImagen'>" ;
+       /* echo "<div class='seccionSpotImagen'>" ;
             $imagenSpot = getFotoSpot(2);
             echo $imagenSpot;
-        echo "</div>"; //FIN DE div seccionSpotImagen
+        echo "</div>"; //FIN DE div seccionSpotImagen*/
 
         echo "<div class='seccionSpotOpciones'>";
-            echo "<br>El \"Ojailén River Grand Prix\" es el evento principal del Campeonato de Carreras de Cocodrilos. ¡Hagan sus apuestas!<br><br>";
+            echo "<div class='semiTransparente'>"; 
+                echo "<div class='textoDependiente'>";
+                    echo "\"El evento principal del Campeonato de Carreras de Cocodrilos. ¡Hagan sus apuestas!\"";
+                echo "</div>"; //FIN textoDependiente
+                echo "<div class='imagenDependiente'>";
+                    echo '<img src="/design/img/dependientes/apuestasCocodrilos.png">';
+                echo "</div>"; //FIN imagenDependiente
+           
               
             ?>
 <form id = "selectorOpciones" action="?bPage=apuestas&action=cocodrilos&nonUI" method="post">
@@ -46,19 +49,19 @@ echo "<div id='moduloZona'>";
                 x3
             </td>
             <td>
-                <label><input name="cantidadApuesta1" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+                <label><input name="cantidadApuesta1" style="width:50%; border-radius:10px;" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
             </td>
         </tr>
         
         <tr>
             <td>
-                Dientes de Leche
+                Mellao
             </td>
             <td>
                 x4
             </td>
             <td>
-                <label><input name="cantidadApuesta2" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+                <label><input name="cantidadApuesta2" style="width:50%; border-radius:10px;" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
             </td>
         </tr>
         
@@ -70,7 +73,7 @@ echo "<div id='moduloZona'>";
                 x5
             </td>
             <td>
-                <label><input name="cantidadApuesta3" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+                <label><input name="cantidadApuesta3" style="width:50%; border-radius:10px;" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
             </td>
         </tr>
         
@@ -82,7 +85,7 @@ echo "<div id='moduloZona'>";
                 x6
             </td>
             <td>
-                <label><input name="cantidadApuesta4" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+                <label><input name="cantidadApuesta4" style="width:50%; border-radius:10px;" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
             </td>
         </tr>
         
@@ -94,7 +97,7 @@ echo "<div id='moduloZona'>";
                 x8
             </td>
             <td>
-                <label><input name="cantidadApuesta5" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+                <label><input name="cantidadApuesta5" style="width:50%; border-radius:10px;" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
             </td>
         </tr>
         
@@ -106,7 +109,7 @@ echo "<div id='moduloZona'>";
                 x10
             </td>
             <td>
-                <label><input name="cantidadApuesta6" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+                <label><input name="cantidadApuesta6" style="width:50%; border-radius:10px;" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
             </td>
         </tr>
         
@@ -118,12 +121,15 @@ echo "<div id='moduloZona'>";
                 x41
             </td>
             <td>
-                <label><input name="cantidadApuesta7" style="width:50%" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
+                <label><input name="cantidadApuesta7" style="width:50%; border-radius:10px;" type=number min="0" value =0><img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></label>
             </td>
         </tr>
             
     </table>
-                <input type="submit" value="¡Apostar!">
+        <div class='submitTienda'>
+            <input type='submit' class='botonApostar' value=' '>
+        </div>
+                
 </form>                
                 <script>
                     
@@ -141,7 +147,7 @@ echo "<div id='moduloZona'>";
                 <?php
                 
                 echo " Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";  
-                    
+                echo "</div>"; //Fin de semiTransparente   
                 echo "</div>"; //FIN DE div seccionSpotOpciones
 
              echo "</span>";

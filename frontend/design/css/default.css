@@ -289,6 +289,21 @@ h3{
   background-position:center;
 }
 
+.botonMisiones{
+    margin-top: 5px;
+    height:100px;
+    width:100px; 
+    float:left;
+}
+
+.botonMisionesImagen{
+  background-image:url("/design/img/botones/misiones.png");
+  background-repeat:no-repeat;
+  height:100px;
+  width:100px;
+  background-position:center;
+}
+
 .botonMensajes{
     margin-top: 5px;
     height:100px;
@@ -315,6 +330,21 @@ h3{
 }
 
 .seccion3{
+    border-radius: 15px 50px;
+    background: white;
+}
+
+.seccion4{
+    border-radius: 15px 50px;
+    background: white;
+}
+
+.seccion5{
+    border-radius: 15px 50px;
+    background: white;
+}
+
+.seccion6{
     border-radius: 15px 50px;
     background: white;
 }
@@ -1526,7 +1556,7 @@ h3{
     margin-right: 5px;
     width:100px;
     border-radius: 10px;
-    background: goldenrod;
+    background: lightskyblue;
 }
 
 .opcionesTiendaCheckbox{
@@ -1625,6 +1655,14 @@ h3{
     display:none;
 }
 
+#seccion6Ranking{
+    display:none;
+}
+
+#seccion2Misiones{
+    display:none;
+}
+
 #sexos{
     height: 110px;
     width: 110px;
@@ -1710,6 +1748,16 @@ h3{
     margin-right: 2px;
 }
 
+.energiaTienda{
+    background-image: url("/design/img/iconos/energiaMini.png");
+    background-repeat: repeat-x;
+    width: 20px;
+    height: 20px;
+    float:left; 
+    margin-left: 6px;
+    margin-right: 2px;
+}
+
 .semiTransparente{
     background : rgba(255, 249, 192, 0.7); 
     padding : 20px;
@@ -1760,6 +1808,13 @@ h3{
 .submitTienda{
     padding-top: 15px;
 }
+
+.botonTrabajar{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/submitCarrilBici.png");
+}
+
 .botonBarComprar{
     width: 100px;
     height:33px;

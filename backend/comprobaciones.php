@@ -1,5 +1,85 @@
 <?php
 
+function comprobarMision($idM){
+   global $db;
+   $id = $_SESSION['loggedIn'];  
+   
+   $sql = "SELECT * FROM progresos WHERE idP='$id' AND idM='$idM'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   $mostrar = 1;
+   
+   if(isset($result[0])){
+       if($result[0]['completada'] === '1'){
+        $mostrar = 0;
+       }
+   }
+   return $mostrar;
+}
+
+function comprobarProgreso($idM){
+  global $db;
+   $id = $_SESSION['loggedIn'];  
+   
+   $sql = "SELECT * FROM progresos WHERE idP='$id' AND idM='$idM'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   if(isset($result[0])){
+    $progreso = $result[0]['progreso'];
+   }
+   else{
+       $progreso = 1;
+   }
+   return $progreso;
+}
+
+function getDescripcionMision($idM, $progreso){
+   global $db; 
+   
+   $sql = "SELECT * FROM misiones WHERE idM='$idM'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   $etapa = 'e' . $progreso;
+   $recompensa = $result[0][$etapa];
+   
+   return $recompensa;
+}
+
+function getRecompensaMision($idM, $progreso){
+   global $db; 
+   
+   $sql = "SELECT * FROM misiones WHERE idM='$idM'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   $etapa = 'r' . $progreso;
+   $recompensa = $result[0][$etapa];
+   
+   return $recompensa;
+}
+
+function comprobarIluminacion(){
+    global $db;
+    $id = $_SESSION['loggedIn']; 
+    
+    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $tengoIluminacion = 0;
+    
+    foreach ($result as $cadaObjeto){
+        if($cadaObjeto['id'] === '105'){ //SI LLEVO EQUIPADO UN OBJETO LUMINOSO
+            $tengoIluminacion = 1;
+            break;
+        }
+    }
+    return $tengoIluminacion;
+}
+
 function objetosDesequipados(){
     global $db;
     $id = $_SESSION['loggedIn']; 

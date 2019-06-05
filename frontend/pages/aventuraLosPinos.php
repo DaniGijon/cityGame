@@ -13,22 +13,37 @@ global $db;
             echo "</span>";
 
                 echo "<div class='contenido'>";
-                echo "<span class='contenedor1'>"; 
-                    echo "<div class='seccionSpotImagen'>" ;
-                        $spotImagen = getFotoSpot(5);
-                        echo $spotImagen;
-                    echo "</div>"; //FIN DE div seccionSpotImagen
+                echo "<span class='contenedor1'>";
 
                     echo "<div class='seccionSpotOpciones'>";
-                    echo "<br>Un espeso pinar se divisa a pocos kilómetros de aquí. Todos saben que es un bosque encantado en el que habitan criaturas mágicas.<br><br>";
+                    echo "<div class='semiTransparente'>"; 
+                        echo "<div class='textoDependiente'>";
+                            echo "Un espeso pinar se divisa a pocos kilómetros de aquí. Todos saben que es un bosque encantado.";
+                        echo "</div>"; //FIN textoDependiente
+                        echo "<div class='imagenDependiente'>";
+                            echo '<img src="/design/img/dependientes/fogataRitual.png">';
+                        echo "</div>"; //FIN imagenDependiente
+                   
                     
                     echo "<form id = 'selectorOpciones' action='?bPage=aventuras&action=zona&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='aventuraLosPinos'>¡Aventuras!<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>15M</div></label>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="aventuraLosPinos">';
+                            echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo '¡Hora de Aventuras!';
+                            echo "</div>";
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
                         
                         echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='aventuraLosPinosDebil'>Dar Paseo<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>30M</div></label>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="aventuraLosPinosDebil">';
+                            echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo 'Dar Paseo de tranquis';
+                            echo "</div>";
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
                         
                         echo "<div class='submitTienda'>";
@@ -54,11 +69,12 @@ global $db;
                             if (valor === 'aventuraLosPinos') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
+                                $(".opcionSpot0").hide();
                             }
                             else if (valor === 'aventuraLosPinosDebil'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
-
+                                $(".opcionSpot0").hide();
                             }
                         });
                         
@@ -66,11 +82,20 @@ global $db;
                     </script>
 
                     <?php
-
+                    echo "</div>"; //FIN de semiTransparente
                     echo "</div>"; //FIN DE div seccionSpotOpciones
                     echo "</span>"; //Fin de Contenedor1
                     
                     echo "<span class='contenedor2'>";
+                            echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    echo "<div class='seccionSpotImagen'>" ;
+                                        $spotImagen = getFotoSpot(5);
+                                        echo $spotImagen;
+                                    echo "</div>";
+                                echo "</div>";
+                               
+                            echo "</div>"; //FIN opcionSpot0
                         
                             echo "<div class='opcionSpot1 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
@@ -78,10 +103,12 @@ global $db;
                                     echo $imagenSpot;
                                 echo "</div>";
                                 echo "<div class='seccionDescripcionZonaTexto'>";
-                        
+                           
                                     echo "<span class='textoDescripcionSpot'>";
-                                        $descripcionZona = "Un ritmito generoso con subidas y descensos, cambios de ritmo y un intercambio de superficie asfalto-tierra que me hará sudar como pollo a la parrilla.";
-                                        echo $descripcionZona;
+                                        echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
+                                            $descripcionZona = "Adentrarme en las zonas más peligrosas del bosque en busca de aventuras, tesoros y fama.";
+                                            echo $descripcionZona;
+                                        echo "</div>";
                                     echo "</span>";
                                 echo "</div>"; //Fin seccionDescripcionZonaTexto
                             echo "</div>"; //FIN opcionSpot1
@@ -94,8 +121,10 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                         
                                     echo "<span class='textoDescripcionSpot'>";
-                                        $descripcionZona = "¡Voy a saco! Me vengo arriba ya. Las agujetas mañana serán bestiales, pero ya sabes: \"No Pain, No Gain\".";
-                                        echo $descripcionZona;
+                                        echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
+                                            $descripcionZona = "Entrar al bosque pero sin meterme a zonas demasiado peligrosas. Normalmente sólo encontraré monstruos de niveles bajos.";
+                                            echo $descripcionZona;
+                                        echo "</div>";
                                     echo "</span>";
                                 echo "</div>"; //Fin descripcionZonaTexto
                             echo "</div>"; //FIN opcionSpot2

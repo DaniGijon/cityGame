@@ -132,6 +132,7 @@ function actualizarZona($casilla){
 
 function social($operacion, $cantidadDonacion){
     include (__ROOT__.'/backend/comprobaciones.php');
+    include (__ROOT__.'/backend/aventuras.php');
     global $db;
     $id = $_SESSION['loggedIn'];
     
@@ -178,7 +179,7 @@ function social($operacion, $cantidadDonacion){
                     $stmt = $db->query($sql);
                     $result = $stmt->fetchAll();
 
-                    $popularidadAVG = $result[0]['AVG(puntos)'];
+                    $popularidadAVG = round($result[0]['AVG(puntos)'], 2, PHP_ROUND_HALF_DOWN);
 
                     //Actualizo el personaje
                     $sql = "UPDATE personajes SET energia=energia-$agotamiento, popularidad = $popularidadAVG, accion = ADDTIME(NOW(), '1:0:0') WHERE id='$id'";       
@@ -223,7 +224,7 @@ function social($operacion, $cantidadDonacion){
                         $stmt = $db->query($sql);
                         $result = $stmt->fetchAll();
 
-                        $popularidadAVG = $result[0]['AVG(puntos)'];
+                        $popularidadAVG = round($result[0]['AVG(puntos)'], 2, PHP_ROUND_HALF_DOWN);
 
                         //Actualizo el personaje
                         $sql = "UPDATE personajes SET cash=cash-$cantidadDonacion, popularidad = $popularidadAVG WHERE id='$id'";       
@@ -255,6 +256,7 @@ function social($operacion, $cantidadDonacion){
 // Cuando realiza una accion en un checkbox de un spot
 function accionSpot($box){
     include (__ROOT__.'/backend/comprobaciones.php');
+    include (__ROOT__.'/backend/aventuras.php');
     global $db;
     $id = $_SESSION['loggedIn'];
     
@@ -545,6 +547,581 @@ function accionSpot($box){
                 $box = "No me quedan monedas suficientes";
             }
             break;
+        //Cultura Multicines Ortega 
+        case 'misionCine':
+            $sql = "SELECT * FROM progresos WHERE idP='$id' AND idM='2'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            
+            if(isset($result[0])){ //Si ya tengo comenzada la mision
+                if($result[0]['completada']==='0'){
+                    //Compruebo en que etapa me encuentro ahora mismo
+                    $etapaActual = $result[0]['progreso'];
+                    if($etapaActual === '1'){ //Si estoy en la 1a etapa, debo entregar una Bobina de Pelicula
+                        //Ver Objetos que llevo desequipados
+                        $objetosDesequipados = objetosDesequipados();
+                        foreach($objetosDesequipados as $cadaObjeto){
+                            if($cadaObjeto['id'] === '921'){//Si es una bobina de pelicula, la elimino y recojo recompensa y progreso en la mision a la siguiente etapa y notifico mensaje mision
+                                //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+                                $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '921'";
+                                $stmt = $db->query($sql);
+                                $resultado = $stmt->fetchAll();
+                                $slotLibre = $resultado[0]['slot'];
+
+                                //BORRAR EL OBJETO VENDIDO
+                                $sql = "UPDATE inventario SET idO='0' WHERE (idP='$id' AND slot = '$slotLibre')";
+                                $db->query($sql);
+
+                                //Recojo Recompensa: +400exp
+                                $sql = "UPDATE personajes SET experiencia = experiencia + 400 WHERE id = '$id'";
+                                $db->query($sql);
+
+                                //Completo la Mision
+                                $sql = "UPDATE progresos SET completada = 1 WHERE idP = '$id' AND idM = '2'";
+                                $db->query($sql);
+
+                                //Genero un informe de Mision Cumplida
+                                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Misión Cumplida','¡Has completado la Misión <i>Pánico en el Cine</i>!<br>Al entregar esa Bobina de Película, el operario se echa a tus brazos agradecido y como recompensa te invita a proyectar juntos la película que acabáis de recuperar. Te acomodas en la butaca, saboreas las crujientes palomitas y por fín la pantalla se ilumina con 6 letras vistosas: \"EUROEL\". Por el altavoz alguien narra lo que estás viendo en pantalla: \"Euroel. En C/Cisneros 22. Suministros Electricos. EUROEL\". Parece una interesante tienda, la apuntaré en mi mapa para visitarla más tarde.<br>Ganas +400 EXP. ¡Bien hecho!','etapa.png')";
+                                $db->query($sql);
+
+                                //Comprobar si subo de nivel
+                                $sql = "SELECT nivel FROM personajes WHERE id='$id'";
+                                $stmt = $db->query($sql);
+                                $personaje = $stmt->fetchAll();
+                                $nuevoNivel = comprobarSuboNivel($id);
+                                if($nuevoNivel != $personaje[0]['nivel'] ){ //sube de nivel
+                                    $avances = 5;
+                                    //Mirar si lleva algun objeto con la especialidad AVANCE EXTRA
+                                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+                                    $stmt = $db->query($sql);
+                                    $objetosEquipados = $stmt->fetchAll();
+
+                                    foreach ($objetosEquipados as $cadaObjeto) {
+                                        if($cadaObjeto['especial']==='avance extra'){
+                                            $avances = $avances + 1;
+                                        }   
+                                    }
+
+                                    $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + $avances WHERE id='$id'";
+                                    $db->query($sql);
+                                    //Generar mensaje del informe de la subida de nivel
+                                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes $avances Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
+                                    $db->query($sql);
+                                }
+
+                                break;
+
+                            }
+                            else{
+                                $box = "Aún no he encontrado esa <i>Bobina de Película</i>, debe estar aquí cerca.";
+                            }
+                        }
+                    }
+                    else{
+                        $box = "Ya completaste esta misión.";
+                    }
+                }
+                
+            }
+            else{
+                //Insertar la Mision en el registro de Misiones
+                $sql = "INSERT INTO progresos (idP,idM,progreso,completada) VALUES('$id','2','1','0')";
+                $db->query($sql);
+            }
+                
+            break;
+        
+        case 'verPeli':
+            $agotamiento = 10;
+            $coste = 40;
+            $puedoHacerlo = comprobarEnergia($agotamiento);
+            if($puedoHacerlo === 1){
+                $puedoPagar = comprobarCoste($coste);
+                if($puedoPagar === 1){
+                    //Consulta para hacer el informe
+                    $sql = "SELECT ingenio,percepcion FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $habilidades = $stmt->fetchAll();
+                    
+                    $ingenioPrevio = $habilidades[0]['ingenio'];
+                    $percepcionPrevia = $habilidades[0]['percepcion'];
+                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, ingenio = ingenio + $mejoraSecundariaMedia/personajes.ingenio, percepcion = percepcion + $mejoraPrincipalMedia/personajes.percepcion, accion = ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    
+                    //INFORME DE ENTRENAMIENTO
+                    $sql = "SELECT ingenio, percepcion FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $habilidades = $stmt->fetchAll();
+                    
+                    $ingenioPosterior = $habilidades[0]['ingenio'];
+                    $percepcionPosterior = $habilidades[0]['percepcion'];
+                    
+                    $mejoraIngenio = round($ingenioPosterior - $ingenioPrevio, 2, PHP_ROUND_HALF_DOWN);
+                    $mejoraPercepcion = round($percepcionPosterior - $percepcionPrevia, 2, PHP_ROUND_HALF_DOWN);
+                    
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Mejora de Habilidad','¡Peliculón!. He mejorado $mejoraPercepcion puntos de Percepción y también $mejoraIngenio puntos de Ingenio.','cultura.png')";
+                    $db->query($sql);
+                }
+                else{
+                    $box = "Necesito más monedas para comprar el ticket";
+                }
+            }else{
+                $box = "Tengo poca energía, lo mismo me quedo sopa en la butaca.";
+            }
+            break;
+            
+        case 'rebuscar':
+            $tengoIluminacion = comprobarIluminacion();
+            if($tengoIluminacion === 1){
+                //Voy a encontrar un objeto y voy a notificarselo
+                $rand = rand(0, 5);
+                if($rand === 0 || $rand === 1){ //No encuentro nada mas que pelusas y restos de palomitas
+                    //Genero un informe de Rebuscar
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Rebuscar','¡Mmeh! Tras pasar 10 Minutos gateando entre las butacas lo único que he conseguido ha sido llenarme la ropa de pelusas y restos de palomitas. No he encontrado nada de interés esta vez.','rebuscar.png')";
+                    $db->query($sql);
+                }
+                elseif($rand === 2 || $rand === 3){ //Encuentro dinero
+                    //Genero un informe de Rebuscar
+                    $cantidad = rand(20,80);
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Rebuscar','¡Anda! Alguien ha perdido su cambio por aquí. Obtengo $cantidad monedas.','rebuscar.png')";
+                    $db->query($sql);
+                    
+                    $sql = "UPDATE personajes SET cash = cash + $cantidad WHERE id='$id'";
+                    $db->query($sql);
+                }
+                elseif($rand === 4){ //Encuentro chocolatina derretida
+                    $mensajeObjeto = ' ¡Me la llevo!';
+                    //Miro que tenga algun slot libre en el inventario
+                    $slotDondeGuardo = comprobarSlotLibre();
+                    if($slotDondeGuardo === -1){
+                        $mensajeObjeto = " No puedo llevarme el botín porque mi inventario está lleno.";
+                    }
+                    else{
+                        //AÑADIR AL INVENTARIO
+                        $idObjetoObtenido = $obj[$objetoObtenido]['id'];
+                        $sql = "UPDATE inventario SET idO = '920' WHERE idP='$id' AND slot = '$slotDondeGuardo'";
+                        $db->query($sql);
+                    }
+                    //Genero un informe de Rebuscar
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Rebuscar','¡Puaj! Una chocolatina derretida. $mensajeObjeto','rebuscar.png')";
+                    $db->query($sql);
+                }
+                elseif($rand === 5){ //ENCUENTRO LA BOBINA DE PELICULA
+                    $mensajeObjeto = ' ¡Me la llevo!';
+                    //Miro que tenga algun slot libre en el inventario
+                    $slotDondeGuardo = comprobarSlotLibre();
+                    if($slotDondeGuardo === -1){
+                        $mensajeObjeto = " No puedo llevarme el botín porque mi inventario está lleno.";
+                    }
+                    else{
+                        //AÑADIR AL INVENTARIO
+                        $idObjetoObtenido = $obj[$objetoObtenido]['id'];
+                        $sql = "UPDATE inventario SET idO = '921' WHERE idP='$id' AND slot = '$slotDondeGuardo'";
+                        $db->query($sql);
+                    }
+                    //Genero un informe de Rebuscar
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Rebuscar','¡¿Y esto?! Parece una bobina de película antigua, como las que salen en las películas. $mensajeObjeto','rebuscar.png')";
+                    $db->query($sql);
+                }
+                $sql = "UPDATE personajes SET accion= ADDTIME(NOW(), '0:10:0') WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+            }
+            else{
+                $box = "Necesito llevar algo para iluminar. Está muy oscuro.";
+            }
+            break;
+        
+        // EVENTO ALTAR DE SACRIFICIOS   
+        case 'misionMaimonides':
+            $sql = "SELECT * FROM progresos WHERE idP='$id' AND idM='1'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            
+            if(isset($result[0])){ //Si ya tengo comenzada la mision
+                if($result[0]['completada']==='0'){
+                //Compruebo en que etapa me encuentro ahora mismo
+                $etapaActual = $result[0]['progreso'];
+                if($etapaActual === '1'){ //Si estoy en la 1a etapa, debo entregar una chocolatina
+                    //Ver Objetos que llevo desequipados
+                    $objetosDesequipados = objetosDesequipados();
+                    foreach($objetosDesequipados as $cadaObjeto){
+                        if($cadaObjeto['id'] === '920'){//Si es una chocolatina derretida, la elimino y recojo recompensa y progreso en la mision a la siguiente etapa y notifico mensaje mision
+                            //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+                            $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '920'";
+                            $stmt = $db->query($sql);
+                            $resultado = $stmt->fetchAll();
+                            $slotLibre = $resultado[0]['slot'];
+
+                            //BORRAR EL OBJETO VENDIDO
+                            $sql = "UPDATE inventario SET idO='0' WHERE (idP='$id' AND slot = '$slotLibre')";
+                            $db->query($sql);
+                            
+                            //Recojo Recompensa: +100exp
+                            $sql = "UPDATE personajes SET experiencia = experiencia + 100 WHERE id = '$id'";
+                            $db->query($sql);
+                            
+                            //Aumento el Progreso de Mision a 2
+                            $sql = "UPDATE progresos SET progreso = 2 WHERE idP = '$id' AND idM = '1'";
+                            $db->query($sql);
+                            
+                            //Genero un informe de Mision Cumplida
+                            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Misión Cumplida','¡Has completado la Etapa 1 de la Misión <i>El Proverbio de Maimónides</i>!<br>Al entregar esa Chocolatina al Mendigo, ganas +100 EXP. ¡Bien hecho! Vuelve a hablar con él para continuar con la misión.','etapa.png')";
+                            $db->query($sql);
+                            
+                            //Comprobar si subo de nivel
+                            $sql = "SELECT nivel FROM personajes WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                            $personaje = $stmt->fetchAll();
+                            $nuevoNivel = comprobarSuboNivel($id);
+                            if($nuevoNivel != $personaje[0]['nivel'] ){ //sube de nivel
+                                $avances = 5;
+                                //Mirar si lleva algun objeto con la especialidad AVANCE EXTRA
+                                $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+                                $stmt = $db->query($sql);
+                                $objetosEquipados = $stmt->fetchAll();
+
+                                foreach ($objetosEquipados as $cadaObjeto) {
+                                    if($cadaObjeto['especial']==='avance extra'){
+                                        $avances = $avances + 1;
+                                    }   
+                                }
+
+                                $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + $avances WHERE id='$id'";
+                                $db->query($sql);
+                                //Generar mensaje del informe de la subida de nivel
+                                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes $avances Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
+                                $db->query($sql);
+                            }
+                            
+                            break;
+                            
+                        }
+                        else{
+                            $box = "¡Oops, me comí todas las <i>chocolatinas</i>! No tengo ninguna más para darle.";
+                        }
+                    }
+                    
+                }
+                elseif($etapaActual === '2'){ //Si estoy en la 1a etapa, debo entregar un abrigo
+                    //Ver Objetos que llevo desequipados
+                    $objetosDesequipados = objetosDesequipados();
+                    foreach($objetosDesequipados as $cadaObjeto){
+                        if($cadaObjeto['id'] === '207'){//Si es un Abrigo Polar, lo elimino y recojo recompensa y progreso en la mision a la siguiente etapa y notifico mensaje mision
+                            //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+                            $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '207'";
+                            $stmt = $db->query($sql);
+                            $resultado = $stmt->fetchAll();
+                            $slotLibre = $resultado[0]['slot'];
+
+                            //BORRAR EL OBJETO VENDIDO
+                            $sql = "UPDATE inventario SET idO='0' WHERE (idP='$id' AND slot = '$slotLibre')";
+                            $db->query($sql);
+                            
+                            //Recojo Recompensa: +100exp
+                            $sql = "UPDATE personajes SET experiencia = experiencia + 200 WHERE id = '$id'";
+                            $db->query($sql);
+                            
+                            //Aumento el Progreso de Mision a 2
+                            $sql = "UPDATE progresos SET progreso = 3 WHERE idP = '$id' AND idM = '1'";
+                            $db->query($sql);
+                            
+                            //Genero un informe de Mision Cumplida
+                            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Misión Cumplida','¡Has completado la Etapa 2 de la Misión <i>El Proverbio de Maimónides</i>!<br>Al entregar ese Abrigo Polar al Mendigo, ganas +200 EXP. ¡Bien hecho! Vuelve a hablar con él para continuar con la misión.','etapa.png')";
+                            $db->query($sql);
+                            
+                            //Comprobar si subo de nivel
+                            $sql = "SELECT nivel FROM personajes WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                            $personaje = $stmt->fetchAll();
+                            $nuevoNivel = comprobarSuboNivel($id);
+                            if($nuevoNivel != $personaje[0]['nivel'] ){ //sube de nivel
+                                $avances = 5;
+                                //Mirar si lleva algun objeto con la especialidad AVANCE EXTRA
+                                $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+                                $stmt = $db->query($sql);
+                                $objetosEquipados = $stmt->fetchAll();
+
+                                foreach ($objetosEquipados as $cadaObjeto) {
+                                    if($cadaObjeto['especial']==='avance extra'){
+                                        $avances = $avances + 1;
+                                    }   
+                                }
+
+                                $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + $avances WHERE id='$id'";
+                                $db->query($sql);
+                                //Generar mensaje del informe de la subida de nivel
+                                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes $avances Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
+                                $db->query($sql);
+                            }
+                            
+                            break;
+                            
+                        }
+                        else{
+                            $box = "No tengo ese <i>Abrigo Polar</i> que dice. ¡¿Tienes idea de cuánto cuesta uno de esos?!";
+                        }
+                    }
+                    
+                }
+                elseif($etapaActual === '3'){ //Si estoy en la 1a etapa, debo entregar una Caña de Pescar
+                    //Ver Objetos que llevo desequipados
+                    $objetosDesequipados = objetosDesequipados();
+                    foreach($objetosDesequipados as $cadaObjeto){
+                        if($cadaObjeto['id'] === '307'){//Si es una Caña de Pesca, lo elimino y recojo recompensa y progreso en la mision a la siguiente etapa y notifico mensaje mision
+                            //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+                            $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '307'";
+                            $stmt = $db->query($sql);
+                            $resultado = $stmt->fetchAll();
+                            $slotLibre = $resultado[0]['slot'];
+
+                            //BORRAR EL OBJETO VENDIDO
+                            $sql = "UPDATE inventario SET idO='0' WHERE (idP='$id' AND slot = '$slotLibre')";
+                            $db->query($sql);
+                            
+                            //EN ESE LUGAR PONER EL OBJETO RECOMPENSA
+                            $sql = "UPDATE inventario SET idO='302' WHERE (idP='$id' AND slot = '$slotLibre')";
+                            $db->query($sql);
+                            
+                            //COMO DICHO OBJETO ES UNA RELIQUIA, INSERTARLO EN coleccionismo Y GENERAR UNA NOTIFICACION
+                            $sql = "INSERT INTO coleccionismo (idP,idO,imagen) VALUES('$id','302','302.png')";
+                            $db->query($sql);
+                            
+                            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Reliquia Encontrada','¡Has conseguido el Callejero de Puertollano, ¡toda una reliquia! Tiene todas las calles y sitios de interés, así que te será de enorme ayuda a la hora de desplazarte más rápido entre zonas.', 'reliquia.png')";
+                            $db->query($sql);
+                            
+                            //Recojo Recompensa: +400exp
+                            $sql = "UPDATE personajes SET experiencia = experiencia + 400 WHERE id = '$id'";
+                            $db->query($sql);
+                            
+                            //Completo la Mision
+                            $sql = "UPDATE progresos SET completada = 1 WHERE idP = '$id' AND idM = '1'";
+                            $db->query($sql);
+                            
+                            //Genero un informe de Mision Cumplida
+                            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Misión Cumplida','¡Has completado todas las etapas de la Misión <i>El Proverbio de Maimónides</i>!<br>Al entregar esa Caña de Pesca al Mendigo, ganas +400 EXP y como recompensa te regala un Callejero de Puertollano. ¡Bien hecho!','etapa.png')";
+                            $db->query($sql);
+                            
+                            //Comprobar si subo de nivel
+                            $sql = "SELECT nivel FROM personajes WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                            $personaje = $stmt->fetchAll();
+                            $nuevoNivel = comprobarSuboNivel($id);
+                            if($nuevoNivel != $personaje[0]['nivel'] ){ //sube de nivel
+                                $avances = 5;
+                                //Mirar si lleva algun objeto con la especialidad AVANCE EXTRA
+                                $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+                                $stmt = $db->query($sql);
+                                $objetosEquipados = $stmt->fetchAll();
+
+                                foreach ($objetosEquipados as $cadaObjeto) {
+                                    if($cadaObjeto['especial']==='avance extra'){
+                                        $avances = $avances + 1;
+                                    }   
+                                }
+
+                                $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + $avances WHERE id='$id'";
+                                $db->query($sql);
+                                //Generar mensaje del informe de la subida de nivel
+                                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes $avances Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
+                                $db->query($sql);
+                            }
+                            
+                            break;
+                            
+                        }
+                        else{
+                            $box = "Eso que llevo ahí no es una <i>Caña de Pesca</i>, es sólo que me alegro de verte.";
+                        }
+                    }
+                    
+                }
+            }
+            else{
+                $box = "Ya completaste esta misión.";
+            }
+            }
+            else{
+                //Insertar la Mision en el registro de Misiones
+                $sql = "INSERT INTO progresos (idP,idM,progreso,completada) VALUES('$id','1','1','0')";
+                $db->query($sql);
+            }
+                
+            break;
+        
+        case 'sacrificio':
+            $costeSalud = 40;
+            $tengoVida = comprobarSalud($costeSalud);
+            if($tengoVida === 1){
+                $mejoraEnergia = 20;
+                $sql = "UPDATE personajes SET energia = CASE WHEN energia + '$mejoraEnergia' > 100 THEN 100 ELSE energia + '$mejoraEnergia' END, salud = salud-$costeSalud WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "¡Ojo! Que puedo quedarme tieso ahí.";
+            }
+            break;
+            
+        case 'barraLibre':
+            $costeSalud = 90;
+            $tengoVida = comprobarSalud($costeSalud);
+            if($tengoVida === 1){
+                $mejoraEnergia = 50;
+                $sql = "UPDATE personajes SET energia = CASE WHEN energia + '$mejoraEnergia' > 100 THEN 100 ELSE energia + '$mejoraEnergia' END, salud = salud-$costeSalud WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "Me pides esto yendo a tope de Salud o me estás pidiendo morir ahí, eh?";
+            }
+            break;
+        
+        // FIESTAS DE LA BARRIADA EL ABULAGAR    
+        case 'pregon':
+            $sql = "SELECT * FROM popularidad WHERE idP='$id'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            
+            foreach ($result as $cadaSpot){
+                $mejoraPuntos = rand(0,10);
+                $cadaSpotID = $cadaSpot['idS'];
+                $sql = "UPDATE popularidad SET puntos = CASE WHEN puntos + '$mejoraPuntos' > 100 THEN 100 ELSE puntos + '$mejoraPuntos' END WHERE idP='$id' AND idS='$cadaSpotID'";
+                $stmt = $db->query($sql);
+            }
+                //Ver mi nueva popularidad, actualizarla, meter el contador de tiempo de accion y Generar mensaje
+            $sql = "SELECT AVG(puntos) FROM popularidad WHERE idP = '$id'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+
+            $popularidadAVG = round($result[0]['AVG(puntos)'], 2, PHP_ROUND_HALF_DOWN);
+            
+            $sql = "UPDATE personajes SET popularidad = $popularidadAVG, accion= ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
+            $stmt = $db->query($sql);
+            
+            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Popularidad','El Pregón ha sido todo un éxito y los habitantes de todo Puertollano hablan mejor de mí ahora mismo.<br>Mi Popularidad asciende un poquito en cada zona de Puertollano. Tengo un $popularidadAVG% de valoración positiva.','popularidad.png')";
+            $db->query($sql);
+            header("location: ?page=mensajes");
+                
+            break;
+        
+        case 'chocolatada':
+            $coste = 40;
+            $mejoraSalud = 10;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagarme el trago de Vino";
+            }
+            break;
+            
+        case 'postre':
+            $coste = 150;
+            $mejoraSalud = 50;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No me quedan monedas suficientes";
+            }
+            break;
+        
+        // Krater Rock City Concierto   
+        case 'telonero':
+            $sql = "SELECT * FROM popularidad WHERE idP='$id'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            
+            foreach ($result as $cadaSpot){
+                $mejoraPuntos = rand(0,10);
+                $cadaSpotID = $cadaSpot['idS'];
+                $sql = "UPDATE popularidad SET puntos = CASE WHEN puntos + '$mejoraPuntos' > 100 THEN 100 ELSE puntos + '$mejoraPuntos' END WHERE idP='$id' AND idS='$cadaSpotID'";
+                $stmt = $db->query($sql);
+            }
+                //Ver mi nueva popularidad, actualizarla, meter el contador de tiempo de accion y Generar mensaje
+            $sql = "SELECT AVG(puntos) FROM popularidad WHERE idP = '$id'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+
+            $popularidadAVG = round($result[0]['AVG(puntos)'], 2, PHP_ROUND_HALF_DOWN);
+            
+            $sql = "UPDATE personajes SET popularidad = $popularidadAVG, accion= ADDTIME(NOW(), '0:30:0') WHERE id='$id'";
+            $stmt = $db->query($sql);
+            
+            $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Popularidad','Me llueven flashes y tangas. Cuando bajo del escenario me abro paso entre la multitud enfervorecida, firmando autógrafos y posando para los selfies. Al llegar a la puerta de mi camerino hay una periodista esperando para entrevistarme. Esto va a dar un subidón a mi Popularidad en todo Puertollano.<br>¡Un éxito! Ahora tengo un $popularidadAVG% de valoración positiva.','popularidad.png')";
+            $db->query($sql);
+            header("location: ?page=mensajes");
+                
+            break;
+        
+        case 'jarraCerveza':
+            $coste = 40;
+            $mejoraSalud = 10;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagarme el trago de Vino";
+            }
+            break;
+            
+        case 'chupitos':
+            $coste = 150;
+            $mejoraSalud = 50;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No me quedan monedas suficientes";
+            }
+            break;
+            
+        //EVENTO: Maestre Trapichero
+        case 'vinoSueño':
+            $coste = 150;
+            $mejoraEnergia = 50;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET energia = CASE WHEN energia + '$mejoraEnergia' > 100 THEN 100 ELSE energia + '$mejoraEnergia' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No me quedan monedas suficientes";
+            }
+            break;
+            
+        case 'lecheAmapola':
+            $coste = 150;
+            $mejoraEnergia = 100;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET energia = CASE WHEN energia + '$mejoraEnergia' > 100 THEN 100 ELSE energia + '$mejoraEnergia' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No me quedan monedas suficientes";
+            }
+            break;
+        
+        case 'bramidoDioses':
+            $coste = 500;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET sexo = CASE WHEN personajes.sexo = 'Hombre' THEN 'Mujer' ELSE 'Hombre' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No me quedan monedas suficientes";
+            }
+            break;
+        
         
         //TRABAJO: CORREDOR DE APUESTAS
         case 'qualy':

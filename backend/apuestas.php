@@ -28,7 +28,7 @@ function cocodrilos($cantidadApuesta1, $cantidadApuesta2, $cantidadApuesta3, $ca
             }
         }
         elseif($ganador >=29 && $ganador <=50){
-            $box = '¡El ganador es Dientes de leche!';
+            $box = '¡El ganador es Mellao!';
             if($cantidadApuesta2 > 0){
                 $ingresos = $cantidadApuesta2 * 4;
                 $beneficio = $ingresos - $gastos;
