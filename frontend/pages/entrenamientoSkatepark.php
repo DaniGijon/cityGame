@@ -3,21 +3,23 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona1Barrio6();
+        comprobarZona3Barrio9();
         $estoyLibre = comprobarEspera();
         if($estoyLibre === 1){
 
             echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(101) . "</h4>";
+                echo "<h4>" . getNombreSpot(150) . "</h4>";
             echo "</span>";
 
                 echo "<div class='contenido'>";
-                echo "<span class='contenedor1'>";
+                echo "<span class='contenedor1'>"; 
+                   
+
                     echo "<div class='seccionSpotOpciones'>";
                     echo "<div class='semiTransparente'>"; 
                         echo "<div class='textoDependiente'>";
-                            echo "¡Me lo voy a pasar de cine!";
+                            echo "\"El skateboarding va de caer mil veces y levantarse mil y una\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/yoHombre.png">';
@@ -26,37 +28,41 @@ global $db;
                     echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="verPeli">';
+                                echo '<input type="checkbox" name="cbox1" value="rodarSkate">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Ver un Estreno';
+                                echo 'Rodar de tranquis';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">30M</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">15M</div></label>';
                         echo "</div>";
                         
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="rebuscar">';
+                                echo '<input type="checkbox" name="cbox1" value="horse">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Rebuscar Butacas';
+                                echo 'Jugar un H.O.R.S.E.';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">30M</div></label>';
                         echo "</div>";
                         
-                        //Esta solo la muestro si no he comenzado la mision o si la tengo comenzada pero no completada
-                        $mostrar = comprobarMision(2);
-                        if ($mostrar === 1){
+                        //HAY UN TERCERA OPCION QUE FORMA PARTE DE LA MISION Repartidor Relampago
+                        $mostrar = comprobarMision(4);
+                        $progreso = comprobarProgreso(4);
+                        if($mostrar === 1 && $progreso === '1'){ //Tengo que entregar aqui el pedido
                             echo "<div class='opcionesTienda'>";
                                 echo "<div class='opcionesTiendaCheckbox'>";
-                                    echo '<input type="checkbox" name="cbox1" value="misionCine">';
+                                    echo '<input type="checkbox" name="cbox1" value="misionBohemios">';
                                 echo "</div>";
                                 echo "<div class='opcionesTiendaTitulo'>";
-                                    echo 'Calmar a Empleado';
+                                    echo "¡Misión Repartidor!";
                                 echo "</div>";
                                 echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">1 etapa</div></label>';
                             echo "</div>";
                         }
+                        
+                        
+                        
                         echo "<div class='submitTienda'>";
                             echo "<input type='submit' class='botonCarrilBici' value=' '>";
                         echo "</div>";
@@ -77,23 +83,16 @@ global $db;
                         $(":checkbox").click(function(){
                             var valor = $(this).val();
                             
-                            if (valor === 'verPeli') {
+                            if (valor === 'rodarSkate') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
-                                $(".opcionSpot3").hide();
                                 $(".opcionSpot0").hide();
                             }
-                            else if (valor === 'rebuscar'){
+                            else if (valor === 'horse'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
-                                $(".opcionSpot3").hide();
                                 $(".opcionSpot0").hide();
-                            }
-                            else if (valor === 'misionCine'){
-                                $(".opcionSpot3").show();
-                                $(".opcionSpot1").hide();
-                                $(".opcionSpot2").hide();
-                                $(".opcionSpot0").hide();
+
                             }
                         });
                         
@@ -110,7 +109,7 @@ global $db;
                             echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
                                     echo "<div class='seccionSpotImagen'>" ;
-                                        $spotImagen = getFotoSpot(101);
+                                        $spotImagen = getFotoSpot(150);
                                         echo $spotImagen;
                                     echo "</div>";
                                 echo "</div>";
@@ -125,7 +124,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Llevo meses esperando para ver este Estreno. ¡No pienso perderme ni un detalle!";
+                                            $descripcionZona = "Sólo quiero echar un rato rodando con mi tabla y olvidarme de todo lo demás.";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>";//Fin SemiTransparente
@@ -134,36 +133,18 @@ global $db;
                             
                             echo "<div class='opcionSpot2 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
-                                    $imagenSpot = "<img src='/design/img/cultura/rebuscar.png'>";
-                                    echo $imagenSpot;
-                                echo "</div>";
-                                echo "<div class='seccionDescripcionZonaTexto'>";
-                                    echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
-                                        echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "La gente a veces pierde objetos entre las butacas, sobretodo en pelis de terror.";
-                                            echo $descripcionZona;
-                                        echo "</span>";
-                                    echo "</div>";//Fin de semiTransparente
-                                echo "</div>"; //Fin descripcionZonaTexto
-                            echo "</div>"; //FIN opcionSpot2
-                            
-                            echo "<div class='opcionSpot3 opcionSpot'>";
-                                $progreso = 1;
-                                echo "<div class='seccionDescripcionZonaImagen'>";
                                     $imagenSpot = "<img src='/design/img/entrenamiento/carrilBici2.png'>";
                                     echo $imagenSpot;
                                 echo "</div>";
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = getDescripcionMision(2, $progreso);
+                                            $descripcionZona = "Otro skater me ha retado a un duelo de H.O.R.S.E. así que tendré que sacar mis mejores trucos para ganar.";
                                             echo $descripcionZona;
-                                            $recompensa = getRecompensaMision(2, $progreso);
-                                            echo $recompensa;
                                         echo "</span>";
                                     echo "</div>";//Fin de semiTransparente
                                 echo "</div>"; //Fin descripcionZonaTexto
-                            echo "</div>"; //FIN opcionSpot3
+                            echo "</div>"; //FIN opcionSpot2
                        
                     echo "</span>"; //FIN de contenedor2
 

@@ -3,53 +3,48 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona1Barrio1();
+        comprobarZona1Barrio7();
         
         echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(3) . "</h4>";
+                echo "<h4>" . getNombreSpot(130) . "</h4>";
             echo "</span>";
             
             echo "<div class='contenido'>";
                 echo "<span class='contenedor1'>"; 
-                /*
-                    echo "<div class='seccionSpotImagen'>" ;
-                        $imagenSpot = getFotoSpot(3);
-                        echo $imagenSpot;
-                    echo "</div>"; //FIN DE div seccionSpotImagen
-*/
+                
                     echo "<div class='seccionSpotOpciones'>";
                     echo "<div id='botonesComprarVender'>";
-                        echo "<button id='botonComprar' class='tagTiendaComprar'>Terraza</button>";
+                        echo "<button id='botonComprar' class='tagTiendaComprar'>Barra</button>";
                         echo "<button id='botonVender' class='tagTiendaVender'>Trastienda</button>";
                     echo "</div>";
                     echo "<div class='semiTransparente'>"; 
-                    echo "<div id='terraza'>";
+                    echo "<div id='barra'>";
                         echo "<div class='textoDependiente'>";
-                            echo "La terraza del \"Un Alto\" es de mis paradas favoritas cada vez que vengo a este barrio.";
+                            echo "\"Ya te dije que no volvieses por aq... ah, eres tú, ¡Holaaa!\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
-                            echo '<img src="/design/img/dependientes/yoHombre.png">';
+                            echo '<img src="/design/img/dependientes/fogataRitual.png">';
                         echo "</div>"; //FIN imagenDependiente
                         
                     
                     echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="cafeGO">';
+                            echo '<input type="checkbox" name="cbox1" value="cafeGo">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Café para llevar';
+                            echo 'Cafe para Llevar';
                         echo "</div>";
-                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">10</div><div class="corazonTienda"></div><div class="vidaTienda">+1</div></label>';
+                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
                     
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="cafeIrlandes">';
+                            echo '<input type="checkbox" name="cbox1" value="palmeraVegetal">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Café Irlandés';
+                            echo 'Palmera Vegetal';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
@@ -63,16 +58,11 @@ global $db;
                 echo "<div id='trastienda'>";
                 $mostrar = comprobarMision(3);
                     echo "<div class='textoDependiente'>";
-                            if($mostrar === 2){ //Aún no está activada
-                                echo "Vengo a Puertollano, el que una vez fue mi hogar. Escucha, tengo asuntos pendientes por aquí y me iría bien contar con <i>escolta</i> que me proteja de <i>viejos amigos</i>. ¿Qué te parece, me acompañas?";
-                            }
-                            elseif($mostrar === 1){ //Está activada y en progreso en
+                            
+                            if($mostrar === 1){ //Está activada y en progreso en
                                 $progreso = comprobarProgreso(3);
-                                if($progreso === '1'){
-                                    $descripcionZona = getDescripcionMision(3, $progreso);
-                                    echo $descripcionZona;
-                                    $recompensa = getRecompensaMision(3, $progreso);
-                                    echo $recompensa;
+                                if($progreso === '5'){
+                                    echo "¡Lo conseguimos! Ahora clicka para recibir tu premio. Yo estaré ocupado un tiempo, puedes quedarte con mi <i>Macuto de Acampar</i>.";
                                 }
                                 else{
                                     echo "Aquí no hay nada de interés ahora mismo";
@@ -83,7 +73,7 @@ global $db;
                             }
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
-                            if($mostrar === 0 || ($mostrar === 1 && $progreso != 1)){ //Aún no está activada o lo está pero en una fase ya avanzada
+                            if($mostrar === 2 || $mostrar === 0 || ($mostrar === 1 && ($progreso === '1' || $progreso === '2' || $progreso === '3'))){ //Aún no está activada o lo está pero en una fase ya avanzada
                                 echo '<img src="/design/img/dependientes/yoHombre.png">';
                             }
                             else{
@@ -91,7 +81,7 @@ global $db;
                             }
                         echo "</div>"; //FIN imagenDependiente
                         
-                    if($mostrar === 2){
+                    if($mostrar === 1 && $progreso === '5'){
                         echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
 
                         echo "<div class='opcionesTienda'>";
@@ -125,14 +115,14 @@ global $db;
                     });
                     
                     $("#botonVender").click(function(){
-                        $("#terraza").hide();
+                        $("#barra").hide();
                         $("#trastienda").show();
                         $("#botonVender").css("background-color", "rgba(255, 249, 192, 0.7)");
                         $("#botonComprar").css("background-color", "white");
                     });
 
                       $("#botonComprar").click(function(){
-                        $("#terraza").show();
+                        $("#barra").show();
                         $("#trastienda").hide();
                         $("#botonComprar").css("background-color", "rgba(255, 249, 192, 0.7)");
                         $("#botonVender").css("background-color", "white");

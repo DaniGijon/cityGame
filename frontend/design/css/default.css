@@ -1611,6 +1611,10 @@ h3{
     text-align : right;
 }
 
+#trastienda{
+    display : none;
+}
+
 #vender{
     display : none;
 }
@@ -1661,6 +1665,14 @@ h3{
 
 #seccion2Misiones{
     display:none;
+}
+
+#escombrera{
+    display: none;
+}
+
+#reservado{
+    display: none;
 }
 
 #sexos{
@@ -1789,7 +1801,7 @@ h3{
 }
 
 .tagTiendaComprar{
-    width: 75px;
+    width: 85px;
     height:33px;
      border-radius: 15px 15px 0px 0px;
      background : rgba(255, 249, 192, 0.7); 
@@ -1798,7 +1810,7 @@ h3{
 }
 
 .tagTiendaVender{
-    width: 75px;
+    width: 85px;
     height:33px;
      border-radius: 15px 15px 0px 0px;
      background : white;
@@ -1835,6 +1847,12 @@ h3{
 }
 
 .botonApostar{
+    width: 100px;
+    height:33px;
+    background-image: url("/design/img/botones/botonTiendaComprar.png");
+}
+
+.botonMision{
     width: 100px;
     height:33px;
     background-image: url("/design/img/botones/botonTiendaComprar.png");

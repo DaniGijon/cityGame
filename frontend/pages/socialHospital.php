@@ -3,26 +3,20 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona1Barrio2();
+        comprobarZona1Barrio9();
         
         echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(22) . "</h4>";
+                echo "<h4>" . getNombreSpot(155) . "</h4>";
             echo "</span>";
             
             echo "<div class='contenido'>";
             echo "<span class='contenedor1'>"; 
-            /*
-                echo "<div class='seccionSpotImagen'>" ;
-                    $imagenSpot = getFotoSpot(22);
-                    echo $imagenSpot;
-                echo "</div>"; //FIN DE div seccionSpotImagen
-             */   
-               
+            
                 echo "<div class='seccionSpotOpciones'>";
                     echo "<div class='semiTransparente'>";
                         echo "<div class='textoDependiente'>";
-                            echo "Estoy terminando de arreglarme, cariño. Enseguida empezamos la conferencia.\"";
+                            echo "\"Me encanta el olor de la sangre fresca por las mañanas.\"";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/centroMujer.png">';
@@ -31,29 +25,20 @@ global $db;
                     echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=social&nonUI' method='post'>";
                             echo "<div class='opcionesTienda'>";
                                 echo "<div class='opcionesTiendaCheckbox'>";
-                                    echo '<input type="checkbox" name="cbox1" value="conferenciaCentroMujer">';
+                                    echo '<input type="checkbox" name="cbox1" value="donarSangreHospital">';
                                 echo "</div>";
                                 echo "<label for='cbox1'>";
                                 echo "<div class='opcionesTiendaTitulo'>";
-                                    echo 'Conferencia';
+                                    echo 'Donación de Sangre';
                                 echo "</div>";
                                 echo "<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>15M</div></label>";
                             echo "</div>";
 
                             echo "<div class='opcionesTienda'>";
                             
-                            echo '<div class="opcionesTiendaCheckbox"><input type="checkbox" name="cbox1" value="donacionCentroMujer"></div><label for="cbox4"><div class="opcionesTiendaTitulo">Donar pasta</div><div id="opcionBox"><img src="/design/img/entrenamiento/ritmitoGeneroso.png"></div><div class="monedaTienda"></div><div class="precioTiendaInput"><input name="cantidadDonacion" style="width:70%; border-radius:10px;" type=number min="100"></div></label>';
+                            echo '<div class="opcionesTiendaCheckbox"><input type="checkbox" name="cbox1" value="donarPastaHospital"></div><label for="cbox4"><div class="opcionesTiendaTitulo">Donación de Dinero</div><div id="opcionBox"><img src="/design/img/entrenamiento/ritmitoGeneroso.png"></div><div class="monedaTienda"></div><div class="precioTiendaInput"><input name="cantidadDonacion" style="width:70%; border-radius:10px;" type=number min="100"></div></label>';
                             echo "</div>";
-                            /*
-                                echo "<div class='opcionesTiendaCheckbox'>";
-                                    echo '<input type="checkbox" name="cbox1" value="donacionCentroMujer">';
-                                echo "</div>";
-                                echo "<div class='opcionesTiendaTitulo'>";
-                                    echo 'Donar Pasta';
-                                echo "</div>";
-                                echo "<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='monedaTienda'></div><div class='precioTiendaInput'><label for='cbox1'><input name='cantidadDonacion' style='width:70%; border-radius:10px;' type=number min='100'></div></label>";
-                            echo "</div>";
-*/
+
                             echo "<div class='submitTienda'>";
                                 echo "<input type='submit' class='botonCarrilBici' value=' '>";
                             echo "</div>";
@@ -82,7 +67,7 @@ global $db;
                 
                 echo "<div class='seccionSpotInfo'>";
                 echo "<div class='semiTransparente'>";
-                   $popularidadAqui = getPopularidadSpot(22);
+                   $popularidadAqui = getPopularidadSpot(155);
                    echo "<div class='popularidadLetras'>";
                         echo "<h4>Tu Popularidad aquí es de: </h4>";
                    echo "</div>";
@@ -132,7 +117,5 @@ global $db;
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona
-        
-        
 
 

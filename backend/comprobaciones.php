@@ -8,12 +8,15 @@ function comprobarMision($idM){
    $stmt = $db->query($sql);
    $result = $stmt->fetchAll();
    
-   $mostrar = 1;
+   $mostrar = 1; //Esta activa pero no completada
    
    if(isset($result[0])){
        if($result[0]['completada'] === '1'){
-        $mostrar = 0;
+        $mostrar = 0; //Ya está completada
        }
+   }
+   else{
+       $mostrar = 2; //Aún no está activada
    }
    return $mostrar;
 }
@@ -59,6 +62,30 @@ function getRecompensaMision($idM, $progreso){
    $recompensa = $result[0][$etapa];
    
    return $recompensa;
+}
+
+function comprobarTiempoRestanteMision($idP, $idM){
+    global $db; 
+    
+   date_default_timezone_set('Europe/Madrid');
+   
+   $actual = date("Y-m-d H:i:s");
+   
+   $sql = "SELECT * FROM tiempos WHERE idP='$idP' AND idM='$idM'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   $deadline = $result[0]['deadline'];
+   $tiempoRestante = strtotime($deadline) - strtotime($actual);
+   $legible = date('i\M s\S', $tiempoRestante);
+   
+   if($deadline <= $actual){
+       return 0;
+   }
+   else{
+       return $legible;
+   }
+    
 }
 
 function comprobarIluminacion(){
@@ -765,11 +792,11 @@ function esDistintoSitio($idP){
 }
 
 //GET Popularidad de cada spot
-function getPopularidadCentroMujer(){
+function getPopularidadSpot($idS){
     global $db;
     $id = $_SESSION['loggedIn'];
     
-    $sql = "SELECT * FROM popularidad WHERE idP='$id' AND idS='22'";
+    $sql = "SELECT * FROM popularidad WHERE idP='$id' AND idS='$idS'";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     

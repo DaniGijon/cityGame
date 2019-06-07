@@ -849,14 +849,14 @@
             elseif($cosaId >=508 && $cosaId <=509){
                 $extra = 5;
             }
-            elseif($cosaId >=510 && $cosaId <=511){
+            elseif($cosaId >=510 && $cosaId <=512){
                 $extra = 6;
-            }
-            elseif($cosaId >=512 && $cosaId <=512){
-                $extra = 7;
             }
             elseif($cosaId >=513 && $cosaId <=513){
                 $extra = 8;
+            }
+            elseif($cosaId >=514 && $cosaId <=514){
+                $extra = 10;
             }
             
             $sql = "SELECT COUNT(*) FROM inventario WHERE (idP = '$id' && slot > '9')";
