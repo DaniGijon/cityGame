@@ -14,23 +14,61 @@ global $db;
 
                 echo "<div class='contenido'>";
                 echo "<span class='contenedor1'>"; 
-                    echo "<div class='seccionSpotImagen'>" ;
-                        $spotImagen = getFotoSpot(129);
-                        echo $spotImagen;
-                    echo "</div>"; //FIN DE div seccionSpotImagen
-
-                    echo "<div class='seccionSpotOpciones'>";
-                    echo "<br>Un mágico y emocionante acto, en el que el fuego está presente, da el inicio al Guiso del Santo Voto<br><br>";
-                    
-                    echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
-                        echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='tomarGuiso'>Guiso<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>1H</div></label>";
-                        echo "</div>";
+                   
+                    echo "<div class='semiTransparente'>"; 
+                    $mostrar = comprobarMision(10);
+                    $progreso = comprobarProgreso(10);
+                        echo "<div class='textoDependiente'>";
+                             if($mostrar === 0) //Está completada
+                                echo "\"¡Al rico Guiso del Santo Voto! Respetad la fila, hay comida para todos\".";
+                             elseif($mostrar === 2) //No está activada
+                                echo "\"¡Por la Virgen de Gracia! Aún no han llegado los ingredientes\".";
+                             elseif($mostrar === 1){
+                                $descripcionZona = getDescripcionMision(10, $progreso);
+                                echo $descripcionZona;
+                                $recompensa = getRecompensaMision(10, $progreso);
+                                echo $recompensa; 
+                             }
+                        echo "</div>"; //FIN textoDependiente
+                        echo "<div class='imagenDependiente'>";
+                            echo '<img src="/design/img/dependientes/cocineraVoto.png">';
+                        echo "</div>"; //FIN imagenDependiente
                         
-                        echo "<div class='submitTienda'>";
-                            echo "<input type='submit' class='botonCarrilBici' value=' '>";
+                    if($mostrar === 1 || $mostrar === 2){ //La mision aun no se ha completado
+                        echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
+
+                        echo "<div class='opcionesTienda'>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="misionVoto">';
+                            echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo '¡Misión Voto!';
+                            echo "</div>";
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">3 Etapas</div></label>';
                         echo "</div>";
-                    echo "</form>";           
+
+                            echo "<div class='submitTienda'>";
+                                echo'<input type="submit" class="botonMision" value=" ">';
+                            echo "</div>";
+                        echo "</form>";  
+                    } 
+                    else{ //La mision ya se ha completado
+                        echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
+                            echo "<div class='opcionesTienda'>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="tomarGuiso">';
+                            echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo '¡Tomar Guiso!';
+                            echo "</div>";
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="corazonTienda"></div><div class="precioTienda">+100</div></label>';
+                        echo "</div>";
+
+                            echo "<div class='submitTienda'>";
+                                echo'<input type="submit" class="botonMision" value=" ">';
+                            echo "</div>";
+                        echo "</form>";  
+                    }
             ?>
                     <script>
 
@@ -57,26 +95,21 @@ global $db;
                     </script>
 
                     <?php
-
-                    echo "</div>"; //FIN DE div seccionSpotOpciones
+                    echo "</div>"; //FIN de semiTransparente
                     echo "</span>"; //Fin de Contenedor1
                     
                     echo "<span class='contenedor2'>";
-                        
-                            echo "<div class='opcionSpot1 opcionSpot'>";
+                            echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
-                                    $imagenSpot = "<img src='/design/img/especial/ritual.png'>";
-                                    echo $imagenSpot;
+                                    echo "<div class='seccionSpotImagen'>" ;
+                                        $spotImagen = getFotoSpot(129);
+                                        echo $spotImagen;
+                                    echo "</div>";
                                 echo "</div>";
-                                echo "<div class='seccionDescripcionZonaTexto'>";
+                               
+                            echo "</div>"; //FIN opcionSpot0
                         
-                                    echo "<span class='textoDescripcionSpot'>";
-                                        $descripcionZona = "\"Probar un poco del Guiso sagrado que se lleva ofreciendo a la Virgen de Gracia desde la Peste del año 1348.\"";
-                                        echo $descripcionZona;
-                                    echo "</span>";
-                                echo "</div>"; //Fin seccionDescripcionZonaTexto
-                            echo "</div>"; //FIN opcionSpot1
-                                                   
+                       
                     echo "</span>"; //FIN de contenedor2
 
 

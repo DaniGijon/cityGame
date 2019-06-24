@@ -107,6 +107,25 @@ function comprobarIluminacion(){
     return $tengoIluminacion;
 }
 
+function comprobarRevolver(){
+    global $db;
+    $id = $_SESSION['loggedIn']; 
+    
+    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $tengoRevolver = 0;
+    
+    foreach ($result as $cadaObjeto){
+        if($cadaObjeto['id'] === '310'){ //SI LLEVO EQUIPADO UN REVOLVER
+            $tengoRevolver = 1;
+            break;
+        }
+    }
+    return $tengoRevolver;
+}
+
 function objetosDesequipados(){
     global $db;
     $id = $_SESSION['loggedIn']; 
@@ -218,6 +237,17 @@ function comprobarSalud($salud){
    return $tengoVida;
 }
 
+function comprobarRespeto(){
+    global $db;
+    $id = $_SESSION['loggedIn']; 
+   
+   $sql = "SELECT respeto FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   return $result[0]['respeto'];
+}
+
 function comprobarEspera(){
   global $db;
    $id = $_SESSION['loggedIn']; 
@@ -278,6 +308,9 @@ function TiempoViaje($idP){
    }
    elseif($vehiculoEquipado === '21'){
        $tiempoViaje = 50;
+   }
+   elseif($vehiculoEquipado === '22'){
+       $tiempoViaje = 35;
    }
    else{
        $tiempoViaje = 59;
@@ -830,6 +863,80 @@ function getMonstruosDerrotados($idP){
         $victorias += $cadaMonstruo['cantidad'];
     }
     
+    return $victorias;
+}
+
+function getJabaliesDerrotados($idP){
+    global $db;
+    
+    $sql = "SELECT cantidad FROM cacerias WHERE idP='$idP' AND (idM='91' OR idM='94' OR idM='96' OR idM='99')";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $victorias = 0;
+    
+    foreach($result as $cadaMonstruo){
+        $victorias += $cadaMonstruo['cantidad'];
+    }
+    
+    return $victorias;
+}
+
+function getTauroDerrotados($idP){
+    global $db;
+    
+    $sql = "SELECT cantidad FROM cacerias WHERE idP='$idP' AND (idM='81' OR idM='82' OR idM='83' OR idM='84' OR idM='85' OR idM='86' OR idM='87' OR idM='88' OR idM='89' OR idM='90' OR idM='208')";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $victorias = 0;
+    
+    foreach($result as $cadaMonstruo){
+        $victorias += $cadaMonstruo['cantidad'];
+    }
+    
+    return $victorias;
+}
+
+function get666Derrotados($idP, $etapa){
+    global $db;
+    
+    if($etapa === 1){
+
+        $sql = "SELECT cantidad FROM cacerias WHERE idP='$idP' AND (idM='31' OR idM='32' OR idM='33')";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+
+        $victorias = 0;
+
+        foreach($result as $cadaMonstruo){
+            $victorias += $cadaMonstruo['cantidad'];
+        }
+    }
+    elseif($etapa === 2){
+
+        $sql = "SELECT cantidad FROM cacerias WHERE idP='$idP' AND (idM='34' OR idM='35' OR idM='36')";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+
+        $victorias = 0;
+
+        foreach($result as $cadaMonstruo){
+            $victorias += $cadaMonstruo['cantidad'];
+        }
+    }
+    elseif($etapa === 3){
+
+        $sql = "SELECT cantidad FROM cacerias WHERE idP='$idP' AND (idM='37' OR idM='38' OR idM='39')";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+
+        $victorias = 0;
+
+        foreach($result as $cadaMonstruo){
+            $victorias += $cadaMonstruo['cantidad'];
+        }
+    }
     return $victorias;
 }
 

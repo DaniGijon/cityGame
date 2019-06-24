@@ -810,6 +810,20 @@
         else if ($cosaId >= 500 && $cosaId < 600){
             $slot = 7; //bolsa
         }
+        //CONSUMIBLES
+        elseif($cosaId === '920'){
+            consumir(920);
+            exit();
+        }
+        elseif($cosaId === '923'){
+            consumir(923);
+            exit();
+        }
+        elseif($cosaId === '925'){
+            consumir(925);
+            exit();
+        }
+       
         else{
             //OBJETOS QUE NO SE PUEDEN EQUIPAR
             exit();
@@ -884,6 +898,41 @@
                 
             }
         }
+    }
+    
+    function consumir($idO){
+        global $db;
+        $id = $_SESSION['loggedIn'];
+        
+        //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+        $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '$idO'";
+        $stmt = $db->query($sql);
+        $resultado = $stmt->fetchAll();
+        $slotLibre = $resultado[0]['slot'];
+        
+        //DESEQUIPAR EL OBJETO ANTERIOR
+        $sql = "UPDATE inventario SET idO='0' WHERE (idP='$id' AND slot = '$slotLibre')";
+        $stmt = $db->query($sql);
+        
+        //Otorgarle los efectos de consumir
+        if($idO === 920){ //Chocolatina derretida. +2 Salud
+            $mejoraSalud = 2;
+            $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END WHERE id='$id'";
+            $db->query($sql);  
+        }
+        
+        if($idO === 923){ //Agua Agria. +5 Salud
+            $mejoraSalud = 5;
+            $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END WHERE id='$id'";
+            $db->query($sql);  
+        }
+        
+        if($idO === 925){ //Sandia Hermosa. +3 Salud
+            $mejoraSalud = 3;
+            $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END WHERE id='$id'";
+            $db->query($sql);  
+        }
+        
     }
 
     function listJugadorRival($id){

@@ -13,26 +13,61 @@ global $db;
             echo "</span>";
 
                 echo "<div class='contenido'>";
-                echo "<span class='contenedor1'>"; 
-                    echo "<div class='seccionSpotImagen'>" ;
-                        $spotImagen = getFotoSpot(99);
-                        echo $spotImagen;
-                    echo "</div>"; //FIN DE div seccionSpotImagen
+                echo "<span class='contenedor1'>";
+                    echo "<div class='semiTransparente'>"; 
+                    $mostrar = comprobarMision(11);
+                    $progreso = comprobarProgreso(11);
+                    echo "<div class='textoDependiente'>";
+                        if($mostrar != 1) //No está en curso
+                            echo "\"¡Aquí pintando! Si echas un selfie etiquétame en Insta: @okudart\".";
+                        else{
+                            $descripcionZona = getDescripcionMision(10, $progreso);
+                            echo $descripcionZona;
+                            $recompensa = getRecompensaMision(10, $progreso);
+                            echo $recompensa; 
+                        }
+                        echo "</div>"; //FIN textoDependiente
+                        echo "<div class='imagenDependiente'>";
+                            echo '<img src="/design/img/dependientes/okuda.png">';
+                        echo "</div>"; //FIN imagenDependiente
+                        
+                    echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
+                    if($mostrar === '1' || $mostrar === '2'){ //La mision aun no se ha completado
 
-                    echo "<div class='seccionSpotOpciones'>";
-                    echo "<br>¡El mismísimo Okuda San Miguel (@okudart) está aquí pintando uno de sus murales urbanos! Flipante.<br><br>";
-                    
-                    echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='autografo'>Autógrafo<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>1H</div></label>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="misionOkuda">';
+                            echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo '¡Misión Okuda!';
+                            echo "</div>";
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">1 Etapa</div></label>';
+                        echo "</div>";
+ 
+                    } 
+                        
+                        echo "<div class='opcionesTienda'>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="autografo">';
+                            echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo 'Firmar Autógrafo';
+                            echo "</div>";
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="relojMini"></div><div class="precioTienda">30M</div></label>';
                         echo "</div>";
                         
                         echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='birras'>¡Birras!<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='monedaTienda'></div><div class='precioTienda'>40</div><div class='corazonTienda'></div><div class='vidaTienda'>+10</div></label>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="birras">';
+                            echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo 'Birras con Okuda';
+                            echo "</div>";
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">40</div><div class="corazonTienda"></div><div class="precioTienda">+10</div></label>';
                         echo "</div>";
                         
                         echo "<div class='submitTienda'>";
-                            echo "<input type='submit' class='botonCarrilBici' value=' '>";
+                            echo'<input type="submit" class="botonMision" value=" ">';
                         echo "</div>";
                     echo "</form>";           
             ?>
@@ -54,10 +89,12 @@ global $db;
                             if (valor === 'autografo') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
+                                $(".opcionSpot0").hide();
                             }
                             else if (valor === 'birras'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
+                                $(".opcionSpot0").hide();
                             }
                             
                         });
@@ -71,6 +108,15 @@ global $db;
                     echo "</span>"; //Fin de Contenedor1
                     
                     echo "<span class='contenedor2'>";
+                             echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    echo "<div class='seccionSpotImagen'>" ;
+                                        $spotImagen = getFotoSpot(99);
+                                        echo $spotImagen;
+                                    echo "</div>";
+                                echo "</div>";
+                               
+                            echo "</div>"; //FIN opcionSpot0
                         
                             echo "<div class='opcionSpot1 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";

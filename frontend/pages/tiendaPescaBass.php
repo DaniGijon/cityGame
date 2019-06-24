@@ -13,12 +13,7 @@ global $db;
             echo "<div class='contenido'>";
             
             echo "<span class='contenedor1'>"; 
-                    /*
-                echo "<div class='seccionSpotImagen'>" ;
-                    $imagenSpot = getFotoSpot(21);
-                    echo $imagenSpot;
-                echo "</div>"; //FIN DE div seccionSpotImagen
-                */
+                 
                 echo "<div class='seccionSpotOpciones'>";   
                     //Cabecera selector opciones
                     echo "<div id='botonesComprarVender'>";
@@ -181,14 +176,14 @@ global $db;
                     $("#botonVender").click(function(){
                         $("#comprar").hide();
                         $("#vender").show();
-                        $("#botonVender").css("background-color", "yellow");
+                        $("#botonVender").css("background-color", "rgba(255, 249, 192, 0.7)");
                         $("#botonComprar").css("background-color", "white");
                     });
 
                       $("#botonComprar").click(function(){
                         $("#comprar").show();
                         $("#vender").hide();
-                        $("#botonComprar").css("background-color", "yellow");
+                        $("#botonComprar").css("background-color", "rgba(255, 249, 192, 0.7)");
                         $("#botonVender").css("background-color", "white");
                     });
                     

@@ -3,13 +3,13 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona3Barrio9();
+        comprobarZona1Barrio5();
         $estoyLibre = comprobarEspera();
         if($estoyLibre === 1){
 
             echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(170) . "</h4>";
+                echo "<h4>" . getNombreSpot(71) . "</h4>";
             echo "</span>";
 
                 echo "<div class='contenido'>";
@@ -17,9 +17,14 @@ global $db;
                    
 
                     echo "<div class='seccionSpotOpciones'>";
+                    echo "<div id='botonesComprarVender'>";
+                        echo "<button id='botonComprar' class='tagTiendaComprar'>Parroquia</button>";
+                        echo "<button id='botonVender' class='tagTiendaVender'>Altar</button>";
+                    echo "</div>";
                     echo "<div class='semiTransparente'>"; 
+                    echo "<div id='parroquia'>";
                         echo "<div class='textoDependiente'>";
-                            echo "\"El skateboarding va de caer mil veces y levantarse mil y una\".";
+                            echo "\"Mmm. Así que aquí es donde empezó todo el movimiento salesiano\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/yoHombre.png">';
@@ -28,45 +33,85 @@ global $db;
                     echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="rodarSkate">';
+                                echo '<input type="checkbox" name="cbox1" value="escucharMisa">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Rodar de tranquis';
+                                echo 'Escuchar Misa';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">15M</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
                         
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="horse">';
+                                echo '<input type="checkbox" name="cbox1" value="confesarPecados">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Jugar un H.O.R.S.E.';
+                                echo 'Confesar Pecados';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">30M</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
-                        
-                        //HAY UN TERCERA OPCION QUE FORMA PARTE DE LA MISION Repartidor Relampago
-                        $mostrar = comprobarMision(4);
-                        $progreso = comprobarProgreso(4);
-                        if($mostrar === 1 && $progreso === '1'){ //Tengo que entregar aqui el pedido
-                            echo "<div class='opcionesTienda'>";
-                                echo "<div class='opcionesTiendaCheckbox'>";
-                                    echo '<input type="checkbox" name="cbox1" value="misionBohemios">';
-                                echo "</div>";
-                                echo "<div class='opcionesTiendaTitulo'>";
-                                    echo "¡Misión Repartidor!";
-                                echo "</div>";
-                                echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">1 etapa</div></label>';
-                            echo "</div>";
-                        }
-                        
-                        
                         
                         echo "<div class='submitTienda'>";
                             echo "<input type='submit' class='botonCarrilBici' value=' '>";
                         echo "</div>";
-                    echo "</form>";           
+                    echo "</form>"; 
+                    echo "</div>"; //FIN parroquia
+                    
+                    echo "<div id='altar'>";
+                $mostrar = comprobarMision(18);
+                $progreso = comprobarProgreso(18);
+                    echo "<div class='textoDependiente'>";
+                            if($mostrar === 1){ //Está activada y en progreso en                
+                                $descripcionZona = getDescripcionMision(18, $progreso);
+                                echo $descripcionZona;
+                                $recompensa = getRecompensaMision(18, $progreso);
+                                echo $recompensa;
+                                
+                            }
+                            elseif($mostrar === 2){ //Aun no esta activada
+                                echo "\"Oye, disculpa. ¿Nos quieres casar tú? El cura no aparece y los invitados tienen ya más hambre que el tamagochi un sordo\".";
+                            }
+                            else{ //L mision ya esta completada
+                                echo "¿No se casa nadie hoy? Pues vaya.";
+                            }
+                        echo "</div>"; //FIN textoDependiente
+                        echo "<div class='imagenDependiente'>";
+                            if($mostrar === 2 || ($mostrar === 1)){ //Aún no está activada o lo está pero no completada
+                                echo '<img src="/design/img/dependientes/novios.png">';
+                            }
+                            else{ //Si ya he completado la misión
+                                echo '<img src="/design/img/dependientes/yoHombre.png">';
+                            }
+                        echo "</div>"; //FIN imagenDependiente
+                        
+                    if($mostrar != 0){
+                        echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
+
+                        echo "<div class='opcionesTienda'>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="misionBoda">';
+                            echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo '¡Misión Boda!';
+                            echo "</div>";
+                            if($progreso === '1'){
+                                echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
+                            }
+                            elseif($progreso === '2'){
+                                echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
+                            }
+                            else{
+                                echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="relojMini"></div><div class="precioTienda">2 etapas</div></label>';
+                            }
+                        echo "</div>";
+
+                            echo "<div class='submitTienda'>";
+                                echo'<input type="submit" class="botonMision" value=" ">';
+                            echo "</div>";
+                        echo "</form>";  
+                    }
+                
+                echo "</div>"; //Fin Altar
             ?>
                     <script>
 
@@ -83,12 +128,12 @@ global $db;
                         $(":checkbox").click(function(){
                             var valor = $(this).val();
                             
-                            if (valor === 'rodarSkate') {
+                            if (valor === 'escucharMisa') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
                                 $(".opcionSpot0").hide();
                             }
-                            else if (valor === 'horse'){
+                            else if (valor === 'confesarPecados'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot0").hide();
@@ -96,6 +141,19 @@ global $db;
                             }
                         });
                         
+                    $("#botonVender").click(function(){
+                        $("#parroquia").hide();
+                        $("#altar").show();
+                        $("#botonVender").css("background-color", "rgba(255, 249, 192, 0.7)");
+                        $("#botonComprar").css("background-color", "white");
+                    });
+
+                      $("#botonComprar").click(function(){
+                        $("#parroquia").show();
+                        $("#altar").hide();
+                        $("#botonComprar").css("background-color", "rgba(255, 249, 192, 0.7)");
+                        $("#botonVender").css("background-color", "white");
+                    });
                         
                     </script>
 
@@ -109,7 +167,7 @@ global $db;
                             echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
                                     echo "<div class='seccionSpotImagen'>" ;
-                                        $spotImagen = getFotoSpot(170);
+                                        $spotImagen = getFotoSpot(71);
                                         echo $spotImagen;
                                     echo "</div>";
                                 echo "</div>";
@@ -124,7 +182,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Sólo quiero echar un rato rodando con mi tabla y olvidarme de todo lo demás.";
+                                            $descripcionZona = "Echar un ratito escuchando las aventuras de Jesús y cantar cuando el libro lo pida.";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>";//Fin SemiTransparente
@@ -139,7 +197,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Otro skater me ha retado a un duelo de H.O.R.S.E. así que tendré que sacar mis mejores trucos para ganar.";
+                                            $descripcionZona = "Desde que me he ido a vivir por mi cuenta, no tengo a quien contarle mis movidas.";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>";//Fin de semiTransparente

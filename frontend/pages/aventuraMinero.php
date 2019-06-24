@@ -3,68 +3,51 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona3Barrio9();
+        comprobarZona3Barrio5();
         $estoyLibre = comprobarEspera();
         if($estoyLibre === 1){
 
             echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(170) . "</h4>";
+                echo "<h4>" . getNombreSpot(90) . "</h4>";
             echo "</span>";
 
                 echo "<div class='contenido'>";
-                echo "<span class='contenedor1'>"; 
-                   
+                echo "<span class='contenedor1'>";
 
                     echo "<div class='seccionSpotOpciones'>";
                     echo "<div class='semiTransparente'>"; 
                         echo "<div class='textoDependiente'>";
-                            echo "\"El skateboarding va de caer mil veces y levantarse mil y una\".";
+                            echo "Allí arriba desde la montaña nos protege el Minero.";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/yoHombre.png">';
                         echo "</div>"; //FIN imagenDependiente
+                   
                     
-                    echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
+                    echo "<form id = 'selectorOpciones' action='?bPage=aventuras&action=zona&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="rodarSkate">';
+                                echo '<input type="checkbox" name="cbox1" value="aventuraMinero">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Rodar de tranquis';
+                                echo '¡Subir al Minero!';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">15M</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
                         
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="horse">';
+                                echo '<input type="checkbox" name="cbox1" value="aventuraMineroDebil">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Jugar un H.O.R.S.E.';
+                                echo 'Salir a andar';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">30M</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
-                        
-                        //HAY UN TERCERA OPCION QUE FORMA PARTE DE LA MISION Repartidor Relampago
-                        $mostrar = comprobarMision(4);
-                        $progreso = comprobarProgreso(4);
-                        if($mostrar === 1 && $progreso === '1'){ //Tengo que entregar aqui el pedido
-                            echo "<div class='opcionesTienda'>";
-                                echo "<div class='opcionesTiendaCheckbox'>";
-                                    echo '<input type="checkbox" name="cbox1" value="misionBohemios">';
-                                echo "</div>";
-                                echo "<div class='opcionesTiendaTitulo'>";
-                                    echo "¡Misión Repartidor!";
-                                echo "</div>";
-                                echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">1 etapa</div></label>';
-                            echo "</div>";
-                        }
-                        
-                        
                         
                         echo "<div class='submitTienda'>";
-                            echo "<input type='submit' class='botonCarrilBici' value=' '>";
+                            echo "<input type='submit' class='botonAventura' value=' '>";
                         echo "</div>";
                     echo "</form>";           
             ?>
@@ -83,16 +66,15 @@ global $db;
                         $(":checkbox").click(function(){
                             var valor = $(this).val();
                             
-                            if (valor === 'rodarSkate') {
+                            if (valor === 'aventuraMinero') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
                                 $(".opcionSpot0").hide();
                             }
-                            else if (valor === 'horse'){
+                            else if (valor === 'aventuraMineroDebil'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot0").hide();
-
                             }
                         });
                         
@@ -105,11 +87,10 @@ global $db;
                     echo "</span>"; //Fin de Contenedor1
                     
                     echo "<span class='contenedor2'>";
-                            
                             echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
                                     echo "<div class='seccionSpotImagen'>" ;
-                                        $spotImagen = getFotoSpot(170);
+                                        $spotImagen = getFotoSpot(90);
                                         echo $spotImagen;
                                     echo "</div>";
                                 echo "</div>";
@@ -122,12 +103,13 @@ global $db;
                                     echo $imagenSpot;
                                 echo "</div>";
                                 echo "<div class='seccionDescripcionZonaTexto'>";
-                                    echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
-                                        echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Sólo quiero echar un rato rodando con mi tabla y olvidarme de todo lo demás.";
+                           
+                                    echo "<span class='textoDescripcionSpot'>";
+                                        echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
+                                            $descripcionZona = "La montaña del Minero está habitada por bestias. Pienso subir a poner órden y ganarme un respeto.";
                                             echo $descripcionZona;
-                                        echo "</span>";
-                                    echo "</div>";//Fin SemiTransparente
+                                        echo "</div>";
+                                    echo "</span>";
                                 echo "</div>"; //Fin seccionDescripcionZonaTexto
                             echo "</div>"; //FIN opcionSpot1
                             
@@ -137,12 +119,13 @@ global $db;
                                     echo $imagenSpot;
                                 echo "</div>";
                                 echo "<div class='seccionDescripcionZonaTexto'>";
-                                    echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
-                                        echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Otro skater me ha retado a un duelo de H.O.R.S.E. así que tendré que sacar mis mejores trucos para ganar.";
+                        
+                                    echo "<span class='textoDescripcionSpot'>";
+                                        echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
+                                            $descripcionZona = "Subiré al Mirador del Minero pero por el sendero más seguro. Es difícil que las bestias más peligrosas se acerquen hasta mi.";
                                             echo $descripcionZona;
-                                        echo "</span>";
-                                    echo "</div>";//Fin de semiTransparente
+                                        echo "</div>";
+                                    echo "</span>";
                                 echo "</div>"; //Fin descripcionZonaTexto
                             echo "</div>"; //FIN opcionSpot2
                        

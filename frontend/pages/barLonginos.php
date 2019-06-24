@@ -3,13 +3,11 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona1Barrio2();
-        $estoyLibre = comprobarEspera();
-        if($estoyLibre === 1){
+        comprobarZona2Barrio2();
         
         echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(23) . "</h4>";
+                echo "<h4>" . getNombreSpot(30) . "</h4>";
             echo "</span>";
             
             echo "<div class='contenido'>";
@@ -17,46 +15,46 @@ global $db;
                 
                     echo "<div class='seccionSpotOpciones'>";
                     echo "<div id='botonesComprarVender'>";
-                        echo "<button id='botonComprar' class='tagTiendaComprar'>Salón</button>";
-                        echo "<button id='botonVender' class='tagTiendaVender'>Cocina</button>";
+                        echo "<button id='botonComprar' class='tagTiendaComprar'>Barra</button>";
+                        echo "<button id='botonVender' class='tagTiendaVender'>Muro</button>";
                     echo "</div>";
                     echo "<div class='semiTransparente'>"; 
-                    echo "<div id='salon'>";
+                    echo "<div id='barra'>";
                         echo "<div class='textoDependiente'>";
-                            echo "\"Llevo viniendo a comer aquí desde mi bautizo por lo menos\".";
+                            echo "\"La comida picante de mi bar te hará sentir como en el calor del hogar, del mismo infierno\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
-                            echo '<img src="/design/img/dependientes/yoHombre.png">';
+                            echo '<img src="/design/img/dependientes/hellboy.png">';
                         echo "</div>"; //FIN imagenDependiente
                         
                     
                     echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="roscaChurros">';
+                            echo '<input type="checkbox" name="cbox1" value="bravas">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Rosca de Churros';
+                            echo 'Patatas Bravas';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
                     
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="migasManchegas">';
+                            echo '<input type="checkbox" name="cbox1" value="brochetas">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Migas Manchegas';
+                            echo 'Brochetas Bravas';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
                     
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="bombaRellena">';
+                            echo '<input type="checkbox" name="cbox1" value="retoPicante">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Bomba Rellena';
+                            echo 'Reto Picante';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
@@ -67,43 +65,41 @@ global $db;
                     echo "</form>";      
                 echo "</div>"; //FIN terraza
                 
-                echo "<div id='trastienda'>";
-                $mostrar = comprobarMision(6);
+                echo "<div id='muro'>";
+                $mostrar = comprobarMision(17);
+                $progreso = comprobarProgreso(17);
                     echo "<div class='textoDependiente'>";
                             
                             if($mostrar === 1){ //Está activada y en progreso
-                                $descripcionZona = getDescripcionMision(6, 1);
+                                $descripcionZona = getDescripcionMision(17, $progreso);
                                 echo $descripcionZona;
-                                $recompensa = getRecompensaMision(6, 1);
+                                $recompensa = getRecompensaMision(17, $progreso);
                                 echo $recompensa; 
                             }
                             elseif($mostrar === 2){ //La mision aun no esta activada
-                                echo "\"Nos la robarooon, la quereeemos, la necesitaaamos\".";
+                                echo "\"Qué vecinos tan ruidosos con sus rituales y sacrificios. Se ofrece recompensa por silenciarlos\".";
                             }
                             else{ //L mision ya esta completada
-                                echo "¡Huele bien a comida! pero no hay nada de interés ahora mismo";
+                                echo "\"Vendo Opel Corsa. 5 puertas. Está nuevo\".";
                             }
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
-                            if($mostrar === 0){ //Está completada
-                                echo '<img src="/design/img/dependientes/yoHombre.png">';
-                            }
-                            else{ //No está activada o está activad pero en progreso
-                                echo '<img src="/design/img/dependientes/fogataRitual.png">';
-                            }
+                            
+                                echo '<img src="/design/img/dependientes/cartelMuro.png">';
+                            
                         echo "</div>"; //FIN imagenDependiente
                         
-                    if($mostrar === 1 || $mostrar === 2){
+                    if($mostrar === 2 || $mostrar === 1){
                         echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
 
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="misionBomba">';
+                                echo '<input type="checkbox" name="cbox1" value="mision666">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo '¡Misión Tesoro!';
+                                echo '¡Misión 666!';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">1 Etapa</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">3 Etapas</div></label>';
                         echo "</div>";
 
                             echo "<div class='submitTienda'>";
@@ -127,15 +123,15 @@ global $db;
                     });
                     
                     $("#botonVender").click(function(){
-                        $("#salon").hide();
-                        $("#trastienda").show();
+                        $("#barra").hide();
+                        $("#muro").show();
                         $("#botonVender").css("background-color", "rgba(255, 249, 192, 0.7)");
                         $("#botonComprar").css("background-color", "white");
                     });
 
                       $("#botonComprar").click(function(){
-                        $("#salon").show();
-                        $("#trastienda").hide();
+                        $("#barra").show();
+                        $("#muro").hide();
                         $("#botonComprar").css("background-color", "rgba(255, 249, 192, 0.7)");
                         $("#botonVender").css("background-color", "white");
                     });
@@ -151,27 +147,27 @@ global $db;
             echo "<div class='seccionSpotInfo'>";
                     echo "<div class = 'seccionContacto'>";
                         echo "<div class = 'mapaCallejero'>";
-                            echo "<iframe width='300' height='225' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.openstreetmap.org/export/embed.html?bbox=-4.115452766418458%2C38.67803066731481%2C-4.1016554832458505%2C38.683885029177475&amp;layer=mapnik&amp;marker=38.680965031981174%2C-4.108549833690631' style='border: 1px solid black'></iframe><br/><br>";    
+                            echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.105024337768556%2C38.68146461431729%2C-4.091227054595948%2C38.6873186952697&amp;layer=mapnik&amp;marker=38.68439578716559%2C-4.098129987323773" style="border: 1px solid black"></iframe><br/><br>';    
                         echo "</div>";
                         echo "<div class = 'infoSpot'>";
                             echo "<table border = '0' style = 'text-align:left'>";
                                 echo "<tr>";
-                                    echo "<td><div class='mapaMini'></div> C/Asdrúbal, 36<br></td>";
+                                    echo "<td><div class='mapaMini'></div> C/Palafox, 17<br></td>";
                                 echo "</tr>";
                                 echo "<tr>";
-                                echo "<td><div class='telefonoMini'></div>  926 42 53 13<br></td>";
+                                echo "<td><div class='telefonoMini'></div>  926 43 07 72<br></td>";
                                 echo "</tr>";
                                 echo "<tr>";
-                                echo "<td><div class='relojMini'></div> ??????</td>";
+                                echo "<td><div class='relojMini'></div> 12:30H - 00:00H. Miércoles Cerrado.</td>";
                                 echo "</tr>";
                             echo "</table>";
                         echo "</div>";
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia(3);
+                        $fechaInsignia = comprobarInsignia(30);
                         if ($fechaInsignia != '0'){
-                            $fotoInsignia = getFotoInsignia(3);
+                            $fotoInsignia = getFotoInsignia(30);
                             echo "<div class='fotoInsignia'>";
                                 echo $fotoInsignia . "<br>";
                             echo "</div>";
@@ -199,9 +195,5 @@ global $db;
             echo "</div>"; //FIN DE div contenido
 
         echo "</div>"; //FIN DE div moduloZona
-        }
-        else{
-            header("location: ?page=zona&nonUI&message=Aun no he descansado de mi última acción");
-        }
         
         

@@ -3,6 +3,10 @@ html,body{
     margin:0px;
 }
 
+*{
+/*font-family: 'Showcard Gothic';
+font-size: 14px;*/
+}
 
 h1{
     color:blue;
@@ -1551,9 +1555,25 @@ h3{
     border:1px solid white;
 }
 
+.opcionesMision{
+    float: left;
+    margin-right: 5px;
+    margin-top: 10px;
+    width:100px;
+    border-radius: 10px;
+    background: silver;
+}
+
+.opcionesMisionTitulo{
+    background: silver;
+    border-radius: 10px 10px 0px 0px;
+    /*font-family: "Times New Roman";*/
+}
+
 .opcionesTienda{
     float: left;
     margin-right: 5px;
+    margin-top: 10px;
     width:100px;
     border-radius: 10px;
     background: lightskyblue;
@@ -1566,6 +1586,7 @@ h3{
 .opcionesTiendaTitulo{
     background: lightskyblue;
     border-radius: 10px 10px 0px 0px;
+    /*font-family: "Times New Roman";*/
 }
 
 .submitTienda{
@@ -1611,7 +1632,48 @@ h3{
     text-align : right;
 }
 
+
+#charlar{
+    display : none;
+}
+
+#enfermeria{
+    display : none;
+}
+
+#mesa{
+    display: none;
+}
+
+#pasaje{
+    display : none;
+}
+
+#altar{
+    display : none;
+}
+
+#muro{
+    display : none;
+}
+
+#caseta{
+    display : none;
+}
+
+#escenario{
+    display:none;
+}
+
+#bodega{
+    display:none;
+}
+
 #trastienda{
+    display : none;
+}
+
+#lapidas{
     display : none;
 }
 
@@ -1673,6 +1735,9 @@ h3{
 
 #reservado{
     display: none;
+}
+#banco{
+    display : none;
 }
 
 #sexos{
@@ -1781,15 +1846,15 @@ h3{
     background : rgba(255, 255, 255, 0.7); 
     padding : 10px 20px 10px 20px;
     border-radius: 10px;
-    margin-bottom: 10px;
     float : left;
     width : 220px;
+    font-family: "Times New Roman";
+    font-weight: 16px;
 }
 
 .imagenDependiente{
  border-radius: 90px;
  overflow: hidden;
- margin-bottom: 10px;
 }
 
 .precioTienda{

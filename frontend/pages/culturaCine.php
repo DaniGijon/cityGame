@@ -46,7 +46,7 @@ global $db;
                         
                         //Esta solo la muestro si no he comenzado la mision o si la tengo comenzada pero no completada
                         $mostrar = comprobarMision(2);
-                        if ($mostrar === 1){
+                        if ($mostrar === 1 || $mostrar === 2){
                             echo "<div class='opcionesTienda'>";
                                 echo "<div class='opcionesTiendaCheckbox'>";
                                     echo '<input type="checkbox" name="cbox1" value="misionCine">';
