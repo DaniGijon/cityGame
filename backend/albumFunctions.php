@@ -12,11 +12,30 @@ function dibujarAlbum(){
     echo "</div>"; 
     
     echo "<div id=seccion1>";
-       
+       echo "<button id='botonMonstruosAsdrubal' class='botonMonstruosZona'>Asdrúbal</button>";
+       echo "<button id='botonMonstruosTerri' class='botonMonstruosZona'>Terri</button>";
+       echo "<button id='botonMonstruosGranCapitan' class='botonMonstruosZona'>Gran Capitán</button>";
+       echo "<button id='botonMonstruosSanJose' class='botonMonstruosZona'>San José</button>";
+       echo "<button id='botonMonstruosPozoNorte' class='botonMonstruosZona'>Pozo Norte</button>";
+       echo "<button id='botonMonstruosAbulagar' class='botonMonstruosZona'>Abulagar</button>";
+       echo "<button id='botonMonstruosElPoblado' class='botonMonstruosZona'>El Poblado</button>";
+       echo "<button id='botonMonstruosSalesianos' class='botonMonstruosZona'>Salesianos</button>";
+       echo "<button id='botonMonstruosTauro' class='botonMonstruosZona'>Tauro</button>";
+       echo "<button id='botonMonstruosLaCopa' class='botonMonstruosZona'>La Copa</button>";
+       echo "<br>";
+       echo "<button id='botonMonstruosAyuntamiento' class='botonMonstruosZona'>Ayuntamiento</button>";
+       echo "<button id='botonMonstruosPaseoSanGregorio' class='botonMonstruosZona'>Paseo S.Gregorio</button>";
+       echo "<button id='botonMonstruosPaseoElBosque' class='botonMonstruosZona'>Paseo El Bosque</button>";
+       echo "<button id='botonMonstruosElPino' class='botonMonstruosZona'>El Pino</button>";
+       echo "<button id='botonMonstruosElCarmen' class='botonMonstruosZona'>El Carmen</button>";
+       echo "<button id='botonMonstruosLas600' class='botonMonstruosZona'>Las 600</button>";
+       echo "<button id='botonMonstruosPAU' class='botonMonstruosZona'>PAU</button>";
+       echo "<button id='botonMonstruosRecintoFerial' class='botonMonstruosZona'>Recinto Ferial</button>";
+       echo "<button id='botonMonstruosCiudadJardin' class='botonMonstruosZona'>Ciudad Jardín</button>";
     echo "<div id='monstruos'>";
     
     echo '<br>MONSTRUOS DERROTADOS: ' . getMonstruosDerrotados($id);
-    echo '<br>ESPECIES DERROTADAS: ' . getEspeciesDerrotadas($id) . ' / 209';
+    echo '<br>ESPECIES DERROTADAS: ' . getEspeciesDerrotadas($id) . ' / 190';
     
     echo "<div class='tablaMonstruosDerrotados'>";
     

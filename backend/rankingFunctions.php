@@ -212,7 +212,7 @@ function dibujarRanking(){
             $nombre = getNombre($result[$i]['idP']);
             echo "<td>" . $nombre . "</td>";
 
-            echo "<td>" . $result[$i]['COUNT(*)'] . " / 209</td>";
+            echo "<td>" . $result[$i]['COUNT(*)'] . " / 190</td>";
             echo "</tr>";
         }
     }

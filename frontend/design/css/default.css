@@ -323,6 +323,11 @@ h3{
   background-position:center;
 }
 
+.botonMonstruosZona{
+    border-radius: 15px 50px;
+    background: lightblue;
+}
+
 .seccion1{
     border-radius: 15px 50px;
     background: yellow;
