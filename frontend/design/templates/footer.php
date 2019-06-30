@@ -1,8 +1,5 @@
 <div id="footer">
     
-    <span id='botonManual' class='botonManual'>
-        <a href="?page=manual"><button>Manual</button></a><br>
-    </span>
     
     
     <div id="relojilloFooter">

@@ -4,12 +4,11 @@ html,body{
 }
 
 *{
-/*font-family: 'Showcard Gothic';
-font-size: 14px;*/
+/*font-family: "Showcard Gothic";*/
 }
 
 h1{
-    color:blue;
+    color:white;
 }
 
 h2{
@@ -197,39 +196,40 @@ h3{
     margin:auto;
     border-right:1px solid black;
     border-left:1px solid black;
+    background-image: url("/design/img/background/background-pattern.jpg");
 }
 
 #top{
-    height:100px;
-    background:#bababa;
-    border-bottom:1px solid black;
+    height:110px;
+   /* background:#bababa;*/
+    /*border-bottom:1px solid black;*/
 }
 
 #menuLateral{
     position: absolute;
+    padding-top: 25px;
     top: 101px;
     z-index: 100;
-    width: 120px;
+    width: 300px;
     min-height: 624px;
-    background: url("/design/img/botones/corazon.png") /*repeat-y*/;
-    background-position: top left;
-    background-attachment: local;
-    overflow: hidden;
 }
 
 #main{
     position : relative;
-    margin-left : 120px;
+    margin-left : 300px;
+    margin-top: 20px;
+    margin-right: 20px;
     display : block;
-    background:#dadada;
+    background:white; 
     flex-grow:1;
     overflow-y:auto;
     border-bottom:1px solid black;
     padding:5px;
+    border-radius: 20px;
 }
 
 #footer{
-    background:#bababa;
+  /*  background:#bababa;*/
     height:30px;
     text-align:center;
     line-height:30px;
@@ -242,6 +242,7 @@ h3{
 
 .ulMenuLateral{
     padding : 10;
+    padding-left:0px;
     margin : 0;
 }
 
@@ -251,7 +252,7 @@ h3{
 
 #infoArriba{
   height:100px;
-  width:500px;  
+  width:575px;  
 }
 
 #OpcionesArriba{
@@ -264,63 +265,45 @@ h3{
 }
 
 .botonPersonaje{
+    background-image:url("/design/img/menu/boton-personaje.png");
+    background-repeat:no-repeat;
     margin-top: 5px;
-    height:100px;
-    width:100px; 
+    height:81px;
+    width:290px; 
     float:left;
-}
-
-.botonPersonajeImagen{
-  background-image:url("/design/img/botones/miPersonaje.png");
-  background-repeat:no-repeat;
-  height:100px;
-  width:100px;
-  background-position:center;
 }
 
 .botonDarUnaVuelta{
-    margin-top: 5px;
-    height:100px;
-    width:100px; 
+    height:81px;
+    width:290px; 
     float:left;
+    background-image:url("/design/img/menu/boton-vuelta.png");
+    background-repeat:no-repeat;
 }
 
-.botonDarUnaVueltaImagen{
-  background-image:url("/design/img/botones/darUnaVuelta.png");
-  background-repeat:no-repeat;
-  height:100px;
-  width:100px;
-  background-position:center;
-}
 
 .botonMisiones{
-    margin-top: 5px;
-    height:100px;
-    width:100px; 
+    height:81px;
+    width:290px; 
     float:left;
-}
-
-.botonMisionesImagen{
-  background-image:url("/design/img/botones/misiones.png");
-  background-repeat:no-repeat;
-  height:100px;
-  width:100px;
-  background-position:center;
+    background-image:url("/design/img/menu/boton-novedades.png");
+    background-repeat:no-repeat;
 }
 
 .botonMensajes{
-    margin-top: 5px;
-    height:100px;
-    width:100px; 
+    height:81px;
+    width:290px; 
     float:left;
+    background-image:url("/design/img/menu/boton-mensajes.png");
+    background-repeat:no-repeat;
 }
 
-.botonMensajesImagen{
-  background-image:url("/design/img/botones/mensajes.png");
-  background-repeat:no-repeat;
-  height:100px;
-  width:100px;
-  background-position:center;
+.botonMensajesPendientes{
+    height:81px;
+    width:290px; 
+    float:left;
+    background-image:url("/design/img/menu/boton-mensajes-accion.png");
+    background-repeat:no-repeat;
 }
 
 .botonMonstruosZona{
@@ -359,47 +342,22 @@ h3{
 }
 
 .botonAlbum{
-    margin-top: 5px;
-    height:100px;
-    width:100px; 
+    height:81px;
+    width:290px; 
     float:left;
+    background-image:url("/design/img/menu/boton-album.png");
+    background-repeat:no-repeat;
 }
 
-.botonAlbumImagen{
-  background-image:url("/design/img/botones/album.png");
-  background-repeat:no-repeat;
-  height:100px;
-  width:100px;
-  background-position:center;
-}
 
 .botonRanking{
-    margin-top: 5px;
-    height:100px;
-    width:100px; 
+    height:81px;
+    width:290px; 
     float:left;
+    background-image:url("/design/img/menu/boton-ranking.png");
+    background-repeat:no-repeat;
 }
 
-.botonRankingImagen{
-  background-image:url("/design/img/botones/ranking.png");
-  background-repeat:no-repeat;
-  height:100px;
-  width:100px;
-  background-position:center;
-}
-
-.botonManual{
-   height:25px;
-   width:50px;
-   float:left; 
-}
-
-.botonLogout{
-    height:50px;
-    width:50px;
-    float:right;
-    background-image:url("/design/img/iconos/logout.png");
-}
 
 .botonAvances{
   background-image:url("/design/img/botones/avances.png");
@@ -415,11 +373,45 @@ h3{
     opacity:0.5;
 }
 
+#contenedorTop{
+    border: 2px solid rgba(7, 61, 27, 0.7);
+    border-radius: 20px;
+    float: right;
+    margin-left: 20px;
+    margin-top: 5px;    
+    background: rgba(7, 61, 27, 0.7); 
+}
+
+.iconoTop{
+    margin-top:15px;
+    margin-right: 30px;
+}
+
+#secundarioTop{
+    float: right;
+    margin-left: 10px;
+    width: 60px;
+}
+
+#manualTop{
+    background-image:url("/design/img/icons/icon-manual.png");
+    width: 33px;
+    height:35px;
+}
+
+#logoutTop{
+    background-image:url("/design/img/icons/icon-logout.png");
+    width: 33px;
+    height:33px;
+}
+
 .burbujaPersonaje{
    top:0px;
    height:100px;
    width:100px;
    float:left; 
+   margin-left: 25px;
+   margin-top: 15px;
 }
 
 .nombrePersonaje{
@@ -431,23 +423,43 @@ h3{
 
 .avatar{
    top:20px;
-   height:58px;
-   width:100px;
+   height:75px;
+   width:75px;
    float:left; 
-}
-
-.miniTop{
-    height: 20px;
-    width : 20px;
-    margin-right: 30px;
-    float : left;
+   border-radius: 90px; 
+   border:1px solid black; 
+   background:white
 }
 
 #capaDinero{
     display:none;
-    width:200px;
-    height:50px;
     position:absolute;
+    background: white;
+    border: solid 2px black;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+#capaManual{
+    display:none;
+    width: 80px;
+    text-align: center;
+    position:absolute;
+    background: white;
+    border: solid 2px black;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+#capaLogout{
+    display:none;
+    width: 80px;
+    text-align: center;
+    position:absolute;
+    background: white;
+    border: solid 2px black;
+    border-radius: 10px;
+    pointer-events: none;
 }
 
 .iconoCash{
@@ -461,7 +473,6 @@ h3{
    height:20px;
    width:80px;
    float:left;
-   background: white;
 }
 
 .iconoBanco{
@@ -475,170 +486,298 @@ h3{
    height:20px;
    width:80px;
    float:left;
-   background: white;
+}
+
+#capaNivel{
+    display:none;
+    position:absolute;
+    width:80px;
+    text-align: center;
+    background: white;
+    border : solid 2px black;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+#capaRespeto{
+    display:none;
+    position:absolute;
+    width:80px;
+    text-align: center;
+    background: white;
+    border : solid 2px black;
+    border-radius: 10px;
+    pointer-events: none;
 }
 
 #capaTiempo{
     display:none;
-    width:400px;
-    height:50px;
     position:absolute;
+    background: white;
+    border : solid 2px black;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+#capaPopularidad{
+    display:none;
+    position:absolute;
+    width:100px;
+    text-align: center;
+    background: white;
+    border : solid 2px black;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+#capaExperiencia{
+    display:none;
+    position:absolute;
+    width:100px;
+    text-align: center;
+    background: white;
+    border : solid 2px black;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+#capaSalud{
+    display:none;
+    position:absolute;
+    width:100px;
+    text-align: center;
+    background: white;
+    border : solid 2px black;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+#capaEnergia{
+    pointer-events: none;
+    display:none;
+    position:absolute;
+    width:100px;
+    text-align: center;
+    background: white;
+    border : solid 2px black;
+    border-radius: 10px;
 }
 
 .cajitaSeccionTop{
    height:50px;
-   width:100px;
+   width:103px;
    float:left;
    margin-left: 5px;
-   border: 1px solid black;
    margin-bottom:5px;
 }
 
-.nivelSeccionTop{
+.dineroSeccionTop{
+   height:33px;
+   margin-top:20px;
+}
+
+.iconoDinero{
+   height:33px;
+   width:96px;
+   float:left;
+   background-image:url("/design/img/icons/icon-money.png");
+   text-align: right;
+}
+
+.textoDinero{
    height:25px;
+   width:67px;
+   margin-left: 20px;
+   margin-top: 5px;
+   float:left;
+   text-align: right;
+   color : white;
+}
+
+.nivelSeccionTop{
+   height:33px;
    margin-top:20px;
 }
 
 .iconoNivel{
-   height:25px;
-   width:33px;
+   height:33px;
+   width:103px;
    float:left;
-   background-image:url("/design/img/botones/nivel.png");
+   background-image:url("/design/img/icons/icon-level.png");
+   text-align: right;
 }
 
 .textoNivel{
    height:25px;
    width:67px;
+   margin-left: 20px;
+   margin-top: 5px;
    float:left;
-   text-align: center;
+   text-align: right;
+   color : white;
 }
 
 .respetoSeccionTop{
-   height:25px;
+   height:33px;
    margin-top:20px;
 }
 
 .iconoRespeto{
-   height:25px;
-   width:33px;
+   height:33px;
+   width:101px;
    float:left;
-   background-image:url("/design/img/botones/exp.png");
+   background-image:url("/design/img/icons/icon-world.png");
 }
 
 .textoRespeto{
    height:25px;
    width:67px;
+   margin-left: 20px;
+   margin-top: 5px;
    float:left;
-   text-align: center;
+   text-align: right;
+   color : white;
 }
 
 .popularidadSeccionTop{
-   height:25px;
+   height:33px;
    margin-top:20px;
 }
 
 .iconoPopularidad{
-   height:25px;
-   width:33px;
+   height:33px;
+   width:89px;
    float:left;
-   background-image:url("/design/img/iconos/popularidadIcono.png");
+   background-image:url("/design/img/icons/icon-star.png");
 }
 
 .textoPopularidad{
    height:25px;
    width:67px;
+   margin-left: 20px;
+   margin-top: 5px;
    float:left;
-   text-align: center;
+   text-align: right;
+   color : white;
 }
 
-.experienciaSeccionTop{
-   height:50px;
-   width:100px;
+.tiempoSeccionTop{
+   height:33px;
+   margin-top:5px;
+}
+
+.iconoTiempo{
+   height:33px;
+   width:97px;
    float:left;
+   background-image:url("/design/img/icons/icon-time.png");
+}
+
+.textoTiempo{
+   height:25px;
+   width:67px;
+   margin-left: 20px;
+   margin-top: 5px;
+   float:left;
+   text-align: right;
+   color : white;
+}
+
+.expSeccionTop{
+   height:33px;
+   margin-top:5px;
 }
 
 .iconoExp{
-   height:25px;
-   width:33px;
+   height:33px;
+   width:103px;
    float:left;
-   background-image:url("/design/img/botones/exp.png");
+   margin-top:3px;
+   background-image:url("/design/img/icons/icon-exp.png");
 }
 
 .textoExp{
    height:25px;
    width:67px;
+   margin-left: 20px;
+   margin-top: 5px;
    float:left;
-   text-align: center;
-}
-
-.barraExp{
-    height:20px;
-    width:100px;
-    float:left;
-    background-image:url("/design/img/botones/barraExpFondo.png");
+   text-align: right;
+   color : white;
 }
 
 #expAhora{
-    height:20px;
-    width:100px;
+    height:33px;
+    width:70px;
     float:left;
-    background-image:url("/design/img/botones/barraExpAhora.png");
+    margin-left: 34px;
+    background-image:url("/design/img/icons/icon-exp-ahora.png");
+    background-repeat: repeat-y;
+}
+
+.saludSeccionTop{
+   height:33px;
+   margin-top:5px;
 }
 
 .iconoSalud{
-   height:25px;
-   width:33px;
-   float:left; 
-   background-image:url("/design/img/botones/corazon.png");
+   height:33px;
+   width:102px;
+   float:left;
+   background-image:url("/design/img/icons/icon-live.png");
 }
 
 .textoSalud{
    height:25px;
    width:67px;
-   float:left; 
-   text-align: center;
+   margin-left: 20px;
+   margin-top: 5px;
+   float:left;
+   text-align: right;
+   color : white;
 }
 
-.barraSalud{
-    height:20px;
-    width:100px;
-    float:left;
-    background-image:url("/design/img/botones/barraSaludFondo.png");
-}
 
 #saludAhora{
-    height:20px;
-    width:100px;
+    height:33px;
+    width:68px;
     float:left;
-    background-image:url("/design/img/botones/barraSaludAhora.png");
+    margin-left: 34px;
+    background-image:url("/design/img/icons/icon-live-ahora.png");
+    background-repeat: repeat-y;
+}
+
+.energiaSeccionTop{
+   height:33px;
+   margin-top:5px;
 }
 
 .iconoEnergia{
-   height:25px;
-   width:33px;
-   float:left; 
-   background-image:url("/design/img/botones/energia.png");
+   height:33px;
+   width:102px;
+   float:left;
+   background-image:url("/design/img/icons/icon-ray.png");
 }
 
 .textoEnergia{
    height:25px;
    width:67px;
+   margin-left: 20px;
+   margin-top: 5px;
    float:left;
-   text-align: center;
-}
-
-.barraEnergia{
-    height:20px;
-    width:100px;
-    float:left;
-    background-image:url("/design/img/botones/barraEnergiaFondo.png");
+   text-align: right;
+   color : white;
+   
 }
 
 #energiaAhora{
-    height:20px;
-    width:100px;
+    margin-left: 12px;
+    margin-top: 1px;
+    height:33px;
+    width:91px;
     float:left;
-    background-image:url("/design/img/botones/barraEnergiaAhora.png");
+    background-image:url("/design/img/icons/icon-ray-ahora.png");
+    background-repeat: repeat-y;
 }
 
 .contenedor1{
@@ -1637,6 +1776,13 @@ h3{
     text-align : right;
 }
 
+#seccion2{
+    display : none;
+}
+
+#seccion3{
+    display : none;
+}
 
 #charlar{
     display : none;

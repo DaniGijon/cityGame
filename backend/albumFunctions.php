@@ -37,6 +37,8 @@ function dibujarAlbum(){
     echo '<br>MONSTRUOS DERROTADOS: ' . getMonstruosDerrotados($id);
     echo '<br>ESPECIES DERROTADAS: ' . getEspeciesDerrotadas($id) . ' / 190';
     
+    echo "<div id='asdrubalAlbum'>";
+    
     echo "<div class='tablaMonstruosDerrotados'>";
     
         echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
@@ -198,6 +200,8 @@ function dibujarAlbum(){
 
         echo "</table>";
     echo "</div>";
+    
+    echo "</div>"; //Fin asdrubal
     
     
     echo "</div>"; //FIN SECCION MONSTRUOS

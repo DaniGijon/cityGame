@@ -7,27 +7,21 @@
     <div id="menuLateral">
         
         <ul class='ulMenuLateral'>
-        
-
-                <span id='botonPersonaje' class="botonPersonaje">
-                    <a href="?page=personaje"><button class="botonPersonajeImagen">Mi Personaje</button></a><br>
-                </span>
-                <span id='botonDarUnaVuelta' class="botonDarUnaVuelta">
-                    <a href="?page=zona"><button class="botonDarUnaVueltaImagen">Dar una Vuelta</button></a><br>
-                </span>
-                <span id='botonMensajes' class="botonMensajes">
-                    <a href="?page=mensajes"><button class="botonMensajesImagen">Mensajes</button></a><br>
-                </span>
-                <span id='botonMensajes' class="botonMisiones">
-                    <a href="?page=misiones"><button class="botonMisionesImagen">Misiones</button></a><br>
-                </span>
-                <span id='botonAlbum' class="botonAlbum">
-                    <a href="?page=album"><button class="botonAlbumImagen">Album</button></a><br>
-                </span>
-                <span id='botonRanking' class="botonRanking">
-                    <a href="?page=ranking"><button class="botonRankingImagen">Ranking</button></a><br>
-                </span>
-
+                <a href="?page=personaje"><div id='botonPersonaje' class="botonPersonaje"></div></a><br>    
+                <a href="?page=zona"><div id='botonDarUnaVuelta' class="botonDarUnaVuelta"></div></a><br>
+                <?php
+                    if(getMensajesPendientes($id) == 1){
+                        echo '<a href="?page=mensajes"><div id="botonMensajesPendientes" class="botonMensajesPendientes"></div></a><br>';
+                    }
+                    else {
+                        echo '<a href="?page=mensajes"><div id="botonMensajes" class="botonMensajes"></div></a><br>';
+                    }
+                ?>
+                
+                <a href="?page=misiones"><div id='botonMisiones' class="botonMisiones"></div></a><br>
+                <a href="?page=album"><div id='botonAlbum' class="botonAlbum"></div></a><br>
+                <a href="?page=ranking"><div id='botonRanking' class="botonRanking"></div></a><br>
+                <a href="?page=ranking"><div id='botonRanking' class="botonRanking"></div></a><br>
         </ul>    
         
         
@@ -36,7 +30,7 @@
     }
     else{
         ?>
-        <div id="menuLateal">
+        <div id="menuLateral">
             
         </div>
     <?php
