@@ -43,165 +43,118 @@ function dibujarAlbum(){
     
         echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
             echo "<tr>";
-                echo "<th></th>";
-                for($i=1;$i<=11;$i++){
-                    if($i != 11){
-                        echo "<th style='text-align:center; border-radius: 15px'> $i </th>";
-                    }
-                    else{
-                        echo "<th style='text-align:center; border-radius: 15px'> BOSS </th>";
-                    }
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='opcionesTienda albumTarjeta'>";
+                                echo "<div class='opcionesTiendaTitulo'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                echo "</div>";
+                                if($ver[0]['cantidad'] >1)
+                                    echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $ver[0]['cantidad'] . ' veces</div>';
+                                else 
+                                    echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $ver[0]['cantidad'] . ' vez</div>';
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
                 }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='200'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='opcionesTiendaTitulo'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                    echo "</div>";
+                    if($ver[0]['cantidad'] >1)
+                        echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $ver[0]['cantidad'] . ' veces</div>';
+                    else 
+                        echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $ver[0]['cantidad'] . ' vez</div>';
+                    echo "</div>";                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='opcionesTienda albumTarjeta'>";
+                                echo "<div class='opcionesTiendaTitulo'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                echo "</div>";
+                                if($ver[0]['cantidad'] >1)
+                                    echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $ver[0]['cantidad'] . ' veces</div>';
+                                else 
+                                    echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $ver[0]['cantidad'] . ' vez</div>';
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
             echo "</tr>";
             
-            for($i=1;$i<20;$i++){ //Para cada zona
-              echo "<tr>";
-                echo "<td colspan='100%' bgcolor='black' height='2'></td>";
-              echo "</tr>";  
-              
-              echo "<tr>";
-                echo "<td>" . getNombreZona($i) . "</td>";
-                $uno = $i*10-9;
-                $dos = $i*10-8;
-                $tres = $i*10-7;
-                $cuatro = $i*10-6;
-                $cinco = $i*10-5;
-                $seis = $i*10-4;
-                $siete = $i*10-3;
-                $ocho = $i*10-2;
-                $nueve = $i*10-1;
-                $diez = $i*10;
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM = '$uno'";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[0]) && $ver[0]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $uno . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $uno . ".png'>" . "</div></td>";
-                }
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM = '$dos'";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[0]) && $ver[0]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $dos . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $dos . ".png'>" . "</div></td>";
-                }
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM = '$tres'";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[0]) && $ver[0]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $tres . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $tres . ".png'>" . "</div></td>";
-                }
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM = '$cuatro'";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[0]) && $ver[0]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $cuatro . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $cuatro . ".png'>" . "</div></td>";
-                }
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM = '$cinco'";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[0]) && $ver[0]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $cinco . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $cinco . ".png'>" . "</div></td>";
-                }
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM = '$seis'";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[0]) && $ver[0]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $seis . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $seis . ".png'>" . "</div></td>";
-                }
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM = '$siete'";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[0]) && $ver[0]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $siete . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $siete . ".png'>" . "</div></td>";
-                }
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM = '$ocho'";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[0]) && $ver[0]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $ocho . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $ocho . ".png'>" . "</div></td>";
-                }
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM = '$nueve'";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[0]) && $ver[0]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $nueve . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $nueve . ".png'>" . "</div></td>";
-                }
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM = '$diez'";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[0]) && $ver[0]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $diez . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $diez . ".png'>" . "</div></td>";
-                }
-                
-                $sql = "SELECT * FROM victorias WHERE idP='$id' AND idM >= 200";
-                $stmt = $db->query($sql);
-                $ver = $stmt->fetchAll();
-                
-                if(isset($ver[$i-1]) && $ver[$i-1]['cantidad'] > 0){
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $ver[0]['idM'] . "ok.png'>" . "</div></td>";
-                }
-                else{
-                    $idSombra = $i+199;
-                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/" . $idSombra . ".png'>" . "</div></td>";
-                }
-               
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='opcionesTienda albumTarjeta'>";
+                                echo "<div class='opcionesTiendaTitulo'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                echo "</div>";
+                                if($ver[0]['cantidad'] >1)
+                                    echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $ver[0]['cantidad'] . ' veces</div>';
+                                else 
+                                    echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $ver[0]['cantidad'] . ' vez</div>';
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<div class='opcionesTienda albumTarjeta'>";
+                                echo "<div class='opcionesTiendaTitulo'>";
+                                    echo "?????";
+                                echo "</div>";
+                                echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . 0 . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . 'Nivel: ' . $i . '</div>';
+                            echo "</div>";  
+                        }
+                    echo "</td>";
+                }   
             echo "</tr>";
-            }
             
 
         echo "</table>";
     echo "</div>";
     
     echo "</div>"; //Fin asdrubal
+   
     
     
     echo "</div>"; //FIN SECCION MONSTRUOS
@@ -609,6 +562,92 @@ function dibujarAlbum(){
         $(".seccion2").css("background-color", "white");
         $(".seccion1").css("background-color", "white");
     });
+    
+    $("#botonMonstruosAsdrubal").click(function(){
+        $("#asdrubalAlbum").show();
+        $("#terriAlbum").hide();
+        $("#granCapitanAlbum").hide();
+        $("#sanJoseAlbum").hide();
+        $("#pozoNorteAlbum").hide();
+        $("#abulagarAlbum").hide();
+        $("#elPobladoAlbum").hide();
+        $("#salesianosAlbum").hide();
+        $("#tauroAlbum").hide();
+        $("#laCopaAlbum").hide();
+        $("#ayuntamientoAlbum").hide();
+        $("#paseoSanGregorioAlbum").hide();
+        $("#paseoElBosqueAlbum").hide();
+        $("#elPinoAlbum").hide();
+        $("#elCarmenAlbum").hide();
+        $("#las600Album").hide();
+        $("#PAUAlbum").hide();
+        $("#recintoFerialAlbum").hide();
+        $("#ciudadJardinAlbum").hide();
+        $("#botonMonstruosAsdrubal").css("background-color", "yellow");
+        $("#botonMonstruosTerri").css("background-color", "lightblue");
+        $("#botonMonstruosGranCapitan").css("background-color", "lightblue");
+        $("#botonMonstruosSanJose").css("background-color", "lightblue");
+        $("#botonMonstruosPozoNorte").css("background-color", "lightblue");
+        $("#botonMonstruosAbulagar").css("background-color", "lightblue");
+        $("#botonMonstruosElPoblado").css("background-color", "lightblue");
+        $("#botonMonstruosSalesianos").css("background-color", "lightblue");
+        $("#botonMonstruosTauro").css("background-color", "lightblue");
+        $("#botonMonstruosLaCopa").css("background-color", "lightblue");
+        $("#botonMonstruosAyuntamiento").css("background-color", "lightblue");
+        $("#botonMonstruosPaseoSanGregorio").css("background-color", "lightblue");
+        $("#botonMonstruosPaseoElBosque").css("background-color", "lightblue");
+        $("#botonMonstruosElPino").css("background-color", "lightblue");
+        $("#botonMonstruosElCarmen").css("background-color", "lightblue");
+        $("#botonMonstruosLas600").css("background-color", "lightblue");
+        $("#botonMonstruosPAU").css("background-color", "lightblue");
+        $("#botonMonstruosRecintoFerial").css("background-color", "lightblue");
+        $("#botonMonstruosCiudadJardin").css("background-color", "lightblue");
+        
+    });
+    
+    $("#botonMonstruosTerri").click(function(){
+        $("#asdrubalAlbum").hide();
+        $("#terriAlbum").show();
+        $("#granCapitanAlbum").hide();
+        $("#sanJoseAlbum").hide();
+        $("#pozoNorteAlbum").hide();
+        $("#abulagarAlbum").hide();
+        $("#elPobladoAlbum").hide();
+        $("#salesianosAlbum").hide();
+        $("#tauroAlbum").hide();
+        $("#laCopaAlbum").hide();
+        $("#ayuntamientoAlbum").hide();
+        $("#paseoSanGregorioAlbum").hide();
+        $("#paseoElBosqueAlbum").hide();
+        $("#elPinoAlbum").hide();
+        $("#elCarmenAlbum").hide();
+        $("#las600Album").hide();
+        $("#PAUAlbum").hide();
+        $("#recintoFerialAlbum").hide();
+        $("#ciudadJardinAlbum").hide();
+        $("#botonMonstruosAsdrubal").css("background-color", "lightblue");
+        $("#botonMonstruosTerri").css("background-color", "yellow");
+        $("#botonMonstruosGranCapitan").css("background-color", "lightblue");
+        $("#botonMonstruosSanJose").css("background-color", "lightblue");
+        $("#botonMonstruosPozoNorte").css("background-color", "lightblue");
+        $("#botonMonstruosAbulagar").css("background-color", "lightblue");
+        $("#botonMonstruosElPoblado").css("background-color", "lightblue");
+        $("#botonMonstruosSalesianos").css("background-color", "lightblue");
+        $("#botonMonstruosTauro").css("background-color", "lightblue");
+        $("#botonMonstruosLaCopa").css("background-color", "lightblue");
+        $("#botonMonstruosAyuntamiento").css("background-color", "lightblue");
+        $("#botonMonstruosPaseoSanGregorio").css("background-color", "lightblue");
+        $("#botonMonstruosPaseoElBosque").css("background-color", "lightblue");
+        $("#botonMonstruosElPino").css("background-color", "lightblue");
+        $("#botonMonstruosElCarmen").css("background-color", "lightblue");
+        $("#botonMonstruosLas600").css("background-color", "lightblue");
+        $("#botonMonstruosPAU").css("background-color", "lightblue");
+        $("#botonMonstruosRecintoFerial").css("background-color", "lightblue");
+        $("#botonMonstruosCiudadJardin").css("background-color", "lightblue");
+        
+    });
+    
+    
     $(".miniDescubierta104").mouseenter(function(e){
         $("#infoReliquia104").css("left", e.pageX - 150);
         $("#infoReliquia104").css("top", e.pageY - 100);
@@ -708,5 +747,13 @@ function getNombreZona($zona){
              break;
      }
      return $nombreZona;
+}
+
+function getMonstruoRow($idMonstruo){
+    global $db;
+    $sql = "SELECT * FROM monstruos WHERE idM=?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array($idMonstruo));
+    return $stmt->fetchAll();       
 }
 ?>

@@ -1776,6 +1776,16 @@ h3{
     text-align : right;
 }
 
+.albumTarjeta{
+    margin-left:20px;
+}
+
+.bossTarjeta{
+    margin-left:150px;
+    width : 300px;
+    
+}
+
 #seccion2{
     display : none;
 }
