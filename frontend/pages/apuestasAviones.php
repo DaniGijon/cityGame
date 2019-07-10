@@ -21,22 +21,20 @@ echo "<div id='moduloZona'>";
 
     echo "<div class='contenido'>";
         echo "<span class='contenedor1'>"; 
-        echo "<div class='seccionSpotImagen'>" ;
-            $imagenSpot = getFotoSpot(41);
-            echo $imagenSpot;
-        echo "</div>"; //FIN DE div seccionSpotImagen
+         echo "<div class='seccionSpotOpciones'>";
+         echo "<div class='semiTransparente'>"; 
+          echo "<div class='textoDependiente'>";
+            echo "\"Auténticas batallas aéreas con réplicas de legendarias naves. ¡Inscribe la tuya!\".";
+          echo "</div>"; //FIN textoDependiente
+          echo "<div class='imagenDependiente'>";
+            echo '<img src="/design/img/dependientes/aviones.png">';
+          echo "</div>"; //FIN imagenDependiente
 
-        echo "<div class='seccionSpotOpciones'>";
-            echo "<br>'Auténticas batallas aéreas con réplicas de legendarios aviones. ¡Inscribe el tuyo!<br><br>";
-            
             // Establecer la zona horaria predeterminada a usar
             date_default_timezone_set('Europe/Madrid');
             // Darle formato a la fecha y hora
             $inicio = date( "d/m/Y H:i:s", strtotime($timeStamp));
-             
-            ?>
-
-            <?php
+            
                 $estoyInscrito = avionesEstoyInscrito();
                 if($estoyInscrito === '1'){
                     echo "<br>¡Estoy Inscrito! <br><br>";
@@ -60,7 +58,7 @@ echo "<div id='moduloZona'>";
                 </script>
 
                 <?php
-                    
+                echo "</div>";
                 echo "</div>"; //FIN DE div seccionSpotOpciones
             
             echo "</span>"; //Fin de Contenedor1

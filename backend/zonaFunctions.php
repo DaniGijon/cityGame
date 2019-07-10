@@ -29,10 +29,25 @@
                     $result = $stmt->fetchAll();
                     
                     foreach ($result as $spots) {
-                       echo "<div id = '" . $spots['idS'] . "' class='cajitaSpot fila" . $spots['fila'] . " columna" . $spots['columna'] .
-                            " tipo" . $spots['tipo'] .   
-                       "'>";
-                       /*echo $spots['nombre'];*/
+                        //EUROEL
+                       if($spots['idS'] === '24'){
+                           $sql = "SELECT completada FROM progresos WHERE idM='2' AND idP='$id'";
+                           $stmt = $db->query($sql);
+                           $mision = $stmt->fetchAll();
+                           if(isset($mision[0]))
+                                $activa = $mision[0]['completada'];
+                           if(isset($activa) && $activa === '1'){
+                               echo "<div id = '" . $spots['idS'] . "' class='cajitaSpot fila" . $spots['fila'] . " columna" . $spots['columna'] .
+                                 " tipo" . $spots['tipo'] .   
+                                "'>";
+                           }
+                               
+                       }
+                       else{
+                            echo "<div id = '" . $spots['idS'] . "' class='cajitaSpot fila" . $spots['fila'] . " columna" . $spots['columna'] .
+                                 " tipo" . $spots['tipo'] .   
+                            "'>";
+                       }
                        echo "</div>";
                     }
 

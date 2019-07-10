@@ -68,9 +68,10 @@ global $db;
                             echo "<div class='submitTienda'>";
                                     echo'<input type="submit" class="botonTiendaComprar" value=" ">';
                             echo "</div>";
-                           /* $miDinero = comprobarDinero();
+                            $miDinero = comprobarDinero();
                             $dineroEnCash = $miDinero[0]['cash'];
-                            echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; */
+                            echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+                                
                             echo "</form>";                 
                     echo "</div>";
 
@@ -105,7 +106,9 @@ global $db;
                             echo "<div class='submitTienda'>";
                                 echo'<input type="submit" class="botonTiendaVender" value=" ">';
                             echo "</div>";
-                            /*echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; */
+                          
+                            echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+                                
                             echo '</form>';
                     echo "</div>";
                     echo "</div>"; //Fin SemiTransparente

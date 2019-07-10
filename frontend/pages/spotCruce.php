@@ -23,7 +23,7 @@ global $db;
                     echo "<div class='textoDependiente'>";
                             $progreso = comprobarProgreso(9);
                             if($mostrar === 2 ){ //La misión aún no está activada
-                                echo "\"Ag...Agua! Necesito beber agua, por favor\".";
+                                echo "\"Ag...Agua! Necesito beber agua, forajido\".";
                             }
                             elseif($mostrar === 1 && $progreso === '1'){
                                 $descripcionZona = getDescripcionMision(9, $progreso);

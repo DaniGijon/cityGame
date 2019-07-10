@@ -13,31 +13,56 @@ global $db;
             echo "</span>";
 
                 echo "<div class='contenido'>";
-                echo "<span class='contenedor1'>"; 
-                    echo "<div class='seccionSpotImagen'>" ;
-                        $spotImagen = getFotoSpot(79);
-                        echo $spotImagen;
-                    echo "</div>"; //FIN DE div seccionSpotImagen
+                echo "<span class='contenedor1'>";
 
                     echo "<div class='seccionSpotOpciones'>";
-                    echo "<br>En el punto más alto del Cerro Santa Ana se erige la \"Chimenea Cuadrá\". Cada 23 de Enero sube mucha gente a celebrar el Día del Chorizo y a disfrutar de las vistas.<br><br>";
-                    
+                    echo "<div class='semiTransparente'>";
+                    echo "<div class='textoDependiente'>";
+                        echo "\"Cada 23 de Enero subo aquí a celebrar el Día del Chorizo y a disfrutar de las vistas\".";
+                    echo "</div>"; //FIN textoDependiente
+                    echo "<div class='imagenDependiente'>";
+                        echo '<img src="/design/img/dependientes/yoHombre.png">';
+                    echo "</div>"; //FIN imagenDependiente
+                   
                     echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
-                        echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='mirarLejos'>Mirar Lejos<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>1H</div></label>";
+                     echo "<div class='opcionesTienda'>";
+                        echo "<div class='opcionesTiendaCheckbox'>";
+                            echo '<input type="checkbox" name="cbox1" value="mirarLejos">';
                         echo "</div>";
-                        
-                        echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='choribollo'>Choribollo<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='monedaTienda'></div><div class='precioTienda'>40</div><div class='corazonTienda'></div><div class='vidaTienda'>+10</div></label>";
+                        echo "<div class='opcionesTiendaTitulo'>";
+                            echo 'Observar Horizonte';
                         echo "</div>";
-                        
-                        echo "<div class='opcionesTienda'>";
-                            echo "<label><input type='checkbox' name='cbox1' value='limona'>Limoná<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='monedaTienda'></div><div class='precioTienda'>150</div><div class='corazonTienda'></div><div class='vidaTienda'>+50</div></label>";
+                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="relojMini"></div><div class="precioTienda">30M</div></label>';
+                    echo "</div>";
+                    
+                     echo "<div class='opcionesTienda'>";
+                        echo "<div class='opcionesTiendaCheckbox'>";
+                            echo '<input type="checkbox" name="cbox1" value="limona">';
                         echo "</div>";
+                        echo "<div class='opcionesTiendaTitulo'>";
+                            echo 'Beber Limoná';
+                        echo "</div>";
+                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">40</div><div class="corazonTienda"></div><div class="vidaTienda">+10</div></label>';
+                    echo "</div>";
+                    
+                     echo "<div class='opcionesTienda'>";
+                        echo "<div class='opcionesTiendaCheckbox'>";
+                            echo '<input type="checkbox" name="cbox1" value="choribollo">';
+                        echo "</div>";
+                        echo "<div class='opcionesTiendaTitulo'>";
+                            echo 'Comer Choribollo';
+                        echo "</div>";
+                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">150</div><div class="corazonTienda"></div><div class="vidaTienda">+50</div></label>';
+                    echo "</div>";
+                       
                         
                         echo "<div class='submitTienda'>";
                             echo "<input type='submit' class='botonCarrilBici' value=' '>";
                         echo "</div>";
+                        $miDinero = comprobarDinero();
+                        $dineroEnCash = $miDinero[0]['cash'];
+                        echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+                                
                     echo "</form>";           
             ?>
                     <script>
@@ -59,16 +84,19 @@ global $db;
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
                                 $(".opcionSpot3").hide();
+                                $(".opcionSpot0").hide();
                             }
                             else if (valor === 'choribollo'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot3").hide();
+                                $(".opcionSpot0").hide();
                             }
                             else if (valor === 'limona'){
                                 $(".opcionSpot3").show();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot2").hide();
+                                $(".opcionSpot0").hide();
                             }
                         });
                         
@@ -76,11 +104,20 @@ global $db;
                     </script>
 
                     <?php
-
+                    echo "</div>";
                     echo "</div>"; //FIN DE div seccionSpotOpciones
                     echo "</span>"; //Fin de Contenedor1
                     
                     echo "<span class='contenedor2'>";
+                            echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    echo "<div class='seccionSpotImagen'>" ;
+                                        $spotImagen = getFotoSpot(79);
+                                        echo $spotImagen;
+                                    echo "</div>";
+                                echo "</div>";
+                               
+                            echo "</div>"; //FIN opcionSpot0
                         
                             echo "<div class='opcionSpot1 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";

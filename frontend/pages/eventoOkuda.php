@@ -19,7 +19,7 @@ global $db;
                     $progreso = comprobarProgreso(11);
                     echo "<div class='textoDependiente'>";
                         if($mostrar != 1) //No está en curso
-                            echo "\"¡Aquí pintando! Si echas un selfie etiquétame en Insta: @okudart\".";
+                            echo "\"¡Aquí pintando! Si echas un selfie, etiquétame en Insta: @okudart\".";
                         else{
                             $descripcionZona = getDescripcionMision(10, $progreso);
                             echo $descripcionZona;
@@ -58,10 +58,10 @@ global $db;
                         
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="birras">';
+                                echo '<input type="checkbox" name="cbox1" value="champagneOkuda">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Birras con Okuda';
+                                echo 'Champagne con Okuda';
                             echo "</div>";
                             echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">40</div><div class="corazonTienda"></div><div class="precioTienda">+10</div></label>';
                         echo "</div>";
@@ -69,6 +69,10 @@ global $db;
                         echo "<div class='submitTienda'>";
                             echo'<input type="submit" class="botonMision" value=" ">';
                         echo "</div>";
+                        $miDinero = comprobarDinero();
+                        $dineroEnCash = $miDinero[0]['cash'];
+                        echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+                           
                     echo "</form>";           
             ?>
                     <script>
@@ -91,7 +95,7 @@ global $db;
                                 $(".opcionSpot2").hide();
                                 $(".opcionSpot0").hide();
                             }
-                            else if (valor === 'birras'){
+                            else if (valor === 'champagneOkuda'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot0").hide();
@@ -120,7 +124,7 @@ global $db;
                         
                             echo "<div class='opcionSpot1 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
-                                    $imagenSpot = "<img src='/design/img/especial/ritual.png'>";
+                                    $imagenSpot = "<img src='/design/img/spots/okuda2.png'>";
                                     echo $imagenSpot;
                                 echo "</div>";
                                 echo "<div class='seccionDescripcionZonaTexto'>";
@@ -134,13 +138,13 @@ global $db;
                             
                             echo "<div class='opcionSpot2 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
-                                    $imagenSpot = "<img src='/design/img/especial/tragoVino.png'>";
+                                    $imagenSpot = "<img src='/design/img/spots/okuda3.png'>";
                                     echo $imagenSpot;
                                 echo "</div>";
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                         
                                     echo "<span class='textoDescripcionSpot'>";
-                                        $descripcionZona = "Invitar a Okuda a unas birras y echar un rato de charla.";
+                                        $descripcionZona = "Celebrar con Champagne el éxito de Okuda y echar un rato de charla.";
                                         echo $descripcionZona;
                                     echo "</span>";
                                 echo "</div>"; //Fin descripcionZonaTexto

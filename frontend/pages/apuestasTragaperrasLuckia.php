@@ -7,8 +7,6 @@ include (__ROOT__.'/backend/comprobaciones.php');
 include (__ROOT__.'/backend/apuestas.php');
 include (__ROOT__.'/backend/getFotos.php');
 $id = $_SESSION['loggedIn'];
-$miDinero = comprobarDinero();
-$dineroEnCash = $miDinero[0]['cash'];
 comprobarZona1Barrio6();
 
 echo "<div id='moduloZona'>";
@@ -21,7 +19,7 @@ echo "<div id='moduloZona'>";
 
         echo "<div class='seccionSpotOpciones'>";
             echo "<br>'Din din din! Las máquinas tragaperras suenan sin parar. ¡Hagan sus apuestas!<br><br>";
-            echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>";    
+          
             ?>
 <center><table>
     <tr>
@@ -53,6 +51,11 @@ echo "<div id='moduloZona'>";
                     <center><label> <br><input name="cantidadApuesta1" style="width:25%" type=number min="0" value =0>€</label><br>
 
                     <input type="submit" value="¡Apostar!"></center>
+                    <?php
+                    $miDinero = comprobarDinero();
+                    $dineroEnCash = $miDinero[0]['cash'];
+                    echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+                    ?>       
         </form> 
         </td>
     </tr>

@@ -10,44 +10,50 @@ global $db;
                 
             
         echo "<div id='moduloZona'>";
+          echo "<span class = 'tituloSpot'>";
+                echo "<h4>" . getNombreSpot(112) . "</h4>";
+            echo "</span>";
             
             echo "<div class='contenido'>";
-                echo "<div class='seccionSpotImagen'>" ;
-                    $imagenSpot = getFotoSpot(112);
-                    echo $imagenSpot;
-                echo "</div>"; //FIN DE div seccionSpotImagen
-                
-                echo "<div class='seccionSpotInfo'>";
-                    echo "<div class = 'seccionContacto'>";
-                        echo "<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d778.5757872801886!2d-4.106969971472256!3d38.687880266855736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xacbcbf68ff5325bd!2sHotel+Santa+Eulalia!5e0!3m2!1ses!2ses!4v1556040757205!5m2!1ses!2ses' width='300' height='225' frameborder='0' style='border:0' allowfullscreen></iframe><br>";
-                        echo "Aqui la info del sitio";
+            echo "<span class='contenedor1'>"; 
+            echo "<div class='semiTransparente'>"; 
+            echo "<div class='textoDependiente'>";
+                echo "\"Disfrute de su estancia en el Hotel Santa Eulalia\".";
+            echo "</div>"; //FIN textoDependiente
+            echo "<div class='imagenDependiente'>";
+                echo '<img src="/design/img/dependientes/fogataRitual.png">';
+            echo "</div>"; //FIN imagenDependiente
+            
+            echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
+                    echo "<div class='opcionesTienda'>";
+                        echo "<div class='opcionesTiendaCheckbox'>";
+                            echo '<input type="checkbox" name="cbox1" value="individualEulalia">';
+                        echo "</div>";
+                        echo "<div class='opcionesTiendaTitulo'>";
+                            echo 'Habitación Individual';
+                        echo "</div>";
+                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">50</div><div class="relojMini"></div><div class="vidaTienda">30M</div></label>';
                     echo "</div>";
                     
-                    echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia(112);
-                        if ($fechaInsignia != '0'){
-                            $fotoInsignia = getFotoInsignia(112);
-                            echo $fotoInsignia . "<br>";
-                            echo "Nos visitaste el día: <b>" . date( 'd/m/Y',strtotime($fechaInsignia)) . "</b><br>¡Gracias por venir!";
-                        }
-                        else{
-                            echo "Aqui la foto de la insignia vacia<br>";
-                            echo "<form action='?bPage=comprobaciones&action=activarCodigo' method='post'>";
-                                echo "Introduce el código: <input type='text' name='codigoInsignia'><br>";
-                                echo "<input type='submit'>";
-                            echo "</form>";
-                        }
+                    echo "<div class='opcionesTienda'>";
+                        echo "<div class='opcionesTiendaCheckbox'>";
+                            echo '<input type="checkbox" name="cbox1" value="suiteEulalia">';
+                        echo "</div>";
+                        echo "<div class='opcionesTiendaTitulo'>";
+                            echo 'Suite Santa Eulalia';
+                        echo "</div>";
+                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">300</div><div class="relojMini"></div><div class="vidaTienda">3M</div></label>';
                     echo "</div>";
-                echo "</div>";
-               
-                echo "<div class='seccionSpotOpciones'>";
-                echo "Bienvenido a nuestro Hotel, probablemente el más elegante de todo Puertollano. <br><br>";
-                ?>
-<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">
-                <input type="checkbox" name="cbox1" value="habitacionSantaEulalia"> <label for="cbox3">Habitación individual (50 monedas | 30 Minutos)</label><br>
-                <label><input type="checkbox" name="cbox1" value="suiteSantaEulalia"> Suite 'Santa Eulalia' (300 monedas | 5 Minutos)</label><br><br>
-                
-                <input type="submit" value="Descansar">
+                       
+                        echo "<div class='submitTienda'>";
+                            echo'<input type="submit" class="botonTiendaComprar" value=" ">';
+                        echo "</div>";
+                        $miDinero = comprobarDinero();
+                        $dineroEnCash = $miDinero[0]['cash'];
+                        echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+                                
+            echo "</form>"; 
+               ?>     
 </form>                
                 <script>
                     
@@ -63,8 +69,63 @@ global $db;
                 </script>
 
                 <?php
-                    
+                
                 echo "</div>"; //FIN DE div seccionSpotOpciones
+                
+            echo "</span>"; //FIN Contenedor1
+            
+            
+                echo "<span class='contenedor2'>";
+                
+                echo "<div class='seccionSpotInfo'>";
+                    echo "<div class = 'seccionContacto'>";
+                        echo "<div class = 'mapaCallejero'>";
+                            echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.1082483530044565%2C38.68710304913881%2C-4.104799032211305%2C38.68856649895498&amp;layer=mapnik&amp;marker=38.687836095734575%2C-4.1065215468734095" style="border: 1px solid black"></iframe><br/><br>';    
+                        echo "</div>";
+                        echo "<div class = 'semiTransparente'>";
+                        echo "<div class = 'infoSpot'>";
+                            echo "<table border = '0' style = 'text-align:left'>";
+                                echo "<tr>";
+                                    echo "<td><div class='mapaMini'></div> Paseo de San Gregorio, 2<br></td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                echo "<td><div class='telefonoMini'></div> 926 95 02 79<br></td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                echo "<td><div class='relojMini'></div> 00:00 - 24:00 Lunes-Domingo</td>";
+                                echo "</tr>";
+                            echo "</table>";
+                        echo "</div>";
+                        echo "</div>";//fin semiTransparente
+                    echo "</div>";
+                    
+                    echo "<div class = 'seccionInsignia'>";
+                        $fechaInsignia = comprobarInsignia(112);
+                        if ($fechaInsignia != '0'){
+                            $fotoInsignia = getFotoInsignia(112);
+                            echo "<div class='fotoInsignia'>";
+                                echo $fotoInsignia . "<br>";
+                            echo "</div>";
+                            echo "<span class='textoInsignia'>";
+                                echo "Nos visitaste el día: <b>" . date( 'd/m/Y',strtotime($fechaInsignia)) . "</b><br>¡Gracias por venir!";
+                            echo "</span>";
+                        }
+                        else{
+                            echo "<div class='fotoInsignia'>";
+                                echo "<img src='/design/img/insignias/insigniaVacia'><br>";
+                            echo "</div>";
+                            echo "<div class='textoInsignia'>";
+                                echo "Visítanos y pide al dependiente tu Código de Activación";
+                            echo "</div>";
+                          /*  echo "<form action='?bPage=comprobaciones&action=activarCodigo' method='post'>";
+                                echo "Introduce el código: <input type='text' name='codigoInsignia'><br>";
+                                echo "<input type='submit'>";
+                            echo "</form>";*/
+                        }
+                    echo "</div>";
+                echo "</div>";
+                
+                echo "</span>"; //FIN Contenedor2
 
                 
             echo "</div>"; //FIN DE div contenido

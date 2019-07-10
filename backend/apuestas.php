@@ -2080,17 +2080,29 @@ function avionesFormulario(){
     
     echo "<form id = 'selectorOpciones' action='?bPage=apuestas&action=avionesInscripcion&nonUI' method='post'>";
         foreach ($result as $avion){
-                echo "<div class='opcionesTienda'>";
-                    echo "<label><input type='checkbox' name='cbox1' value='" . $avion['nombre'] . "'>" . $avion['nombre'] . "<div id='opcionBox'><img src='/design/img/objetos/" . $avion['imagenObjeto'] . "'></div></label>";
+            echo "<div class='opcionesTienda'>";
+                echo "<div class='opcionesTiendaCheckbox'>";
+                    echo '<input type="checkbox" name="cbox1" value="' . $avion['nombre'] . '">';
                 echo "</div>";
+                echo "<div class='opcionesTiendaTitulo'>";
+                    echo $avion['nombre'];
+                echo "</div>";
+                echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/objetos/' . $avion['imagenObjeto'] . '">' . '</div><div class="monedaTienda"></div><div class="precioTienda">50</div></label>';
+            echo "</div>";
                 
         }
         echo "<div class='opcionesTienda'>";
-            echo "<label><input type='checkbox' name='cbox1' value='Avioneta de Alquiler' checked='true'>" . "Avioneta Alquiler" . "<div id='opcionBox'><img src='/design/img/objetos/1001.png'></div></label>";
-        echo "</div>";
+                echo "<div class='opcionesTiendaCheckbox'>";
+                    echo '<input type="checkbox" name="cbox1" value="Avioneta de Alquiler">';
+                echo "</div>";
+                echo "<div class='opcionesTiendaTitulo'>";
+                    echo "Avioneta Alquiler";
+                echo "</div>";
+                echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/objetos/1001.png">' . '</div><div class="monedaTienda"></div><div class="precioTienda">50</div></label>';
+            echo "</div>";
 
         echo "<div class='submitTienda'>";
-            echo "El coste de participación es : 50€ <br><input type='submit' class='botonCarrilBici' value=' '>";
+            echo"<input type='submit' class='botonCarrilBici' value=' '>";
         echo "</div>";
     echo "</form>"; 
 }

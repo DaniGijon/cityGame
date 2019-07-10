@@ -42,6 +42,10 @@ global $db;
                             echo "<div class='submitTienda'>";
                                 echo "<input type='submit' class='botonCarrilBici' value=' '>";
                             echo "</div>";
+                            $miDinero = comprobarDinero();
+                                $dineroEnCash = $miDinero[0]['cash'];
+                                echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+
                         echo "</form>";  
                     ?>
 

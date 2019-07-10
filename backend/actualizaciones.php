@@ -2228,7 +2228,7 @@ function accionSpot($box){
            
             $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END WHERE id='$id'";
             $stmt = $db->query($sql);
-            
+            break;
         //PETANCA
         case 'misionPetanca':
             $sql = "SELECT * FROM progresos WHERE idP='$id' AND idM='8'";

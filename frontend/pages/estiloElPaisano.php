@@ -4,6 +4,9 @@ global $db;
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
         comprobarZona3Barrio6();
+        echo "<span class = 'tituloSpot'>";
+            echo "<h4>" . getNombreSpot(120) . "</h4>";
+        echo "</span>";
         
         $estoyLibre = comprobarEspera();
             if($estoyLibre === 1){
@@ -12,43 +15,48 @@ global $db;
         echo "<div id='moduloZona'>";
             
             echo "<div class='contenido'>";
-                echo "<div class='seccionSpotImagen'>" ;
-                    $imagenSpot = getFotoSpot(120);
-                    echo $imagenSpot;
-                echo "</div>"; //FIN DE div seccionSpotImagen
-                
-                echo "<div class='seccionSpotInfo'>";
-                    echo "<div class = 'seccionContacto'>";
-                        echo "<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d778.5254518408508!2d-4.109406793758046!3d38.69250564847927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6b8ddca5bcac2d%3A0x728636e9ed0f4fcf!2sPeluqueria+El+Paisano!5e0!3m2!1ses!2ses!4v1556042163864!5m2!1ses!2ses' width='300' height='225' frameborder='0' style='border:0' allowfullscreen></iframe><br>";
-                        echo "Aqui la info del sitio";
-                    echo "</div>";
-                    
-                    echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia(120);
-                        if ($fechaInsignia != '0'){
-                            $fotoInsignia = getFotoInsignia(120);
-                            echo $fotoInsignia . "<br>";
-                            echo "Nos visitaste el día: <b>" . date( 'd/m/Y',strtotime($fechaInsignia)) . "</b><br>¡Gracias por venir!";
-                        }
-                        else{
-                            echo "Aqui la foto de la insignia vacia<br>";
-                            echo "<form action='?bPage=comprobaciones&action=activarCodigo' method='post'>";
-                                echo "Introduce el código: <input type='text' name='codigoInsignia'><br>";
-                                echo "<input type='submit'>";
-                            echo "</form>";
-                        }
-                    echo "</div>";
-                echo "</div>";
+                echo "<span class='contenedor1'>"; 
+               echo "<div class='semiTransparente'>"; 
                
                 echo "<div class='seccionSpotOpciones'>";
-                echo "Hudy te saluda tijeras en mano. \"Hey Bro!\" <br><br>";
-                ?>
-<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">
-                <input type="checkbox" name="cbox1" value="clasicoElPaisano"> <label for="cbox3">Corte Clásico (50 monedas | 15 Minutos)</label><br>
-                <label><input type="checkbox" name="cbox1" value="hudyElPaisano"> Hudy's Haircut (200 monedas | 30 Minutos)</label><br><br>
+                echo "<div class='textoDependiente'>";
+                    echo "\"¡Hey Hermano! ¿Cómo lo quieres hoy?\".";
+                echo "</div>"; //FIN textoDependiente
+                echo "<div class='imagenDependiente'>";
+                    echo '<img src="/design/img/dependientes/hudy.png">';
+                echo "</div>"; //FIN imagenDependiente
                 
-                <input type="submit" value="Córtame el pelo">
-</form>                
+                echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
+                    echo "<div class='opcionesTienda'>";
+                        echo "<div class='opcionesTiendaCheckbox'>";
+                            echo '<input type="checkbox" name="cbox1" value="clasicoElPaisano">';
+                        echo "</div>";
+                        echo "<div class='opcionesTiendaTitulo'>";
+                            echo 'Corte Clásico';
+                        echo "</div>";
+                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
+                    echo "</div>";
+                    
+                    echo "<div class='opcionesTienda'>";
+                        echo "<div class='opcionesTiendaCheckbox'>";
+                            echo '<input type="checkbox" name="cbox1" value="hudyElPaisano">';
+                        echo "</div>";
+                        echo "<div class='opcionesTiendaTitulo'>";
+                            echo "Hudy's Haircut";
+                        echo "</div>";
+                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="relojMini"></div><div class="precioTienda">25M</div></label>';
+                    echo "</div>";
+                       
+                        echo "<div class='submitTienda'>";
+                            echo'<input type="submit" class="botonTiendaComprar" value=" ">';
+                        echo "</div>";
+                        $miDinero = comprobarDinero();
+                        $dineroEnCash = $miDinero[0]['cash'];
+                        echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+                                
+                    echo "</form>";    
+                
+?>            
                 <script>
                     
                     $(":checkbox").change(function(){
@@ -60,16 +68,78 @@ global $db;
                        $box.prop("checked", true);
 
                     });
+                    
+                     $(":checkbox").click(function(){
+                            var valor = $(this).val();
+                            
+                            if (valor === 'clasicoElPaisano') {
+                                $(".opcionSpot1").show();
+                                $(".opcionSpot2").hide();
+                                $(".opcionSpot0").hide();
+                            }
+                            else if (valor === 'hudyElPaisano'){
+                                $(".opcionSpot2").show();
+                                $(".opcionSpot1").hide();
+                                $(".opcionSpot0").hide();
+
+                            }
+                        });
+                        
                 </script>
 
                 <?php
+                echo "</div>"; //FIN de semiTransparente
+                    echo "</div>"; //FIN DE div seccionSpotOpciones
+                    echo "</span>"; //Fin de Contenedor1
                     
-                echo "</div>"; //FIN DE div seccionSpotOpciones
+                    echo "<span class='contenedor2'>";
+                            
+                            echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    echo "<div class='seccionSpotImagen'>" ;
+                                        $spotImagen = getFotoSpot(120);
+                                        echo $spotImagen;
+                                    echo "</div>";
+                                echo "</div>";
+                               
+                            echo "</div>"; //FIN opcionSpot0
+                        
+                            echo "<div class='opcionSpot1 opcionSpot'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    $imagenSpot = "<img src='/design/img/estilo/hudyClasico.png'>";
+                                    echo $imagenSpot;
+                                echo "</div>";
+                                echo "<div class='seccionDescripcionZonaTexto'>";
+                                    echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
+                                        echo "<span class='textoDescripcionSpot'>";
+                                            $descripcionZona = "Recórtame un poco las greñas, que el otro día me dormí en la piscina y al despertar tenía a una familia de golondrinas celebrando una fiesta de cumpleaños sobre mi pelo.";
+                                            echo $descripcionZona;
+                                        echo "</span>";
+                                    echo "</div>";//Fin SemiTransparente
+                                echo "</div>"; //Fin seccionDescripcionZonaTexto
+                            echo "</div>"; //FIN opcionSpot1
+                            
+                            echo "<div class='opcionSpot2 opcionSpot'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    $imagenSpot = "<img src='/design/img/estilo/hudyElPaisano.png'>";
+                                    echo $imagenSpot;
+                                echo "</div>";
+                                echo "<div class='seccionDescripcionZonaTexto'>";
+                                    echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
+                                        echo "<span class='textoDescripcionSpot'>";
+                                            $descripcionZona = "\"Que tus manos hablen, hermano\".";
+                                            echo $descripcionZona;
+                                        echo "</span>";
+                                    echo "</div>";//Fin de semiTransparente
+                                echo "</div>"; //Fin descripcionZonaTexto
+                            echo "</div>"; //FIN opcionSpot2
+                       
+                    echo "</span>"; //FIN de contenedor2
 
-                
-            echo "</div>"; //FIN DE div contenido
 
-        echo "</div>"; //FIN DE div moduloZona
+                echo "</div>"; //FIN DE div contenido
+
+            echo "</div>"; //FIN DE div moduloZona
         
             }
             else{

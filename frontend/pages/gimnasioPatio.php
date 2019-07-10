@@ -183,7 +183,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Simplemente quiero echar la partida y hablar un rato, por despejarme.";
+                                            $descripcionZona = "Hay días que vuelvo con más cortes por culpa de los gatos que de las espadas.";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>";//Fin SemiTransparente
@@ -198,7 +198,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Me pico con los viejetes de la Petanca y no me pienso ir de aquí hasta que les gane una partida.";
+                                            $descripcionZona = "\"¡En guardia!\"";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>";//Fin de semiTransparente

@@ -99,7 +99,7 @@ function comprobarIluminacion(){
     $tengoIluminacion = 0;
     
     foreach ($result as $cadaObjeto){
-        if($cadaObjeto['id'] === '105'){ //SI LLEVO EQUIPADO UN OBJETO LUMINOSO
+        if($cadaObjeto['id'] === '105' || $cadaObjeto['id'] === '313' || $cadaObjeto['id'] === '314'){ //SI LLEVO EQUIPADO UN OBJETO LUMINOSO
             $tengoIluminacion = 1;
             break;
         }
@@ -140,7 +140,7 @@ function objetosDesequipadosCofres(){
     global $db;
     $id = $_SESSION['loggedIn']; 
    
-    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND (inventario.idO >= 900 && inventario.idO <1000)";
+    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND (inventario.idO >= 900 && inventario.idO <920)";
     $stmt = $db->query($sql);
     $objetosDB = $stmt->fetchAll();
     return $objetosDB;

@@ -96,13 +96,14 @@ global $db;
                                     echo "</div>";
                                     echo '<label for="cbox3"><div id="opcionBox">' . $imagenAlfombraMagica . '</div><div class="monedaTienda"></div><div class="precioTienda">3000</div></label>';
                                 echo "</div>";
-                                
-                                
-                                
                                 echo "<div class='submitTienda'>";
                                     echo'<input type="submit" class="botonTiendaComprar" value=" ">';
                                 echo "</div>";
-                                
+                               
+                                $miDinero = comprobarDinero();
+                                $dineroEnCash = $miDinero[0]['cash'];
+                                echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+
                                 
                                 echo "</form>";                 
                         echo "</div>";
@@ -138,7 +139,10 @@ global $db;
                                 echo "<div class='submitTienda'>";
                                     echo "<input type='submit' class='botonCarrilBici' value=' '>";
                                 echo "</div>";
-                                /*echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; */
+                                $miDinero = comprobarDinero();
+                                $dineroEnCash = $miDinero[0]['cash'];
+                                echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+
                                 echo '</form>';
                         echo "</div>"; //Fin Vender
                         

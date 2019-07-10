@@ -13,15 +13,16 @@ global $db;
             echo "</span>";
 
                 echo "<div class='contenido'>";
-                echo "<span class='contenedor1'>"; 
-                    echo "<div class='seccionSpotImagen'>" ;
-                        $spotImagen = getFotoSpot(49);
-                        echo $spotImagen;
-                    echo "</div>"; //FIN DE div seccionSpotImagen
+                echo "<span class='contenedor1'>";
 
-                    echo "<div class='seccionSpotOpciones'>";
-                    echo "<br>¡Se ha dado la alarma de Emergencia! Acude rápidamente la unidad ColeccionaFantasmas. Todo pasa muy deprisa. \"¡Eh, tú! ¡Espabila!\". Me pasan un kit antifantasmas y me empujan hacia dentro del Museo. \"¡Asegura esta zona!\".<br><br>";
-                    
+                    echo "<div class='seccionSpotOpciones'>"; 
+                    echo "<div class='semiTransparente'>"; 
+                        echo "<div class='textoDependiente'>";
+                            echo "\"Se ha dado una emergencia ColeccionaFantasmas. ¡Espabila! Ponte este kit antifantasmas y asegura la zona. ¡Deprisa!\".";
+                        echo "</div>"; //FIN textoDependiente
+                        echo "<div class='imagenDependiente'>";
+                            echo '<img src="/design/img/dependientes/fantasmas.png">';
+                        echo "</div>"; //FIN imagenDependiente
                     echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";
                             echo "<label><input type='checkbox' name='cbox1' value='edificioFantasma'>Edificio<div id='opcionBox'><img src='/design/img/entrenamiento/ritmitoGeneroso.png'></div><div class='relojMini'></div><div class='precioTienda'>1H</div></label>";
@@ -59,16 +60,19 @@ global $db;
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
                                 $(".opcionSpot3").hide();
+                                $(".opcionSpot0").hide();
                             }
                             else if (valor === 'jardinFantasma'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot3").hide();
+                                $(".opcionSpot0").hide();
                             }
                             else if (valor === 'galeriaFantasma'){
                                 $(".opcionSpot3").show();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot2").hide();
+                                $(".opcionSpot0").hide();
                             }
                         });
                         
@@ -76,11 +80,20 @@ global $db;
                     </script>
 
                     <?php
-
+                    echo "</div>";
                     echo "</div>"; //FIN DE div seccionSpotOpciones
                     echo "</span>"; //Fin de Contenedor1
                     
                     echo "<span class='contenedor2'>";
+                            echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    echo "<div class='seccionSpotImagen'>" ;
+                                        $spotImagen = getFotoSpot(49);
+                                        echo $spotImagen;
+                                    echo "</div>";
+                                echo "</div>";
+                               
+                            echo "</div>"; //FIN opcionSpot0
                         
                             echo "<div class='opcionSpot1 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";

@@ -128,7 +128,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "\"Un pequeño trago traerá de vuelta esa energía que malgastaste afilando mazas\".";
+                                            $descripcionZona = "\"Si lo miras bien, es como una sesión de acupuntura\".";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>"; //Fin semiTransparente
@@ -143,7 +143,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "\"Sabor amargo para un sueño dulce y reparador\".";
+                                            $descripcionZona = "\"Voy a beber hasta el agua de los floreros\".";
                                             echo $descripcionZona;
                                         echo "</span>";
                                      echo "</div>"; //Fin de semiTransparente

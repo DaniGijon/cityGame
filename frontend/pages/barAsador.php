@@ -62,7 +62,11 @@ global $db;
                         echo "<div class='submitTienda'>";
                             echo'<input type="submit" class="botonTiendaComprar" value=" ">';
                         echo "</div>";
-                    echo "</form>";      
+                    echo "</form>";    
+                    $miDinero = comprobarDinero();
+                    $dineroEnCash = $miDinero[0]['cash'];
+                    echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+                                
                 echo "</div>"; //FIN terraza
                 
                 echo "<div id='trastienda'>";

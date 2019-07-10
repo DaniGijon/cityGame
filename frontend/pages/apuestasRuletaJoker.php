@@ -25,7 +25,8 @@ echo "<div id='moduloZona'>";
 
         echo "<div class='seccionSpotOpciones'>";
             echo "<br>Why so serious?. ¡Hagan sus apuestas!<br><br>";
-            echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>";    
+            
+                                
             ?>
 <center><table>
     <tr>
@@ -115,8 +116,12 @@ echo "<div id='moduloZona'>";
                 <label> Vecinos <input name="cantidadApuestaVecinos" style="width:25%" type=number min="0" max="500" value =0></label><br>
                 <label> Huérfanos <input name="cantidadApuestaHuerfanos" style="width:25%" type=number min="0" max="500" value =0></label>
                 <label> Tercio <input name="cantidadApuestaTercio" style="width:25%" type=number min="0" max="500" value =0></label><br><br>
-                
+                             
                 <input type="submit" value="¡Apostar!">
+                
+                <?php
+                        echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
+                ?>   
 </form>                
                 <script>
                     

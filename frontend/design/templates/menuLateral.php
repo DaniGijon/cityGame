@@ -7,7 +7,13 @@
     <div id="menuLateral">
         
         <ul class='ulMenuLateral'>
-                <a href="?page=personaje"><div id='botonPersonaje' class="botonPersonaje"></div></a><br>    
+                <a href="?page=personaje"><div id='botonPersonaje' class="botonPersonaje">
+                        <div id='botonPersonajeTexto'>
+                            <?php
+                            echo getNombre($id);
+                            ?>
+                        </div>
+                </div></a><br>    
                 <a href="?page=zona"><div id='botonDarUnaVuelta' class="botonDarUnaVuelta"></div></a><br>
                 <?php
                     if(getMensajesPendientes($id) == 1){

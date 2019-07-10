@@ -3,6 +3,8 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
+        $miDinero = comprobarDinero();
+        $dineroEnCash = $miDinero[0]['cash'];
         comprobarZona1Barrio2();
         $estoyLibre = comprobarEspera();
         if($estoyLibre === 1){
@@ -62,8 +64,9 @@ global $db;
                     echo "</div>";
                        
                         echo "<div class='submitTienda'>";
-                            echo'<input type="submit" class="botonTiendaComprar" value=" ">';
+                            echo'<input type="submit" class="botonTiendaComprar" value=" "><br><br>';
                         echo "</div>";
+                        echo " Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
                     echo "</form>";      
                 echo "</div>"; //FIN terraza
                 

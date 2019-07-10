@@ -3,19 +3,19 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona1Barrio6();
+        comprobarZona1Barrio4();
         $estoyLibre = comprobarEspera();
         if($estoyLibre === 1){
 
             echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(109) . "</h4>";
+                echo "<h4>" . getNombreSpot(69) . "</h4>";
             echo "</span>";
 
                 echo "<div class='contenido'>";
                 echo "<span class='contenedor1'>"; 
                     echo "<div class='seccionSpotImagen'>" ;
-                        $spotImagen = getFotoSpot(109);
+                        $spotImagen = getFotoSpot(69);
                         echo $spotImagen;
                     echo "</div>"; //FIN DE div seccionSpotImagen
 

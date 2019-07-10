@@ -3,6 +3,8 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
+        $miDinero = comprobarDinero();
+        $dineroEnCash = $miDinero[0]['cash'];
         comprobarZona1Barrio2();
         
         echo "<div id='moduloZona'>";
@@ -63,8 +65,9 @@ global $db;
                                     echo '<label for="cbox3"><div id="opcionBox">' . $imagenBotasPescador . '</div><div class="monedaTienda"></div><div class="precioTienda">100</div></label>';
                                 echo "</div>";
                                 echo "<div class='submitTienda'>";
-                                    echo'<input type="submit" class="botonTiendaComprar" value=" ">';
+                                    echo'<input type="submit" class="botonTiendaComprar" value=" "><br><br>';
                                 echo "</div>";
+                                echo " Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
                                 echo "</form>";                 
                         echo "</div>";
 
@@ -97,9 +100,9 @@ global $db;
                                 }
 
                                 echo "<div class='submitTienda'>";
-                                    echo "<input type='submit' class='botonCarrilBici' value=' '>";
+                                    echo "<input type='submit' class='botonCarrilBici' value=' '><br><br>";
                                 echo "</div>";
-                                /*echo " Llevo " . $dineroEnCash . "€ en el bolsillo.<br><br>"; */
+                                echo " Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
                                 echo '</form>';
                         echo "</div>";
                     echo "</div>"; //Fin SemiTransparente

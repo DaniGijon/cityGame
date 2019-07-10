@@ -13,6 +13,7 @@
     if(isset($_GET['spotClickado'])){
         
 ?>
+
         <script>
         $(".seccionDescripcionSpot").toggle()
         $(".seccionDescripcionZona").toggle()

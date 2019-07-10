@@ -189,7 +189,7 @@ h3{
 }
 
 #wrapper{
-    width:90%;
+    width:99%;
     height:100%;
     display:flex;
     flex-direction: column;
@@ -216,7 +216,7 @@ h3{
 
 #main{
     position : relative;
-    margin-left : 300px;
+    margin-left : 330px;
     margin-top: 20px;
     margin-right: 20px;
     display : block;
@@ -264,17 +264,26 @@ h3{
     width:100%;
 }
 
+#botonPersonajeTexto{
+    font-size: 24px;
+    color: white;
+    width:215px;
+    float:left;
+    margin-top:20px;
+    margin-left: 45px;
+}
+
 .botonPersonaje{
     background-image:url("/design/img/menu/boton-personaje.png");
     background-repeat:no-repeat;
     margin-top: 5px;
-    height:81px;
+    height:73px;
     width:290px; 
     float:left;
 }
 
 .botonDarUnaVuelta{
-    height:81px;
+    height:73px;
     width:290px; 
     float:left;
     background-image:url("/design/img/menu/boton-vuelta.png");
@@ -283,7 +292,7 @@ h3{
 
 
 .botonMisiones{
-    height:81px;
+    height:73px;
     width:290px; 
     float:left;
     background-image:url("/design/img/menu/boton-novedades.png");
@@ -291,18 +300,18 @@ h3{
 }
 
 .botonMensajes{
-    height:81px;
+    height:73px;
     width:290px; 
     float:left;
-    background-image:url("/design/img/menu/boton-mensajes.png");
+    background-image:url("/design/img/menu/boton-mensajes-accion.png");
     background-repeat:no-repeat;
 }
 
 .botonMensajesPendientes{
-    height:81px;
+    height:73px;
     width:290px; 
     float:left;
-    background-image:url("/design/img/menu/boton-mensajes-accion.png");
+    background-image:url("/design/img/menu/boton-mensajes.png");
     background-repeat:no-repeat;
 }
 
@@ -310,7 +319,9 @@ h3{
     border-radius: 15px 50px;
     background: lightblue;
 }
-
+#botonMonstruosAsdrubal{
+    background: yellow;
+}
 .seccion1{
     border-radius: 15px 50px;
     background: yellow;
@@ -342,7 +353,7 @@ h3{
 }
 
 .botonAlbum{
-    height:81px;
+    height:73px;
     width:290px; 
     float:left;
     background-image:url("/design/img/menu/boton-album.png");
@@ -351,7 +362,7 @@ h3{
 
 
 .botonRanking{
-    height:81px;
+    height:73px;
     width:290px; 
     float:left;
     background-image:url("/design/img/menu/boton-ranking.png");
@@ -781,8 +792,9 @@ h3{
 }
 
 .contenedor1{
-    width: 50%;
+    width: 47%;
     float: left;
+    margin-left:3%;
 }
 
 .contenedor2{
@@ -1778,6 +1790,28 @@ h3{
 
 .albumTarjeta{
     margin-left:20px;
+    float: left;
+    margin-right: 5px;
+    margin-top: 10px;
+    width:150px;
+    height:220px;
+    border-radius: 10px;
+    background: silver;
+    border: solid 1px black;
+}
+
+.albumTarjetaTitulo{
+    height: 36px;
+    margin: 5px;
+}
+
+#vecesDerrotado{
+    float:right;
+    width:38px;
+    height: 38px;
+    border-radius: 10px 0px 10px 0px;
+    background-color: black;
+    color: white;
 }
 
 .bossTarjeta{
