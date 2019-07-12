@@ -7,7 +7,7 @@
     echo "<div id='top'>";
             
         echo "<div id='logoTitulo'>";
-            echo "<h1 class='large noMargin floatLeft'>PG</h1>";
+            echo "<h1 class='large noMargin floatLeft cool'>PG</h1>";
         echo "</div>";
         ?>
 
@@ -47,7 +47,7 @@
              
              <span id='dineroSeccionTop' class='dineroSeccionTop cajitaSeccionTop dineroTop'>
                  <span id='iconoDinero' class='iconoDinero'>
-                     <span id='textoDinero' class='textoDinero'>
+                     <span id='textoDinero' class='textoDinero cool'>
                     <?php
                     if(floor(getCash($id))<1000)
                      echo floor(getCash($id));
@@ -64,7 +64,7 @@
              
              <span id='nivelSeccionTop' class='nivelSeccionTop cajitaSeccionTop'>
                  <span id='iconoNivel' class='iconoNivel'>
-                     <span id='textoNivel' class='textoNivel'>
+                     <span id='textoNivel' class='textoNivel cool'>
                     <?php
                     echo "Nivel " . floor(getNivel($id));
                     ?>
@@ -75,7 +75,7 @@
              
              <span id='respetoSeccionTop' class='respetoSeccionTop cajitaSeccionTop'>
                  <span id='iconoRespeto' class='iconoRespeto'>
-                     <span id='textoRespeto' class='textoRespeto'>
+                     <span id='textoRespeto' class='textoRespeto cool'>
                     <?php
                     if(floor(getRespeto($id))<1000)
                      echo floor(getRespeto($id));
@@ -92,7 +92,7 @@
              
              <span id='popularidadSeccionTop' class='popularidadSeccionTop cajitaSeccionTop'>
                  <span id='iconoPopularidad' class='iconoPopularidad'>
-                     <span id='textoPopularidad' class='textoPopularidad'>
+                     <span id='textoPopularidad' class='textoPopularidad cool'>
                     <?php
                      echo getPopularidad($id) . " %";
                      ?>
@@ -103,7 +103,7 @@
              
              <span id='tiempoSeccionTop' class='tiempoSeccionTop cajitaSeccionTop tiempoTop'>
                  <span id='iconoTiempo' class='iconoTiempo'>
-                     <span id='textoTiempo' class='textoTiempo'>
+                     <span id='textoTiempo' class='textoTiempo cool'>
                     <?php
                      echo getTiempoAccion($id);
                      ?>

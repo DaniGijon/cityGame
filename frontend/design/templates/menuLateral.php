@@ -8,7 +8,7 @@
         
         <ul class='ulMenuLateral'>
                 <a href="?page=personaje"><div id='botonPersonaje' class="botonPersonaje">
-                        <div id='botonPersonajeTexto'>
+                        <div id='botonPersonajeTexto' class='cool'>
                             <?php
                             echo getNombre($id);
                             ?>

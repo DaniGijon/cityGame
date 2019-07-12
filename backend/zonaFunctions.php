@@ -16,10 +16,10 @@
             
             echo "<div class='contenido'>";
                 echo "<span class='contenedor1'>";
-                echo "<div class = 'tituloZona'>";
-                    echo $result[0]['nombreZona'] . " <br>(" . $result[0]['nombreBarrio'] . ")";
+                echo "<div class = 'tituloZona cool'>";
+                    echo $result[0]['nombreZona'];
                 echo "</div>";
-                echo "<span class = 'irA'>";
+                echo "<span class = 'irA cool'>";
                     echo "Ir a Otra Zona";
                 echo "</span>";
                 echo "<div class='seccionMapaZona'>" ;
@@ -88,7 +88,7 @@
                             $cortoSpot = $res[0]['corto'];
                             $nombreSpot = $res[0]['nombre'];
                             $iconoSpot = $res[0]['tipo'];
-                            echo "<div class='textoDescripcionSpot'>";
+                            echo "<div class='textoDescripcionSpot cool'>";
                                 echo $nombreSpot;
                             echo "</div>";
                             echo "<br>";
