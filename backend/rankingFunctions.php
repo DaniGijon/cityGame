@@ -13,6 +13,7 @@ function dibujarRanking(){
         echo "<button class='seccion6'>Top Clientes</button>";
     echo "</div>"; 
     
+    echo "<div class='contenedor1'>";
     echo "<div id=seccion1Ranking>";
     //Cojo todos los jugadores y los ordeno de más respeto a menos respeto
     $sql = "SELECT * FROM personajes ORDER BY respeto DESC";
@@ -21,12 +22,12 @@ function dibujarRanking(){
     
     echo "<div class='tablaTopRespetados'>";
     
-    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br><caption>10 Más Respetados</caption>";
+    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;'><br><caption></caption>";
     
-    echo "<tr>";
-        echo "<th style='text-align:center; border-radius: 15px'> POS. </th>";
-        echo "<th style='text-align:center; border-radius: 15px'> NOMBRE </th>";
-	echo "<th style='text-align:center; border-radius: 15px'> RESPETO </th>";
+    echo "<tr style='background:darkturquoise'>";
+        echo "<th style='text-align:center;min-width:70px' class='coolWhiteGrande texto-borde'> POS. </th>";
+        echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> NOMBRE </th>";
+	echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> RESPETO </th>";
     echo "</tr>";
     
     for($i=0; $i<10; $i=$i+1){
@@ -36,28 +37,17 @@ function dibujarRanking(){
             echo "</tr>";  
 
             if($result[$i]['id'] === $id ){ //Si soy yo
-                echo "<tr style='background:pink;'>";
+                echo "<tr style='color:orange; font-weight:bold'>";
             }
-            else{
-                if($i===0){
-                    echo "<tr style='background:gold;'>";
-                }
-                elseif($i===1){
-                    echo "<tr style='background:silver;'>";
-                }
-                elseif($i===2){
-                    echo "<tr style='background:orange;'>";
-                }
-                else{
-                    echo "<tr>";
-                }
+            else{    
+                echo "<tr>";    
             }
             $pos = $i + 1;
-            echo "<td>" . $pos . "º</td>";
+            echo "<td><b>" . $pos . "</b></td>";
 
             echo "<td>" . $result[$i]['nombre'] . "</td>";
 
-            echo "<td>" . $result[$i]['respeto'] . "</td>";
+            echo "<td style='text-align:right;'>" . $result[$i]['respeto'] . "</td>";
             echo "</tr>";
         }
     }
@@ -73,12 +63,12 @@ function dibujarRanking(){
     
     echo "<div class='tablaTopPopulares'>";
     
-    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br><caption>10 Más Populares</caption>";
+    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;'><br><caption></caption>";
     
-    echo "<tr>";
-        echo "<th style='text-align:center; border-radius: 15px'> POS. </th>";
-        echo "<th style='text-align:center; border-radius: 15px'> NOMBRE </th>";
-	echo "<th style='text-align:center; border-radius: 15px'> POPULARIDAD </th>";
+    echo "<tr style='background:darkturquoise'>";
+        echo "<th style='text-align:center;min-width:70px' class='coolWhiteGrande texto-borde'> POS. </th>";
+        echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> NOMBRE </th>";
+	echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> POPULARIDAD </th>";
     echo "</tr>";
     for($i=0; $i<10; $i=$i+1){
         if(isset($result[$i])){
@@ -87,24 +77,13 @@ function dibujarRanking(){
             echo "</tr>";  
 
             if($result[$i]['id'] === $id ){ //Si soy yo
-                echo "<tr style='background:pink;'>";
+                echo "<tr style='color:orange; font-weight:bold'>";
             }
-            else{
-                if($i===0){
-                    echo "<tr style='background:gold;'>";
-                }
-                elseif($i===1){
-                    echo "<tr style='background:silver;'>";
-                }
-                elseif($i===2){
-                    echo "<tr style='background:orange;'>";
-                }
-                else{
-                    echo "<tr>";
-                }
+            else{    
+                echo "<tr>";    
             }
             $pos = $i + 1;
-            echo "<td>" . $pos . "º</td>";
+            echo "<td><b>" . $pos . "</b></td>";
 
             echo "<td>" . $result[$i]['nombre'] . "</td>";
 
@@ -124,12 +103,12 @@ function dibujarRanking(){
     
     echo "<div class='tablaTopCazarrecompensas'>";
     
-    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br><caption>10 Mejores Cazarrecompensas</caption>";
+    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black'><br><caption></caption>";
     
-    echo "<tr>";
-        echo "<th style='text-align:center; border-radius: 15px'> POS. </th>";
-        echo "<th style='text-align:center; border-radius: 15px'> NOMBRE </th>";
-	echo "<th style='text-align:center; border-radius: 15px'> MISIONES COMPLETADAS</th>";
+    echo "<tr style='background:darkturquoise'>";
+        echo "<th style='text-align:center;min-width:70px' class='coolWhiteGrande texto-borde'> POS. </th>";
+        echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> NOMBRE </th>";
+	echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> MISIONES COMPLETADAS </th>";
     echo "</tr>";
     for($i=0; $i<10; $i=$i+1){
         if(isset($result[$i])){
@@ -138,24 +117,13 @@ function dibujarRanking(){
             echo "</tr>";  
 
             if($result[$i]['idP'] === $id ){ //Si soy yo
-                echo "<tr style='background:pink;'>";
+                echo "<tr style='color:orange; font-weight:bold'>";
             }
-            else{
-                if($i===0){
-                    echo "<tr style='background:gold;'>";
-                }
-                elseif($i===1){
-                    echo "<tr style='background:silver;'>";
-                }
-                elseif($i===2){
-                    echo "<tr style='background:orange;'>";
-                }
-                else{
-                    echo "<tr>";
-                }
+            else{    
+                echo "<tr>";    
             }
             $pos = $i + 1;
-            echo "<td>" . $pos . "º</td>";
+            echo "<td><b>" . $pos . "</b></td>";
 
             $nombre = getNombre($result[$i]['idP']);
             echo "<td>" . $nombre . "</td>";
@@ -176,12 +144,12 @@ function dibujarRanking(){
     
     echo "<div class='tablaTopSafari'>";
     
-    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br><caption>10 Mejores Cazadores</caption>";
+    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;'><br><caption></caption>";
     
-    echo "<tr>";
-        echo "<th style='text-align:center; border-radius: 15px'> POS. </th>";
-        echo "<th style='text-align:center; border-radius: 15px'> NOMBRE </th>";
-	echo "<th style='text-align:center; border-radius: 15px'> ESPECIES DERROTADAS</th>";
+   echo "<tr style='background:darkturquoise'>";
+        echo "<th style='text-align:center;min-width:70px' class='coolWhiteGrande texto-borde'> POS. </th>";
+        echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> NOMBRE </th>";
+	echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> ESPECIES DERROTADAS </th>";
     echo "</tr>";
     for($i=0; $i<10; $i=$i+1){
         if(isset($result[$i])){
@@ -189,25 +157,14 @@ function dibujarRanking(){
                 echo "<td colspan='100%' bgcolor='black' height='2'></td>";
             echo "</tr>";  
 
-            if($result[$i]['idP'] === $id ){ //Si soy yo
-                echo "<tr style='background:pink;'>";
+             if($result[$i]['idP'] === $id ){ //Si soy yo
+                echo "<tr style='color:orange; font-weight:bold'>";
             }
-            else{
-                if($i===0){
-                    echo "<tr style='background:gold;'>";
-                }
-                elseif($i===1){
-                    echo "<tr style='background:silver;'>";
-                }
-                elseif($i===2){
-                    echo "<tr style='background:orange;'>";
-                }
-                else{
-                    echo "<tr>";
-                }
+            else{    
+                echo "<tr>";    
             }
             $pos = $i + 1;
-            echo "<td>" . $pos . "º</td>";
+            echo "<td><b>" . $pos . "</b></td>";
 
             $nombre = getNombre($result[$i]['idP']);
             echo "<td>" . $nombre . "</td>";
@@ -228,12 +185,12 @@ function dibujarRanking(){
     
     echo "<div class='tablaTopColeccionistas'>";
     
-    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br><caption>10 Mejores Coleccionistas</caption>";
+    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; '><br><caption></caption>";
     
-    echo "<tr>";
-        echo "<th style='text-align:center; border-radius: 15px'> POS. </th>";
-        echo "<th style='text-align:center; border-radius: 15px'> NOMBRE </th>";
-	echo "<th style='text-align:center; border-radius: 15px'> RELIQUIAS</th>";
+    echo "<tr style='background:darkturquoise'>";
+        echo "<th style='text-align:center;min-width:70px' class='coolWhiteGrande texto-borde'> POS. </th>";
+        echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> NOMBRE </th>";
+	echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> RELIQUIAS </th>";
     echo "</tr>";
     for($i=0; $i<10; $i=$i+1){
         if(isset($result[$i])){
@@ -241,25 +198,14 @@ function dibujarRanking(){
                 echo "<td colspan='100%' bgcolor='black' height='2'></td>";
             echo "</tr>";  
 
-            if($result[$i]['idP'] === $id ){ //Si soy yo
-                echo "<tr style='background:pink;'>";
+             if($result[$i]['idP'] === $id ){ //Si soy yo
+                echo "<tr style='color:orange; font-weight:bold'>";
             }
-            else{
-                if($i===0){
-                    echo "<tr style='background:gold;'>";
-                }
-                elseif($i===1){
-                    echo "<tr style='background:silver;'>";
-                }
-                elseif($i===2){
-                    echo "<tr style='background:orange;'>";
-                }
-                else{
-                    echo "<tr>";
-                }
+            else{    
+                echo "<tr>";    
             }
             $pos = $i + 1;
-            echo "<td>" . $pos . "º</td>";
+            echo "<td><b>" . $pos . "</b></td>";
 
             $nombre = getNombre($result[$i]['idP']);
             echo "<td>" . $nombre . "</td>";
@@ -280,12 +226,12 @@ function dibujarRanking(){
     
     echo "<div class='tablaTopClientes'>";
     
-    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br><caption>10 Mejores Clientes</caption>";
+    echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;'><br><caption></caption>";
     
-    echo "<tr>";
-        echo "<th style='text-align:center; border-radius: 15px'> POS. </th>";
-        echo "<th style='text-align:center; border-radius: 15px'> NOMBRE </th>";
-	echo "<th style='text-align:center; border-radius: 15px'> INSIGNIAS</th>";
+    echo "<tr style='background:darkturquoise'>";
+        echo "<th style='text-align:center;min-width:70px' class='coolWhiteGrande texto-borde'> POS. </th>";
+        echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> NOMBRE </th>";
+	echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> INSIGNIAS </th>";
     echo "</tr>";
     for($i=0; $i<10; $i=$i+1){
         if(isset($result[$i])){
@@ -294,24 +240,13 @@ function dibujarRanking(){
             echo "</tr>";  
 
             if($result[$i]['idP'] === $id ){ //Si soy yo
-                echo "<tr style='background:pink;'>";
+                echo "<tr style='color:orange; font-weight:bold'>";
             }
-            else{
-                if($i===0){
-                    echo "<tr style='background:gold;'>";
-                }
-                elseif($i===1){
-                    echo "<tr style='background:silver;'>";
-                }
-                elseif($i===2){
-                    echo "<tr style='background:orange;'>";
-                }
-                else{
-                    echo "<tr>";
-                }
+            else{    
+                echo "<tr>";    
             }
             $pos = $i + 1;
-            echo "<td>" . $pos . "º</td>";
+            echo "<td><b>" . $pos . "</b></td>";
 
             $nombre = getNombre($result[$i]['idP']);
             echo "<td>" . $nombre . "</td>";
@@ -323,6 +258,7 @@ function dibujarRanking(){
     echo "</table>";
     echo "</div>";
     echo "</div>"; //Fin seccion6
+    echo "</div>";
     
 
 ?>

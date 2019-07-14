@@ -710,9 +710,68 @@ function accionSpot($box){
                 $box = "No puedo pagar eso";
             }
             break;
-            
+        case 'panCamino':
+            $coste = 25;
+            $mejoraSalud = 3;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        case 'segundoDesayuno':
+            $coste = 25;
+            $mejoraSalud = 3;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        case 'bravas':
+            $coste = 25;
+            $mejoraSalud = 3;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        case 'brochetas':
+            $coste = 25;
+            $mejoraSalud = 3;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        case 'retoPicante':
+            $coste = 25;
+            $mejoraSalud = 3;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
         //CAFES
-        case 'cafeGo':
+        case 'cafeLeche':
             $coste = 10;
             $mejoraSalud = 1;
             $puedoPagar = comprobarCoste($coste);
@@ -3351,6 +3410,71 @@ function accionSpot($box){
                 
             break;
             
+        case 'cronoTerri':
+            $agotamiento = 60;
+            $coste = 0;
+            $puedoHacerlo = comprobarEnergia($agotamiento);
+            if($puedoHacerlo === 1){
+                $puedoPagar = comprobarCoste($coste);
+                if($puedoPagar === 1){
+                    //Consulta para hacer el informe
+                    $sql = "SELECT agilidad,resistencia FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $habilidades = $stmt->fetchAll();
+                    
+                    $agilidadPrevia = $habilidades[0]['agilidad'];
+                    $resistenciaPrevia = $habilidades[0]['resistencia'];
+                    
+                    $sql = "UPDATE personajes SET cash = cash - $coste, energia = energia-$agotamiento, agilidad = agilidad + $mejoraSecundariaAlta/personajes.agilidad, resistencia = resistencia + $mejoraPrincipalAlta/personajes.resistencia, accion = ADDTIME(NOW(), '0:45:0') WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    
+                    //INFORME DE ENTRENAMIENTO
+                    $sql = "SELECT agilidad,resistencia FROM personajes WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $habilidades = $stmt->fetchAll();
+                    
+                    $agilidadPosterior = $habilidades[0]['agilidad'];
+                    $resistenciaPosterior = $habilidades[0]['resistencia'];
+                    
+                    $mejoraAgilidad = round($agilidadPosterior - $agilidadPrevia, 2, PHP_ROUND_HALF_DOWN);
+                    $mejoraResistencia = round($resistenciaPosterior - $resistenciaPrevia, 2, PHP_ROUND_HALF_DOWN);
+                    
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Mejora de Habilidad','¡De aquí a subir el Tourmalet! He mejorado $mejoraResistencia puntos de Resistencia y también $mejoraAgilidad puntos de Agilidad.','entrenamiento.png')";
+                    $db->query($sql);
+                }
+                else{
+                    $box = "¿Y si me multan por ir tan rápido? Mejor reunir algo de dinero antes";
+                }
+            }else{
+                $box = "Mejor dedicarme a la cronosiesta y descansar un rato.";
+            }
+            break;
+            
+        case 'empanadilla':
+            $coste = 40;
+            $mejoraSalud = 10;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        case 'hotDog':
+            $coste = 150;
+            $mejoraSalud = 50;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END, cash = cash-$coste WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+            
         //MISION Danza del Agua
         case 'misionDanza':
             $sql = "SELECT * FROM progresos WHERE idP='$id' AND idM='13'";
@@ -5069,6 +5193,96 @@ function accionSpot($box){
                 $box = "No me quedan monedas suficientes";
             }
             break;
+        //TRABAJO: CRIBA DE ORO
+        case 'ratito':
+            $agotamiento = 10;
+            $salario = 15;
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                $puedoHacerlo = comprobarEnergia($agotamiento);
+                if($puedoHacerlo === 1){
+                        //Consulta para hacer el informe
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPrevio = $dinero[0]['cash'];
+                        //HACER EL PAGO
+                        if($recaudador === 1){
+                            $sql = "UPDATE personajes SET cash = cash+$salario*1.50, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '0:15:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        else{
+                            $sql = "UPDATE personajes SET cash = cash+$salario, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '0:15:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        //GENERAR EL INFORME DE COBRO
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPosterior = $dinero[0]['cash'];
+                        
+                        $mejoraCash = round($cashPosterior - $cashPrevio, 2, PHP_ROUND_HALF_DOWN);
+                        
+
+                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cobro','¡Aquí está el cobro por 15 minutos de duro trabajo! Ahora mi bolsillo pesa un poco más, exactamente $mejoraCash monedas más.','cobro.png')";
+                        $db->query($sql);
+                    
+                }else{
+                    $box = "¿Tú quieres que me muera ahí al sol? Mejor descansar un poco.";
+                }
+            }
+            else{
+                $box = "Aún no he descansado de mi ultima acción";
+            }
+            break; 
+            
+            case 'solasol':
+            $agotamiento = 10;
+            $salario = 15;
+            $estoyLibre = comprobarEspera();
+            if($estoyLibre === 1){
+                $puedoHacerlo = comprobarEnergia($agotamiento);
+                if($puedoHacerlo === 1){
+                        //Consulta para hacer el informe
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPrevio = $dinero[0]['cash'];
+                        //HACER EL PAGO
+                        if($recaudador === 1){
+                            $sql = "UPDATE personajes SET cash = cash+$salario*1.50, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '0:15:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        else{
+                            $sql = "UPDATE personajes SET cash = cash+$salario, energia = energia-$agotamiento, accion = ADDTIME(NOW(), '0:15:0') WHERE id='$id'";
+                            $stmt = $db->query($sql);
+                        }
+                        //GENERAR EL INFORME DE COBRO
+                        $sql = "SELECT cash FROM personajes WHERE id='$id'";
+                        $stmt = $db->query($sql);
+                        $dinero = $stmt->fetchAll();
+
+                        $cashPosterior = $dinero[0]['cash'];
+                        
+                        $mejoraCash = round($cashPosterior - $cashPrevio, 2, PHP_ROUND_HALF_DOWN);
+                        
+
+                        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cobro','¡Aquí está el cobro por 15 minutos de duro trabajo! Ahora mi bolsillo pesa un poco más, exactamente $mejoraCash monedas más.','cobro.png')";
+                        $db->query($sql);
+                    
+                }else{
+                    $box = "¿Tú quieres que me muera ahí al sol? Mejor descansar un poco.";
+                }
+            }
+            else{
+                $box = "Aún no he descansado de mi ultima acción";
+            }
+            break; 
+        
+        
         //TRABAJO: VIGILANTE DE OBRA
         case 'qualy':
             $agotamiento = 10;
@@ -5662,6 +5876,73 @@ function accionSpot($box){
                     $db->query($sql); 
                     
                     $sql = "UPDATE inventario SET idO = 3 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        //Euroel
+        case 'pulseraLuminosa':
+            $coste = 300;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 314 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        case 'linterna':
+            $coste = 800;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 313 WHERE idP='$id' AND slot = '$slotLibre'";
+                    $db->query($sql); 
+                    
+                }
+                else{
+                    $box = "No tengo espacio libre";
+                }
+                
+            }
+            else{
+                $box = "No puedo pagar eso";
+            }
+            break;
+        case 'lucesLED':
+            $coste = 2000;
+            $puedoPagar = comprobarCoste($coste);
+            $slotLibre = comprobarSlotLibre();
+            if($puedoPagar === 1){
+                if($slotLibre >=0){
+                    $sql = "UPDATE personajes SET cash = cash - $coste WHERE id='$id'";
+                    $db->query($sql); 
+                    
+                    $sql = "UPDATE inventario SET idO = 927 WHERE idP='$id' AND slot = '$slotLibre'";
                     $db->query($sql); 
                     
                 }

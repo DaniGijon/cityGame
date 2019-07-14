@@ -42,7 +42,7 @@ global $db;
                             echo "<div class='opcionesTiendaTitulo'>";
                                 echo 'Barra Libre de Copas';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="corazonTienda"></div><div class="precioTienda">↓↓</div><div class="energiaTienda"></div><div class="vidaTienda">+50</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="corazonTienda"></div><div class="precioTienda">↓</div><div class="energiaTienda"></div><div class="vidaTienda">+50</div></label>';
                         echo "</div>";
                         
                         //Esta solo la muestro si no he comenzado la mision o si la tengo comenzada pero no completada

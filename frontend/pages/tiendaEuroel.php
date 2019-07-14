@@ -37,7 +37,7 @@ global $db;
 
                                 echo "<div class='opcionesTienda'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
-                                        echo '<input type="checkbox" name="cbox1" value="cañaPesca">';
+                                        echo '<input type="checkbox" name="cbox1" value="pulseraLuminosa">';
                                     echo "</div>";
                                     echo "<div class='opcionesTiendaTitulo'>";
                                         echo 'Pulsera Luminosa';
@@ -47,7 +47,7 @@ global $db;
                                 
                                 echo "<div class='opcionesTienda'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
-                                        echo '<input type="checkbox" name="cbox1" value="sombreroPescador">';
+                                        echo '<input type="checkbox" name="cbox1" value="linterna">';
                                     echo "</div>";
                                     echo "<div class='opcionesTiendaTitulo'>";
                                         echo 'Linterna de mano';
@@ -57,7 +57,7 @@ global $db;
                                 
                                 echo "<div class='opcionesTienda'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
-                                        echo '<input type="checkbox" name="cbox1" value="botasPescador">';
+                                        echo '<input type="checkbox" name="cbox1" value="lucesLED">';
                                     echo "</div>";
                                     echo "<div class='opcionesTiendaTitulo'>";
                                         echo 'Luces de LED';

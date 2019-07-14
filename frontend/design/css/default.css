@@ -1552,11 +1552,11 @@ h4{
 }
 
 .barrio3{
-    background: orange;
+    background: yellow;
 }
 
 .barrio4{
-    background: aquamarine;
+    background: silver;
 }
 
 .barrio5{
@@ -1564,23 +1564,24 @@ h4{
 }
 
 .barrio6{
-    background: yellow;
+    background: gold;
 }
 
 .barrio7{
-    background: brown;
+    background: aquamarine;
 }
 
 .barrio8{
-    background: purple;
+    background: darkorchid;
 }
 
 .barrio9{
-    background: greenyellow;
+    background: black;
+    color:white;
 }
 
 .barrio10{
-    background: grey;
+    background: greenyellow;
 }
 
 
