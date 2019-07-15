@@ -359,33 +359,33 @@ h4{
     background: yellow;
 }
 .seccion1{
-    border-radius: 15px 50px;
-    background: yellow;
+   /* border-radius: 15px 50px;
+    background: yellow;*/
 }
 
 .seccion2{
-    border-radius: 15px 50px;
-    background: white;
+  /*  border-radius: 15px 50px;
+    background: white;*/
 }
 
 .seccion3{
-    border-radius: 15px 50px;
-    background: white;
+  /*  border-radius: 15px 50px;
+    background: white;*/
 }
 
 .seccion4{
-    border-radius: 15px 50px;
-    background: white;
+    /*border-radius: 15px 50px;
+    background: white;*/
 }
 
 .seccion5{
-    border-radius: 15px 50px;
-    background: white;
+   /* border-radius: 15px 50px;
+    background: white;*/
 }
 
 .seccion6{
-    border-radius: 15px 50px;
-    background: white;
+   /* border-radius: 15px 50px;
+    background: white;*/
 }
 
 .botonAlbum{
@@ -881,16 +881,88 @@ h4{
 
 }
 
-.tituloZona{
-    width: 100px;
-    height: 50px;
-    background-image: url("/design/img/iconos/cartelZona.png");
+.tituloZona1{
+    width: 113px;
+    height: 36px;
+    background-image: url("/design/img/botones/boton-madera1.png");
     background-repeat: repeat-y;
     text-align: center;
     float : left;
     position: relative;
     margin : auto;
     color: white;
+}
+
+.tituloZona2{
+    width: 191px;
+    height: 36px;
+    background-image: url("/design/img/botones/boton-madera2.png");
+    background-repeat: repeat-y;
+    text-align: center;
+    float : left;
+    position: relative;
+    margin : auto;
+    color: white;
+}
+
+.tituloZona3{
+    width: 255px;
+    height: 36px;
+    background-image: url("/design/img/botones/boton-madera3.png");
+    background-repeat: repeat-y;
+    text-align: center;
+    float : left;
+    position: relative;
+    margin : auto;
+    color: white;
+}
+
+.tituloZona4{
+    width: 191px;
+    height: 36px;
+    background-image: url("/design/img/botones/boton-madera4.png");
+    background-repeat: repeat-y;
+    text-align: center;
+    float : left;
+    position: relative;
+    margin : auto;
+    color: white;
+}
+
+.tituloZona5{
+    width: 113px;
+    height: 36px;
+    background-image: url("/design/img/botones/boton-madera5.png");
+    background-repeat: repeat-y;
+    text-align: center;
+    float : left;
+    position: relative;
+    margin : auto;
+    color: white;
+}
+
+.textoZona1 {
+  margin-top: 6%;
+}
+
+.textoZona2 {
+  margin-top: 4%;
+}
+
+.textoZona3 {
+  margin-top: 3%;
+}
+
+.textoZona4 {
+  margin-top: 4%;
+}
+
+.textoZona5 {
+  margin-top: 6%;
+}
+
+.opacity{
+    opacity:0.6;
 }
 
 .irA{
@@ -1564,7 +1636,7 @@ h4{
 }
 
 .barrio6{
-    background: gold;
+    background: goldtit;
 }
 
 .barrio7{

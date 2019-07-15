@@ -16,9 +16,29 @@
             
             echo "<div class='contenido'>";
                 echo "<span class='contenedor1'>";
-                echo "<div class = 'tituloZona cool'>";
-                    echo $result[0]['nombreZona'];
-                echo "</div>";
+                $cartel = elegirCartel($barrioActual,$zonaActual);
+                if($cartel === 1){
+                    echo "<div class = 'tituloZona1'>";
+                        echo "<div class = 'textoZona1 cool'>";
+                            echo $result[0]['nombreZona'];
+                        echo "</div>";
+                    echo "</div>";
+                }
+                elseif($cartel === 2){
+                    echo "<div class = 'tituloZona2'>";
+                        echo "<div class = 'textoZona2 cool'>";
+                            echo $result[0]['nombreZona'];
+                        echo "</div>";
+                    echo "</div>";
+                }
+                elseif($cartel === 3){
+                    echo "<div class = 'tituloZona3'>";
+                        echo "<div class = 'textoZona3 cool'>";
+                            echo $result[0]['nombreZona'];
+                        echo "</div>";
+                    echo "</div>";
+                }
+                    
                 echo "<span class = 'irA cool'>";
                     echo "Ir a Otra Zona";
                 echo "</span>";
@@ -182,6 +202,17 @@ $(".irA").click(function(event){
         
         return $cortoSpot;
         
+    }
+    
+    function elegirCartel($idB, $idZ){
+        $cartel = 1;
+        if(($idB === '6' && $idZ === '2') || ($idB === '6' && $idZ === '3')){ //Paseo de San Gregorio, Paseo El Bosque
+            $cartel = 3;
+        }
+        elseif(($idB === '2' && $idZ === '1') || ($idB === '2' && $idZ === '3') || ($idB === '4' && $idZ === '1') || ($idB === '5' && $idZ === '1') || ($idB === '6' && $idZ === '1')|| ($idB === '8' && $idZ === '1') || ($idB === '9' && $idZ === '3') ||$idB === '10'){
+            $cartel = 2;
+        }
+        return $cartel;
     }
     
     if(isset($_GET['dibujarZona'])){

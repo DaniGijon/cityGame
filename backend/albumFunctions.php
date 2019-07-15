@@ -6,9 +6,22 @@ function dibujarAlbum(){
     
     //Cabecera selector opciones
     echo "<div id='botonesComprarVender'>";
-        echo "<button class='seccion1'>Monstruos</button>";
-        echo "<button class='seccion2'>Reliquias</button>";
-        echo "<button class='seccion3'>Insignias</button>";
+        echo "<div class = 'tituloZona5 seccion1'>";
+            echo "<div class = 'textoZona5 cool'>";
+                echo "Monstruos";
+            echo "</div>";
+        echo "</div>";
+        echo "<div class = 'tituloZona1 seccion2 opacity'>";
+            echo "<div class = 'textoZona1 cool'>";
+                echo "Reliquias";
+            echo "</div>";
+        echo "</div>";
+        echo "<div class = 'tituloZona5 seccion3 opacity'>";
+            echo "<div class = 'textoZona5 cool'>";
+                echo "Insignias";
+            echo "</div>";
+        echo "</div>";
+        
     echo "</div>"; 
     
     echo "<div id=seccion1>";
@@ -640,27 +653,27 @@ function dibujarAlbum(){
         $("#seccion1").show();
         $("#seccion2").hide();
         $("#seccion3").hide();
-        $(".seccion1").css("background-color", "yellow");
-        $(".seccion2").css("background-color", "white");
-        $(".seccion3").css("background-color", "white");
+        $(".seccion1").css("opacity", "1");
+        $(".seccion2").css("opacity", "0.6");
+        $(".seccion3").css("opacity", "0.6");
     });
     
     $(".seccion2").click(function(){
         $("#seccion2").show();
         $("#seccion1").hide();
         $("#seccion3").hide();
-        $(".seccion2").css("background-color", "yellow");
-        $(".seccion1").css("background-color", "white");
-        $(".seccion3").css("background-color", "white");
+        $(".seccion2").css("opacity", "1");
+        $(".seccion1").css("opacity", "0.6");
+        $(".seccion3").css("opacity", "0.6");
     });
     
     $(".seccion3").click(function(){
         $("#seccion3").show();
         $("#seccion2").hide();
         $("#seccion1").hide();
-        $(".seccion3").css("background-color", "yellow");
-        $(".seccion2").css("background-color", "white");
-        $(".seccion1").css("background-color", "white");
+        $(".seccion3").css("opacity", "1");
+        $(".seccion2").css("opacity", "0.6");
+        $(".seccion1").css("opacity", "0.6");
     });
     
     $("#botonMonstruosAsdrubal").click(function(){

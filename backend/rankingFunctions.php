@@ -5,12 +5,36 @@ function dibujarRanking(){
     
     //Cabecera selector opciones
     echo "<div id='botonesComprarVender'>";
-        echo "<button class='seccion1'>Top Respetados</button>";
-        echo "<button class='seccion2'>Top Populares</button>";
-        echo "<button class='seccion3'>Top Cazarrecompensas</button>";
-        echo "<button class='seccion4'>Top Safari</button>";
-        echo "<button class='seccion5'>Top Coleccionistas</button>";
-        echo "<button class='seccion6'>Top Clientes</button>";
+        echo "<div class = 'tituloZona2 seccion1'>";
+            echo "<div class = 'textoZona2 cool'>";
+                echo "Top Respetados";
+            echo "</div>";
+        echo "</div>";
+        echo "<div class = 'tituloZona4 seccion2 opacity'>";
+            echo "<div class = 'textoZona4 cool'>";
+                echo "Top Populares";
+            echo "</div>";
+        echo "</div>";
+        echo "<div class = 'tituloZona3 seccion3 opacity'>";
+            echo "<div class = 'textoZona3 cool'>";
+                echo "Top Cazarrecompensas";
+            echo "</div>";
+        echo "</div>";
+        echo "<div class = 'tituloZona5 seccion4 opacity'>";
+            echo "<div class = 'textoZona5 cool'>";
+                echo "Top Safari";
+            echo "</div>";
+        echo "</div>";
+        echo "<div class = 'tituloZona2 seccion5 opacity'>";
+            echo "<div class = 'textoZona2 cool'>";
+                echo "Top Coleccionistas";
+            echo "</div>";
+        echo "</div>";
+        echo "<div class = 'tituloZona5 seccion6 opacity'>";
+            echo "<div class = 'textoZona5 cool'>";
+                echo "Top Clientes";
+            echo "</div>";
+        echo "</div>";
     echo "</div>"; 
     
     echo "<div class='contenedor1'>";
@@ -270,12 +294,12 @@ function dibujarRanking(){
         $("#seccion5Ranking").hide();
         $("#seccion6Ranking").hide();
         $("#seccion1Ranking").show(); 
-        $(".seccion1").css("background-color", "yellow");
-        $(".seccion2").css("background-color", "white");
-        $(".seccion3").css("background-color", "white");
-        $(".seccion4").css("background-color", "white");
-        $(".seccion5").css("background-color", "white");
-        $(".seccion6").css("background-color", "white");
+        $(".seccion1").css("opacity", "1");
+        $(".seccion2").css("opacity", "0.6");
+        $(".seccion3").css("opacity", "0.6");
+        $(".seccion4").css("opacity", "0.6");
+        $(".seccion5").css("opacity", "0.6");
+        $(".seccion6").css("opacity", "0.6");
     });
     
     $(".seccion2").click(function(){
@@ -285,12 +309,12 @@ function dibujarRanking(){
         $("#seccion5Ranking").hide();
         $("#seccion6Ranking").hide();
         $("#seccion2Ranking").show(); 
-        $(".seccion2").css("background-color", "yellow");
-        $(".seccion1").css("background-color", "white");
-        $(".seccion3").css("background-color", "white");
-        $(".seccion4").css("background-color", "white");
-        $(".seccion5").css("background-color", "white");
-        $(".seccion6").css("background-color", "white");
+        $(".seccion2").css("opacity", "1");
+        $(".seccion1").css("opacity", "0.6");
+        $(".seccion3").css("opacity", "0.6");
+        $(".seccion4").css("opacity", "0.6");
+        $(".seccion5").css("opacity", "0.6");
+        $(".seccion6").css("opacity", "0.6");
     });
     
     $(".seccion3").click(function(){
@@ -300,12 +324,12 @@ function dibujarRanking(){
         $("#seccion5Ranking").hide();
         $("#seccion6Ranking").hide();
         $("#seccion3Ranking").show();
-        $(".seccion3").css("background-color", "yellow");
-        $(".seccion2").css("background-color", "white");
-        $(".seccion1").css("background-color", "white");
-        $(".seccion4").css("background-color", "white");
-        $(".seccion5").css("background-color", "white");
-        $(".seccion6").css("background-color", "white");
+        $(".seccion3").css("opacity", "1");
+        $(".seccion1").css("opacity", "0.6");
+        $(".seccion2").css("opacity", "0.6");
+        $(".seccion4").css("opacity", "0.6");
+        $(".seccion5").css("opacity", "0.6");
+        $(".seccion6").css("opacity", "0.6");
     });
     $(".seccion4").click(function(){
         $("#seccion1Ranking").hide();
@@ -314,12 +338,12 @@ function dibujarRanking(){
         $("#seccion5Ranking").hide();
         $("#seccion6Ranking").hide();
         $("#seccion4Ranking").show(); 
-        $(".seccion4").css("background-color", "yellow");
-        $(".seccion2").css("background-color", "white");
-        $(".seccion3").css("background-color", "white");
-        $(".seccion1").css("background-color", "white");
-        $(".seccion5").css("background-color", "white");
-        $(".seccion6").css("background-color", "white");
+        $(".seccion4").css("opacity", "1");
+        $(".seccion1").css("opacity", "0.6");
+        $(".seccion2").css("opacity", "0.6");
+        $(".seccion3").css("opacity", "0.6");
+        $(".seccion5").css("opacity", "0.6");
+        $(".seccion6").css("opacity", "0.6");
     });
     $(".seccion5").click(function(){
         $("#seccion1Ranking").hide();
@@ -328,12 +352,12 @@ function dibujarRanking(){
         $("#seccion4Ranking").hide();
         $("#seccion6Ranking").hide();
         $("#seccion5Ranking").show(); 
-        $(".seccion5").css("background-color", "yellow");
-        $(".seccion2").css("background-color", "white");
-        $(".seccion3").css("background-color", "white");
-        $(".seccion4").css("background-color", "white");
-        $(".seccion1").css("background-color", "white");
-        $(".seccion6").css("background-color", "white");
+        $(".seccion5").css("opacity", "1");
+        $(".seccion1").css("opacity", "0.6");
+        $(".seccion2").css("opacity", "0.6");
+        $(".seccion3").css("opacity", "0.6");
+        $(".seccion4").css("opacity", "0.6");
+        $(".seccion6").css("opacity", "0.6");
     });
     $(".seccion6").click(function(){
         $("#seccion1Ranking").hide();
@@ -342,12 +366,12 @@ function dibujarRanking(){
         $("#seccion4Ranking").hide();
         $("#seccion5Ranking").hide();
         $("#seccion6Ranking").show(); 
-        $(".seccion6").css("background-color", "yellow");
-        $(".seccion2").css("background-color", "white");
-        $(".seccion3").css("background-color", "white");
-        $(".seccion4").css("background-color", "white");
-        $(".seccion5").css("background-color", "white");
-        $(".seccion1").css("background-color", "white");
+        $(".seccion6").css("opacity", "1");
+        $(".seccion1").css("opacity", "0.6");
+        $(".seccion2").css("opacity", "0.6");
+        $(".seccion3").css("opacity", "0.6");
+        $(".seccion4").css("opacity", "0.6");
+        $(".seccion5").css("opacity", "0.6");
     });
 </script>
 <?php
