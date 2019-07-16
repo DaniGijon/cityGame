@@ -21,7 +21,9 @@ function dibujarAlbum(){
                 echo "Insignias";
             echo "</div>";
         echo "</div>";
-        
+        echo "<div id='Mi'>";
+        echo "<br><br>";
+        echo "</div>";
     echo "</div>"; 
     
     echo "<div id=seccion1>";
@@ -35,7 +37,6 @@ function dibujarAlbum(){
        echo "<button id='botonMonstruosSalesianos' class='botonMonstruosZona'>Salesianos</button>";
        echo "<button id='botonMonstruosTauro' class='botonMonstruosZona'>Tauro</button>";
        echo "<button id='botonMonstruosLaCopa' class='botonMonstruosZona'>La Copa</button>";
-       echo "<br>";
        echo "<button id='botonMonstruosAyuntamiento' class='botonMonstruosZona'>Ayuntamiento</button>";
        echo "<button id='botonMonstruosPaseoSanGregorio' class='botonMonstruosZona'>Paseo S.Gregorio</button>";
        echo "<button id='botonMonstruosPaseoElBosque' class='botonMonstruosZona'>Paseo El Bosque</button>";

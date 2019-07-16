@@ -646,8 +646,8 @@
                 $(".objetoBox").click(function(event){
                    var id = $(this).attr('id');
                     $("#areaCuerpo").text(id); 
-                    $("#capaBolsa").css('left',event.pageX);
-                    $("#capaBolsa").css('top',event.pageY);
+                    $("#capaBolsa").css('left',event.pageX - 300);
+                    $("#capaBolsa").css('top',event.pageY - 200);
                     $("#capaBolsa").toggle();
                       
                 });
@@ -656,8 +656,8 @@
                    var objetoBolsaId = $(this).attr('id');
                    var areaCuerpoId = $("#areaCuerpo").text();
                    if(objetoBolsaId >=300 && objetoBolsaId < 400){
-                       $("#opcionMano").css('left',event.pageX);
-                       $("#opcionMano").css('top',event.pageY);
+                       $("#opcionMano").css('left',event.pageX - 300);
+                       $("#opcionMano").css('top',event.pageY - 200);
                        $("#opcionMano").toggle();
                        
                        $(".cualMano").click(function(){

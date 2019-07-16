@@ -91,7 +91,9 @@ h4{
    text-align : center;
    
 }
-
+#tablaMisiones{
+    margin-top: 15px;
+}
 .gridBox{
     width:32%;
     border:1px solid black;
@@ -357,35 +359,6 @@ h4{
 }
 #botonMonstruosAsdrubal{
     background: yellow;
-}
-.seccion1{
-   /* border-radius: 15px 50px;
-    background: yellow;*/
-}
-
-.seccion2{
-  /*  border-radius: 15px 50px;
-    background: white;*/
-}
-
-.seccion3{
-  /*  border-radius: 15px 50px;
-    background: white;*/
-}
-
-.seccion4{
-    /*border-radius: 15px 50px;
-    background: white;*/
-}
-
-.seccion5{
-   /* border-radius: 15px 50px;
-    background: white;*/
-}
-
-.seccion6{
-   /* border-radius: 15px 50px;
-    background: white;*/
 }
 
 .botonAlbum{
@@ -1616,7 +1589,7 @@ h4{
 }
 
 .barrio1{
-    background: pink;
+    background: orange;
 }
 
 .barrio2{
@@ -1628,7 +1601,7 @@ h4{
 }
 
 .barrio4{
-    background: silver;
+    background: greenyellow;
 }
 
 .barrio5{
@@ -1636,15 +1609,15 @@ h4{
 }
 
 .barrio6{
-    background: goldtit;
+    background: gold;
 }
 
 .barrio7{
-    background: aquamarine;
+    background: darkorchid;
 }
 
 .barrio8{
-    background: darkorchid;
+    background: aqua;
 }
 
 .barrio9{
@@ -1653,7 +1626,7 @@ h4{
 }
 
 .barrio10{
-    background: greenyellow;
+    background: pink;
 }
 
 
@@ -1716,6 +1689,14 @@ h4{
 }
 
 #infoObjeto7{
+    background-color:greenyellow;
+    padding: 10px;
+    display: none;
+    position: absolute;
+    border-radius: 10px;
+}
+
+.infoObjeto{
     background-color:greenyellow;
     padding: 10px;
     display: none;

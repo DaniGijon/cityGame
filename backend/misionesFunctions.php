@@ -10,10 +10,21 @@ function dibujarMisiones($id){
         
             //Cabecera selector opciones
         echo "<div id='botonesComprarVender'>";
-            echo "<button class='seccion1'>Activas</button>";
-            echo "<button class='seccion2'>Completadas</button>";
+            echo "<div class = 'tituloZona1 seccion1'>";
+                echo "<div class = 'textoZona1 cool'>";
+                    echo "Activas";
+                echo "</div>";
+            echo "</div>";
+            echo "<div class = 'tituloZona5 seccion2 opacity'>";
+                echo "<div class = 'textoZona5 cool'>";
+                    echo "Completadas";
+                echo "</div>";
+            echo "</div>";
+            echo "<div id='Mi'>";
+        echo "<br><br>";
+        echo "</div>";
         echo "</div>"; 
-        
+        echo "<div id = 'tablaMisiones'>";
          echo "<div id=seccion1Misiones>";
     
             echo "<div id=TablaMisionesActivas>";
@@ -98,19 +109,20 @@ function dibujarMisiones($id){
             }
             echo "</table>";
         echo "</div>"; //FIN de seccion2Misiones
+        echo "</div>"; //Fin tabla misiones
                ?>
 <script>
                 $(".seccion1").click(function(){
                     $("#seccion2Misiones").hide();
                     $("#seccion1Misiones").show(); 
-                    $(".seccion1").css("background-color", "yellow");
-                    $(".seccion2").css("background-color", "white");
+                    $(".seccion1").css("opacity", "1");
+                    $(".seccion2").css("opacity", "0.6");
                 });
                 $(".seccion2").click(function(){
                     $("#seccion1Misiones").hide();
                     $("#seccion2Misiones").show(); 
-                    $(".seccion2").css("background-color", "yellow");
-                    $(".seccion1").css("background-color", "white");
+                    $(".seccion2").css("opacity", "1");
+                    $(".seccion1").css("opacity", "0.6");
                 });
     
                 $(".cajitaMision").hover(function(){

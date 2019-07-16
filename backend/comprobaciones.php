@@ -146,6 +146,16 @@ function objetosDesequipadosCofres(){
     return $objetosDB;
 }
 
+function getObjeto($idO){
+    global $db;
+    $id = $_SESSION['loggedIn']; 
+   
+    $sql = "SELECT * FROM objetos WHERE id = '$idO'";
+    $stmt = $db->query($sql);
+    $objeto = $stmt->fetchAll();
+    return $objeto;
+}
+
 function comprobarSlotLibre(){
     global $db;
     $id = $_SESSION['loggedIn'];
