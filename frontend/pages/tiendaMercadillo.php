@@ -21,7 +21,263 @@ global $db;
                         echo "<button id='botonVender' class='tagTiendaVender'>Vender</button>";
                         echo "<button id='botonCharlar' class='tagTiendaVender'>Charlar</button>";
                     echo "</div>";
-                    echo "<div class='semiTransparente'>";  
+                    echo "<div class='semiTransparente'>"; 
+                    //INFOOBJETO 924
+                     echo "<div id='infoObjeto924' class='infoObjeto'>";
+                    $result = getObjeto(924);
+                    if($result[0]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
+                    }
+                    
+                    if($result[0]['destreza'] != 0){
+                        echo "Destreza: " . $result[0]['destreza'] . "<br>";
+                    }
+                    if($result[0]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[0]['fuerza'] ."<br>";
+                    }
+                    if($result[0]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[0]['agilidad'] ."<br>";
+                    }
+                    if($result[0]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[0]['resistencia'] ."<br>";
+                    }
+                    if($result[0]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[0]['espiritu'] ."<br>";
+                    }
+                    if($result[0]['estilo'] != 0){
+                        echo "Estilo: " . $result[0]['estilo'] ."<br>" ;
+                    }
+                    if($result[0]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[0]['ingenio'] ."<br>";
+                    }
+                    if($result[0]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[0]['percepcion'];
+                    }
+                    if($result[0]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[0]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                //FIN INFOOBJETO 924
+                //INFOOBJETO 925
+                     echo "<div id='infoObjeto925' class='infoObjeto'>";
+                    $result = getObjeto(925);
+                    if($result[0]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
+                    }
+                    
+                    if($result[0]['destreza'] != 0){
+                        echo "Destreza: " . $result[0]['destreza'] . "<br>";
+                    }
+                    if($result[0]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[0]['fuerza'] ."<br>";
+                    }
+                    if($result[0]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[0]['agilidad'] ."<br>";
+                    }
+                    if($result[0]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[0]['resistencia'] ."<br>";
+                    }
+                    if($result[0]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[0]['espiritu'] ."<br>";
+                    }
+                    if($result[0]['estilo'] != 0){
+                        echo "Estilo: " . $result[0]['estilo'] ."<br>" ;
+                    }
+                    if($result[0]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[0]['ingenio'] ."<br>";
+                    }
+                    if($result[0]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[0]['percepcion'];
+                    }
+                    if($result[0]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[0]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                //FIN INFOOBJETO 925
+                //INFOOBJETO 110
+                     echo "<div id='infoObjeto110' class='infoObjeto'>";
+                    $result = getObjeto(110);
+                    if($result[0]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
+                    }
+                    
+                    if($result[0]['destreza'] != 0){
+                        echo "Destreza: " . $result[0]['destreza'] . "<br>";
+                    }
+                    if($result[0]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[0]['fuerza'] ."<br>";
+                    }
+                    if($result[0]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[0]['agilidad'] ."<br>";
+                    }
+                    if($result[0]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[0]['resistencia'] ."<br>";
+                    }
+                    if($result[0]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[0]['espiritu'] ."<br>";
+                    }
+                    if($result[0]['estilo'] != 0){
+                        echo "Estilo: " . $result[0]['estilo'] ."<br>" ;
+                    }
+                    if($result[0]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[0]['ingenio'] ."<br>";
+                    }
+                    if($result[0]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[0]['percepcion'];
+                    }
+                    if($result[0]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[0]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                //FIN INFOOBJETO 110
+                ////INFOOBJETO 22
+                     echo "<div id='infoObjeto22' class='infoObjeto'>";
+                    $result = getObjeto(22);
+                    if($result[0]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
+                    }
+                    
+                    if($result[0]['destreza'] != 0){
+                        echo "Destreza: " . $result[0]['destreza'] . "<br>";
+                    }
+                    if($result[0]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[0]['fuerza'] ."<br>";
+                    }
+                    if($result[0]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[0]['agilidad'] ."<br>";
+                    }
+                    if($result[0]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[0]['resistencia'] ."<br>";
+                    }
+                    if($result[0]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[0]['espiritu'] ."<br>";
+                    }
+                    if($result[0]['estilo'] != 0){
+                        echo "Estilo: " . $result[0]['estilo'] ."<br>" ;
+                    }
+                    if($result[0]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[0]['ingenio'] ."<br>";
+                    }
+                    if($result[0]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[0]['percepcion'];
+                    }
+                    if($result[0]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[0]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                //FIN INFOOBJETO 22
+                //INFOOBJETO 3
+                     echo "<div id='infoObjeto3' class='infoObjeto'>";
+                    $result = getObjeto(3);
+                    if($result[0]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
+                    }
+                    
+                    if($result[0]['destreza'] != 0){
+                        echo "Destreza: " . $result[0]['destreza'] . "<br>";
+                    }
+                    if($result[0]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[0]['fuerza'] ."<br>";
+                    }
+                    if($result[0]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[0]['agilidad'] ."<br>";
+                    }
+                    if($result[0]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[0]['resistencia'] ."<br>";
+                    }
+                    if($result[0]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[0]['espiritu'] ."<br>";
+                    }
+                    if($result[0]['estilo'] != 0){
+                        echo "Estilo: " . $result[0]['estilo'] ."<br>" ;
+                    }
+                    if($result[0]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[0]['ingenio'] ."<br>";
+                    }
+                    if($result[0]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[0]['percepcion'];
+                    }
+                    if($result[0]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[0]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                //FIN INFOOBJETO 3
+                //INFOOBJETO 506
+                     echo "<div id='infoObjeto506' class='infoObjeto'>";
+                    $result = getObjeto(506);
+                    if($result[0]['nombre'] != 'Vacio'){
+                        echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
+                    }
+                    
+                    if($result[0]['destreza'] != 0){
+                        echo "Destreza: " . $result[0]['destreza'] . "<br>";
+                    }
+                    if($result[0]['fuerza'] != 0){
+                        echo "Fuerza: " . $result[0]['fuerza'] ."<br>";
+                    }
+                    if($result[0]['agilidad'] != 0){
+                        echo "Agilidad: " . $result[0]['agilidad'] ."<br>";
+                    }
+                    if($result[0]['resistencia'] != 0){
+                        echo "Resistencia: " . $result[0]['resistencia'] ."<br>";
+                    }
+                    if($result[0]['espiritu'] != 0){
+                        echo "Espiritu: " . $result[0]['espiritu'] ."<br>";
+                    }
+                    if($result[0]['estilo'] != 0){
+                        echo "Estilo: " . $result[0]['estilo'] ."<br>" ;
+                    }
+                    if($result[0]['ingenio'] != 0){
+                        echo "Ingenio: " . $result[0]['ingenio'] ."<br>";
+                    }
+                    if($result[0]['percepcion'] != 0){
+                        echo "Percepcion: " . $result[0]['percepcion'];
+                    }
+                    if($result[0]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $result[0]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                //FIN INFOOBJETO 506
+                //INFO OBJETOS VENTA
+                $objetosDesequipados = objetosDesequipados();
+                $i = 0;
+                foreach($objetosDesequipados as $objetoVenta){
+                    echo "<div id='infoObjetoVenta" . $i . "' class='infoObjeto'>";
+                        $result = getObjeto($objetoVenta['id']);
+                        if($result[0]['nombre'] != 'Vacio'){
+                            echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
+                        }
+
+                        if($result[0]['destreza'] != 0){
+                            echo "Destreza: " . $result[0]['destreza'] . "<br>";
+                        }
+                        if($result[0]['fuerza'] != 0){
+                            echo "Fuerza: " . $result[0]['fuerza'] ."<br>";
+                        }
+                        if($result[0]['agilidad'] != 0){
+                            echo "Agilidad: " . $result[0]['agilidad'] ."<br>";
+                        }
+                        if($result[0]['resistencia'] != 0){
+                            echo "Resistencia: " . $result[0]['resistencia'] ."<br>";
+                        }
+                        if($result[0]['espiritu'] != 0){
+                            echo "Espiritu: " . $result[0]['espiritu'] ."<br>";
+                        }
+                        if($result[0]['estilo'] != 0){
+                            echo "Estilo: " . $result[0]['estilo'] ."<br>" ;
+                        }
+                        if($result[0]['ingenio'] != 0){
+                            echo "Ingenio: " . $result[0]['ingenio'] ."<br>";
+                        }
+                        if($result[0]['percepcion'] != 0){
+                            echo "Percepcion: " . $result[0]['percepcion'];
+                        }
+                        if($result[0]['especial'] != 'nada'){
+                            echo "<br>Especial: <b>" . $result[0]['especial'] . "</b>";
+                        }
+                    echo "</div>";
+                    $i++;
+                } //Fin foreach
                         echo "<div id='comprar'>";
                                 echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                                 echo "<div class='textoDependiente'>";
@@ -37,7 +293,7 @@ global $db;
                                 $imagenGallo = getFotoObjeto(3);
                                 $imagenMochilaGrande = getFotoObjeto(506);
 
-                                echo "<div class='opcionesTienda'>";
+                                echo "<div class='opcionesTienda " . 924 . "'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
                                         echo '<input type="checkbox" name="cbox1" value="sacoPatatas">';
                                     echo "</div>";
@@ -47,7 +303,7 @@ global $db;
                                     echo '<label for="cbox3"><div id="opcionBox">' . $imagenSacoPatatas . '</div><div class="monedaTienda"></div><div class="precioTienda">130</div></label>';
                                 echo "</div>";
                                 
-                                echo "<div class='opcionesTienda'>";
+                                echo "<div class='opcionesTienda " . 925 . "'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
                                         echo '<input type="checkbox" name="cbox1" value="sandia">';
                                     echo "</div>";
@@ -57,7 +313,7 @@ global $db;
                                     echo '<label for="cbox3"><div id="opcionBox">' . $imagenSandia . '</div><div class="monedaTienda"></div><div class="precioTienda">150</div></label>';
                                 echo "</div>";
                                 
-                                echo "<div class='opcionesTienda'>";
+                                echo "<div class='opcionesTienda " . 110 . "'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
                                         echo '<input type="checkbox" name="cbox1" value="sombreroAventurero">';
                                     echo "</div>";
@@ -67,7 +323,7 @@ global $db;
                                     echo '<label for="cbox3"><div id="opcionBox">' . $imagenSombreroAventurero . '</div><div class="monedaTienda"></div><div class="precioTienda">270</div></label>';
                                 echo "</div>";
                                 
-                                echo "<div class='opcionesTienda'>";
+                                echo "<div class='opcionesTienda " . 3 . "'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
                                         echo '<input type="checkbox" name="cbox1" value="gallo">';
                                     echo "</div>";
@@ -77,7 +333,7 @@ global $db;
                                     echo '<label for="cbox3"><div id="opcionBox">' . $imagenGallo . '</div><div class="monedaTienda"></div><div class="precioTienda">500</div></label>';
                                 echo "</div>";
                                 
-                                echo "<div class='opcionesTienda'>";
+                                echo "<div class='opcionesTienda " . 506 . "'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
                                         echo '<input type="checkbox" name="cbox1" value="mochilaGrande">';
                                     echo "</div>";
@@ -87,7 +343,7 @@ global $db;
                                     echo '<label for="cbox3"><div id="opcionBox">' . $imagenMochilaGrande . '</div><div class="monedaTienda"></div><div class="precioTienda">900</div></label>';
                                 echo "</div>";
                                 
-                                echo "<div class='opcionesTienda'>";
+                                echo "<div class='opcionesTienda " . 22 . "'>";
                                     echo "<div class='opcionesTiendaCheckbox'>";
                                         echo '<input type="checkbox" name="cbox1" value="alfombraMagica">';
                                     echo "</div>";
@@ -119,12 +375,13 @@ global $db;
                                 echo "</div>"; //FIN imagenDependiente
                                 //CONSULTAR OBJETOS QUE LLEVO DESEQUIPADOS
                                 $objetosDesequipados=objetosDesequipados();
+                                $j = 0;
                                 foreach($objetosDesequipados as $cadaObjeto){
                                     if($cadaObjeto['id'] === '0'){
 
                                     }
                                     else{
-                                        echo "<div class='opcionesTienda'>";
+                                        echo "<div class='opcionesTienda venta" . $j . "'>";
                                             echo "<div class='opcionesTiendaCheckbox'>";
                                                 echo '<input type="checkbox" name="cbox1" value="v' . $cadaObjeto['nombre'] . '">';
                                             echo "</div>";
@@ -134,7 +391,8 @@ global $db;
                                             echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/objetos/' . $cadaObjeto['imagenObjeto'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $cadaObjeto["precioVenta"] . '</div></label>';
                                         echo "</div>";
                                     }
-                                }
+                                    $j++;
+                                }//fin foreach
 
                                 echo "<div class='submitTienda'>";
                                     echo "<input type='submit' class='botonCarrilBici' value=' '>";
@@ -259,6 +517,188 @@ global $db;
                         $("#botonVender").css("background-color", "white");
                         $("#botonComprar").css("background-color", "white");
                     });
+                    
+                    
+                    $(".924").mouseenter(function(e){
+                    $("#infoObjeto924").css("left", e.pageX - 300);
+                    $("#infoObjeto924").css("top", e.pageY - 200);
+                    $("#infoObjeto924").css("display", "block");
+                    });
+                    
+                    $(".924").mouseleave(function(e){
+                    $("#infoObjeto924").css("display", "none");
+                    });
+                    
+                    $(".925").mouseenter(function(e){
+                    $("#infoObjeto925").css("left", e.pageX - 300);
+                    $("#infoObjeto925").css("top", e.pageY - 200);
+                    $("#infoObjeto925").css("display", "block");
+                    });
+                    
+                    $(".925").mouseleave(function(e){
+                    $("#infoObjeto925").css("display", "none");
+                    });
+                    
+                    $(".110").mouseenter(function(e){
+                    $("#infoObjeto110").css("left", e.pageX - 300);
+                    $("#infoObjeto110").css("top", e.pageY - 200);
+                    $("#infoObjeto110").css("display", "block");
+                    });
+                    
+                    $(".110").mouseleave(function(e){
+                    $("#infoObjeto110").css("display", "none");
+                    });
+                    
+                    $(".22").mouseenter(function(e){
+                    $("#infoObjeto22").css("left", e.pageX - 300);
+                    $("#infoObjeto22").css("top", e.pageY - 200);
+                    $("#infoObjeto22").css("display", "block");
+                    });
+                    
+                    $(".22").mouseleave(function(e){
+                    $("#infoObjeto22").css("display", "none");
+                    });
+                    
+                    $(".3").mouseenter(function(e){
+                    $("#infoObjeto3").css("left", e.pageX - 300);
+                    $("#infoObjeto3").css("top", e.pageY - 200);
+                    $("#infoObjeto3").css("display", "block");
+                    });
+                    
+                    $(".3").mouseleave(function(e){
+                    $("#infoObjeto3").css("display", "none");
+                    });
+                    
+                    $(".506").mouseenter(function(e){
+                    $("#infoObjeto506").css("left", e.pageX - 300);
+                    $("#infoObjeto506").css("top", e.pageY - 200);
+                    $("#infoObjeto506").css("display", "block");
+                    });
+                    
+                    $(".506").mouseleave(function(e){
+                    $("#infoObjeto506").css("display", "none");
+                    });
+                    
+                    $(".venta0").mouseenter(function(e){
+                    $("#infoObjetoVenta0").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta0").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta0").css("display", "block");
+                    });
+                    
+                    $(".venta0").mouseleave(function(e){
+                    $("#infoObjetoVenta0").css("display", "none");
+                    });
+                    
+                    $(".venta1").mouseenter(function(e){
+                    $("#infoObjetoVenta1").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta1").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta1").css("display", "block");
+                    });
+                    
+                    $(".venta1").mouseleave(function(e){
+                    $("#infoObjetoVenta1").css("display", "none");
+                    });
+                    
+                    $(".venta2").mouseenter(function(e){
+                    $("#infoObjetoVenta2").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta2").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta2").css("display", "block");
+                    });
+                    
+                    $(".venta2").mouseleave(function(e){
+                    $("#infoObjetoVenta2").css("display", "none");
+                    });
+                    
+                    $(".venta3").mouseenter(function(e){
+                    $("#infoObjetoVenta3").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta3").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta3").css("display", "block");
+                    });
+                    
+                    $(".venta3").mouseleave(function(e){
+                    $("#infoObjetoVenta3").css("display", "none");
+                    });
+                    
+                    $(".venta4").mouseenter(function(e){
+                    $("#infoObjetoVenta4").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta4").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta4").css("display", "block");
+                    });
+                    
+                    $(".venta4").mouseleave(function(e){
+                    $("#infoObjetoVenta4").css("display", "none");
+                    });
+                    
+                    $(".venta5").mouseenter(function(e){
+                    $("#infoObjetoVenta5").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta5").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta5").css("display", "block");
+                    });
+                    
+                    $(".venta5").mouseleave(function(e){
+                    $("#infoObjetoVenta5").css("display", "none");
+                    });
+                    
+                    $(".venta6").mouseenter(function(e){
+                    $("#infoObjetoVenta6").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta6").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta6").css("display", "block");
+                    });
+                    
+                    $(".venta6").mouseleave(function(e){
+                    $("#infoObjetoVenta6").css("display", "none");
+                    });
+                    
+                    $(".venta7").mouseenter(function(e){
+                    $("#infoObjetoVenta7").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta7").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta7").css("display", "block");
+                    });
+                    
+                    $(".venta7").mouseleave(function(e){
+                    $("#infoObjetoVenta7").css("display", "none");
+                    });
+                    
+                    $(".venta8").mouseenter(function(e){
+                    $("#infoObjetoVenta8").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta8").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta8").css("display", "block");
+                    });
+                    
+                    $(".venta8").mouseleave(function(e){
+                    $("#infoObjetoVenta8").css("display", "none");
+                    });
+                    
+                    $(".venta9").mouseenter(function(e){
+                    $("#infoObjetoVenta9").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta9").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta9").css("display", "block");
+                    });
+                    
+                    $(".venta9").mouseleave(function(e){
+                    $("#infoObjetoVenta9").css("display", "none");
+                    });
+                    
+                    $(".venta10").mouseenter(function(e){
+                    $("#infoObjetoVenta10").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta10").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta10").css("display", "block");
+                    });
+                    
+                    $(".venta10").mouseleave(function(e){
+                    $("#infoObjetoVenta10").css("display", "none");
+                    });
+                    
+                    $(".venta11").mouseenter(function(e){
+                    $("#infoObjetoVenta11").css("left", e.pageX - 300);
+                    $("#infoObjetoVenta11").css("top", e.pageY - 200);
+                    $("#infoObjetoVenta11").css("display", "block");
+                    });
+                    
+                    $(".venta11").mouseleave(function(e){
+                    $("#infoObjetoVenta11").css("display", "none");
+                    });
+                    
                     
                 </script>
                 
