@@ -943,37 +943,66 @@
         $result = $stmt->fetchAll();
         
         $nombre = $result[0]['nombre'];
+        $origen = $result[0]['origen'];
         $sexo = $result[0]['sexo'];
         $nivel = $result[0]['nivel'];
         $respeto = $result[0]['respeto'];
         $currentMoney = $result[0]['cash'];
         
+        //clanes
+        if($origen === '1')
+            $origen = 'Cañamares';
+        elseif($origen === '2')
+            $origen = 'Libertad';
+        elseif($origen === '3')
+            $origen = 'Constitución';
+        elseif($origen === '4')
+            $origen = 'El Poblado';
+        elseif($origen === '5')
+            $origen = 'Santa Ana';
+        elseif($origen === '6')
+            $origen = 'Centro Sur';
+        elseif($origen === '7')
+            $origen = 'Las Mercedes';
+        elseif($origen === '8')
+            $origen = 'El Carmen';
+        elseif($origen === '9')
+            $origen = 'Fraternidad';
+        elseif($origen === '10')
+            $origen = 'Ciudad Jardín';
+        
         // Rangos de dinero
-        if($currentMoney < 100){
+        if($currentMoney < 500){
             $currentMoneyText = 'Menos que uno que se está bañando';
         }
-        if($currentMoney >=100 && $currentMoney< 500){
+        if($currentMoney >=500 && $currentMoney< 2500){
             $currentMoneyText = 'Pobre';
         }
-        if($currentMoney >= 500){
+        if($currentMoney >= 2500){
             $currentMoneyText = 'Rico nuevo';
         }
         
         // Rangos de Respeto
-        if($respeto < 50){
+        if($respeto < 500){
             $respetoText = 'Nuevo en la ciudad';
         }
-        if($respeto >=50 && $respeto< 200){
+        if($respeto >=500 && $respeto< 2000){
             $respetoText = 'Don Nadie';
         }
-        if($respeto >= 200){
+        if($respeto >= 2000){
             $respetoText = 'De Usted';
         }
         
         echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br></caption>";
     
         echo "<tr>";
-            echo "<th style='text-align:center; border-radius: 15px' colspan='100%'>" . $nombre . "</th>";
+                echo "<th style='text-align:center; border-radius: 15px' colspan='100%'>";
+                    if($sexo === 'Hombre'){
+                        echo "<img src='/design/img/iconos/personajilloHombre.png'>";
+                    }else{
+                        echo "<img src='/design/img/iconos/personajilloMujer.png'>";
+                    }
+                echo "</th>";
         echo "</tr>";
         
         echo "<tr>";
@@ -981,8 +1010,17 @@
         echo "</tr>";
         
         echo "<tr>";
-            echo "<th style='text-align:center; border-radius: 15px'>" . "Sexo" . "</th>";
-            echo "<td style='text-align:center; border-radius: 15px'>" . $sexo . "</td>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Nick" . "</th>";
+            echo "<td style='text-align:left; border-radius: 15px'>" . $nombre . "</td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<td colspan='100%' bgcolor='black' height='2'></td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Clan" . "</th>";
+            echo "<td style='text-align:left; border-radius: 15px'>" . $origen . "</td>";
         echo "</tr>";
              
         echo "<tr>";
@@ -991,7 +1029,7 @@
         
         echo "<tr>";
             echo "<th style='text-align:center; border-radius: 15px'>" . "Nivel" . "</th>";
-            echo "<td style='text-align:center; border-radius: 15px'>" . $nivel . "</td>";
+            echo "<td style='text-align:left; border-radius: 15px'>" . $nivel . "</td>";
         echo "</tr>";
              
         echo "<tr>";
@@ -1000,7 +1038,7 @@
         
         echo "<tr>";
             echo "<th style='text-align:center; border-radius: 15px'>" . "Respeto" . "</th>";
-            echo "<td style='text-align:center; border-radius: 15px'>" . $respetoText . "</td>";
+            echo "<td style='text-align:left; border-radius: 15px'>" . $respetoText . "</td>";
         echo "</tr>";
         
         echo "<tr>";
@@ -1009,7 +1047,7 @@
         
         echo "<tr>";
             echo "<th style='text-align:center; border-radius: 15px'>" . "Dinero" . "</th>";
-            echo "<td style='text-align:center; border-radius: 15px'>" . $currentMoneyText . "</td>";
+            echo "<td style='text-align:left; border-radius: 15px'>" . $currentMoneyText . "</td>";
         echo "</tr>";
          
         echo "</table>";

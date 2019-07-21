@@ -398,6 +398,17 @@ function comprobarEnergia($agotamiento){
    return $puedoHacerlo;
 }
 
+function getOrigen($id){
+  global $db;
+   $id = $_SESSION['loggedIn'];  
+   
+   $sql = "SELECT origen FROM personajes WHERE id='$id'";
+   $stmt = $db->query($sql);
+   $result = $stmt->fetchAll();
+   
+   return $result[0]['origen'];
+}
+
 function comprobarEsNuevoPersonaje(){
    global $db;
    $id = $_SESSION['loggedIn']; 

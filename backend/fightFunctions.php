@@ -43,6 +43,8 @@
         include (__ROOT__.'/backend/comprobaciones.php');
         global $db;
         $miId = $_SESSION['loggedIn'];
+        //Comprobar que no me estoy atacando a mi mismo
+        if ($id != $miId){
         //Comprobar que estoy libre de hacer una Accion
         $estoyLibre = comprobarEspera();
         if($estoyLibre === 1){
@@ -1644,6 +1646,10 @@
             echo "No he descansado de mi última acción";
         }
     }
+    else{
+        echo "No creerás que voy a atacarme a mí mismo";
+    }
+    }
     
     
     
@@ -1760,4 +1766,17 @@
         return $stmt->fetchAll();   
     }
     
+    function nombreAId($nombre){
+        global $db;
+        $sql = "SELECT id FROM personajes WHERE nombre = '$nombre'";
+        $stmt = $db->query($sql);
+        $result = $stmt->fetchAll();
+        
+        $id = $result[0]['id'];
+        
+        return $id;
+
+        
+    }
+        
 ?>
