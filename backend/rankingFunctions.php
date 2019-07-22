@@ -4,6 +4,7 @@ function dibujarRanking(){
     global $db;
     $id = $_SESSION['loggedIn'];
     
+    
     //Cabecera selector opciones
     echo "<div id='botonesComprarVender'>";
     echo "<div class = 'tituloZona1 seccion0'>";

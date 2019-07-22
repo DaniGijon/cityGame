@@ -15,13 +15,13 @@ function dibujarMensajes($id){
             $stmt = $db->query($sql);
             $result = $stmt->fetchAll();
 
-            echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black'><caption></caption>";
 
-            echo "<tr>";
-                echo "<th style='Stext-align:center; border-radius: 15px'> FECHA </th>";
-                echo "<th style='Stext-align:center; border-radius: 15px'> ASUNTO </th>";
-                echo "<th style='Stext-align:center; border-radius: 15px; width: 80px;'> LEER </th>";
-                echo "<th style='Stext-align:center; border-radius: 15px'> BORRAR </th>";
+            echo "<tr style='background:darkturquoise'>";
+                 echo "<th style='text-align:center;min-width:70px' class='coolWhiteGrande texto-borde'> FECHA </th>";
+                 echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> ASUNTO </th>";
+                 echo "<th style='text-align:center;min-width:100px' class='coolWhiteGrande texto-borde'> LEER </th>";
+                 echo "<th style='text-align:center;min-width:70px' class='coolWhiteGrande texto-borde'> BORRAR </th>";
             echo "</tr>";
 
             for($i=0; $i<10 /* sizeof($result)*/; $i=$i+1){

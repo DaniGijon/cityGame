@@ -4,11 +4,14 @@
         global $db;
         
         echo "<div id='moduloZona'>";
+        $sql = "SELECT personajes.barrio,personajes.zona,zonas.nombreZona,barrios.nombreBarrio FROM personajes INNER JOIN zonas ON (personajes.zona = zonas.idZ) AND (personajes.barrio = zonas.idB) INNER JOIN barrios ON barrios.idb = zonas.idB WHERE id='$id'";
+                    $stmt = $db->query($sql);
+                    $result = $stmt->fetchAll();
             
             echo "<div class='contenido'>";
             echo "<span class='contenedor1'>";
-                echo "<span class = 'irA'>";
-                    echo "Ir a Otra Zona";
+                echo "<span class = 'irA cool'>";
+                    echo $result[0]['nombreZona'];
                 echo "</span>";
                 
                 echo "<div class='seccionMapaCiudad'>" ;
