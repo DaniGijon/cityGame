@@ -189,6 +189,7 @@ function dibujarRanking(){
         
     }
     echo "</table>";
+    echo "<br>* Sólo contabilizan los jugadores de Nivel 2 o superior.<br>** 1% de Popularidad = +100 puntos. 1 de Respeto = +1 punto.";
     echo "</div>";
     echo "</div>"; //Fin seccion0Ranking
     echo "<div id=seccion1Ranking>";

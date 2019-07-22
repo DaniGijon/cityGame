@@ -11,12 +11,15 @@ elseif(isset($_POST['buscarJugador'])){
     include(__ROOT__."/backend/fightFunctions.php");
     $nombre = $_POST['buscarJugador'];
     $id = nombreAId($nombre);
-    listJugadorObjetivo($id);  
+    if($id === 0){
+        echo "Jaja ¿De verdad existe alguien con ese nombre tan estúpido?";
+    }
+    else
+    listJugador($id);  
     
 }
 
 else{
-    var_dump($_POST['buscarJugador']);
     echo 'Tienes que elegir un jugador al que atacar.';
 }
 

@@ -942,6 +942,12 @@
         $stmt = $db->query($sql);
         $result = $stmt->fetchAll();
         
+        $sql = "SELECT * FROM insignias WHERE idP='$id'";
+        $stmt = $db->query($sql);
+        $insignias = $stmt->fetchAll();
+
+            
+        
         $nombre = $result[0]['nombre'];
         $origen = $result[0]['origen'];
         $sexo = $result[0]['sexo'];
@@ -993,7 +999,7 @@
             $respetoText = 'De Usted';
         }
         
-        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br></caption>";
+        echo "<table style='text-align:center; margin-left: 3%; margin-right: 3%; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><br></caption>";
     
         echo "<tr>";
                 echo "<th style='text-align:center; border-radius: 15px' colspan='100%'>";
@@ -1010,7 +1016,7 @@
         echo "</tr>";
         
         echo "<tr>";
-            echo "<th style='text-align:center; border-radius: 15px'>" . "Nick" . "</th>";
+            echo "<th style='text-align:center; border-radius: 15px; width:100px'>" . "Nick:" . "</th>";
             echo "<td style='text-align:left; border-radius: 15px'>" . $nombre . "</td>";
         echo "</tr>";
         
@@ -1019,7 +1025,7 @@
         echo "</tr>";
         
         echo "<tr>";
-            echo "<th style='text-align:center; border-radius: 15px'>" . "Clan" . "</th>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Clan:" . "</th>";
             echo "<td style='text-align:left; border-radius: 15px'>" . $origen . "</td>";
         echo "</tr>";
              
@@ -1028,7 +1034,7 @@
         echo "</tr>";
         
         echo "<tr>";
-            echo "<th style='text-align:center; border-radius: 15px'>" . "Nivel" . "</th>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Nivel:" . "</th>";
             echo "<td style='text-align:left; border-radius: 15px'>" . $nivel . "</td>";
         echo "</tr>";
              
@@ -1037,7 +1043,7 @@
         echo "</tr>";
         
         echo "<tr>";
-            echo "<th style='text-align:center; border-radius: 15px'>" . "Respeto" . "</th>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Respeto:" . "</th>";
             echo "<td style='text-align:left; border-radius: 15px'>" . $respetoText . "</td>";
         echo "</tr>";
         
@@ -1046,13 +1052,30 @@
         echo "</tr>";
         
         echo "<tr>";
-            echo "<th style='text-align:center; border-radius: 15px'>" . "Dinero" . "</th>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Dinero:" . "</th>";
             echo "<td style='text-align:left; border-radius: 15px'>" . $currentMoneyText . "</td>";
         echo "</tr>";
+        
+        echo "<tr>";
+            echo "<td colspan='100%' bgcolor='black' height='2'></td>";
+        echo "</tr>";
+        
+        echo "<tr>";
+            echo "<th style='text-align:center; border-radius: 15px'>" . "Insignias:" . "</th>";
+            echo "<td style='text-align:left; border-radius: 15px'>";
+                foreach ($insignias as $cadaInsignia){
+                    echo "<div id='albumFicha'>";
+                        echo "<div id='insigniaBox'><img src='/design/img/insignias/" . $cadaInsignia['imagen'] ."'>";
+                        echo "</div>";
+                    echo "</div>";   
+                }
+            echo "</td>";
+        echo "</tr>";
+        
+           
          
         echo "</table>";
-        
-    } 
+    }
     
     function getDestrezaInicial($idB){
     switch($idB){

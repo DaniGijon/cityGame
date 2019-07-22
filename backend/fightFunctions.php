@@ -39,6 +39,16 @@
     
     }
     
+    function listJugador($id){
+        global $db;
+        include(__ROOT__."/backend/personajeFunctions.php");
+        
+        listJugadorRival($id);
+     
+        //echo "<a href='?page=attackPlayer&id=" . $id . "'><button class='botonEmboscada'></button></a>";
+    
+    }
+    
     function atacarJugador($id){
         include (__ROOT__.'/backend/comprobaciones.php');
         global $db;
@@ -1771,11 +1781,15 @@
         $sql = "SELECT id FROM personajes WHERE nombre = '$nombre'";
         $stmt = $db->query($sql);
         $result = $stmt->fetchAll();
-        
-        $id = $result[0]['id'];
-        
-        return $id;
+        if(isset($result[0])){
+            $id = $result[0]['id'];
 
+            return $id;
+        }
+        else{
+            
+           return 0;
+        }
         
     }
         
