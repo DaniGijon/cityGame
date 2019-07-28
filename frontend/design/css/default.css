@@ -1912,9 +1912,21 @@ h4{
     float:left;
 }
 
+.cartaAtaqueBoss{
+    margin-left:15px;
+    margin-top:8px;
+    float:left;
+}
+
 .cartaDefensa{
     margin-right:10px;
     margin-top:5px;
+    float:right;
+}
+
+.cartaDefensaBoss{
+    margin-right:15px;
+    margin-top:8px;
     float:right;
 }
 
@@ -1935,6 +1947,16 @@ h4{
     height: 107px;
     margin: 10px;
     margin-left:15px;
+    text-align: left;
+    position: relative;
+}
+
+.cartaDescripcionBoss{
+    float:left;
+    height: 135px;
+    width:260px;
+    margin: 15px;
+    margin-left:20px;
     text-align: left;
     position: relative;
 }
@@ -1971,7 +1993,31 @@ h4{
 .bossTarjeta{
     margin-left:150px;
     width : 300px;
-    
+    height: 429px;
+    background-image: url("/design/img/icons/cartaBoss.png");  
+}
+
+.bossTarjetaTitulo{
+    height: 30px;
+    margin: 5px;
+    margin-bottom:0px;
+    margin-top: 18px;
+}
+
+.bossTarjetaImagen{
+    height: 175px;
+    width: 270px;
+    margin-top:7px;
+    margin-left:15px;
+    margin-bottom:2px;
+    position: relative;
+}
+
+.cartaFotoBoss{
+    position:absolute;
+    margin-top:5px;
+    height: 175px;
+    width: 270px;
 }
 
 #seccion2{

@@ -65,7 +65,7 @@ function dibujarAlbum(){
 
                         if(isset($ver[0])){
                             echo "<div class='albumTarjeta'>";
-                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
                                     $monstruo = getMonstruoRow($ver[0]['idM']);
                                     echo $monstruo[0]['nombre'];
                                     //Catalogar las habilidades del monstruo
@@ -123,15 +123,50 @@ function dibujarAlbum(){
                 
                 if(isset($ver[0])){
                     echo "<div class='opcionesTienda bossTarjeta'>";
-                    echo "<div class='opcionesTiendaTitulo'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
                         $monstruo = getMonstruoRow($ver[0]['idM']);
                         echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
                     echo "</div>";
-                    if($ver[0]['cantidad'] >1)
-                        echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $ver[0]['cantidad'] . ' veces</div>';
-                    else 
-                        echo '<div id="opcionBox">' . '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '"></div>' . '<div class="monedaTienda"></div><div class="precioTienda">' . $ver[0]['cantidad'] . ' vez</div>';
-                    echo "</div>";                          
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
                 }
                 else{
                     echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
