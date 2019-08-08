@@ -28,6 +28,11 @@ color:white;
 font-size: 20px;
 }
 
+.WhiteGrande{
+  color:white;
+font-size: 20px;  
+}
+
 .coolWhite{
 font-family: luckiestguy;
 color:white;
@@ -106,82 +111,90 @@ h4{
     opacity:0.5;
 }
 
+#dibujoPersonaje{
+    height: 440px;
+    width: 450px;
+    background-image: url("/design/img/export/siluetaMujer.png");
+    background-repeat: no-repeat;
+}
+
 .cabezaBox{
-    width:150px;
+    width:100px;
     border:1px solid black;
     float: left;
-    height:149px;
+    height:100px;
     text-align:center;
-    margin-left: 100px;
+    margin-left: 162px;
+    margin-top: 0px;
 }
 .torsoBox{
-    width:110px;
+    width:100px;
     border:1px solid black;
     float: left;
-    height:193px;
+    height:100px;
     text-align:center;
-    margin-left: 1px;
-    margin-top: 5px;
+    margin-left: -81px;
+    margin-top: -74px;
 }
 
 .piesBox{
-    width:110px;
+    width:100px;
     border:1px solid black;
     float: left;
-    height:130px;
+    height:100px;
     text-align:center;
-    margin-left: 1px;
-    margin-top: 5px;
+    margin-left: 30px;
+    margin-top: 61px;
 }
 
 .derechaBox{
-    width:110px;
+    width:100px;
     border:1px solid black;
     float: left;
-    height:193px;
+    height:100px;
     text-align:center;
-    margin-left: 5px;
-    margin-top: 5px;
+    margin-left: 18px;
+    margin-top: 38px;
 }
 
 .izquierdaBox{
-    width:110px;
+    width:100px;
     border:1px solid black;
     float: left;
-    height:193px;
+    height:100px;
     text-align:center;
-    margin-left: 1px;
-    margin-top: 5px;
+    margin-left: 187px;
+    margin-top: 38px;
 }
 
 .vehiculoBox{
-    width:213px;
+    width:100px;
     border:1px solid black;
     float: left;
-    height:130px;
+    height:100px;
     text-align:center;
-    margin-left: 1px;
-    margin-top: 5px;
+    margin-left: 28px;
+    margin-top: 10px;
 }
 
 .mascotaBox{
-    width:110px;
+    width:100px;
     border:1px solid black;
     float: left;
-    height:130px;
+    height:100px;
     text-align:center;
-    margin-left: 5px;
-    margin-top: 5px;
+    margin-left: 34px;
+    margin-top: 9px;
 }
 
 .bolsaBox{
     width:100px;
     border:1px solid black;
     float: left;
-    height:193px;
+    height:100px;
     text-align:center;
-    margin-left: 1px;
-    margin-top: 5px;
+    margin-left: -142px;
+    margin-top: -71px;
 }
 
 #opcionMano{
@@ -204,26 +217,23 @@ h4{
 
 #tercioArriba{
     width:450px;
-    height: 150px;
+    height: 120px;
     margin:auto;
     float: left;
-    background-image: url("/design/img/botones/tercioArriba.png");
 }
 
 #tercioMedio{
     width:450px;
-    height: 200px;
+    height: 150px;
     margin:auto;
     float: left;
-    background-image: url("/design/img/botones/terciomedio.png");
 }
 
 #tercioAbajo{
     width:450px;
-    height: 150px;
+    height: 120px;
     margin:auto;
     float: left;
-    background-image: url("/design/img/botones/tercioAbajo.png");
 }
 
 #wrapper{
@@ -391,6 +401,13 @@ h4{
 
 .botonAvances:hover{
     opacity:0.5;
+}
+
+.avances{
+    width: 100px;
+    height: 68px;
+    background-image: url("/design/img/export/azul.png");
+    margin-left: 23%;
 }
 
 #contenedorTop{
@@ -854,6 +871,27 @@ h4{
 
 }
 
+.madera1{
+    background-image: url("/design/img/botones/boton-madera1.png");
+    width: 113px;
+    background-repeat: repeat-y;
+    height: 36px;
+}
+
+.madera2{
+    background-image: url("/design/img/export/madera2.png");
+    width: 50px;
+    background-repeat: no-repeat;
+    height: 39px;
+}
+
+.madera3{
+    background-image: url("/design/img/export/madera3.png");
+    width: 50px;
+    background-repeat: no-repeat;
+    height: 39px;
+}
+
 .tituloZona1{
     width: 113px;
     height: 36px;
@@ -912,6 +950,19 @@ h4{
     position: relative;
     margin : auto;
     color: white;
+}
+
+.textCenter{
+    text-align: center;
+}
+
+.tit{
+    color: darkturquoise;
+    font-weight: bold;
+}
+
+.contenidoPersonaje{
+    margin-top: 50px;
 }
 
 .textoZona1 {

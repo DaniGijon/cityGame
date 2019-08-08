@@ -15,10 +15,11 @@
             $bonusPercepcion = 0;            
 ?>
 
-    <span class="contenedor1">
-        
-        <fieldset>
-            <legend style="text-align: center">Mi personaje</legend>
+        <table style='text-align:center;'><br><caption></caption>
+    
+    <tr>
+        <td rowspan = '3' style='text-align:center;min-width:70px'> <!-- MI PERSONAJE -->
+         
             
             <?php
                
@@ -28,6 +29,7 @@
                 $stmt = $db->query($sql);
                 $objetosEquipados = $stmt->fetchAll();
                 
+                echo "<div id = 'dibujoPersonaje'>";
                     echo "<div id='tercioArriba'>";
                         echo "<span id='0' class='cabezaBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[0]['imagenObjeto'] . "'></span>";
                     echo "</div>";
@@ -389,13 +391,15 @@
                 echo "</div>";
             ?>
    
-        </fieldset>
-        
-    </span>
-
-    <span class="contenedor2">
-        
-        <?php
+        </td> <!-- FIN MI PERSONAJE -->
+        <td style='text-align:center;min-width:300px; max-width: 300px' > <!-- MIS DATOS -->
+            <?php
+            
+            echo "<div class = 'tituloZona2 seccion0  textCenter' style = ' left: 25%'>";
+                echo "<div class = 'textoZona2 cool'>";
+                    echo "Mis Datos";
+                echo "</div>";
+            echo "</div>";
         
             $sql = "SELECT personajes.*, zonas.*, barrios.* FROM personajes INNER JOIN zonas ON (personajes.zona = zonas.idZ) and (personajes.barrio = zonas.idB) INNER JOIN barrios ON barrios.idB = zonas.idB WHERE id = '$id'";
             $stmt = $db->query($sql);
@@ -415,55 +419,161 @@
             $ingenio = $habilidadesBase[0]['ingenio'];
             $percepcion = $habilidadesBase[0]['percepcion'];
         ?>   
-        <fieldset>
-            <legend style="text-align: center"> Mis Datos</legend>
-            <span class="quarterWidth">Nombre: <?php echo $result[0]['nombre'] . " (" . $result[0]['origen'] . ")"; ?> </span>
-            <span class="quarterWidth">Experiencia: <?php echo $result[0]['experiencia']; ?></span>
-            <span class="quarterWidth">Sexo: <?php echo $result[0]['sexo']; ?></span>
-            <span class="quarterWidth">Nivel: <?php echo $result[0]['nivel']; ?></span>
-            <span class="quarterWidth">Barrio: <?php echo $result[0]['nombreBarrio']; ?></span>
-            <span class="quarterWidth">Zona: <?php echo $result[0]['nombreZona']; ?></span>
+            <div class ="contenidoPersonaje">
+                <span class="quarterWidth"><span class="tit">Nombre:</span> <?php echo $result[0]['nombre']; ?> </span>
+                <span class="quarterWidth"><span class="tit">Experiencia:</span>  <?php echo $result[0]['experiencia']; ?></span>
+                <span class="quarterWidth"><span class="tit">Sexo:</span> <?php echo $result[0]['sexo']; ?></span>
+                <span class="quarterWidth"><span class="tit">Nivel:</span>  <?php echo $result[0]['nivel']; ?></span>
+                <span class="quarterWidth"><span class="tit">Barrio:</span>  <?php echo $result[0]['nombreBarrio']; ?></span>
+                <span class="quarterWidth"><span class="tit">Zona:</span>  <?php echo $result[0]['nombreZona']; ?></span>
+            </div>
+        </div>    
+        </td> <!-- FIN MIS DATOS -->
+        <td style='text-align:center;min-width:100px'> <!-- CONSTANTES VITALES -->
+            <?php
+            echo "<div class = 'tituloZona2 seccion1' style='margin-top:-18px;'>";
+                echo "<div class = 'textoZona2 cool'>";
+                    echo "Constantes Vitales";
+                echo "</div>";
+            echo "</div>";
+            ?>
+            <div class ="contenidoPersonaje">
+                <span class="quarterWidth" style="margin-top: -18px;"><span class="tit">Salud:</span> <?php echo $result[0]['salud']; ?></span>
+                <span class="quarterWidth" style="margin-top: -18px;"><span class="tit">Energía:</span> <?php echo $result[0]['energia']; ?></span><br>
+            </div>
+
+        </td> <!-- FIN CONSTANTES VITALES -->
+    </tr>
+    <tr>
+        <td style='text-align:center;min-width:70px' class='coolWhiteGrande texto-borde'> <!-- LOGO CLAN -->
+            <?php
+            echo "<img src='/design/img/export/clan1.png' style='vertical-align: bottom'>";
+            ?>
+        </td> <!-- FIN LOGO CLAN -->
+        <td style='text-align:center;min-width:100px'> <!-- FAMA -->
+            <?php
+            echo "<div class = 'tituloZona1 seccion1' style='margin-top:-18px; left:23%'>";
+                echo "<div class = 'textoZona1 cool'>";
+                    echo "Fama";
+                echo "</div>";
+            echo "</div>";
+            ?>
+            <div class ="contenidoPersonaje">
+                <?php
+                $sql = "SELECT AVG(puntos) FROM popularidad WHERE idP = '$id'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+
+                $popularidadAVG = $resultado[0]['AVG(puntos)'];
+                ?>
+                <span class="quarterWidth" style="margin-top: -18px;"><span class="tit">Respeto:</span> <?php echo $result[0]['respeto']; ?></span>
+                <span class="quarterWidth" style="margin-top: -18px;"><span class="tit">Popularidad:</span> <?php echo round($popularidadAVG, 2, PHP_ROUND_HALF_DOWN); ?>%</span><br>
             
-        </fieldset>
-        <fieldset>
-            <legend style="text-align: center"> Constantes vitales</legend>
-            <span class="quarterWidth">Salud: <?php echo $result[0]['salud']; ?></span><br>
-            <span class="quarterWidth">Energia: <?php echo $result[0]['energia']; ?></span><br>
-        </fieldset>
-        <fieldset>
-            <legend style="text-align: center"> Fama</legend>
-            <span class="quarterWidth">Respeto: <?php echo $result[0]['respeto']; ?></span><br>
-            <span class="quarterWidth">Popularidad: <?php 
-            $sql = "SELECT AVG(puntos) FROM popularidad WHERE idP = '$id'";
-            $stmt = $db->query($sql);
-            $resultado = $stmt->fetchAll();
+            </div>
+        </td>   <!-- FIN FAMA -->
+    </tr>
+    <tr>
+        <td style='text-align:center;min-width:300px;'> <!-- TIEMPOS ESPERA -->
+        <?php
+            echo "<div class = 'tituloZona2 seccion1' style='left:25%'>";
+                echo "<div class = 'textoZona2 cool'>";
+                    echo "Tiempos Espera";
+                echo "</div>";
+            echo "</div>";
+            ?>
+            <?php
+                date_default_timezone_set('Europe/Madrid');
+            
+                $sql = "SELECT accion,viaje,emboscada FROM personajes WHERE id = '$id'";
+                $stmt = $db->query($sql);
+                $tiempos = $stmt->fetchAll();
                 
-            $popularidadAVG = $resultado[0]['AVG(puntos)'];
-            echo round($popularidadAVG, 2, PHP_ROUND_HALF_DOWN); ?>%</span><br>
-        </fieldset>
-        <fieldset>
-            <legend style="text-align: center"> Mi dinero</legend>
-            <span class="quarterWidth">En bolsillo: <?php echo $result[0]['cash'] . "<img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>"; ?></span>
-            <span class="quarterWidth">En banco: <?php echo $result[0]['enBanco'] . "<img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>"; ?></span><br>
-        </fieldset>
-        <fieldset>
-            <legend style="text-align: center"> Mis habilidades</legend>
+                $actual = date("Y-m-d H:i:s");
+                $accion = $tiempos[0]['accion'];
+                $viaje = $tiempos[0]['viaje'];
+                $emboscada = $tiempos[0]['emboscada'];
+                echo '<div class ="contenidoPersonaje">';
+                echo '<span class="tit">';
+                echo "Prox. Acción : ";
+                echo "</span>";
+                if($accion < $actual){
+                    echo '¡Ahora!<br>';
+                }
+                else{
+                    $diferenciaAccion = strtotime($accion) - strtotime($actual);
+                    $diferenciaLegibleAccion = date('i\M s\S', $diferenciaAccion);
+                    echo $diferenciaLegibleAccion . '<br>';
+                }
+                
+                echo '<span class="tit">';
+                echo "Prox. Viaje : ";
+                echo "</span>";
+                if($viaje < $actual && $accion < $actual){
+                    echo '¡Ahora!<br>';
+                }
+                else{
+                    if($viaje > $accion){
+                        $diferenciaViaje = strtotime($viaje) - strtotime($actual);
+                        $diferenciaLegibleViaje = date('i\M s\S', $diferenciaViaje);
+                        echo $diferenciaLegibleViaje . '<br>';
+                    }
+                    else{
+                        echo $diferenciaLegibleAccion . '<br>';
+                    }
+                }
+                
+                echo '<span class="tit">';
+                echo "Prox. Emboscada : ";
+                echo "</span>";
+                if($emboscada < $actual && $accion < $actual){
+                    echo '¡Ahora!<br>';
+                }
+                else{
+                    if($emboscada > $accion){
+                        $diferenciaEmboscada = strtotime($emboscada) - strtotime($actual);
+                        $diferenciaLegibleEmboscada = date('i\M s\S', $diferenciaEmboscada);
+                        echo $diferenciaLegibleEmboscada . '<br>';
+                    }
+                    else{
+                        echo $diferenciaLegibleAccion . '<br>';
+                    }
+                }
+            echo "</div>"; //fin div contenidoPersonaje 
+            ?>
+        </td> <!-- FIN TIEMPOS ESPERA -->
+       
+        <td style='text-align:center;min-width:100px'> <!-- DINERO -->
+            <?php
+            echo "<div class = 'tituloZona1 seccion1' style='left:23%;margin-top:-10px'>";
+                echo "<div class = 'textoZona1 cool'>";
+                    echo "Dinero";
+                echo "</div>";
+            echo "</div>";
+            ?>
+            <div class ="contenidoPersonaje">
+                <span class="tit">En Bolsillo:</span> <?php echo $result[0]['cash'] . "<img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>"; ?><br>
+                <span class="tit">En Banco:</span> <?php echo $result[0]['enBanco'] . "<img src='/design/img/iconos/cajaFuerteTop.png' style='vertical-align: bottom'>"; ?><br>
+            </div>
+        </td><!-- FIN DINERO -->
+    </tr>
+    <tr>
+        <td colspan = "2" style='text-align:center;min-width:70px'> <!-- HABILIDADES -->
             <div id="tablaHabilidades">
             <table border = '0' class='floatLeft'>
     
             <tr>
-                <th colspan="2"> <img src='/design/img/iconos/destreza.png'> </th>
-                <th colspan="2"> <img src='/design/img/iconos/fuerza.png'> </th>
-                <th colspan="2"> <img src='/design/img/iconos/agilidad.png'> </th>
-                <th colspan="2"> <img src='/design/img/iconos/resistencia.png'> </th>
-                <th colspan="2"> <img src='/design/img/iconos/espiritu.png'> </th>
-                <th colspan="2"> <img src='/design/img/iconos/estilo.png'> </th>
-                <th colspan="2"> <img src='/design/img/iconos/ingenio.png'> </th>
-                <th colspan="2"> <img src='/design/img/iconos/percepcion.png'> </th>   
+                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/destreza.png'> </th>
+                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/fuerza.png'> </th>
+                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/agilidad.png'> </th>
+                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/resistencia.png'> </th>
+                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/espiritu.png'> </th>
+                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/estilo.png'> </th>
+                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/ingenio.png'> </th>
+                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/percepcion.png'> </th>   
             </tr>    
-                
-            <tr>
-            <?php
+             <?php   
+            /* echo "<tr>";
+            
                 echo "<th colspan='2'>";
                 if ($result[0]['avances'] > 0){
                     echo "<span id='botonAvances1' class='botonAvances'>
@@ -519,115 +629,65 @@
                     <img src='/design/img/botones/avances.png'><br></span>";
                 }
                 echo " PER </th>";
-            echo "</tr>";
+            echo "</tr>"; */
             
             echo "<tr>";
-                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($destreza+$bonusDestreza) . "</th>";
-                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($fuerza+$bonusFuerza) . "</th>";
-                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($agilidad+$bonusAgilidad) . "</th>";
-                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($resistencia+$bonusResistencia) . "</th>";
-                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($espiritu+$bonusEspiritu) . "</th>";
-                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($estilo+$bonusEstilo) . "</th>";
-                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($ingenio+$bonusIngenio) . "</th>";
-                echo "<th colspan='2' style='background-color:yellowgreen'>" . floor($percepcion+$bonusPercepcion) . "</th>";
+                echo "<th colspan='2' class='madera1 coolWhiteGrande texto-borde'>" . floor($destreza+$bonusDestreza) . "</th>";
+                echo "<th colspan='2' class='madera1 coolWhiteGrande texto-borde'>" . floor($fuerza+$bonusFuerza) . "</th>";
+                echo "<th colspan='2' class='madera1 coolWhiteGrande texto-borde'>" . floor($agilidad+$bonusAgilidad) . "</th>";
+                echo "<th colspan='2' class='madera1 coolWhiteGrande texto-borde'>" . floor($resistencia+$bonusResistencia) . "</th>";
+                echo "<th colspan='2' class='madera1 coolWhiteGrande texto-borde'>" . floor($espiritu+$bonusEspiritu) . "</th>";
+                echo "<th colspan='2' class='madera1 coolWhiteGrande texto-borde'>" . floor($estilo+$bonusEstilo) . "</th>";
+                echo "<th colspan='2' class='madera1 coolWhiteGrande texto-borde'>" . floor($ingenio+$bonusIngenio) . "</th>";
+                echo "<th colspan='2' class='madera1 coolWhiteGrande texto-borde'>" . floor($percepcion+$bonusPercepcion) . "</th>";
             
             echo "</tr>";
             
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['destreza'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
-                echo "<th style='width:50px; background-color:pink'>" . $bonusDestreza . "</th>";
+                echo "<th class = 'madera3 coolWhiteGrande texto-borde'>" . round($habilidadesBase[0]['destreza'], 1, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th class = 'madera2 coolWhiteGrande texto-borde'>" . $bonusDestreza . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['fuerza'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
-                echo "<th style='width:50px; background-color:pink'>" . $bonusFuerza . "</th>";
+                echo "<th class = 'madera3 coolWhiteGrande texto-borde'>" . round($habilidadesBase[0]['fuerza'], 1, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th class = 'madera2 coolWhiteGrande texto-borde'>" . $bonusFuerza . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['agilidad'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
-                echo "<th style='width:50px; background-color:pink'>" . $bonusAgilidad . "</th>";
+                echo "<th class = 'madera3 coolWhiteGrande texto-borde'>" . round($habilidadesBase[0]['agilidad'], 1, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th class = 'madera2 coolWhiteGrande texto-borde'>" . $bonusAgilidad . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['resistencia'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
-                echo "<th style='width:50px; background-color:pink'>" . $bonusResistencia . "</th>";
+                echo "<th class = 'madera3 coolWhiteGrande texto-borde'>" . round($habilidadesBase[0]['resistencia'], 1, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th class = 'madera2 coolWhiteGrande texto-borde'>" . $bonusResistencia . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['espiritu'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
-                echo "<th style='width:50px; background-color:pink'>" . $bonusEspiritu . "</th>";
+                echo "<th class = 'madera3 coolWhiteGrande texto-borde'>" . round($habilidadesBase[0]['espiritu'], 1, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th class = 'madera2 coolWhiteGrande texto-borde'>" . $bonusEspiritu . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['estilo'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
-                echo "<th style='width:50px; background-color:pink'>" . $bonusEstilo . "</th>";
+                echo "<th class = 'madera3 coolWhiteGrande texto-borde'>" . round($habilidadesBase[0]['estilo'], 1, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th class = 'madera2 coolWhiteGrande texto-borde'>" . $bonusEstilo . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['ingenio'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
-                echo "<th style='width:50px; background-color:pink'>" . $bonusIngenio . "</th>";
+                echo "<th class = 'madera3 coolWhiteGrande texto-borde'>" . round($habilidadesBase[0]['ingenio'], 1, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th class = 'madera2 coolWhiteGrande texto-borde'>" . $bonusIngenio . "</th>";
                 
-                echo "<th style='width:50px; background-color:yellowgreen'>" . round($habilidadesBase[0]['percepcion'], 2, PHP_ROUND_HALF_DOWN) . "</th>";
-                echo "<th style='width:50px; background-color:pink'>" . $bonusPercepcion . "</th>";
+                echo "<th class = 'madera3 coolWhiteGrande texto-borde'>" . round($habilidadesBase[0]['percepcion'], 1, PHP_ROUND_HALF_DOWN) . "</th>";
+                echo "<th class = 'madera2 coolWhiteGrande texto-borde'>" . $bonusPercepcion . "</th>";
                 
                 echo '</table>';
                 
                 echo "</div>";
             ?>
-        <div id="Avances" class="floatLeft"><br>Avances: <?php echo $result[0]['avances'] . " ";?></div><br>
     
-        </fieldset>
-        
-         <fieldset>
-            <legend style="text-align: center"> Tiempos de Espera </legend>
+        </td> <!-- FIN HABILIDADES -->
+        <td style='text-align:center;min-width:100px'> <!-- AVANCES -->
             <?php
-                date_default_timezone_set('Europe/Madrid');
-            
-                $sql = "SELECT accion,viaje,emboscada FROM personajes WHERE id = '$id'";
-                $stmt = $db->query($sql);
-                $result = $stmt->fetchAll();
-                
-                $actual = date("Y-m-d H:i:s");
-                $accion = $result[0]['accion'];
-                $viaje = $result[0]['viaje'];
-                $emboscada = $result[0]['emboscada'];
-                /*
-                echo "Actual : " . $actual . "<br>";
-                echo "Accion : " . $accion . "<br>";
-                echo "Viaje : " . $viaje . "<br>";
-                echo "Emboscada : " . $emboscada . "<br>";
-                */
-                echo "Prox. Acción : ";
-                if($accion < $actual){
-                    echo '¡Ahora!';
-                }
-                else{
-                    $diferenciaAccion = strtotime($accion) - strtotime($actual);
-                    $diferenciaLegibleAccion = date('i\M s\S', $diferenciaAccion);
-                    echo $diferenciaLegibleAccion;
-                }
-                
-                echo "<br>Prox. Viaje : ";
-                if($viaje < $actual && $accion < $actual){
-                    echo '¡Ahora!';
-                }
-                else{
-                    if($viaje > $accion){
-                        $diferenciaViaje = strtotime($viaje) - strtotime($actual);
-                        $diferenciaLegibleViaje = date('i\M s\S', $diferenciaViaje);
-                        echo $diferenciaLegibleViaje;
-                    }
-                    else{
-                        echo $diferenciaLegibleAccion;
-                    }
-                }
-                
-                echo "<br>Prox. Emboscada : ";
-                if($emboscada < $actual && $accion < $actual){
-                    echo '¡Ahora!';
-                }
-                else{
-                    if($emboscada > $accion){
-                        $diferenciaEmboscada = strtotime($emboscada) - strtotime($actual);
-                        $diferenciaLegibleEmboscada = date('i\M s\S', $diferenciaEmboscada);
-                        echo $diferenciaLegibleEmboscada;
-                    }
-                    else{
-                        echo $diferenciaLegibleAccion;
-                    }
-                }
-                
+            echo "<div class = 'avances coolWhite'>";
+            echo "Avances:<br>";
+            echo $result[0]['avances'];
+            echo "</div>";
             ?>
-         </fieldset>
+        </td> <!-- FIN AVANCES -->
+    </tr>
+    
+        </table>
         
-    </span>
+        
+
+
 
     <div id="opcionMano" style="display:none;">
         <div id="manoTexto">
