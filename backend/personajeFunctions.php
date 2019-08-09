@@ -42,40 +42,333 @@
                         
                         echo "<span id='areaCuerpo' style='display:none'></span>";
                         foreach($objetosDB as $obj){
-                            echo "<div id='nuevoBoxBolsa'>";
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br><br>";
-                                if($obj['destreza'] != 0){
-                                    echo "Destreza: " . $obj['destreza'] . "<br>";
-                                }
-                                if($obj['fuerza'] != 0){
-                                    echo "Fuerza: " . $obj['fuerza'] ."<br>";
-                                }
-                                if($obj['agilidad'] != 0){
-                                    echo "Agilidad: " . $obj['agilidad'] ."<br>";
-                                }
-                                if($obj['resistencia'] != 0){
-                                    echo "Resistencia: " . $obj['resistencia'] ."<br>";
-                                }
-                                if($obj['espiritu'] != 0){
-                                    echo "Espiritu: " . $obj['espiritu'] ."<br>";
-                                }
-                                if($obj['estilo'] != 0){
-                                    echo "Estilo: " . $obj['estilo'] ."<br>" ;
-                                }
-                                if($obj['ingenio'] != 0){
-                                    echo "Ingenio: " . $obj['ingenio'] ."<br>";
-                                }
-                                if($obj['percepcion'] != 0){
-                                    echo "Percepcion: " . $obj['percepcion'];
-                                }
-                                if($obj['especial'] != 'nada'){
-                                    echo "Especial: " . $obj['especial'];
-                                }
-                                   
-                                  
-                                echo "</div>" ;
-                            echo "</div>";
+                            if($obj['id'] === '0'){
+                                
+                             echo "<div id='nuevoBoxBolsa' style='background:white'>";
+                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                    echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
+                                    if($obj['destreza'] != 0){
+                                        echo "Destreza: " . $obj['destreza'] . "<br>";
+                                    }
+                                    if($obj['fuerza'] != 0){
+                                        echo "Fuerza: " . $obj['fuerza'] ."<br>";
+                                    }
+                                    if($obj['agilidad'] != 0){
+                                        echo "Agilidad: " . $obj['agilidad'] ."<br>";
+                                    }
+                                    if($obj['resistencia'] != 0){
+                                        echo "Resistencia: " . $obj['resistencia'] ."<br>";
+                                    }
+                                    if($obj['espiritu'] != 0){
+                                        echo "Espiritu: " . $obj['espiritu'] ."<br>";
+                                    }
+                                    if($obj['estilo'] != 0){
+                                        echo "Estilo: " . $obj['estilo'] ."<br>" ;
+                                    }
+                                    if($obj['ingenio'] != 0){
+                                        echo "Ingenio: " . $obj['ingenio'] ."<br>";
+                                    }
+                                    if($obj['percepcion'] != 0){
+                                        echo "Percepcion: " . $obj['percepcion'];
+                                    }
+                                    if($obj['especial'] != 'nada'){
+                                        echo "Especial: " . $obj['especial'];
+                                    }
+
+
+                                    echo "</div>" ;
+                                echo "</div>";
+                            }
+                            elseif($obj['id'] > 0 && $obj['id'] < 20){
+                                echo "<div id='nuevoBoxBolsa' style='background:green'>";
+                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                    echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
+                                    if($obj['destreza'] != 0){
+                                        echo "Destreza: " . $obj['destreza'] . "<br>";
+                                    }
+                                    if($obj['fuerza'] != 0){
+                                        echo "Fuerza: " . $obj['fuerza'] ."<br>";
+                                    }
+                                    if($obj['agilidad'] != 0){
+                                        echo "Agilidad: " . $obj['agilidad'] ."<br>";
+                                    }
+                                    if($obj['resistencia'] != 0){
+                                        echo "Resistencia: " . $obj['resistencia'] ."<br>";
+                                    }
+                                    if($obj['espiritu'] != 0){
+                                        echo "Espiritu: " . $obj['espiritu'] ."<br>";
+                                    }
+                                    if($obj['estilo'] != 0){
+                                        echo "Estilo: " . $obj['estilo'] ."<br>" ;
+                                    }
+                                    if($obj['ingenio'] != 0){
+                                        echo "Ingenio: " . $obj['ingenio'] ."<br>";
+                                    }
+                                    if($obj['percepcion'] != 0){
+                                        echo "Percepcion: " . $obj['percepcion'];
+                                    }
+                                    if($obj['especial'] != 'nada'){
+                                        echo "Especial: " . $obj['especial'];
+                                    }
+
+
+                                    echo "</div>" ;
+                                echo "</div>";
+                            }
+                            else if($obj['id'] >= 20 && $obj['id'] < 100){
+                                echo "<div id='nuevoBoxBolsa' style='background:pink'>";
+                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                    echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
+                                    if($obj['destreza'] != 0){
+                                        echo "Destreza: " . $obj['destreza'] . "<br>";
+                                    }
+                                    if($obj['fuerza'] != 0){
+                                        echo "Fuerza: " . $obj['fuerza'] ."<br>";
+                                    }
+                                    if($obj['agilidad'] != 0){
+                                        echo "Agilidad: " . $obj['agilidad'] ."<br>";
+                                    }
+                                    if($obj['resistencia'] != 0){
+                                        echo "Resistencia: " . $obj['resistencia'] ."<br>";
+                                    }
+                                    if($obj['espiritu'] != 0){
+                                        echo "Espiritu: " . $obj['espiritu'] ."<br>";
+                                    }
+                                    if($obj['estilo'] != 0){
+                                        echo "Estilo: " . $obj['estilo'] ."<br>" ;
+                                    }
+                                    if($obj['ingenio'] != 0){
+                                        echo "Ingenio: " . $obj['ingenio'] ."<br>";
+                                    }
+                                    if($obj['percepcion'] != 0){
+                                        echo "Percepcion: " . $obj['percepcion'];
+                                    }
+                                    if($obj['especial'] != 'nada'){
+                                        echo "Especial: " . $obj['especial'];
+                                    }
+
+
+                                    echo "</div>" ;
+                                echo "</div>";
+                            }
+                            else if($obj['id'] >= 100 && $obj['id'] < 200){
+                                echo "<div id='nuevoBoxBolsa' style='background:darkturquoise'>";
+                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                    echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
+                                    if($obj['destreza'] != 0){
+                                        echo "Destreza: " . $obj['destreza'] . "<br>";
+                                    }
+                                    if($obj['fuerza'] != 0){
+                                        echo "Fuerza: " . $obj['fuerza'] ."<br>";
+                                    }
+                                    if($obj['agilidad'] != 0){
+                                        echo "Agilidad: " . $obj['agilidad'] ."<br>";
+                                    }
+                                    if($obj['resistencia'] != 0){
+                                        echo "Resistencia: " . $obj['resistencia'] ."<br>";
+                                    }
+                                    if($obj['espiritu'] != 0){
+                                        echo "Espiritu: " . $obj['espiritu'] ."<br>";
+                                    }
+                                    if($obj['estilo'] != 0){
+                                        echo "Estilo: " . $obj['estilo'] ."<br>" ;
+                                    }
+                                    if($obj['ingenio'] != 0){
+                                        echo "Ingenio: " . $obj['ingenio'] ."<br>";
+                                    }
+                                    if($obj['percepcion'] != 0){
+                                        echo "Percepcion: " . $obj['percepcion'];
+                                    }
+                                    if($obj['especial'] != 'nada'){
+                                        echo "Especial: " . $obj['especial'];
+                                    }
+
+
+                                    echo "</div>" ;
+                                echo "</div>";
+                            }
+                            else if($obj['id'] >= 200 && $obj['id'] < 300){
+                                echo "<div id='nuevoBoxBolsa' style='background:red'>";
+                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                    echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
+                                    if($obj['destreza'] != 0){
+                                        echo "Destreza: " . $obj['destreza'] . "<br>";
+                                    }
+                                    if($obj['fuerza'] != 0){
+                                        echo "Fuerza: " . $obj['fuerza'] ."<br>";
+                                    }
+                                    if($obj['agilidad'] != 0){
+                                        echo "Agilidad: " . $obj['agilidad'] ."<br>";
+                                    }
+                                    if($obj['resistencia'] != 0){
+                                        echo "Resistencia: " . $obj['resistencia'] ."<br>";
+                                    }
+                                    if($obj['espiritu'] != 0){
+                                        echo "Espiritu: " . $obj['espiritu'] ."<br>";
+                                    }
+                                    if($obj['estilo'] != 0){
+                                        echo "Estilo: " . $obj['estilo'] ."<br>" ;
+                                    }
+                                    if($obj['ingenio'] != 0){
+                                        echo "Ingenio: " . $obj['ingenio'] ."<br>";
+                                    }
+                                    if($obj['percepcion'] != 0){
+                                        echo "Percepcion: " . $obj['percepcion'];
+                                    }
+                                    if($obj['especial'] != 'nada'){
+                                        echo "Especial: " . $obj['especial'];
+                                    }
+
+
+                                    echo "</div>" ;
+                                echo "</div>";
+                            }
+                            else if($obj['id'] >= 300 && $obj['id'] < 400){
+                                echo "<div id='nuevoBoxBolsa' style='background:gold'>";
+                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                    echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
+                                    if($obj['destreza'] != 0){
+                                        echo "Destreza: " . $obj['destreza'] . "<br>";
+                                    }
+                                    if($obj['fuerza'] != 0){
+                                        echo "Fuerza: " . $obj['fuerza'] ."<br>";
+                                    }
+                                    if($obj['agilidad'] != 0){
+                                        echo "Agilidad: " . $obj['agilidad'] ."<br>";
+                                    }
+                                    if($obj['resistencia'] != 0){
+                                        echo "Resistencia: " . $obj['resistencia'] ."<br>";
+                                    }
+                                    if($obj['espiritu'] != 0){
+                                        echo "Espiritu: " . $obj['espiritu'] ."<br>";
+                                    }
+                                    if($obj['estilo'] != 0){
+                                        echo "Estilo: " . $obj['estilo'] ."<br>" ;
+                                    }
+                                    if($obj['ingenio'] != 0){
+                                        echo "Ingenio: " . $obj['ingenio'] ."<br>";
+                                    }
+                                    if($obj['percepcion'] != 0){
+                                        echo "Percepcion: " . $obj['percepcion'];
+                                    }
+                                    if($obj['especial'] != 'nada'){
+                                        echo "Especial: " . $obj['especial'];
+                                    }
+
+
+                                    echo "</div>" ;
+                                echo "</div>";
+                            }
+                            else if($obj['id'] >= 400 && $obj['id'] < 500){
+                                echo "<div id='nuevoBoxBolsa' style='background:darkorchid'>";
+                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                    echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
+                                    if($obj['destreza'] != 0){
+                                        echo "Destreza: " . $obj['destreza'] . "<br>";
+                                    }
+                                    if($obj['fuerza'] != 0){
+                                        echo "Fuerza: " . $obj['fuerza'] ."<br>";
+                                    }
+                                    if($obj['agilidad'] != 0){
+                                        echo "Agilidad: " . $obj['agilidad'] ."<br>";
+                                    }
+                                    if($obj['resistencia'] != 0){
+                                        echo "Resistencia: " . $obj['resistencia'] ."<br>";
+                                    }
+                                    if($obj['espiritu'] != 0){
+                                        echo "Espiritu: " . $obj['espiritu'] ."<br>";
+                                    }
+                                    if($obj['estilo'] != 0){
+                                        echo "Estilo: " . $obj['estilo'] ."<br>" ;
+                                    }
+                                    if($obj['ingenio'] != 0){
+                                        echo "Ingenio: " . $obj['ingenio'] ."<br>";
+                                    }
+                                    if($obj['percepcion'] != 0){
+                                        echo "Percepcion: " . $obj['percepcion'];
+                                    }
+                                    if($obj['especial'] != 'nada'){
+                                        echo "Especial: " . $obj['especial'];
+                                    }
+
+
+                                    echo "</div>" ;
+                                echo "</div>";
+                            }
+                            else if($obj['id'] >= 500 && $obj['id'] < 600){
+                                echo "<div id='nuevoBoxBolsa' style='background:yellowgreen'>";
+                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                    echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
+                                    if($obj['destreza'] != 0){
+                                        echo "Destreza: " . $obj['destreza'] . "<br>";
+                                    }
+                                    if($obj['fuerza'] != 0){
+                                        echo "Fuerza: " . $obj['fuerza'] ."<br>";
+                                    }
+                                    if($obj['agilidad'] != 0){
+                                        echo "Agilidad: " . $obj['agilidad'] ."<br>";
+                                    }
+                                    if($obj['resistencia'] != 0){
+                                        echo "Resistencia: " . $obj['resistencia'] ."<br>";
+                                    }
+                                    if($obj['espiritu'] != 0){
+                                        echo "Espiritu: " . $obj['espiritu'] ."<br>";
+                                    }
+                                    if($obj['estilo'] != 0){
+                                        echo "Estilo: " . $obj['estilo'] ."<br>" ;
+                                    }
+                                    if($obj['ingenio'] != 0){
+                                        echo "Ingenio: " . $obj['ingenio'] ."<br>";
+                                    }
+                                    if($obj['percepcion'] != 0){
+                                        echo "Percepcion: " . $obj['percepcion'];
+                                    }
+                                    if($obj['especial'] != 'nada'){
+                                        echo "Especial: " . $obj['especial'];
+                                    }
+
+
+                                    echo "</div>" ;
+                                echo "</div>";
+                            }
+                            else if($obj['id'] >= 900 && $obj['id'] < 920){
+                                echo "<div id='nuevoBoxBolsa' style='background:brown'>";
+                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                    echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
+                                    if($obj['destreza'] != 0){
+                                        echo "Destreza: " . $obj['destreza'] . "<br>";
+                                    }
+                                    if($obj['fuerza'] != 0){
+                                        echo "Fuerza: " . $obj['fuerza'] ."<br>";
+                                    }
+                                    if($obj['agilidad'] != 0){
+                                        echo "Agilidad: " . $obj['agilidad'] ."<br>";
+                                    }
+                                    if($obj['resistencia'] != 0){
+                                        echo "Resistencia: " . $obj['resistencia'] ."<br>";
+                                    }
+                                    if($obj['espiritu'] != 0){
+                                        echo "Espiritu: " . $obj['espiritu'] ."<br>";
+                                    }
+                                    if($obj['estilo'] != 0){
+                                        echo "Estilo: " . $obj['estilo'] ."<br>" ;
+                                    }
+                                    if($obj['ingenio'] != 0){
+                                        echo "Ingenio: " . $obj['ingenio'] ."<br>";
+                                    }
+                                    if($obj['percepcion'] != 0){
+                                        echo "Percepcion: " . $obj['percepcion'];
+                                    }
+                                    if($obj['especial'] != 'nada'){
+                                        echo "Especial: " . $obj['especial'];
+                                    }
+
+
+                                    echo "</div>" ;
+                                echo "</div>";
+                            }
                         }
+                        
                     echo "</div>";
                     
                     echo "<div id='tercioMedio'>";
@@ -562,75 +855,138 @@
             <table border = '0' class='floatLeft'>
     
             <tr>
-                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/destreza.png'> </th>
-                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/fuerza.png'> </th>
-                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/agilidad.png'> </th>
-                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/resistencia.png'> </th>
-                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/espiritu.png'> </th>
-                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/estilo.png'> </th>
-                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/ingenio.png'> </th>
-                <th colspan="2"    style='width:200px;'> <img src='/design/img/export/percepcion.png'> </th>   
+                <th colspan="2"    style='width:200px;'>
+                <?php
+                    if ($result[0]['avances'] > 0){
+                        echo "<div id='botonAvances1' class='botonAvances'>";
+                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<div id='iconoHabilidad' style='margin-right:16px'>";
+                            echo "<img src='/design/img/export/destreza.png'>";
+                        echo "</div>";
+                    }
+                    else{
+                        echo "<div id='iconoHabilidad'>";
+                            echo "<img src='/design/img/export/destreza.png'>";
+                        echo "</div>";
+                    }
+                    ?>
+                </th>
+                <th colspan="2"    style='width:200px;'>
+                <?php
+                    if ($result[0]['avances'] > 0){
+                        echo "<div id='botonAvances2' class='botonAvances'>";
+                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<div id='iconoHabilidad' style='margin-right:16px'>";
+                            echo "<img src='/design/img/export/fuerza.png'>";
+                        echo "</div>";
+                    }
+                    else{
+                        echo "<div id='iconoHabilidad'>";
+                            echo "<img src='/design/img/export/fuerza.png'>";
+                        echo "</div>";
+                    }
+                    ?>
+                </th>
+                <th colspan="2"    style='width:200px;'>
+                <?php
+                    if ($result[0]['avances'] > 0){
+                        echo "<div id='botonAvances3' class='botonAvances'>";
+                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<div id='iconoHabilidad' style='margin-right:16px'>";
+                            echo "<img src='/design/img/export/agilidad.png'>";
+                        echo "</div>";
+                    }
+                    else{
+                        echo "<div id='iconoHabilidad'>";
+                            echo "<img src='/design/img/export/agilidad.png'>";
+                        echo "</div>";
+                    }
+                    ?> 
+                </th>
+                <th colspan="2"    style='width:200px;'>
+                <?php
+                    if ($result[0]['avances'] > 0){
+                        echo "<div id='botonAvances4' class='botonAvances'>";
+                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<div id='iconoHabilidad' style='margin-right:16px'>";
+                            echo "<img src='/design/img/export/resistencia.png'>";
+                        echo "</div>";
+                    }
+                    else{
+                        echo "<div id='iconoHabilidad'>";
+                            echo "<img src='/design/img/export/resistencia.png'>";
+                        echo "</div>";
+                    }
+                    ?> 
+                </th>
+                <th colspan="2"    style='width:200px;'>
+                <?php
+                    if ($result[0]['avances'] > 0){
+                        echo "<div id='botonAvances5' class='botonAvances'>";
+                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<div id='iconoHabilidad' style='margin-right:16px'>";
+                            echo "<img src='/design/img/export/espiritu.png'>";
+                        echo "</div>";
+                    }
+                    else{
+                        echo "<div id='iconoHabilidad'>";
+                            echo "<img src='/design/img/export/espiritu.png'>";
+                        echo "</div>";
+                    }
+                    ?>
+                </th>
+                <th colspan="2"    style='width:200px;'>
+                <?php
+                    if ($result[0]['avances'] > 0){
+                        echo "<div id='botonAvances6' class='botonAvances'>";
+                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<div id='iconoHabilidad' style='margin-right:16px'>";
+                            echo "<img src='/design/img/export/estilo.png'>";
+                        echo "</div>";
+                    }
+                    else{
+                        echo "<div id='iconoHabilidad'>";
+                            echo "<img src='/design/img/export/estilo.png'>";
+                        echo "</div>";
+                    }
+                    ?>
+                </th>
+                <th colspan="2"    style='width:200px;'>
+                <?php
+                    if ($result[0]['avances'] > 0){
+                        echo "<div id='botonAvances7' class='botonAvances'>";
+                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<div id='iconoHabilidad' style='margin-right:16px'>";
+                            echo "<img src='/design/img/export/ingenio.png'>";
+                        echo "</div>";
+                    }
+                    else{
+                        echo "<div id='iconoHabilidad'>";
+                            echo "<img src='/design/img/export/ingenio.png'>";
+                        echo "</div>";
+                    }
+                    ?>
+                    
+                </th>
+                <th colspan="2"    style='width:200px;'>
+                <?php
+                    if ($result[0]['avances'] > 0){
+                        echo "<div id='botonAvances8' class='botonAvances'>";
+                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<div id='iconoHabilidad' style='margin-right:16px'>";
+                            echo "<img src='/design/img/export/percepcion.png'>";
+                        echo "</div>";
+                    }
+                    else{
+                        echo "<div id='iconoHabilidad'>";
+                            echo "<img src='/design/img/export/percepcion.png'>";
+                        echo "</div>";
+                    }
+                    ?>
+                </th>  
             </tr>    
              <?php   
-            /* echo "<tr>";
-            
-                echo "<th colspan='2'>";
-                if ($result[0]['avances'] > 0){
-                    echo "<span id='botonAvances1' class='botonAvances'>
-                    <img src='/design/img/botones/avances.png'><br></span>";
-                }
-                echo " DES </th>";
-                
-                echo "<th colspan='2'>";
-                if ($result[0]['avances'] > 0){
-                    echo "<span id='botonAvances2' class='botonAvances'>
-                    <img src='/design/img/botones/avances.png'><br></span>";
-                }
-                echo " FUE </th>";
-                
-                echo "<th colspan='2'>";
-                if ($result[0]['avances'] > 0){
-                    echo "<span id='botonAvances3' class='botonAvances'>
-                    <img src='/design/img/botones/avances.png'><br></span>";
-                }
-                echo " AGI </th>";
-                
-                echo "<th colspan='2'>";
-                if ($result[0]['avances'] > 0){
-                    echo "<span id='botonAvances4' class='botonAvances'>
-                    <img src='/design/img/botones/avances.png'><br></span>";
-                }
-                echo " RES </th>";
-                
-                echo "<th colspan='2'>";
-                if ($result[0]['avances'] > 0){
-                    echo "<span id='botonAvances5' class='botonAvances'>
-                    <img src='/design/img/botones/avances.png'><br></span>";
-                }
-                echo " ESP </th>";
-                
-                echo "<th colspan='2'>";
-                if ($result[0]['avances'] > 0){
-                    echo "<span id='botonAvances6' class='botonAvances'>
-                    <img src='/design/img/botones/avances.png'><br></span>";
-                }
-                echo " EST </th>";
-                
-                echo "<th colspan='2'>";
-                if ($result[0]['avances'] > 0){
-                    echo "<span id='botonAvances7' class='botonAvances'>
-                    <img src='/design/img/botones/avances.png'><br></span>";
-                }
-                echo " ING </th>";
-                
-                echo "<th colspan='2'>";
-                if ($result[0]['avances'] > 0){
-                    echo "<span id='botonAvances8' class='botonAvances'>
-                    <img src='/design/img/botones/avances.png'><br></span>";
-                }
-                echo " PER </th>";
-            echo "</tr>"; */
-            
+           
             echo "<tr>";
                 echo "<th colspan='2' class='madera1 coolWhiteGrande texto-borde'>" . floor($destreza+$bonusDestreza) . "</th>";
                 echo "<th colspan='2' class='madera1 coolWhiteGrande texto-borde'>" . floor($fuerza+$bonusFuerza) . "</th>";
@@ -706,8 +1062,8 @@
                 $(".objetoBox").click(function(event){
                    var id = $(this).attr('id');
                     $("#areaCuerpo").text(id); 
-                    $("#capaBolsa").css('left',event.pageX - 300);
-                    $("#capaBolsa").css('top',event.pageY - 200);
+                    $("#capaBolsa").css('left',600);
+                    $("#capaBolsa").css('top',25);
                     $("#capaBolsa").toggle();
                       
                 });
@@ -751,50 +1107,50 @@
                 });
                 
                 $(".cabezaBox").mouseenter(function(e){
-                    $("#infoObjeto0").css("left", e.pageX - 150);
-                    $("#infoObjeto0").css("top", e.pageY - 100);
+                    $("#infoObjeto0").css("left", e.pageX-300);
+                    $("#infoObjeto0").css("top", e.pageY-125);
                     $("#infoObjeto0").css("display", "block");
                 });
                 
                 $(".torsoBox").mouseenter(function(e){
-                    $("#infoObjeto1").css("left", e.pageX - 150);
-                    $("#infoObjeto1").css("top", e.pageY - 100);
+                    $("#infoObjeto1").css("left", e.pageX - 300);
+                    $("#infoObjeto1").css("top", e.pageY - 200);
                     $("#infoObjeto1").css("display", "block");
                 });
                 
                 $(".piesBox").mouseenter(function(e){
-                    $("#infoObjeto2").css("left", e.pageX - 150);
-                    $("#infoObjeto2").css("top", e.pageY - 100);
+                    $("#infoObjeto2").css("left", e.pageX - 300);
+                    $("#infoObjeto2").css("top", e.pageY - 200);
                     $("#infoObjeto2").css("display", "block");
                 });
                 
                 $(".derechaBox").mouseenter(function(e){
-                    $("#infoObjeto3").css("left", e.pageX - 150);
-                    $("#infoObjeto3").css("top", e.pageY - 100);
+                    $("#infoObjeto3").css("left", e.pageX - 300);
+                    $("#infoObjeto3").css("top", e.pageY - 200);
                     $("#infoObjeto3").css("display", "block");
                 });
                 
                 $(".izquierdaBox").mouseenter(function(e){
-                    $("#infoObjeto4").css("left", e.pageX - 150);
-                    $("#infoObjeto4").css("top", e.pageY - 100);
+                    $("#infoObjeto4").css("left", e.pageX - 300);
+                    $("#infoObjeto4").css("top", e.pageY - 200);
                     $("#infoObjeto4").css("display", "block");
                 });
                 
                 $(".vehiculoBox").mouseenter(function(e){
-                    $("#infoObjeto5").css("left", e.pageX - 150);
-                    $("#infoObjeto5").css("top", e.pageY - 100);
+                    $("#infoObjeto5").css("left", e.pageX - 300);
+                    $("#infoObjeto5").css("top", e.pageY - 200);
                     $("#infoObjeto5").css("display", "block");
                 });
                 
                 $(".mascotaBox").mouseenter(function(e){
-                    $("#infoObjeto6").css("left", e.pageX + - 150);
-                    $("#infoObjeto6").css("top", e.pageY + - 100);
+                    $("#infoObjeto6").css("left", e.pageX - 300);
+                    $("#infoObjeto6").css("top", e.pageY - 200);
                     $("#infoObjeto6").css("display", "block");
                 });
                 
                 $(".bolsaBox").mouseenter(function(e){
-                    $("#infoObjeto7").css("left", e.pageX - 150);
-                    $("#infoObjeto7").css("top", e.pageY - 100);
+                    $("#infoObjeto7").css("left", e.pageX - 300);
+                    $("#infoObjeto7").css("top", e.pageY - 200);
                     $("#infoObjeto7").css("display", "block");
                 });
                 
@@ -898,13 +1254,7 @@
         $resultado = $stmt->fetchAll();
         $slotLibre = $resultado[0]['slot'];
         
-        //EQUIPAR
-        $sql = "UPDATE inventario SET idO=$cosaId WHERE (idP='$id' AND slot = '$slot')";
-        $stmt = $db->query($sql);
         
-        //DESEQUIPAR EL OBJETO ANTERIOR
-        $sql = "UPDATE inventario SET idO='$objetoDesequipado' WHERE (idP='$id' AND slot = '$slotLibre')";
-        $stmt = $db->query($sql);
         
         //COMPROBAR SI AUMENTO SLOTS DE INVENTARIO (EN CASO DE EQUIPAR UNA MOCHILA)
         if($slot == 7){
@@ -946,16 +1296,25 @@
                     $sql = "INSERT INTO inventario (idP, slot, idO) VALUES ('$id', '$nuevoSlot', '0')";
                     $db->query($sql);
                 }
+                
+                //EQUIPAR
+                $sql = "UPDATE inventario SET idO=$cosaId WHERE (idP='$id' AND slot = '$slot')";
+                $stmt = $db->query($sql);
+
+                //DESEQUIPAR EL OBJETO ANTERIOR
+                $sql = "UPDATE inventario SET idO='$objetoDesequipado' WHERE (idP='$id' AND slot = '$slotLibre')";
+                $stmt = $db->query($sql);
             }
             elseif($extra < $extraAnterior){
-                //Quitarle slots
+               /* //Quitarle slots
                 $nuevos = $extraAnterior - $extra;
                 for($i=1; $i<=$nuevos; $i++){
                     $slotEliminado = 10 + $extraAnterior - $i;
                     $sql = "DELETE FROM inventario WHERE idP = '$id' AND slot = '$slotEliminado'";
                     $db->query($sql);
                 }
-                
+                */
+                exit();
             }
         }
     }
