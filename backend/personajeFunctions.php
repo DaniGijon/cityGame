@@ -1254,10 +1254,18 @@
         $resultado = $stmt->fetchAll();
         $slotLibre = $resultado[0]['slot'];
         
-        
+        if($slot != 7){
+        //EQUIPAR
+        $sql = "UPDATE inventario SET idO=$cosaId WHERE (idP='$id' AND slot = '$slot')";
+        $stmt = $db->query($sql);
+
+        //DESEQUIPAR EL OBJETO ANTERIOR
+        $sql = "UPDATE inventario SET idO='$objetoDesequipado' WHERE (idP='$id' AND slot = '$slotLibre')";
+        $stmt = $db->query($sql);
+        }
         
         //COMPROBAR SI AUMENTO SLOTS DE INVENTARIO (EN CASO DE EQUIPAR UNA MOCHILA)
-        if($slot == 7){
+        else{
             if($cosaId >=500 && $cosaId <=501){
                 $extra = 1;
             }

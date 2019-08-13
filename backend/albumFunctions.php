@@ -303,7 +303,4561 @@ function dibujarAlbum(){
     echo "</div>";
     
     echo "</div>"; //Fin asdrubal
+    
+    echo "<div id='terriAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =10+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='201'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =10 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 10 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Terri
    
+    echo "<div id='granCapitanAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =20+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='202'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =20 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 20 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Gran Capitan
+    
+    echo "<div id='sanJoseAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =30+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='203'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =30 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 30 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin San Jose
+    
+    echo "<div id='pozoNorteAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =40+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='204'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =40 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 40 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Pozo Norte
+    
+    echo "<div id='abulagarAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =50+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='205'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =50 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 50 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Abulagar
+    
+    echo "<div id='elPobladoAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =60+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='206'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =60 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 60 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin El Poblado
+    
+    echo "<div id='salesianosAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =70+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='207'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =70 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 70 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Salesianos
+    
+    echo "<div id='tauroAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =80+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='208'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =80 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 80 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Tauro
+    
+    echo "<div id='laCopaAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =90+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='209'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =90 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 90 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin La Copa
+    
+    echo "<div id='ayuntamientoAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =100+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='210'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =100 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 100 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Ayuntamiento
+    
+    echo "<div id='paseoSanGregorioAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =110+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='211'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =110 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 110 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Paseo San Gregorio
+    
+    echo "<div id='paseoElBosqueAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =120+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='212'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =120 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 120 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Paseo El Bosque
+    
+    echo "<div id='elPinoAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =130+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='213'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =130 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 130 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin El Pino
+    
+    
+    echo "<div id='elCarmenAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =140+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='214'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =140 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 140 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin El Carmen
+    
+    echo "<div id='las600Album'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =150+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='215'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =150 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 150 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Las 600
+    
+    echo "<div id='PAUAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =160+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='216'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =160 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 160 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin PAU
+    
+    echo "<div id='recintoFerialAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =170+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='217'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =170 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 170 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Recinto Ferial
+    
+    echo "<div id='ciudadJardinAlbum'>";
+    
+    echo "<div class='tablaMonstruosDerrotados'>";
+    
+        echo "<table style='text-align:center; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; border-radius: 15px'><caption></caption>";
+            echo "<tr>";
+                for($i=1; $i<=3; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =180+'$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+                
+                echo "<td rowspan='3'>";
+                $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM ='218'";
+                $stmt = $db->query($sql);
+                $ver = $stmt->fetchAll();
+                
+                if(isset($ver[0])){
+                    echo "<div class='opcionesTienda bossTarjeta'>";
+                    echo "<div class='bossTarjetaTitulo coolWhiteGrande texto-borde'>";
+                        $monstruo = getMonstruoRow($ver[0]['idM']);
+                        echo $monstruo[0]['nombre'];
+                        //Catalogar las habilidades del monstruo
+                        $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                        $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                        $monstruoSalud = ($monstruo[0]['salud']);
+                        $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                    echo "</div>";
+                    echo '<div id="opcionBox" class="bossTarjetaImagen">';
+                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                            echo $monstruoSalud;
+                        echo '</div>';
+                        echo '<div class="cartaFotoBoss texto-borde coolWhiteGrande">';
+                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                        echo '</div>';
+                    echo '</div>';
+                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaqueBoss texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensaBoss texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcionBoss'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                    
+                                          
+                }
+                else{
+                    echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                }
+                
+                echo "</td>";
+            echo "</tr>";
+                for($i=4; $i<=6; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM =180 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            
+            echo "<tr>";
+                
+            echo "</tr>";
+            
+            echo "<tr>";
+                for($i=7; $i<=9; $i++){
+                    echo "<td>";
+                        $sql = "SELECT * FROM victorias WHERE victorias.idP='$id' AND victorias.idM = 180 + '$i'";
+                        $stmt = $db->query($sql);
+                        $ver = $stmt->fetchAll();
+
+                        if(isset($ver[0])){
+                            echo "<div class='albumTarjeta'>";
+                                    echo "<div class='albumTarjetaTitulo coolWhite texto-borde'>";
+                                    $monstruo = getMonstruoRow($ver[0]['idM']);
+                                    echo $monstruo[0]['nombre'];
+                                    //Catalogar las habilidades del monstruo
+                                    $monstruoAtaque = ($monstruo[0]['destreza'] + $monstruo[0]['fuerza'])/2;
+                                    $monstruoDefensa = ($monstruo[0]['agilidad'] + $monstruo[0]['resistencia'])/2;
+                                    $monstruoSalud = ($monstruo[0]['salud']);
+                                    $monstruoDescripcion = ($monstruo[0]['descripcion']);
+                                echo "</div>";
+                                    echo '<div id="opcionBox" class="albumTarjetaImagen">';
+                                        echo '<div class="cartaSalud texto-borde coolWhiteGrande">';
+                                            echo $monstruoSalud;
+                                        echo '</div>';
+                                        echo '<div class="cartaFoto texto-borde coolWhiteGrande">';
+                                            echo '<img src="/design/img/monstruos/' . $ver[0]['idM'] . '">';
+                                        echo '</div>';
+                                    echo '</div>';
+                                    if($monstruoAtaque < 10){
+                                        echo '<div class="cartaAtaqueB texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaAtaque texto-borde coolWhiteGrande">' . $monstruoAtaque . '</div>';
+                                    }
+                                    if($monstruoDefensa < 10){
+                                        echo '<div class="cartaDefensaB texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                    else{
+                                        echo '<div class="cartaDefensa texto-borde coolWhiteGrande">' . $monstruoDefensa . '</div>';
+                                    }
+                                echo "<div class='cartaDescripcion'>";
+                                    echo $monstruoDescripcion;
+                                    if($ver[0]['cantidad'] < 10){
+                                        echo "<div id='vecesDerrotadoB' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                    else{
+                                        echo "<div id='vecesDerrotado' class='texto-borde coolWhiteGrande'>";
+                                            echo $ver[0]['cantidad'];
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
+                                
+                            echo "</div>";                          
+                        }
+                        else{
+                            echo "<td>" . "<div class='miniAlbum'>" . "<img src='/design/img/album/r107.png'>" . "</div></td>";
+                        }
+                    echo "</td>";
+                }
+            echo "</tr>";
+            
+
+        echo "</table>";
+    echo "</div>";
+    
+    echo "</div>"; //Fin Ciudad Jardin
     
     
     echo "</div>"; //FIN SECCION MONSTRUOS

@@ -1233,6 +1233,61 @@ h4{
     margin: 0 10px;
 }
 
+#terriAlbum{
+    display : none;
+}
+#granCapitanAlbum{
+    display : none;
+}
+#sanJoseAlbum{
+    display : none;
+}
+#pozoNorteAlbum{
+    display : none;
+}
+#abulagarAlbum{
+    display : none;
+}
+#elPobladoAlbum{
+    display : none;
+}
+#salesianosAlbum{
+    display : none;
+}
+#tauroAlbum{
+    display : none;
+}
+#laCopaAlbum{
+    display : none;
+}
+#ayuntamientoAlbum{
+    display : none;
+}
+#paseoSanGregorioAlbum{
+    display : none;
+}
+#paseoElBosqueAlbum{
+    display : none;
+}
+#elPinoAlbum{
+    display : none;
+}
+#elCarmenAlbum{
+    display : none;
+}
+#las600Album{
+    display : none;
+}
+#PAUAlbum{
+    display : none;
+}
+#recintoFerialAlbum{
+    display : none;
+}
+#ciudadJardinAlbum{
+    display : none;
+}
+
 /* REFERENTE A DIBUJAR LA CIUDAD */
 #barrio1zona1{ /*Cañamares:Asdrubal*/
     top: 330px;
