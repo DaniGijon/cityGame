@@ -4888,7 +4888,7 @@ function dibujarAlbum(){
               echo "</tr>";  
               
               echo "<tr>"; //Fila CABEZA
-                    echo "<td>Cabeza</td>";
+                    echo "<td class='cool'>Cabeza</td>";
                 
                     $sql = "SELECT * FROM coleccionismo WHERE idP='$id' AND idO = '107'";
                     $stmt = $db->query($sql);
@@ -4961,7 +4961,7 @@ function dibujarAlbum(){
               echo "</tr>";  
             
               echo "<tr>"; //Fila TORSO
-                    echo "<td>Torso</td>";
+                    echo "<td class='cool'>Torso</td>";
                 
                     $sql = "SELECT * FROM coleccionismo WHERE idP='$id' AND idO = '202'";
                     $stmt = $db->query($sql);
@@ -5025,7 +5025,7 @@ function dibujarAlbum(){
               echo "</tr>";
               
               echo "<tr>"; //Fila MANOS
-                    echo "<td>Manos</td>";
+                    echo "<td class='cool'>Manos</td>";
                 
                     $sql = "SELECT * FROM coleccionismo WHERE idP='$id' AND idO = '302'";
                     $stmt = $db->query($sql);
@@ -5090,7 +5090,7 @@ function dibujarAlbum(){
               echo "</tr>";
               
               echo "<tr>"; //Fila PIES
-                    echo "<td>Pies</td>";
+                    echo "<td class='cool'>Pies</td>";
                 
                     $sql = "SELECT * FROM coleccionismo WHERE idP='$id' AND idO = '402'";
                     $stmt = $db->query($sql);
@@ -5155,7 +5155,7 @@ function dibujarAlbum(){
               echo "</tr>";
               
               echo "<tr>"; //Fila AEROMODELISMO
-                    echo "<td>Aeromodelismo</td>";
+                    echo "<td class='cool'>Aeromodelismo</td>";
                 
                     $sql = "SELECT * FROM coleccionismo WHERE idP='$id' AND idO = '1000'";
                     $stmt = $db->query($sql);

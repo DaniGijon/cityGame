@@ -1742,7 +1742,6 @@ h4{
 /* MEJORANDO LA VENTANA DE PERSONAJE */
 
 #infoObjeto0{
-    background-color:darkturquoise;
     padding: 10px;
     display: none;
     position: absolute;
@@ -1750,7 +1749,6 @@ h4{
 }
 
 #infoObjeto1{
-    background-color:red;
     padding: 10px;
     display: none;
     position: absolute;
@@ -1758,7 +1756,6 @@ h4{
 }
 
 #infoObjeto2{
-    background-color:darkorchid;
     padding: 10px;
     display: none;
     position: absolute;
@@ -1766,7 +1763,7 @@ h4{
 }
 
 #infoObjeto3{
-    background-color:gold;
+    
     padding: 10px;
     display: none;
     position: absolute;
@@ -1774,7 +1771,6 @@ h4{
 }
 
 #infoObjeto4{
-    background-color:gold;
     padding: 10px;
     display: none;
     position: absolute;
@@ -1782,7 +1778,6 @@ h4{
 }
 
 #infoObjeto5{
-    background-color:pink;
     padding: 10px;
     display: none;
     position: absolute;
@@ -1790,7 +1785,6 @@ h4{
 }
 
 #infoObjeto6{
-    background-color:green;
     color: white;
     padding: 10px;
     display: none;
@@ -1799,7 +1793,7 @@ h4{
 }
 
 #infoObjeto7{
-    background-color:greenyellow;
+    
     padding: 10px;
     display: none;
     position: absolute;
@@ -1812,6 +1806,33 @@ h4{
     display: none;
     position: absolute;
     border-radius: 10px;
+}
+.objetoCabeza{
+    background-color:darkturquoise;
+}
+
+.objetoTorso{
+    background-color:red;
+}
+
+.objetoPies{
+    background-color:darkorchid;
+}
+
+.objetoMano{
+    background-color:gold;
+}
+
+.objetoVehiculo{
+     background-color:pink;
+}
+
+.objetoMascota{
+    background-color:green;
+}
+
+.objetoMochila{
+    background-color:greenyellow;
 }
 
 #infoReliquia104{
@@ -2345,7 +2366,7 @@ h4{
 }
 
 .semiTransparente{
-    background : rgba(255, 249, 192, 0.7); 
+   background : rgba(255, 249, 192, 0.7); 
     padding : 20px;
     border-radius: 0px 10px 10px 10px;
     float : left;

@@ -403,7 +403,7 @@
                         
                     }
          
-                echo "<div id='infoObjeto0'>";
+                echo "<div id='infoObjeto0' class='objetoCabeza'>";
                     if($result[0]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
                     }else{
@@ -438,7 +438,7 @@
                     }
                 echo "</div>";
                 
-                echo "<div id='infoObjeto1'>";
+                echo "<div id='infoObjeto1' class='objetoTorso'>";
                     if($result[1]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[1]['nombre'] . "</b><br><br>";
                     }else{
@@ -473,7 +473,7 @@
                     }
                 echo "</div>";
                 
-                echo "<div id='infoObjeto2'>";
+                echo "<div id='infoObjeto2' class='objetoPies'>";
                     if($result[2]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[2]['nombre'] . "</b><br><br>";
                     }else{
@@ -508,7 +508,7 @@
                     }
                 echo "</div>";
                 
-                echo "<div id='infoObjeto3'>";
+                echo "<div id='infoObjeto3' class='objetoMano'>";
                     if($result[3]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[3]['nombre'] . "</b><br><br>";
                     }else{
@@ -543,7 +543,7 @@
                     }
                 echo "</div>";
                 
-                echo "<div id='infoObjeto4'>";
+                echo "<div id='infoObjeto4' class='objetoMano'>";
                     if($result[4]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[4]['nombre'] . "</b><br><br>";
                     }else{
@@ -578,7 +578,7 @@
                     }
                 echo "</div>";
                 
-                echo "<div id='infoObjeto5'>";
+                echo "<div id='infoObjeto5' class='objetoVehiculo'>";
                     if($result[5]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[5]['nombre'] . "</b><br><br>";
                     }else{
@@ -613,7 +613,7 @@
                     }
                 echo "</div>";
                 
-                echo "<div id='infoObjeto6'>";
+                echo "<div id='infoObjeto6' class='objetoMascota'>";
                     if($result[6]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[6]['nombre'] . "</b><br><br>";
                     }else{
@@ -648,7 +648,7 @@
                     }
                 echo "</div>";
                 
-                echo "<div id='infoObjeto7'>";
+                echo "<div id='infoObjeto7' class='objetoMochila'>";
                     if($result[7]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[7]['nombre'] . "</b><br><br>";
                     }else{
@@ -1239,6 +1239,10 @@
             consumir(925);
             exit();
         }
+        elseif($cosaId === '928'){
+            consumir(928);
+            exit();
+        }
        
         else{
             //OBJETOS QUE NO SE PUEDEN EQUIPAR
@@ -1348,14 +1352,20 @@
             $db->query($sql);  
         }
         
-        if($idO === 923){ //Agua Agria. +5 Salud
-            $mejoraSalud = 5;
+        if($idO === 923){ //Agua Agria. +1 Salud
+            $mejoraSalud = 1;
             $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END WHERE id='$id'";
             $db->query($sql);  
         }
         
         if($idO === 925){ //Sandia Hermosa. +3 Salud
             $mejoraSalud = 3;
+            $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END WHERE id='$id'";
+            $db->query($sql);  
+        }
+        
+        if($idO === 928){ //Pieza de Fruta Fresca. +2 Salud
+            $mejoraSalud = 2;
             $sql = "UPDATE personajes SET salud = CASE WHEN salud + '$mejoraSalud' > 100 THEN 100 ELSE salud + '$mejoraSalud' END WHERE id='$id'";
             $db->query($sql);  
         }

@@ -31,10 +31,10 @@ global $db;
                     echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="panCamino">';
+                            echo '<input type="checkbox" name="cbox1" value="asadoGuarnicion">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Pan del Camino';
+                            echo 'Asado con Guarnición';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
@@ -75,11 +75,11 @@ global $db;
                                     echo $recompensa;
                                 }
                                 else{
-                                    echo "Aquí no hay nada de interés ahora mismo";
+                                    echo "No veo nada interesante por aquí.";
                                 }
                             }
                             else{ //L mision ya esta completada
-                                echo "Aquí no hay nada de interés ahora mismo";
+                                echo "No veo nada interesante por aquí.";
                             }
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
@@ -149,27 +149,27 @@ global $db;
             echo "<div class='seccionSpotInfo'>";
                     echo "<div class = 'seccionContacto'>";
                         echo "<div class = 'mapaCallejero'>";
-                            echo "<iframe width='300' height='225' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.openstreetmap.org/export/embed.html?bbox=-4.115452766418458%2C38.67803066731481%2C-4.1016554832458505%2C38.683885029177475&amp;layer=mapnik&amp;marker=38.680965031981174%2C-4.108549833690631' style='border: 1px solid black'></iframe><br/><br>";    
+                            echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.116584658622743%2C38.682046693879485%2C-4.109686017036439%2C38.684973770412256&amp;layer=mapnik&amp;marker=38.68351295999708%2C-4.113133192258829" style="border: 1px solid black"></iframe><br/>';
                         echo "</div>";
                         echo "<div class = 'infoSpot'>";
                             echo "<table border = '0' style = 'text-align:left'>";
                                 echo "<tr>";
-                                    echo "<td><div class='mapaMini'></div> C/Asdrúbal, 36<br></td>";
+                                    echo "<td><div class='mapaMini'></div> C/Hernán Cortés, 9<br></td>";
                                 echo "</tr>";
                                 echo "<tr>";
-                                echo "<td><div class='telefonoMini'></div>  926 42 53 13<br></td>";
+                                echo "<td><div class='telefonoMini'></div>  926 42 36 51<br></td>";
                                 echo "</tr>";
                                 echo "<tr>";
-                                echo "<td><div class='relojMini'></div> ??????</td>";
+                                echo "<td><div class='relojMini'></div> Abierto 24 Horas</td>";
                                 echo "</tr>";
                             echo "</table>";
                         echo "</div>";
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia(3);
+                        $fechaInsignia = comprobarInsignia(10);
                         if ($fechaInsignia != '0'){
-                            $fotoInsignia = getFotoInsignia(3);
+                            $fotoInsignia = getFotoInsignia(10);
                             echo "<div class='fotoInsignia'>";
                                 echo $fotoInsignia . "<br>";
                             echo "</div>";
