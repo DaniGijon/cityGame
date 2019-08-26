@@ -172,7 +172,7 @@ global $db;
                         echo "<div id='comprar'>";
                             echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                             echo "<div class='textoDependiente'>";
-                                echo "\"Compra lo que necesites y vuelve al trabajo, rápido\".";
+                                echo "\"Compra lo que necesites y vuelve al trabajo, ¡rápido!\".";
                             echo "</div>";
                             echo "<div class='imagenDependiente'>";
                                 echo '<img src="/design/img/dependientes/todoMascota.png">';

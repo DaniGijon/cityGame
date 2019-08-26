@@ -3,12 +3,12 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona1Barrio1();
+        comprobarZona2Barrio1();
         
         echo "<div id='moduloZona'>";
         
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(7) . "</h4>";
+                echo "<h4>" . getNombreSpot(13) . "</h4>";
             echo "</span>";
             
             echo "<div class='contenido'>";
@@ -19,10 +19,10 @@ global $db;
                 echo "<div class='semiTransparente'>"; 
                 echo "<div class='textoDependiente'>";
                     if(!$cofres){
-                        echo "¡Largo, sabandija! No tienes nada para desbloquear.<br>";
+                        echo "No interrumpas la siesta de un Enano si no traes nada para desbloquear.<br>";
                     }
                     else{
-                        echo "\"Debes ser la típica persona que nunca es capaz de abrir el tarro de garbanzos. Trae aquí, anda\". <br><br>";
+                        echo "\"¡Vaya, eso parece bloqueado!<br>Yo podría abrirlo si tú también abres tu bolsa de monedas\".";
                     }
                 echo "</div>"; //FIN textoDependiente
                 echo "<div class='imagenDependiente'>";
@@ -103,30 +103,7 @@ global $db;
                     echo "</div>"; //FIN Semitransparente
                 echo "</div>";
                     
-                echo "<div class = 'seccionInsignia'>";
-                    $fechaInsignia = comprobarInsignia(7);
-                    if ($fechaInsignia != '0'){
-                        $fotoInsignia = getFotoInsignia(7);
-                        echo "<div class='fotoInsignia'>";
-                            echo $fotoInsignia . "<br>";
-                        echo "</div>";
-                        echo "<span class='textoInsignia'>";
-                            echo "Nos visitaste el día: <b>" . date( 'd/m/Y',strtotime($fechaInsignia)) . "</b><br>¡Gracias por venir!";
-                        echo "</span>";
-                    }
-                    else{
-                        echo "<div class='fotoInsignia'>";
-                            echo "<img src='/design/img/insignias/insigniaVacia'><br>";
-                        echo "</div>";
-                        echo "<div class='textoInsignia'>";
-                            echo "Visítanos y pide al dependiente tu Código de Activación";
-                        echo "</div>";
-                          /*  echo "<form action='?bPage=comprobaciones&action=activarCodigo' method='post'>";
-                                echo "Introduce el código: <input type='text' name='codigoInsignia'><br>";
-                                echo "<input type='submit'>";
-                            echo "</form>";*/
-                    }
-                echo "</div>";
+               
             echo "</div>";
                 
         echo "</span>"; //FIN Contenedor2
@@ -135,4 +112,5 @@ global $db;
 echo "</div>"; //FIN DE div moduloZona
         
         
+
 

@@ -13,17 +13,24 @@
         $stmt->execute();       
         $total = $stmt->fetchAll();
         
-        $limiteMax = $total[0]['COUNT(*)']-1;
+        if($total[0]['COUNT(*)'] === '0'){
+            echo "No veo a nadie.";
+        }
         
-        $propuesta = rand(0, $limiteMax);
+        else{
         
-        echo "<div class='opcionesTienda'>";
-            echo "<div class='opcionesTiendaTitulo' style='text-align:center'>";
-                echo "<a href='?page=jugadorRival&id=" . $result[$propuesta]['id'] . "'>"  . $result[$propuesta]['nombre'];
+            $limiteMax = $total[0]['COUNT(*)']-1;
+
+            $propuesta = rand(0, $limiteMax);
+
+            echo "<div class='opcionesTienda'>";
+                echo "<div class='opcionesTiendaTitulo' style='text-align:center'>";
+                    echo "<a href='?page=jugadorRival&id=" . $result[$propuesta]['id'] . "'>"  . $result[$propuesta]['nombre'];
+                echo "</div>";
+                echo '<div id="opcionBox">' . '<img src="/design/img/objetos/307.png">' . '</div><div class="nivelIcono"></div><div class="precioTienda">' . $result[$propuesta]['nivel'] . '</div></a>';
+
             echo "</div>";
-            echo '<div id="opcionBox">' . '<img src="/design/img/objetos/307.png">' . '</div><div class="nivelIcono"></div><div class="precioTienda">' . $result[$propuesta]['nivel'] . '</div></a>';
-        
-        echo "</div>";
+        }
         echo "<div class='submitTienda'>";
             echo "<a href='?page=zona'><button class='botonVolver'></button></a>";
         echo "</div>";

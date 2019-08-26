@@ -24,7 +24,7 @@ global $db;
                     echo "</div>";
                     echo "<div class='semiTransparente'>";  
                     //INFOOBJETO 307
-                     echo "<div id='infoObjeto307' class='infoObjeto'>";
+                     echo "<div id='infoObjeto307' class='infoObjeto objetoMano'>";
                     $result = getObjeto(307);
                     if($result[0]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
@@ -60,7 +60,7 @@ global $db;
                 echo "</div>";
                 //FIN INFOOBJETO 307
                 //INFOOBJETO 109
-                     echo "<div id='infoObjeto109' class='infoObjeto'>";
+                     echo "<div id='infoObjeto109' class='infoObjeto objetoCabeza'>";
                     $result = getObjeto(109);
                     if($result[0]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
@@ -96,7 +96,7 @@ global $db;
                 echo "</div>";
                 //FIN INFOOBJETO 109
                 //INFOOBJETO 407
-                     echo "<div id='infoObjeto407' class='infoObjeto'>";
+                     echo "<div id='infoObjeto407' class='infoObjeto objetoPies'>";
                     $result = getObjeto(407);
                     if($result[0]['nombre'] != 'Vacio'){
                         echo "<b>" . $result[0]['nombre'] . "</b><br><br>";
