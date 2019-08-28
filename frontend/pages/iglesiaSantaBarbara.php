@@ -3,65 +3,57 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona1Barrio3();
+        comprobarZona1Barrio4();
         $estoyLibre = comprobarEspera();
         if($estoyLibre === 1){
 
             echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(57) . "</h4>";
+                echo "<h4>" . getNombreSpot(63) . "</h4>";
             echo "</span>";
 
                 echo "<div class='contenido'>";
-                echo "<span class='contenedor1'>";
-                    echo "<div class='seccionSpotOpciones'>";
+                echo "<span class='contenedor1'>"; 
                    
+
+                    echo "<div class='seccionSpotOpciones'>";
+                    
                     echo "<div class='semiTransparente'>"; 
-                    echo "<div id='patio'>";
+                    echo "<div id='parroquia'>";
                         echo "<div class='textoDependiente'>";
-                            echo "\"¡Yiiiiha! Un valiente que se atreve con los retos del Rodeo\".";
+                            echo "\"Santa Bárbara, protégenos del vudú y hechicería que han llegado desde islas caribeñas\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
-                            echo '<img src="/design/img/dependientes/syrio.png">';
+                            echo '<img src="/design/img/dependientes/yoHombre.png">';
                         echo "</div>"; //FIN imagenDependiente
                     
                     echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="lazoSencillo">';
+                                echo '<input type="checkbox" name="cbox1" value="escucharMisa">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Lazo Sencillo';
+                                echo 'Escuchar Misa';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">15M</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
                         
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="derribeNovillo">';
+                                echo '<input type="checkbox" name="cbox1" value="confesarPecados">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Derribe de Novillo';
+                                echo 'Confesar Pecados';
                             echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">30M</div></label>';
-                        echo "</div>";
-                        
-                        echo "<div class='opcionesTienda'>";
-                            echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="toroBronco">';
-                            echo "</div>";
-                            echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Monta de Toro Bronco';
-                            echo "</div>";
-                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">30M</div></label>';
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
                         
                         echo "<div class='submitTienda'>";
                             echo "<input type='submit' class='botonCarrilBici' value=' '>";
                         echo "</div>";
                     echo "</form>"; 
-                    echo "</div>"; //FIN patio
-             
+                    echo "</div>"; //FIN parroquia
+                    
             ?>
                     <script>
 
@@ -78,28 +70,32 @@ global $db;
                         $(":checkbox").click(function(){
                             var valor = $(this).val();
                             
-                            if (valor === 'lazoSencillo') {
+                            if (valor === 'escucharMisa') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
-                                $(".opcionSpot3").hide();
                                 $(".opcionSpot0").hide();
                             }
-                            else if (valor === 'derribeNovillo'){
+                            else if (valor === 'confesarPecados'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
-                                $(".opcionSpot3").hide();
-                                $(".opcionSpot0").hide();
-
-                            }
-                            else if (valor === 'toroBronco'){
-                                $(".opcionSpot3").show();
-                                $(".opcionSpot1").hide();
-                                $(".opcionSpot2").hide();
                                 $(".opcionSpot0").hide();
 
                             }
                         });
-                    
+                        
+                    $("#botonVender").click(function(){
+                        $("#parroquia").hide();
+                        $("#altar").show();
+                        $("#botonVender").css("background-color", "rgba(255, 249, 192, 0.7)");
+                        $("#botonComprar").css("background-color", "white");
+                    });
+
+                      $("#botonComprar").click(function(){
+                        $("#parroquia").show();
+                        $("#altar").hide();
+                        $("#botonComprar").css("background-color", "rgba(255, 249, 192, 0.7)");
+                        $("#botonVender").css("background-color", "white");
+                    });
                         
                     </script>
 
@@ -113,7 +109,7 @@ global $db;
                             echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
                                     echo "<div class='seccionSpotImagen'>" ;
-                                        $spotImagen = getFotoSpot(57);
+                                        $spotImagen = getFotoSpot(63);
                                         echo $spotImagen;
                                     echo "</div>";
                                 echo "</div>";
@@ -128,7 +124,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Ahora todo el mundo usa lazos amarillos con tal de ganar un like.";
+                                            $descripcionZona = "Echar un ratito escuchando las aventuras de Jesús y cantar cuando el libro lo pida.";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>";//Fin SemiTransparente
@@ -143,27 +139,12 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "\"Un buen entrenamiento para entrar al equipo de Rugby Mineros.\"";
+                                            $descripcionZona = "Desde que me he ido a vivir por mi cuenta, no tengo a quien contarle mis movidas.";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>";//Fin de semiTransparente
                                 echo "</div>"; //Fin descripcionZonaTexto
                             echo "</div>"; //FIN opcionSpot2
-                            
-                            echo "<div class='opcionSpot3 opcionSpot'>";
-                                echo "<div class='seccionDescripcionZonaImagen'>";
-                                    $imagenSpot = "<img src='/design/img/entrenamiento/carrilBici2.png'>";
-                                    echo $imagenSpot;
-                                echo "</div>";
-                                echo "<div class='seccionDescripcionZonaTexto'>";
-                                    echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
-                                        echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "\"Son años de práctica en los toros de la feria\".";
-                                            echo $descripcionZona;
-                                        echo "</span>";
-                                    echo "</div>";//Fin de semiTransparente
-                                echo "</div>"; //Fin descripcionZonaTexto
-                            echo "</div>"; //FIN opcionSpot3
                        
                     echo "</span>"; //FIN de contenedor2
 
