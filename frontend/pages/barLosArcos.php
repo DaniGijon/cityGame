@@ -21,7 +21,7 @@ global $db;
                     echo "<div class='semiTransparente'>"; 
                     echo "<div id='salon'>";
                         echo "<div class='textoDependiente'>";
-                            echo "\"Adelante, por aquí. Permítame ofrecerle la carta\".";
+                            echo "\"Por favor, no se permiten caballos en el interior del local. Gracias\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/yoHombre.png">';
@@ -31,24 +31,24 @@ global $db;
                     echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="solomillo">';
+                            echo '<input type="checkbox" name="cbox1" value="tragoTequila">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Solomillo Roquefort';
+                            echo 'Trago de Tequila';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">10</div><div class="corazonTienda"></div><div class="vidaTienda">+1</div></label>';
                     echo "</div>";
                     
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="sepia">';
+                            echo '<input type="checkbox" name="cbox1" value="tragoWhisky">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Sepia a la Plancha';
+                            echo 'Trago de Whisky';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
-                       
+                   
                         echo "<div class='submitTienda'>";
                             echo'<input type="submit" class="botonTiendaComprar" value=" ">';
                         echo "</div>";
@@ -167,9 +167,9 @@ global $db;
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia(3);
+                        $fechaInsignia = comprobarInsignia(50);
                         if ($fechaInsignia != '0'){
-                            $fotoInsignia = getFotoInsignia(3);
+                            $fotoInsignia = getFotoInsignia(50);
                             echo "<div class='fotoInsignia'>";
                                 echo $fotoInsignia . "<br>";
                             echo "</div>";

@@ -2,6 +2,7 @@
 global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
+        include (__ROOT__.'/backend/fightFunctions.php');
         $id = $_SESSION['loggedIn'];
         comprobarZona1Barrio3();
         $estoyLibre = comprobarEspera();
@@ -16,9 +17,22 @@ global $db;
                 echo "<span class='contenedor1'>";
 
                     echo "<div class='seccionSpotOpciones'>";
-                    
+                    echo "<div id='botonesComprarVender'>";
+                        echo "<button id='botonComprar' class='tagTiendaComprar'>Norte</button>";
+                        echo "<button id='botonVender' class='tagTiendaVender'>Oeste</button>";
+                    echo "</div>";
                     echo "<div class='semiTransparente'>";
-                    
+                    echo "<div id='norte'>";
+                        echo "<div class='textoDependiente'>";
+                                echo "Caminos, caminos, caminos... tantas direcciones que la gente suele quedar despistada aquí.";
+                            echo "</div>"; //FIN textoDependiente
+                            echo "<div class='imagenDependiente'>";
+                                echo '<img src="/design/img/dependientes/yoHombre.png">';
+                            echo "</div>"; //FIN imagenDependiente
+                            
+                            listRivales();
+                    echo "</div>";
+                    echo "<div id='oeste'>";
                 $mostrar = comprobarMision(9);
                     echo "<div class='textoDependiente'>";
                             $progreso = comprobarProgreso(9);
@@ -67,7 +81,7 @@ global $db;
                             echo "</div>";
                         echo "</form>";  
                     }
-                
+                    echo "</div>"; //fin Oeste
             ?>
                     <script>
 
@@ -97,15 +111,15 @@ global $db;
                         });
                         
                         $("#botonVender").click(function(){
-                        $("#patio").hide();
-                        $("#reservado").show();
+                        $("#norte").hide();
+                        $("#oeste").show();
                         $("#botonVender").css("background-color", "rgba(255, 249, 192, 0.7)");
                         $("#botonComprar").css("background-color", "white");
                     });
 
                       $("#botonComprar").click(function(){
-                        $("#patio").show();
-                        $("#reservado").hide();
+                        $("#norte").show();
+                        $("#oeste").hide();
                         $("#botonComprar").css("background-color", "rgba(255, 249, 192, 0.7)");
                         $("#botonVender").css("background-color", "white");
                     });
