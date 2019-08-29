@@ -30,23 +30,23 @@ global $db;
                             echo '<img src="/design/img/dependientes/yoHombre.png">';
                         echo "</div>"; //FIN imagenDependiente
                     
-                    echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
+                    echo "<form id = 'selectorOpciones' action='?bPage=aventuras&action=zona&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="escucharMisa">';
+                                echo '<input type="checkbox" name="cbox1" value="aventuraSalesianos">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Escuchar Misa';
+                                echo 'Quitar la Palabra a Dios';
                             echo "</div>";
                             echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
                         
                         echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="confesarPecados">';
+                                echo '<input type="checkbox" name="cbox1" value="aventuraSalesianosDebil">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Confesar Pecados';
+                                echo 'Difundir Blasfemias';
                             echo "</div>";
                             echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
@@ -128,12 +128,12 @@ global $db;
                         $(":checkbox").click(function(){
                             var valor = $(this).val();
                             
-                            if (valor === 'escucharMisa') {
+                            if (valor === 'aventuraSalesianos') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
                                 $(".opcionSpot0").hide();
                             }
-                            else if (valor === 'confesarPecados'){
+                            else if (valor === 'aventuraSalesianosDebil'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot0").hide();
@@ -182,7 +182,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Echar un ratito escuchando las aventuras de Jesús y cantar cuando el libro lo pida.";
+                                            $descripcionZona = "Me enfrentaré al Clero y a su fuerte poder religioso.";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>";//Fin SemiTransparente
@@ -197,7 +197,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Desde que me he ido a vivir por mi cuenta, no tengo a quien contarle mis movidas.";
+                                            $descripcionZona = "Intentaré abrir las mentes de esos pobres adeptos, pero desde el anonimato.";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>";//Fin de semiTransparente

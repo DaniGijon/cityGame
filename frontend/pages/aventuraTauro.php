@@ -23,7 +23,7 @@ global $db;
                     echo "<div class='semiTransparente'>"; 
                     echo "<div id='galerias'>";
                         echo "<div class='textoDependiente'>";
-                            echo "\"Las Galerías del Edificio Tauro llevan a un laberinto subterráneo. Quién sabe qué monstruos habrá allí abajo\".";
+                            echo "\"Las Galerías del Tauro llevan a un laberinto subterráneo. Quién sabe qué monstruos habrá allí\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/yoHombre.png">';
