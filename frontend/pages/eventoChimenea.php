@@ -155,7 +155,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                         
                                     echo "<span class='textoDescripcionSpot'>";
-                                        $descripcionZona = "Está fresquita.";
+                                        $descripcionZona = "Está fresquita, pero te pones tibio.";
                                         echo $descripcionZona;
                                     echo "</span>";
                                 echo "</div>"; //Fin descripcionZonaTexto

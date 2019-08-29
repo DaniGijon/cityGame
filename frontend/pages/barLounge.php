@@ -21,7 +21,7 @@ global $db;
                     echo "<div class='semiTransparente'>"; 
                     echo "<div id='salon'>";
                         echo "<div class='textoDependiente'>";
-                            echo "\"Qué decoración tan cosmopolita. Aunque nada tiene Puertollano que envidiar a esas ciudades\".";
+                            echo "\"Como tomar un Capuccino en Roma o un Tartár en París pero sin salir de Puertollano\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/yoHombre.png">';
@@ -31,30 +31,30 @@ global $db;
                     echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="cafeIrlandes">';
+                            echo '<input type="checkbox" name="cbox1" value="cafeCapuccino">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Café Irlandés';
+                            echo 'Café Capuccino';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
                     
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="terneraGallega">';
+                            echo '<input type="checkbox" name="cbox1" value="tartar">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Ternera Gallega';
+                            echo 'Tartár de Atún Rojo';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
                     
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="ensaladaCesar">';
+                            echo '<input type="checkbox" name="cbox1" value="asadoArgentino">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Ensalada César';
+                            echo 'Asado Argentino';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
@@ -177,9 +177,9 @@ global $db;
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia(3);
+                        $fechaInsignia = comprobarInsignia(70);
                         if ($fechaInsignia != '0'){
-                            $fotoInsignia = getFotoInsignia(3);
+                            $fotoInsignia = getFotoInsignia(70);
                             echo "<div class='fotoInsignia'>";
                                 echo $fotoInsignia . "<br>";
                             echo "</div>";
