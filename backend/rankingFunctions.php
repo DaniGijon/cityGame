@@ -437,7 +437,12 @@ function dibujarRanking(){
     echo "</table>";
     echo "</div>";
     echo "</div>"; //Fin seccion6
-    echo "</div>";
+    echo "</div>"; //FIN contenedor1
+    
+    echo "<div class='contenedor2'>";
+        echo "<div class='podioFondo'>";
+        echo "</div>"; //FIN .podioFondo
+    echo "</div>"; //FIN contenedor2
     
 
 ?>

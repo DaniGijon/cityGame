@@ -250,7 +250,7 @@ global $db;
                                 }//fin foreach
 
                                 echo "<div class='submitTienda'>";
-                                    echo "<input type='submit' class='botonCarrilBici' value=' '><br><br>";
+                                    echo "<input type='submit' class='botonTiendaVender' value=' '><br><br>";
                                 echo "</div>";
                                 echo " Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
                                 echo '</form>';

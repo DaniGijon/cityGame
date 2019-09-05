@@ -20,7 +20,7 @@ global $db;
                         echo "<div id='comprar'>";
                             echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                             echo "<div class='textoDependiente'>";
-                                echo "\"El monaguillo se ha puesto malo de beber tanto vino. Necesitamos un sustituto\".";
+                                echo "\"El monaguillo ha enfermado, será por beber tanto vino. Necesitamos un sustituto\".";
                             echo "</div>";
                             echo "<div class='imagenDependiente'>";
                                 echo '<img src="/design/img/dependientes/oliver.png">';

@@ -57,7 +57,7 @@ global $db;
                         echo "</div>";
                         
                         echo "<div class='submitTienda'>";
-                            echo "<input type='submit' class='botonCarrilBici' value=' '>";
+                            echo "<input type='submit' class='botonEntrenar' value=' '>";
                         echo "</div>";
                     echo "</form>"; 
                     echo "</div>"; //FIN patio
