@@ -314,12 +314,11 @@ h4{
 }
 
 #botonPersonajeTexto{
-    font-size: 24px;
     color: white;
-    width:215px;
+    width:200px;
     float:left;
-    margin-top:20px;
-    margin-left: 45px;
+    margin-top:25px;
+    margin-left: 30px;
 }
 
 .botonPersonaje{
@@ -331,6 +330,14 @@ h4{
     float:left;
 }
 
+#botonDarUnaVueltaTexto{
+    color: white;
+    width:190px;
+    float:left;
+    margin-top:25px;
+    margin-left: 30px;
+}
+
 .botonDarUnaVuelta{
     height:73px;
     width:290px; 
@@ -339,17 +346,32 @@ h4{
     background-repeat:no-repeat;
 }
 
+#botonMisionesTexto{
+    color: white;
+    width:180px;
+    float:left;
+    margin-top:25px;
+    margin-left: 30px;
+}
 
 .botonMisiones{
     height:73px;
     width:290px; 
     float:left;
-    background-image:url("/design/img/menu/boton-novedades.png");
+    background-image:url("/design/img/menu/boton-mision.png");
     background-repeat:no-repeat;
 }
 
+#botonMensajesTexto{
+    color: white;
+    width:190px;
+    float:left;
+    margin-top:25px;
+    margin-left: 30px;
+}
+
 .botonMensajes{
-    height:73px;
+    height:72px;
     width:290px; 
     float:left;
     background-image:url("/design/img/menu/boton-mensajes-accion.png");
@@ -357,7 +379,7 @@ h4{
 }
 
 .botonMensajesPendientes{
-    height:73px;
+    height:72px;
     width:290px; 
     float:left;
     background-image:url("/design/img/menu/boton-mensajes.png");
@@ -372,6 +394,14 @@ h4{
     background: yellow;
 }
 
+#botonAlbumTexto{
+    color: white;
+    width:190px;
+    float:left;
+    margin-top:25px;
+    margin-left: 30px;
+}
+
 .botonAlbum{
     height:73px;
     width:290px; 
@@ -380,12 +410,35 @@ h4{
     background-repeat:no-repeat;
 }
 
+#botonRankingTexto{
+    color: white;
+    width:185px;
+    float:left;
+    margin-top:25px;
+    margin-left: 30px;
+}
 
 .botonRanking{
-    height:73px;
+    height:71px;
     width:290px; 
     float:left;
     background-image:url("/design/img/menu/boton-ranking.png");
+    background-repeat:no-repeat;
+}
+
+#botonForoTexto{
+    color: white;
+    width:175px;
+    float:left;
+    margin-top:25px;
+    margin-left: 30px;
+}
+
+.botonForo{
+    height:77px;
+    width:290px; 
+    float:left;
+    background-image:url("/design/img/menu/boton-forum.png");
     background-repeat:no-repeat;
 }
 
@@ -684,7 +737,7 @@ h4{
 
 .iconoPopularidad{
    height:33px;
-   width:89px;
+   width:104px;
    float:left;
    background-image:url("/design/img/icons/icon-star.png");
 }
@@ -2497,4 +2550,14 @@ h4{
 }
 #buscarJugador{
     height: 100px;
+    float:left;
+}
+
+#lupa{
+    margin-top: 15px;
+    margin-left: 15px;
+    background-image: url("/design/img/menu/lupa.png");
+    float: left;
+    height: 33px;
+    width: 33px;
 }
