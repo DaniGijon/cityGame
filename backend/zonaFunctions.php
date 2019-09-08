@@ -117,7 +117,7 @@
                             echo "</div>";
                             echo "<br>";
                             echo "<div class='iconoDescripcionSpot'>";
-                                echo $iconoSpot;
+                                mostrarIconoSpot($iconoSpot);
                             echo "</div>";
                             echo "<br>";
                             echo "<div class='caracteristicasDescripcionSpot'>";
@@ -217,6 +217,23 @@ $(".irA").click(function(event){
             $cartel = 2;
         }
         return $cartel;
+    }
+    
+    function mostrarIconoSpot($iconoSpot){
+        if($iconoSpot === 'apuestas')
+            echo "<div class = 'iconoSpotApostar iconoSpot'></div>";
+        elseif($iconoSpot === 'tienda'){
+            echo "<div class = 'iconoSpotTienda iconoSpot'></div>";
+        }
+        elseif($iconoSpot === 'cerrajeria'){
+            echo "<div class = 'iconoSpotCerrajeria iconoSpot'></div>";
+        }
+        elseif($iconoSpot === 'gimnasio'){
+            echo "<div class = 'iconoSpotGimnasio iconoSpot'></div>";
+        }
+        elseif($iconoSpot === 'hotel'){
+            echo "<div class = 'iconoSpotHotel iconoSpot'></div>";
+        }
     }
     
     if(isset($_GET['dibujarZona'])){

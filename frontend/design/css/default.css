@@ -2630,3 +2630,62 @@ h4{
     height: 319px;
     width: 500px;
 }
+
+.iconoSpot{
+    margin-left:43%;
+}
+
+.iconoSpotTienda{
+    width: 50px;
+    height:50px;
+    background-image: url("/design/img/botones/botonTiendaComprar.png");
+    background-repeat: no-repeat;
+    border-radius: 45px;
+    background-color: white;
+    background-position: center;
+    border: 1px solid silver;
+}
+
+.iconoSpotApostar{
+    width: 50px;
+    height:50px;
+    background-image: url("/design/img/botones/botonApostar.png");
+    background-repeat: no-repeat;
+    border-radius: 45px;
+    background-color: white;
+    background-position: center;
+    border: 1px solid silver;
+}
+
+.iconoSpotCerrajeria{
+    width: 50px;
+    height:50px;
+    background-image: url("/design/img/botones/botonCerrajeria.png");
+    background-repeat: no-repeat;
+    border-radius: 45px;
+    background-color: white;
+    background-position: center;
+    border: 1px solid silver;
+}
+
+.iconoSpotGimnasio{
+    width: 50px;
+    height:50px;
+    background-image: url("/design/img/botones/botonEntrenar.png");
+    background-repeat: no-repeat;
+    border-radius: 45px;
+    background-color: white;
+    background-position: center;
+    border: 1px solid silver;
+}
+
+.iconoSpotHotel{
+    width: 50px;
+    height:50px;
+    background-image: url("/design/img/botones/botonSobar.png");
+    background-repeat: no-repeat;
+    border-radius: 45px;
+    background-color: white;
+    background-position: center;
+    border: 1px solid silver;
+}
