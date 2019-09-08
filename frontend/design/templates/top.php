@@ -7,7 +7,7 @@
     echo "<div id='top'>";
             
         echo "<div id='logoTitulo'>";
-            echo "<h1 class='large noMargin floatLeft cool'>PG</h1>";
+            echo "<h1 class='large noMargin floatLeft cool texto-borde'>PuertoGame</h1>";
         echo "</div>";
         ?>
 

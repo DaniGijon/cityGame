@@ -859,7 +859,7 @@
                 <?php
                     if ($result[0]['avances'] > 0){
                         echo "<div id='botonAvances1' class='botonAvances'>";
-                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<img src='/design/img/botones/avancesOro.png'><br></div>";
                         echo "<div id='iconoHabilidad' style='margin-right:16px'>";
                             echo "<img src='/design/img/export/destreza.png'>";
                         echo "</div>";
@@ -875,7 +875,7 @@
                 <?php
                     if ($result[0]['avances'] > 0){
                         echo "<div id='botonAvances2' class='botonAvances'>";
-                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<img src='/design/img/botones/avancesOro.png'><br></div>";
                         echo "<div id='iconoHabilidad' style='margin-right:16px'>";
                             echo "<img src='/design/img/export/fuerza.png'>";
                         echo "</div>";
@@ -891,7 +891,7 @@
                 <?php
                     if ($result[0]['avances'] > 0){
                         echo "<div id='botonAvances3' class='botonAvances'>";
-                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<img src='/design/img/botones/avancesOro.png'><br></div>";
                         echo "<div id='iconoHabilidad' style='margin-right:16px'>";
                             echo "<img src='/design/img/export/agilidad.png'>";
                         echo "</div>";
@@ -907,7 +907,7 @@
                 <?php
                     if ($result[0]['avances'] > 0){
                         echo "<div id='botonAvances4' class='botonAvances'>";
-                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<img src='/design/img/botones/avancesOro.png'><br></div>";
                         echo "<div id='iconoHabilidad' style='margin-right:16px'>";
                             echo "<img src='/design/img/export/resistencia.png'>";
                         echo "</div>";
@@ -923,7 +923,7 @@
                 <?php
                     if ($result[0]['avances'] > 0){
                         echo "<div id='botonAvances5' class='botonAvances'>";
-                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<img src='/design/img/botones/avancesOro.png'><br></div>";
                         echo "<div id='iconoHabilidad' style='margin-right:16px'>";
                             echo "<img src='/design/img/export/espiritu.png'>";
                         echo "</div>";
@@ -939,14 +939,14 @@
                 <?php
                     if ($result[0]['avances'] > 0){
                         echo "<div id='botonAvances6' class='botonAvances'>";
-                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<img src='/design/img/botones/avancesOro.png'><br></div>";
                         echo "<div id='iconoHabilidad' style='margin-right:16px'>";
-                            echo "<img src='/design/img/export/estilo.png'>";
+                            echo "<img src='/design/img/export/style.png'>";
                         echo "</div>";
                     }
                     else{
                         echo "<div id='iconoHabilidad'>";
-                            echo "<img src='/design/img/export/estilo.png'>";
+                            echo "<img src='/design/img/export/style.png'>";
                         echo "</div>";
                     }
                     ?>
@@ -955,7 +955,7 @@
                 <?php
                     if ($result[0]['avances'] > 0){
                         echo "<div id='botonAvances7' class='botonAvances'>";
-                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<img src='/design/img/botones/avancesOro.png'><br></div>";
                         echo "<div id='iconoHabilidad' style='margin-right:16px'>";
                             echo "<img src='/design/img/export/ingenio.png'>";
                         echo "</div>";
@@ -972,7 +972,7 @@
                 <?php
                     if ($result[0]['avances'] > 0){
                         echo "<div id='botonAvances8' class='botonAvances'>";
-                        echo "<img src='/design/img/botones/avances.png'><br></div>";
+                        echo "<img src='/design/img/botones/avancesOro.png'><br></div>";
                         echo "<div id='iconoHabilidad' style='margin-right:16px'>";
                             echo "<img src='/design/img/export/percepcion.png'>";
                         echo "</div>";
@@ -1031,9 +1031,13 @@
         </td> <!-- FIN HABILIDADES -->
         <td style='text-align:center;min-width:100px'> <!-- AVANCES -->
             <?php
-            echo "<div class = 'avances coolWhite'>";
-            echo "Avances:<br>";
-            echo $result[0]['avances'];
+            echo "<div class = 'avances'>";
+                echo "<div class = 'avancesTexto coolWhiteGigante'>";
+                    echo "AVANCES:<br>";
+                    echo "<div class = 'avancesCantidad'>";
+                        echo $result[0]['avances'];
+                    echo "</div>";
+                echo "</div>";
             echo "</div>";
             ?>
         </td> <!-- FIN AVANCES -->
