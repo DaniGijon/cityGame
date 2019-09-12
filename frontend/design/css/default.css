@@ -2489,16 +2489,6 @@ h4{
     padding-top: 15px;
 }
 
-.botonTrabajar{
-    width: 70px;
-    height:40px;
-    background-image: url("/design/img/botones/botonTrabajo.png");
-    background-repeat: no-repeat;
-    border-radius: 20px;
-    background-color: white;
-    background-position: center;
-}
-
 .botonBarComprar{
     width: 100px;
     height:33px;
@@ -2534,10 +2524,20 @@ h4{
     background-image: url("/design/img/botones/botonTiendaComprar.png");
 }
 
+.botonTrabajar{
+    width: 70px;
+    height:40px;
+    background-image: url("/design/img/botones/botonTrabajo.png");
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    background-color: white;
+    background-position: center;
+}
+
 .botonTiendaComprar{
     width: 70px;
     height:40px;
-    background-image: url("/design/img/botones/botonTiendaComprarCesta.png");
+    background-image: url("/design/img/botones/botonTiendaComprar.png");
     background-repeat: no-repeat;
     border-radius: 20px;
     background-color: white;
@@ -2683,6 +2683,17 @@ h4{
     width: 50px;
     height:50px;
     background-image: url("/design/img/botones/botonSobar.png");
+    background-repeat: no-repeat;
+    border-radius: 45px;
+    background-color: white;
+    background-position: center;
+    border: 1px solid silver;
+}
+
+.iconoSpotTrabajo{
+    width: 50px;
+    height:50px;
+    background-image: url("/design/img/botones/botonTrabajo.png");
     background-repeat: no-repeat;
     border-radius: 45px;
     background-color: white;

@@ -37,7 +37,7 @@ global $db;
                     
                        
                         echo "<div class='submitTienda'>";
-                            echo'<input type="submit" class="botonTiendaComprar" value=" ">';
+                            echo'<input type="submit" class="botonSobar" value=" ">';
                         echo "</div>";
                         $miDinero = comprobarDinero();
                         $dineroEnCash = $miDinero[0]['cash'];

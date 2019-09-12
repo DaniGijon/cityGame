@@ -234,6 +234,9 @@ $(".irA").click(function(event){
         elseif($iconoSpot === 'hotel'){
             echo "<div class = 'iconoSpotHotel iconoSpot'></div>";
         }
+        elseif($iconoSpot === 'trabajo'){
+            echo "<div class = 'iconoSpotTrabajo iconoSpot'></div>";
+        }
     }
     
     if(isset($_GET['dibujarZona'])){
