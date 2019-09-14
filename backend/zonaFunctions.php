@@ -44,6 +44,9 @@
                 echo "</span>";
                 echo "<div class='seccionMapaZona'>" ;
                 
+                    //CARGAR MAPA BACKGROUND DE LA ZONA EN LA QUE ESTOY
+                    echo "<div class='loadMapaB" . $barrioActual . "Z" . $zonaActual . "'>";
+                
                     $sql = "SELECT spots.*, zonas.nombreZona, zonas.textoZona, zonas.imagenZona FROM spots INNER JOIN zonas ON (spots.idZ = zonas.idZ) AND (spots.idB = zonas.idB) WHERE spots.idB='$barrioActual' AND spots.idZ='$zonaActual'";
                     $stmt = $db->query($sql);
                     $result = $stmt->fetchAll();
@@ -70,7 +73,7 @@
                        }
                        echo "</div>";
                     }
-
+                echo "</div>"; //FIN DE loadMapa
                 echo "</div>"; //FIN DE div seccionMapa
                 echo "</span>"; //FIN DE CONTENEDOR1
                 

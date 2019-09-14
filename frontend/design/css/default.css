@@ -2700,3 +2700,23 @@ h4{
     background-position: center;
     border: 1px solid silver;
 }
+
+.loadMapaB1Z1{
+    margin:auto;
+    float:left;
+    position: relative;
+    width: 440px;
+    height: 455px;
+    text-align: center;
+    background:pink;
+}
+
+.loadMapaB1Z2{
+    margin:auto;
+    float:left;
+    position: relative;
+    width: 440px;
+    height: 455px;
+    text-align: center;
+    background-image: url("/design/img/zonas/mapab1z2.jpg");
+}
