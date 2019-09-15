@@ -117,7 +117,9 @@ echo "<div id='moduloZona'>";
                 <label> Huérfanos <input name="cantidadApuestaHuerfanos" style="width:25%" type=number min="0" max="500" value =0></label>
                 <label> Tercio <input name="cantidadApuestaTercio" style="width:25%" type=number min="0" max="500" value =0></label><br><br>
                              
-                <input type="submit" value="¡Apostar!">
+                <div class='submitTienda'>
+                    <input type='submit' class='botonApostar' value=' '>
+                </div>
                 
                 <?php
                         echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";

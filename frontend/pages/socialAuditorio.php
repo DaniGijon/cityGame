@@ -24,7 +24,7 @@ global $db;
                 echo "<div class='seccionSpotOpciones'>";
                     echo "<div class='semiTransparente'>";
                         echo "<div class='textoDependiente'>";
-                            echo "Se abre el telón. Aparece una prestigiosa función. Se cierra el telón. Los paparazzi te han visto\".";
+                            echo "Hoy actúa una prestigiosa actriz de Puertollano. El lleno va a ser absoluto\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/centroMujer.png">';

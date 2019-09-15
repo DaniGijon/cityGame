@@ -50,7 +50,10 @@ echo "<div id='moduloZona'>";
         <form id = "selectorOpciones" action="?bPage=apuestas&action=tragaperras&nonUI" method="post">
                     <center><label> <br><input name="cantidadApuesta1" style="width:25%" type=number min="0" value =0>€</label><br>
 
-                    <input type="submit" value="¡Apostar!"></center>
+                    <div class='submitTienda'>
+                        <input type='submit' class='botonApostar' value=' '>
+                    </div>
+                    </center>
                     <?php
                     $miDinero = comprobarDinero();
                     $dineroEnCash = $miDinero[0]['cash'];

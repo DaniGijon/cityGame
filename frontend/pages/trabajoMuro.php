@@ -21,8 +21,11 @@ global $db;
 <form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">
                 
                 <label><input type="checkbox" name="cbox1" value="guardiaNoche"> Apatrullar durante 1 Hora</label><br><br>
-                
-                <input type="submit" value="Por la Guardia!">
+                <?php
+                echo "<div class='submitTienda'>";
+                    echo "<input type='submit' class='botonTrabajar' value=' '>";
+                echo "</div>";
+                ?>
 </form>                
                 <script>
                     

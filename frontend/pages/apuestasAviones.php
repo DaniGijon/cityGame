@@ -67,7 +67,7 @@ echo "<div id='moduloZona'>";
                         
                                 echo "<div class='seccionDescripcionZonaImagen'>";
                                     echo "La próxima batalla es: <b>" . $inicio . "</b><br><br>";    
-                                    echo " <b>BOTE PREMIO ACUMULADO: " . $premio . "€</b><br><br>";
+                                    echo " <b>BOTE PREMIO ACUMULADO: " . $premio . "<img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'></b><br><br>";
                                 echo "</div>";
                                 
                                 echo "<div class='seccionDescripcionZonaTexto'>";

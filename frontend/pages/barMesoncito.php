@@ -18,7 +18,7 @@ global $db;
                     echo "<div class='semiTransparente'>"; 
                     echo "<div id='salon'>";
                         echo "<div class='textoDependiente'>";
-                            echo "\"Aquí es donde los funcionarios del Ayuntamiento llenan el buche cada día\".";
+                            echo "\"Esto se llena de funcionarios del Ayuntamiento cada mañana\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/fogataRitual.png">';
@@ -38,20 +38,20 @@ global $db;
                     
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="kebabGuarnicion">';
+                            echo '<input type="checkbox" name="cbox1" value="cafeLeche">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Kebab con Guarnición';
+                            echo 'Café con Leche';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
                     
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="durumTernera">';
+                            echo '<input type="checkbox" name="cbox1" value="chorizo">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Durum de Ternera XL';
+                            echo 'Chorizo de la tierra';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";

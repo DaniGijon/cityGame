@@ -2102,7 +2102,7 @@ function avionesFormulario(){
             echo "</div>";
 
         echo "<div class='submitTienda'>";
-            echo"<input type='submit' class='botonCarrilBici' value=' '>";
+            echo"<input type='submit' class='botonApostar' value=' '>";
         echo "</div>";
     echo "</form>"; 
 }
