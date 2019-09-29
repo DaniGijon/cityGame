@@ -23,7 +23,7 @@ global $db;
                     echo "\"¡Hey Hermano! ¿Cómo lo quieres hoy?\".";
                 echo "</div>"; //FIN textoDependiente
                 echo "<div class='imagenDependiente'>";
-                    echo '<img src="/design/img/dependientes/hudy.png">';
+                    echo '<img src="/design/img/dependientes/paisano.png">';
                 echo "</div>"; //FIN imagenDependiente
                 
                 echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
@@ -112,7 +112,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
                                         echo "<span class='textoDescripcionSpot'>";
-                                            $descripcionZona = "Recórtame un poco las greñas, que el otro día me dormí en la piscina y al despertar tenía a una familia de golondrinas celebrando una fiesta de cumpleaños sobre mi pelo.";
+                                            $descripcionZona = "Recórtame un poco las greñas, que parece que llevo un gato acostao.";
                                             echo $descripcionZona;
                                         echo "</span>";
                                     echo "</div>";//Fin SemiTransparente

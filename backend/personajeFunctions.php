@@ -39,15 +39,15 @@
                         $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7";
                         $stmt = $db->query($sql);
                         $objetosDB = $stmt->fetchAll();
-                        
+                        echo "<div id='capaFondo'>";
                         echo "<span id='areaCuerpo' style='display:none'></span>";
                         foreach($objetosDB as $obj){
                             if($obj['id'] === '0'){
                                 
                              echo "<div id='nuevoBoxBolsa' style='background:white'>";
-                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                  //  echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
-                                    if($obj['destreza'] != 0){
+                                   /* if($obj['destreza'] != 0){
                                         echo "Destreza: " . $obj['destreza'] . "<br>";
                                     }
                                     if($obj['fuerza'] != 0){
@@ -74,16 +74,16 @@
                                     if($obj['especial'] != 'nada'){
                                         echo "Especial: " . $obj['especial'];
                                     }
-
+*/
 
                                     echo "</div>" ;
-                                echo "</div>";
+                               
                             }
                             elseif($obj['id'] > 0 && $obj['id'] < 20){
                                 echo "<div id='nuevoBoxBolsa' style='background:green'>";
-                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                  //  echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
-                                    if($obj['destreza'] != 0){
+                                  /*  if($obj['destreza'] != 0){
                                         echo "Destreza: " . $obj['destreza'] . "<br>";
                                     }
                                     if($obj['fuerza'] != 0){
@@ -110,16 +110,15 @@
                                     if($obj['especial'] != 'nada'){
                                         echo "Especial: " . $obj['especial'];
                                     }
-
+*/
 
                                     echo "</div>" ;
-                                echo "</div>";
                             }
                             else if($obj['id'] >= 20 && $obj['id'] < 100){
                                 echo "<div id='nuevoBoxBolsa' style='background:pink'>";
-                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                                //    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
-                                    if($obj['destreza'] != 0){
+                                 /*   if($obj['destreza'] != 0){
                                         echo "Destreza: " . $obj['destreza'] . "<br>";
                                     }
                                     if($obj['fuerza'] != 0){
@@ -147,15 +146,14 @@
                                         echo "Especial: " . $obj['especial'];
                                     }
 
-
+*/
                                     echo "</div>" ;
-                                echo "</div>";
                             }
                             else if($obj['id'] >= 100 && $obj['id'] < 200){
                                 echo "<div id='nuevoBoxBolsa' style='background:darkturquoise'>";
-                                    echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
+                         //           echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>" . $obj['nombre'] . "<br>";
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
-                                    if($obj['destreza'] != 0){
+                         /*           if($obj['destreza'] != 0){
                                         echo "Destreza: " . $obj['destreza'] . "<br>";
                                     }
                                     if($obj['fuerza'] != 0){
@@ -183,9 +181,8 @@
                                         echo "Especial: " . $obj['especial'];
                                     }
 
-
+*/
                                     echo "</div>" ;
-                                echo "</div>";
                             }
                             else if($obj['id'] >= 200 && $obj['id'] < 300){
                                 echo "<div id='nuevoBoxBolsa' style='background:red'>";
@@ -368,8 +365,9 @@
                                 echo "</div>";
                             }
                         }
+                        echo "</div>"; //FIN capaFondo
                         
-                    echo "</div>";
+                    echo "</div>"; //FIN capaBolsa
                     
                     echo "<div id='tercioMedio'>";
                         
@@ -685,10 +683,10 @@
             ?>
    
         </td> <!-- FIN MI PERSONAJE -->
-        <td style='text-align:center;min-width:300px; max-width: 300px' > <!-- MIS DATOS -->
+        <td style='text-align:left;min-width:300px; max-width: 300px' > <!-- MIS DATOS -->
             <?php
             
-            echo "<div class = 'tituloZona2 seccion0  textCenter' style = ' left: 25%'>";
+            echo "<div class = 'tituloZona2 seccion0  textCenter' style = ' left: 15%'>";
                 echo "<div class = 'textoZona2 cool'>";
                     echo "Mis Datos";
                 echo "</div>";
@@ -714,36 +712,36 @@
         ?>   
             <div class ="contenidoPersonaje">
                 <span class="quarterWidth"><span class="tit">Nombre:</span> <?php echo $result[0]['nombre']; ?> </span>
-                <span class="quarterWidth"><span class="tit">Experiencia:</span>  <?php echo $result[0]['experiencia']; ?></span>
-                <span class="quarterWidth"><span class="tit">Sexo:</span> <?php echo $result[0]['sexo']; ?></span>
                 <span class="quarterWidth"><span class="tit">Nivel:</span>  <?php echo $result[0]['nivel']; ?></span>
+                <span class="quarterWidth"><span class="tit">Sexo:</span> <?php echo $result[0]['sexo']; ?></span>
+                <span class="quarterWidth"><span class="tit">Experiencia:</span>  <?php echo $result[0]['experiencia']; ?></span>
                 <span class="quarterWidth"><span class="tit">Barrio:</span>  <?php echo $result[0]['nombreBarrio']; ?></span>
                 <span class="quarterWidth"><span class="tit">Zona:</span>  <?php echo $result[0]['nombreZona']; ?></span>
             </div>
         </div>    
         </td> <!-- FIN MIS DATOS -->
-        <td style='text-align:center;min-width:100px'> <!-- CONSTANTES VITALES -->
+        <td style='text-align:left;min-width:100px'> <!-- CONSTANTES VITALES -->
             <?php
-            echo "<div class = 'tituloZona2 seccion1' style='margin-top:-18px;'>";
+            echo "<div class = 'tituloZona2 seccion1' style='margin-top:-10px;'>";
                 echo "<div class = 'textoZona2 cool'>";
                     echo "Constantes Vitales";
                 echo "</div>";
             echo "</div>";
             ?>
-            <div class ="contenidoPersonaje">
-                <span class="quarterWidth" style="margin-top: -18px;"><span class="tit">Salud:</span> <?php echo $result[0]['salud']; ?></span>
-                <span class="quarterWidth" style="margin-top: -18px;"><span class="tit">Energía:</span> <?php echo $result[0]['energia']; ?></span><br>
+            <div class ="contenidoPersonaje" style="padding-left: 20%">
+                <span class="tit">Salud:</span> <?php echo $result[0]['salud'] . "<br>"; ?>
+                <span class="tit">Energía:</span> <?php echo $result[0]['energia']; ?><br>
             </div>
 
         </td> <!-- FIN CONSTANTES VITALES -->
     </tr>
     <tr>
-        <td style='text-align:center;min-width:70px' class='coolWhiteGrande texto-borde'> <!-- LOGO CLAN -->
+        <td style='padding-right:5%;min-width:70px' class='coolWhiteGrande texto-borde'> <!-- LOGO CLAN -->
             <?php
             echo "<img src='/design/img/export/clan1.png' style='vertical-align: bottom'>";
             ?>
         </td> <!-- FIN LOGO CLAN -->
-        <td style='text-align:center;min-width:100px'> <!-- FAMA -->
+        <td style='text-align:left;min-width:100px'> <!-- FAMA -->
             <?php
             echo "<div class = 'tituloZona1 seccion1' style='margin-top:-18px; left:23%'>";
                 echo "<div class = 'textoZona1 cool'>";
@@ -751,7 +749,7 @@
                 echo "</div>";
             echo "</div>";
             ?>
-            <div class ="contenidoPersonaje">
+            <div class ="contenidoPersonaje" style='padding-left:20%'>
                 <?php
                 $sql = "SELECT AVG(puntos) FROM popularidad WHERE idP = '$id'";
                 $stmt = $db->query($sql);
@@ -759,16 +757,16 @@
 
                 $popularidadAVG = $resultado[0]['AVG(puntos)'];
                 ?>
-                <span class="quarterWidth" style="margin-top: -18px;"><span class="tit">Respeto:</span> <?php echo $result[0]['respeto']; ?></span>
-                <span class="quarterWidth" style="margin-top: -18px;"><span class="tit">Popularidad:</span> <?php echo round($popularidadAVG, 2, PHP_ROUND_HALF_DOWN); ?>%</span><br>
+                <span class="tit">Respeto: </span><?php echo $result[0]['respeto']; ?>
+                <span class="tit">Popularidad: </span> <?php echo round($popularidadAVG, 2, PHP_ROUND_HALF_DOWN); ?>%<br>
             
             </div>
         </td>   <!-- FIN FAMA -->
     </tr>
     <tr>
-        <td style='text-align:center;min-width:300px;'> <!-- TIEMPOS ESPERA -->
+        <td style='text-align:left;min-width:300px;'> <!-- TIEMPOS ESPERA -->
         <?php
-            echo "<div class = 'tituloZona2 seccion1' style='left:25%'>";
+            echo "<div class = 'tituloZona2 seccion1' style='left:15%'>";
                 echo "<div class = 'textoZona2 cool'>";
                     echo "Tiempos Espera";
                 echo "</div>";
@@ -785,7 +783,7 @@
                 $accion = $tiempos[0]['accion'];
                 $viaje = $tiempos[0]['viaje'];
                 $emboscada = $tiempos[0]['emboscada'];
-                echo '<div class ="contenidoPersonaje">';
+                echo "<div class = 'contenidoPersonaje' style='padding-left:20%' >";
                 echo '<span class="tit">';
                 echo "Prox. Acción : ";
                 echo "</span>";
@@ -835,7 +833,7 @@
             ?>
         </td> <!-- FIN TIEMPOS ESPERA -->
        
-        <td style='text-align:center;min-width:100px'> <!-- DINERO -->
+        <td style='text-align:left;min-width:100px'> <!-- DINERO -->
             <?php
             echo "<div class = 'tituloZona1 seccion1' style='left:23%;margin-top:-10px'>";
                 echo "<div class = 'textoZona1 cool'>";
@@ -843,7 +841,7 @@
                 echo "</div>";
             echo "</div>";
             ?>
-            <div class ="contenidoPersonaje">
+            <div class ="contenidoPersonaje" style="padding-left:20%">
                 <span class="tit">En Bolsillo:</span> <?php echo $result[0]['cash'] . "<img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>"; ?><br>
                 <span class="tit">En Banco:</span> <?php echo $result[0]['enBanco'] . "<img src='/design/img/iconos/cajaFuerteTop.png' style='vertical-align: bottom'>"; ?><br>
             </div>
@@ -1066,9 +1064,11 @@
                 $(".objetoBox").click(function(event){
                    var id = $(this).attr('id');
                     $("#areaCuerpo").text(id); 
-                    $("#capaBolsa").css('left',600);
-                    $("#capaBolsa").css('top',25);
+                    $("#capaBolsa").css('left',500);
+                    $("#capaBolsa").css('top',20);
                     $("#capaBolsa").toggle();
+                    
+                    $("#capaFondo").toggle();
                       
                 });
                
@@ -1111,51 +1111,59 @@
                 });
                 
                 $(".cabezaBox").mouseenter(function(e){
-                    $("#infoObjeto0").css("left", e.pageX-300);
-                    $("#infoObjeto0").css("top", e.pageY-125);
+                    $("#infoObjeto0").css("left", 175);
+                    $("#infoObjeto0").css("top", 140);
                     $("#infoObjeto0").css("display", "block");
+                    $("#infoObjeto0").css("opacity", "0.95");
                 });
                 
                 $(".torsoBox").mouseenter(function(e){
-                    $("#infoObjeto1").css("left", e.pageX - 300);
-                    $("#infoObjeto1").css("top", e.pageY - 200);
+                    $("#infoObjeto1").css("left", 175);
+                    $("#infoObjeto1").css("top", 140);
                     $("#infoObjeto1").css("display", "block");
+                    $("#infoObjeto1").css("opacity", "0.95");
                 });
                 
                 $(".piesBox").mouseenter(function(e){
-                    $("#infoObjeto2").css("left", e.pageX - 300);
-                    $("#infoObjeto2").css("top", e.pageY - 200);
+                    $("#infoObjeto2").css("left", 175);
+                    $("#infoObjeto2").css("top", 140);
                     $("#infoObjeto2").css("display", "block");
+                    $("#infoObjeto2").css("opacity", "0.95");
                 });
                 
                 $(".derechaBox").mouseenter(function(e){
-                    $("#infoObjeto3").css("left", e.pageX - 300);
-                    $("#infoObjeto3").css("top", e.pageY - 200);
+                    $("#infoObjeto3").css("left", 175);
+                    $("#infoObjeto3").css("top", 140);
                     $("#infoObjeto3").css("display", "block");
+                    $("#infoObjeto3").css("opacity", "0.95");
                 });
                 
                 $(".izquierdaBox").mouseenter(function(e){
-                    $("#infoObjeto4").css("left", e.pageX - 300);
-                    $("#infoObjeto4").css("top", e.pageY - 200);
+                    $("#infoObjeto4").css("left", 175);
+                    $("#infoObjeto4").css("top", 140);
                     $("#infoObjeto4").css("display", "block");
+                    $("#infoObjeto4").css("opacity", "0.95");
                 });
                 
                 $(".vehiculoBox").mouseenter(function(e){
-                    $("#infoObjeto5").css("left", e.pageX - 300);
-                    $("#infoObjeto5").css("top", e.pageY - 200);
+                    $("#infoObjeto5").css("left", 175);
+                    $("#infoObjeto5").css("top", 140);
                     $("#infoObjeto5").css("display", "block");
+                    $("#infoObjeto5").css("opacity", "0.95");
                 });
                 
                 $(".mascotaBox").mouseenter(function(e){
-                    $("#infoObjeto6").css("left", e.pageX - 300);
-                    $("#infoObjeto6").css("top", e.pageY - 200);
+                    $("#infoObjeto6").css("left", 175);
+                    $("#infoObjeto6").css("top", 140);
                     $("#infoObjeto6").css("display", "block");
+                    $("#infoObjeto6").css("opacity", "0.95");
                 });
                 
                 $(".bolsaBox").mouseenter(function(e){
-                    $("#infoObjeto7").css("left", e.pageX - 300);
-                    $("#infoObjeto7").css("top", e.pageY - 200);
+                    $("#infoObjeto7").css("left", 175);
+                    $("#infoObjeto7").css("top", 140);
                     $("#infoObjeto7").css("display", "block");
+                    $("#infoObjeto7").css("opacity", "0.95");
                 });
                 
                 $(".cabezaBox").mouseleave(function(e){
