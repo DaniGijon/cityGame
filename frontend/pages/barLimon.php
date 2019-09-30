@@ -21,30 +21,21 @@ global $db;
                     echo "<div class='semiTransparente'>"; 
                     echo "<div id='barra'>";
                         echo "<div class='textoDependiente'>";
-                            echo "\"Ya te dije que no volvieses por aq... ah, eres tú, ¡Holaaa!\".";
+                            echo "\"Dije tomamos un par y nos vamos... animando\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
-                            echo '<img src="/design/img/dependientes/fogataRitual.png">';
+                            echo '<img src="/design/img/dependientes/confusedCat.png">';
                         echo "</div>"; //FIN imagenDependiente
                         
                     
                     echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
+                  
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="cafeGo">';
+                            echo '<input type="checkbox" name="cbox1" value="opcionVegana">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Cafe para Llevar';
-                        echo "</div>";
-                        echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
-                    echo "</div>";
-                    
-                    echo "<div class='opcionesTienda'>";
-                        echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="palmeraVegetal">';
-                        echo "</div>";
-                        echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Palmera Vegetal';
+                            echo 'Opción Vegana';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">25</div><div class="corazonTienda"></div><div class="vidaTienda">+3</div></label>';
                     echo "</div>";
