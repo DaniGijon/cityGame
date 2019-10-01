@@ -786,10 +786,6 @@
     
         </table>
         
-        
-
-
-
     <div id="opcionMano" style="display:none;">
         <div id="manoTexto">
             ¿En qué mano quieres equiparlo?
@@ -801,7 +797,6 @@
             Mano Derecha
         </div>
     </div>
-    
     
     <script>
                 $(".objetoBox").click(function(event){
@@ -1088,7 +1083,7 @@
                 $sql = "UPDATE inventario SET idO='$objetoDesequipado' WHERE (idP='$id' AND slot = '$slotLibre')";
                 $stmt = $db->query($sql);
             }
-            elseif($extra < $extraAnterior){
+            elseif($extra < $extraAnterior){ //NO QUITA SLOTS HACIA ATRÁS (PORQUE BORRARÍA OBJETOS). SIMPLEMENTE NO DEJA DESEQUIPAR
                /* //Quitarle slots
                 $nuevos = $extraAnterior - $extra;
                 for($i=1; $i<=$nuevos; $i++){

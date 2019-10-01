@@ -20,7 +20,7 @@ global $db;
                     echo "</div>"; //FIN DE div seccionSpotImagen
 
                     echo "<div class='seccionSpotOpciones'>";
-                    echo "<br>Con mucho sigilo en El Pino aterrizó.<br><br>";
+                    echo "<br>🎵♬Con mucho sigilo en El Pino aterrizó 🎵♬<br><br>";
                     
                     echo "<form id = 'selectorOpciones' action='?bPage=actualizaciones&action=accionSpot&nonUI' method='post'>";
                         echo "<div class='opcionesTienda'>";

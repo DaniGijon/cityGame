@@ -22,7 +22,7 @@ global $db;
                     echo "<div class='seccionSpotOpciones'>";
                         echo "<div class='semiTransparente'>"; 
                             echo "<div class='textoDependiente'>";
-                                echo "\"Tú también te has dado cuenta de que no es en realidad un laurel\".";
+                                echo "\"Te has dado cuenta de que no es en realidad un laurel\".";
                             echo "</div>"; //FIN textoDependiente
                             echo "<div class='imagenDependiente'>";
                                 echo '<img src="/design/img/dependientes/yoHombre.png">';
