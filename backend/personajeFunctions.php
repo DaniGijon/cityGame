@@ -467,7 +467,7 @@
             <?php
             echo "<div class = 'tituloZona2 seccion1' style='margin-top:-10px;'>";
                 echo "<div class = 'textoZona2 cool'>";
-                    echo "Constantes Vitales";
+                    echo "Vitalidad";
                 echo "</div>";
             echo "</div>";
             ?>
