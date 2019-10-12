@@ -920,14 +920,14 @@ h4{
     z-index:2;
 }
 
-#nuevoBoxBolsa{
+.nuevoBoxBolsa{
     width:100px;
     margin:2px;
     height:100px;
     text-align:center;
     float:left;
-    background:white;
-    border: 2px solid #ff9933;
+    background:#c4682b;
+    border: 2px solid #c4682b;
     border-radius: 10px;
 }
 

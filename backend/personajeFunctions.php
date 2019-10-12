@@ -44,7 +44,7 @@
                         foreach($objetosDB as $obj){
                             if($obj['id'] === '0'){
                                 
-                             echo "<div id='nuevoBoxBolsa' style='background:white'>";
+                             echo "<div id='0' class='nuevoBoxBolsa'>";
                                  
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                    
@@ -52,28 +52,28 @@
                                
                             }
                             elseif($obj['id'] > 0 && $obj['id'] < 20){
-                                echo "<div id='nuevoBoxBolsa' style='background:green'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
                                  
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                  
                                 echo "</div>" ;
                             }
                             else if($obj['id'] >= 20 && $obj['id'] < 100){
-                                echo "<div id='nuevoBoxBolsa' style='background:pink'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
                                
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                 
                                 echo "</div>" ;
                             }
                             else if($obj['id'] >= 100 && $obj['id'] < 200){
-                                echo "<div id='nuevoBoxBolsa' style='background:darkturquoise'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
                         
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                        
                                 echo "</div>" ;
                             }
                             else if($obj['id'] >= 200 && $obj['id'] < 300){
-                                echo "<div id='nuevoBoxBolsa' style='background:red'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
                                  
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                   
@@ -81,34 +81,34 @@
                                 echo "</div>";
                             }
                             else if($obj['id'] >= 300 && $obj['id'] < 400){
-                                echo "<div id='nuevoBoxBolsa' style='background:gold'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
                                  
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                     
                                 echo "</div>";
                             }
                             else if($obj['id'] >= 400 && $obj['id'] < 500){
-                                echo "<div id='nuevoBoxBolsa' style='background:darkorchid'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
                                   
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                 
                                 echo "</div>";
                             }
                             else if($obj['id'] >= 500 && $obj['id'] < 600){
-                                echo "<div id='nuevoBoxBolsa' style='background:yellowgreen'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                             
                                 echo "</div>";
                             }
                             else if($obj['id'] >= 900 && $obj['id'] < 920){
-                                echo "<div id='nuevoBoxBolsa' style='background:brown'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
                                    
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                    
                                 echo "</div>";
                             }
                             elseif($obj['id'] >= 920){
-                                echo "<div id='nuevoBoxBolsa' style='background:grey'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
                                    
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                    
@@ -816,6 +816,8 @@
                     $("#capaFondo").toggle();
                       
                 });
+                
+                
                
                 $(".nuevoBoxBolsa").click(function(){
                    var objetoBolsaId = $(this).attr('id');
@@ -844,6 +846,89 @@
                             $("#personajeArea").load("index.php?bPage=personajeFunctions&equipar&listPersonajeTodo&nonUI")
                         })
                    }
+                });
+                
+                $(".nuevoBoxBolsa").mouseenter(function(e){
+                    var objetoBolsaId = $(this).attr('id');
+                    if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                        $(this).css("border","2px solid green");
+                        
+                        $("#infoObjeto6").css("left", 175);
+                        $("#infoObjeto6").css("top", 140);
+                        $("#infoObjeto6").css("display", "block");
+                        $("#infoObjeto6").css("opacity", "0.95");
+                    }
+                    if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                        $(this).css("border","2px solid pink");
+                        
+                        $("#infoObjeto5").css("left", 175);
+                        $("#infoObjeto5").css("top", 140);
+                        $("#infoObjeto5").css("display", "block");
+                        $("#infoObjeto5").css("opacity", "0.95");
+                    }
+                    if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                        $(this).css("border","2px solid darkturquoise");
+                        
+                        $("#infoObjeto0").css("left", 175);
+                        $("#infoObjeto0").css("top", 140);
+                        $("#infoObjeto0").css("display", "block");
+                        $("#infoObjeto0").css("opacity", "0.95");
+                    }
+                    if(objetoBolsaId >=200 && objetoBolsaId < 300){ //pecho
+                        $(this).css("border","2px solid red");
+                        
+                        $("#infoObjeto1").css("left", 175);
+                        $("#infoObjeto1").css("top", 140);
+                        $("#infoObjeto1").css("display", "block");
+                        $("#infoObjeto1").css("opacity", "0.95");
+                    }
+                    if(objetoBolsaId >=300 && objetoBolsaId < 400){ //manos
+                        $(this).css("border","2px solid gold");
+                        
+                        $("#infoObjeto3").css("left", 175);
+                        $("#infoObjeto3").css("top", 140);
+                        $("#infoObjeto3").css("display", "block");
+                        $("#infoObjeto3").css("opacity", "0.95");
+                    }
+                    if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                        $(this).css("border","2px solid purple");
+                        
+                        $("#infoObjeto2").css("left", 175);
+                        $("#infoObjeto2").css("top", 140);
+                        $("#infoObjeto2").css("display", "block");
+                        $("#infoObjeto2").css("opacity", "0.95");
+                    }
+                    if(objetoBolsaId >=500 && objetoBolsaId < 900){ //Mochila
+                        $(this).css("border","2px solid greenyellow");
+                        
+                        $("#infoObjeto7").css("left", 175);
+                        $("#infoObjeto7").css("top", 140);
+                        $("#infoObjeto7").css("display", "block");
+                        $("#infoObjeto7").css("opacity", "0.95");
+                    }
+                    if(objetoBolsaId >=900 && objetoBolsaId < 920){ //Cofre
+                        $(this).css("border","2px solid black");
+                    }
+                    if(objetoBolsaId >=920){ //No equipable
+                        $(this).css("border","2px solid grey");
+                    }
+                });
+                
+                $(".nuevoBoxBolsa").mouseleave(function(e){
+                    var objetoBolsaId = $(this).attr('id');
+                    
+                    $(this).css("border","2px solid #c4682b");
+                    
+                    $("#infoObjeto0").css("display", "none");
+                    $("#infoObjeto1").css("display", "none");
+                    $("#infoObjeto2").css("display", "none");
+                    $("#infoObjeto3").css("display", "none");
+                    $("#infoObjeto4").css("display", "none");
+                    $("#infoObjeto5").css("display", "none");
+                    $("#infoObjeto6").css("display", "none");
+                    $("#infoObjeto7").css("display", "none");
+                    
+                    
                 });
                 
                 $(".botonAvances").click(function(){
