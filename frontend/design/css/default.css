@@ -1880,6 +1880,90 @@ h4{
     padding-top: 30px;
 }
 
+#infoObjeto8{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto9{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto10{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto11{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto12{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto13{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto14{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto15{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto16{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto17{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto18{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#infoObjeto19{
+    padding: 10px;
+    display: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
 .infoObjeto{
     padding: 10px;
     display: none;
@@ -1934,6 +2018,20 @@ h4{
     height: 190px;
     width: 131px;
     background-image: url("/design/img/cartasObjeto/cartaVerdeClaro.png");
+    background-repeat: no-repeat;
+}
+
+.objetoCofre{
+    height: 190px;
+    width: 131px;
+    background-image: url("/design/img/cartasObjeto/cartaNegro.png");
+    background-repeat: no-repeat;
+}
+
+.objetoNoEquipable{
+    height: 190px;
+    width: 131px;
+    background-image: url("/design/img/cartasObjeto/cartaArcoiris.png");
     background-repeat: no-repeat;
 }
 

@@ -29,6 +29,11 @@
                 $stmt = $db->query($sql);
                 $objetosEquipados = $stmt->fetchAll();
                 
+                //Consultar los objetos que lleva desequipados
+                $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7";
+                $stmt = $db->query($sql);
+                $objetosInv = $stmt->fetchAll();
+                
                 echo "<div id = 'dibujoPersonaje'>";
                     echo "<div id='tercioArriba'>";
                         echo "<span id='0' class='cabezaBox objetoBox'>" . "<img src='/design/img/objetos/" . $objetosEquipados[0]['imagenObjeto'] . "'></span>";
@@ -41,39 +46,40 @@
                         $objetosDB = $stmt->fetchAll();
                         echo "<div id='capaFondo'>";
                         echo "<span id='areaCuerpo' style='display:none'></span>";
+                        $inv = 8; //slot inicial de inventario
                         foreach($objetosDB as $obj){
                             if($obj['id'] === '0'){
                                 
-                             echo "<div id='0' class='nuevoBoxBolsa'>";
+                             echo "<div id='0' class='nuevoBoxBolsa inv" . $inv . "'>";
                                  
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                    
-                                echo "</div>" ;
+                             echo "</div>" ;
                                
                             }
                             elseif($obj['id'] > 0 && $obj['id'] < 20){
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa inv" . $inv . "'>";
                                  
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                  
                                 echo "</div>" ;
                             }
                             else if($obj['id'] >= 20 && $obj['id'] < 100){
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa inv" . $inv . "'>";
                                
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                 
                                 echo "</div>" ;
                             }
                             else if($obj['id'] >= 100 && $obj['id'] < 200){
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa inv" . $inv . "'>";
                         
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                        
                                 echo "</div>" ;
                             }
                             else if($obj['id'] >= 200 && $obj['id'] < 300){
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa inv" . $inv . "'>";
                                  
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                   
@@ -81,39 +87,40 @@
                                 echo "</div>";
                             }
                             else if($obj['id'] >= 300 && $obj['id'] < 400){
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa inv" . $inv . "'>";
                                  
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                     
                                 echo "</div>";
                             }
                             else if($obj['id'] >= 400 && $obj['id'] < 500){
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa inv" . $inv . "'>";
                                   
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                 
                                 echo "</div>";
                             }
                             else if($obj['id'] >= 500 && $obj['id'] < 600){
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa inv" . $inv . "'>";
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                             
                                 echo "</div>";
                             }
                             else if($obj['id'] >= 900 && $obj['id'] < 920){
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa inv" . $inv . "'>";
                                    
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                    
                                 echo "</div>";
                             }
                             elseif($obj['id'] >= 920){
-                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa'>";
+                                echo "<div id='" . $obj['id'] . "' class='nuevoBoxBolsa inv" . $inv . "'>";
                                    
                                     echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
                                    
                                 echo "</div>";
                             }
+                            $inv = $inv + 1; //incremento de la variable $inv
                         }
                         echo "</div>"; //FIN capaFondo
                         
@@ -428,6 +435,427 @@
                     }
                     if($result[7]['especial'] != 'nada'){
                         echo "<br>Especial: <b>" . $result[7]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                //Empiezan los infoObjetos del inventario
+                echo "<div id='infoObjeto8'>";
+                    if($objetosInv[0]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[0]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b>  </b><br><br>";
+                    }
+                    if($objetosInv[0]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[0]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[0]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[0]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[0]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[0]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[0]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[0]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[0]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[0]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[0]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[0]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[0]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[0]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[0]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[0]['percepcion'];
+                    }
+                    if($objetosInv[0]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[0]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto9'>";
+                    if($objetosInv[1]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[1]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[1]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[1]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[1]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[1]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[1]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[1]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[1]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[1]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[1]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[1]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[1]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[1]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[1]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[1]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[1]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[1]['percepcion'];
+                    }
+                    if($objetosInv[1]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[1]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto10'>";
+                    if($objetosInv[2]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[2]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[2]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[2]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[2]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[2]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[2]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[2]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[2]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[2]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[2]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[2]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[2]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[2]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[2]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[2]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[2]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[2]['percepcion'];
+                    }
+                    if($objetosInv[2]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[2]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto11'>";
+                    if($objetosInv[3]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[3]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[3]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[3]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[3]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[3]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[3]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[3]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[3]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[3]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[3]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[3]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[3]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[3]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[3]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[3]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[3]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[3]['percepcion'];
+                    }
+                    if($objetosInv[3]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[3]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto12'>";
+                    if($objetosInv[4]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[4]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[4]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[4]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[4]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[4]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[4]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[4]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[4]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[4]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[4]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[4]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[4]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[4]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[4]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[4]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[4]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[4]['percepcion'];
+                    }
+                    if($objetosInv[4]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[4]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                 echo "<div id='infoObjeto13'>";
+                    if($objetosInv[5]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[5]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[5]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[5]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[5]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[5]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[5]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[5]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[5]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[5]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[5]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[5]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[5]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[5]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[5]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[5]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[5]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[5]['percepcion'];
+                    }
+                    if($objetosInv[5]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[5]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto14'>";
+                    if($objetosInv[6]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[6]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[6]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[6]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[6]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[6]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[6]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[6]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[6]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[6]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[6]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[6]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[6]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[6]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[6]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[6]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[6]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[6]['percepcion'];
+                    }
+                    if($objetosInv[6]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[6]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto15'>";
+                    if($objetosInv[7]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[7]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[7]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[7]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[7]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[7]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[7]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[7]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[7]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[7]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[7]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[7]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[7]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[7]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[7]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[7]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[7]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[7]['percepcion'];
+                    }
+                    if($objetosInv[7]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[7]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto16'>";
+                    if($objetosInv[8]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[8]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[8]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[8]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[8]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[8]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[8]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[8]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[8]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[8]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[8]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[8]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[8]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[8]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[8]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[8]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[8]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[8]['percepcion'];
+                    }
+                    if($objetosInv[8]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[8]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto17'>";
+                    if($objetosInv[9]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[9]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[9]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[9]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[9]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[9]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[9]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[9]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[9]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[9]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[9]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[9]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[9]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[9]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[9]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[9]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[9]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[9]['percepcion'];
+                    }
+                    if($objetosInv[9]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[9]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                echo "<div id='infoObjeto18'>";
+                    if($objetosInv[10]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[10]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[10]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[10]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[10]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[10]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[10]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[10]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[10]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[10]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[10]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[10]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[10]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[10]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[10]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[10]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[10]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[10]['percepcion'];
+                    }
+                    if($objetosInv[10]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[10]['especial'] . "</b>";
+                    }
+                echo "</div>";
+                
+                 echo "<div id='infoObjeto19'>";
+                    if($objetosInv[11]['nombre'] != 'Vacio'){
+                        echo "<b>" . $objetosInv[11]['nombre'] . "</b><br><br>";
+                    }else{
+                        echo "<b> </b><br><br>";
+                    }
+                    if($objetosInv[11]['destreza'] != 0){
+                        echo "Destreza: " . $objetosInv[11]['destreza'] . "<br>";
+                    }
+                    if($objetosInv[11]['fuerza'] != 0){
+                        echo "Fuerza: " . $objetosInv[11]['fuerza'] ."<br>";
+                    }
+                    if($objetosInv[11]['agilidad'] != 0){
+                        echo "Agilidad: " . $objetosInv[11]['agilidad'] ."<br>";
+                    }
+                    if($objetosInv[11]['resistencia'] != 0){
+                        echo "Resistencia: " . $objetosInv[11]['resistencia'] ."<br>";
+                    }
+                    if($objetosInv[11]['espiritu'] != 0){
+                        echo "Espiritu: " . $objetosInv[11]['espiritu'] ."<br>";
+                    }
+                    if($objetosInv[11]['estilo'] != 0){
+                        echo "Estilo: " . $objetosInv[11]['estilo'] ."<br>" ;
+                    }
+                    if($objetosInv[11]['ingenio'] != 0){
+                        echo "Ingenio: " . $objetosInv[11]['ingenio'] ."<br>";
+                    }
+                    if($objetosInv[11]['percepcion'] != 0){
+                        echo "Percepcion: " . $objetosInv[11]['percepcion'];
+                    }
+                    if($objetosInv[11]['especial'] != 'nada'){
+                        echo "<br>Especial: <b>" . $objetosInv[11]['especial'] . "</b>";
                     }
                 echo "</div>";
             ?>
@@ -850,61 +1278,458 @@
                 
                 $(".nuevoBoxBolsa").mouseenter(function(e){
                     var objetoBolsaId = $(this).attr('id');
+                    var slotInv = $(this).attr('class');
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv8'){
+                        $("#infoObjeto8").css("left", 175);
+                        $("#infoObjeto8").css("top", 140);
+                        $("#infoObjeto8").css("display", "block");
+                        $("#infoObjeto8").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto8").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto8").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto8").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto8").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto8").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto8").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto8").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto8").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto8").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv9'){
+                        $("#infoObjeto9").css("left", 175);
+                        $("#infoObjeto9").css("top", 140);
+                        $("#infoObjeto9").css("display", "block");
+                        $("#infoObjeto9").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto9").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto9").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto9").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto9").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto9").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto9").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto9").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto9").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto9").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv10'){
+                        $("#infoObjeto10").css("left", 175);
+                        $("#infoObjeto10").css("top", 140);
+                        $("#infoObjeto10").css("display", "block");
+                        $("#infoObjeto10").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto10").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto10").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto10").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto10").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto10").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto10").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto10").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto10").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto10").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv11'){
+                        $("#infoObjeto11").css("left", 175);
+                        $("#infoObjeto11").css("top", 140);
+                        $("#infoObjeto11").css("display", "block");
+                        $("#infoObjeto11").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto11").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto11").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto11").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto11").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto11").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto11").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto11").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto11").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto11").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv12'){
+                        $("#infoObjeto12").css("left", 175);
+                        $("#infoObjeto12").css("top", 140);
+                        $("#infoObjeto12").css("display", "block");
+                        $("#infoObjeto12").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto12").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto12").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto12").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto12").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto12").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto12").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto12").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto12").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto12").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv13'){
+                        $("#infoObjeto13").css("left", 175);
+                        $("#infoObjeto13").css("top", 140);
+                        $("#infoObjeto13").css("display", "block");
+                        $("#infoObjeto13").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto13").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto13").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto13").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto13").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto13").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto13").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto13").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto13").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto13").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv14'){
+                        $("#infoObjeto14").css("left", 175);
+                        $("#infoObjeto14").css("top", 140);
+                        $("#infoObjeto14").css("display", "block");
+                        $("#infoObjeto14").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto14").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto14").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto14").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto14").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto14").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto14").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto14").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto14").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto14").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv15'){
+                        $("#infoObjeto15").css("left", 175);
+                        $("#infoObjeto15").css("top", 140);
+                        $("#infoObjeto15").css("display", "block");
+                        $("#infoObjeto15").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto15").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto15").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto15").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto15").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto15").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto15").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto15").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto15").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto15").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv16'){
+                        $("#infoObjeto16").css("left", 175);
+                        $("#infoObjeto16").css("top", 140);
+                        $("#infoObjeto16").css("display", "block");
+                        $("#infoObjeto16").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto16").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto16").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto16").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto16").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto16").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto16").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto16").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto16").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto16").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv17'){
+                        $("#infoObjeto17").css("left", 175);
+                        $("#infoObjeto17").css("top", 140);
+                        $("#infoObjeto17").css("display", "block");
+                        $("#infoObjeto17").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto17").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto17").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto17").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto17").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto17").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto17").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto17").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto17").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto17").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv18'){
+                        $("#infoObjeto18").css("left", 175);
+                        $("#infoObjeto18").css("top", 140);
+                        $("#infoObjeto18").css("display", "block");
+                        $("#infoObjeto18").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto18").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto18").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto18").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto18").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto18").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto18").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto18").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto18").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto18").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    if(slotInv === 'nuevoBoxBolsa inv19'){
+                        $("#infoObjeto19").css("left", 175);
+                        $("#infoObjeto19").css("top", 140);
+                        $("#infoObjeto19").css("display", "block");
+                        $("#infoObjeto19").css("opacity", "0.95");
+                        
+                        if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
+                            $("#infoObjeto19").attr("class", "objetoMascota");
+                        }
+                        if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
+                            $("#infoObjeto19").attr("class", "objetoVehiculo");
+                        }
+                        if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
+                            $("#infoObjeto19").attr("class", "objetoCabeza");
+                        }
+                        if(objetoBolsaId >=200 && objetoBolsaId < 300){ //torso
+                            $("#infoObjeto19").attr("class", "objetoTorso");
+                        }
+                        if(objetoBolsaId >=300 && objetoBolsaId < 400){ //mano
+                            $("#infoObjeto19").attr("class", "objetoMano");
+                        }
+                        if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
+                            $("#infoObjeto19").attr("class", "objetoPies");
+                        }
+                        if(objetoBolsaId >=500 && objetoBolsaId < 900){ //mochila
+                            $("#infoObjeto19").attr("class", "objetoMochila");
+                        }
+                        if(objetoBolsaId >=900 && objetoBolsaId < 920){ //cofre
+                            $("#infoObjeto19").attr("class", "objetoCofre");
+                        }
+                        if(objetoBolsaId >=920){ //no equipable
+                            $("#infoObjeto19").attr("class", "objetoNoEquipable");
+                        }
+                    }
+                    
+                    
+                    
                     if(objetoBolsaId >=1 && objetoBolsaId < 20){ //mascota
                         $(this).css("border","2px solid green");
                         
-                        $("#infoObjeto6").css("left", 175);
-                        $("#infoObjeto6").css("top", 140);
-                        $("#infoObjeto6").css("display", "block");
-                        $("#infoObjeto6").css("opacity", "0.95");
                     }
                     if(objetoBolsaId >=20 && objetoBolsaId < 100){ //vehiculo
                         $(this).css("border","2px solid pink");
                         
-                        $("#infoObjeto5").css("left", 175);
-                        $("#infoObjeto5").css("top", 140);
-                        $("#infoObjeto5").css("display", "block");
-                        $("#infoObjeto5").css("opacity", "0.95");
                     }
                     if(objetoBolsaId >=100 && objetoBolsaId < 200){ //cabeza
                         $(this).css("border","2px solid darkturquoise");
-                        
-                        $("#infoObjeto0").css("left", 175);
-                        $("#infoObjeto0").css("top", 140);
-                        $("#infoObjeto0").css("display", "block");
-                        $("#infoObjeto0").css("opacity", "0.95");
+                       
                     }
                     if(objetoBolsaId >=200 && objetoBolsaId < 300){ //pecho
                         $(this).css("border","2px solid red");
-                        
-                        $("#infoObjeto1").css("left", 175);
-                        $("#infoObjeto1").css("top", 140);
-                        $("#infoObjeto1").css("display", "block");
-                        $("#infoObjeto1").css("opacity", "0.95");
+                       
                     }
                     if(objetoBolsaId >=300 && objetoBolsaId < 400){ //manos
                         $(this).css("border","2px solid gold");
-                        
-                        $("#infoObjeto3").css("left", 175);
-                        $("#infoObjeto3").css("top", 140);
-                        $("#infoObjeto3").css("display", "block");
-                        $("#infoObjeto3").css("opacity", "0.95");
+                      
                     }
                     if(objetoBolsaId >=400 && objetoBolsaId < 500){ //pies
                         $(this).css("border","2px solid purple");
-                        
-                        $("#infoObjeto2").css("left", 175);
-                        $("#infoObjeto2").css("top", 140);
-                        $("#infoObjeto2").css("display", "block");
-                        $("#infoObjeto2").css("opacity", "0.95");
+                      
                     }
                     if(objetoBolsaId >=500 && objetoBolsaId < 900){ //Mochila
                         $(this).css("border","2px solid greenyellow");
-                        
-                        $("#infoObjeto7").css("left", 175);
-                        $("#infoObjeto7").css("top", 140);
-                        $("#infoObjeto7").css("display", "block");
-                        $("#infoObjeto7").css("opacity", "0.95");
+                    
                     }
                     if(objetoBolsaId >=900 && objetoBolsaId < 920){ //Cofre
                         $(this).css("border","2px solid black");
@@ -927,7 +1752,19 @@
                     $("#infoObjeto5").css("display", "none");
                     $("#infoObjeto6").css("display", "none");
                     $("#infoObjeto7").css("display", "none");
-                    
+                    $("#infoObjeto8").css("display", "none");
+                    $("#infoObjeto9").css("display", "none");
+                    $("#infoObjeto10").css("display", "none");
+                    $("#infoObjeto11").css("display", "none");
+                    $("#infoObjeto12").css("display", "none");
+                    $("#infoObjeto13").css("display", "none");
+                    $("#infoObjeto14").css("display", "none");
+                    $("#infoObjeto15").css("display", "none");
+                    $("#infoObjeto16").css("display", "none");
+                    $("#infoObjeto17").css("display", "none");
+                    $("#infoObjeto18").css("display", "none");
+                    $("#infoObjeto19").css("display", "none");
+                  
                     
                 });
                 
