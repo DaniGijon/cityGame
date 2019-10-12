@@ -107,6 +107,13 @@
                                    
                                 echo "</div>";
                             }
+                            elseif($obj['id'] >= 920){
+                                echo "<div id='nuevoBoxBolsa' style='background:grey'>";
+                                   
+                                    echo "<img src='/design/img/objetos/" . $obj['imagenObjeto'] . "'><br><br>";
+                                   
+                                echo "</div>";
+                            }
                         }
                         echo "</div>"; //FIN capaFondo
                         

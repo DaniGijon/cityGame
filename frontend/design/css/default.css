@@ -902,23 +902,22 @@ h4{
 
 #capaBolsa{
     display:none;
-    width:600px;
+    width:518px;
     height:450px;
     position:absolute;
     z-index:3;
-    background-image: url("/design/img/background/capaBolsa.png");
-    border: 2px solid black;
+    background-image: url("/design/img/background/maletinSin.png");
 }
 
 #capaFondo{
+    top:80px;
     display:none;
-    width:416px;
-    height:416px;
+    width:433px;
+    height:333px;
     position:absolute;
     margin-top:25px;
-    margin-left: 100px;
+    margin-left: 42px;
     z-index:2;
-    background: lightgoldenrodyellow;
 }
 
 #nuevoBoxBolsa{
@@ -928,7 +927,7 @@ h4{
     text-align:center;
     float:left;
     background:white;
-    border: 2px solid black;
+    border: 2px solid #ff9933;
     border-radius: 10px;
 }
 
