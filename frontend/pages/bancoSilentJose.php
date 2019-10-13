@@ -3,13 +3,13 @@ global $db;
         include (__ROOT__.'/backend/comprobaciones.php');
         include (__ROOT__.'/backend/getFotos.php');
         $id = $_SESSION['loggedIn'];
-        comprobarZona2Barrio6();
+        comprobarZona2Barrio2();
         
         $estoyLibre = comprobarEspera();
         if($estoyLibre === 1){
             echo "<div id='moduloZona'>";
             echo "<span class = 'tituloSpot'>";
-                echo "<h4>" . getNombreSpot(111) . "</h4>";
+                echo "<h4>" . getNombreSpot(36) . "</h4>";
             echo "</span>";
             
             $result = comprobarDinero();
@@ -77,7 +77,7 @@ global $db;
                     echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
                         echo "<div class='seccionDescripcionZonaImagen'>";
                             echo "<div class='seccionSpotImagen'>" ;
-                                $spotImagen = getFotoSpot(111);
+                                $spotImagen = getFotoSpot(36);
                                 echo $spotImagen;
                             echo "</div>";
                         echo "</div>";               

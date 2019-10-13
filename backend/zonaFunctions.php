@@ -81,7 +81,7 @@
                 echo "<div class='seccionDescripcionZona'>";
                     echo "<div class='seccionDescripcionZonaImagen'>";
                         if($spotID === 0){
-                            $imagenZona = "<img src='/design/img/zonas/" . $result[0]['imagenZona'] . "' style='border-radius:15px; border: 1px solid grey'>";
+                            $imagenZona = "<img src='/design/img/zonas/" . $result[0]['imagenZona'] . "' style=''>";
                             echo $imagenZona;
                         }
                         else{
@@ -89,7 +89,7 @@
                             $stmt = $db->query($sql);
                             $res = $stmt->fetchAll();
                             
-                            $imagenSpot = "<img src='/design/img/spots/" . $res[0]['imagenSpot'] . "' style='border-radius:15px; border: 1px solid silver'>";
+                            $imagenSpot = "<img src='/design/img/spots/" . $res[0]['imagenSpot'] . "' style='border-radius:15px; border: 1px solid silver;'>";
                             echo $imagenSpot;
                             
                         }
