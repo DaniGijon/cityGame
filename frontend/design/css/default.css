@@ -195,13 +195,42 @@ h4{
     margin-top: -71px;
 }
 
-#opcionMano{
-    background: white;
-    width: 200px;
-    height: 200px;
+#fondoMano{
+    background: rgba(0, 0, 0, 0.75);
+    width: 100%;
+    height: 100%;
     float: left;
     position:absolute;
-    z-index: 4;
+    z-index: 5;
+}
+
+#opcionMano{
+    background: white;
+    width: 600px;
+    height: 300px;
+    float: left;
+    position:absolute;
+    z-index: 5;
+}
+
+#manoTexto{
+    width: 100%;
+    height: 20%;
+    text-align: center;
+}
+
+.cualMano{
+    height: 100%;
+    width: 50%;
+    float:left;
+}
+
+#manoIzq{
+    background: pink;
+}
+
+#manoDer{
+    background: yellow;
 }
 
 #boxHolder{
@@ -213,6 +242,7 @@ h4{
     float: left;
     margin-left: 5px;
 }
+
 
 #tercioArriba{
     width:450px;
@@ -1313,6 +1343,15 @@ h4{
     background-repeat: no-repeat;
     margin-top: 10px;
     margin-left: 15px;
+}
+
+.sombraImagenSpot{
+    background-image: url("/design/img/export/sombra25.png");
+    height: 40px;
+    width: 380px;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+    margin-left: -5px;
 }
 
 #terriAlbum{
@@ -2687,7 +2726,7 @@ h4{
 .botonCerrajeria{
     width: 70px;
     height:40px;
-    background-image: url("/design/img/botones/botonLlave.png");
+    background-image: url("/design/img/botones/botonCerrajeria.png");
     background-repeat: no-repeat;
     border-radius: 20px;
     background-color: white;

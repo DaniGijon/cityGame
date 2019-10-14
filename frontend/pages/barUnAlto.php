@@ -12,12 +12,7 @@ global $db;
             
             echo "<div class='contenido'>";
                 echo "<span class='contenedor1'>"; 
-                /*
-                    echo "<div class='seccionSpotImagen'>" ;
-                        $imagenSpot = getFotoSpot(3);
-                        echo $imagenSpot;
-                    echo "</div>"; //FIN DE div seccionSpotImagen
-*/
+              
                     echo "<div class='seccionSpotOpciones'>";
                     echo "<div id='botonesComprarVender'>";
                         echo "<button id='botonComprar' class='tagTiendaComprar'>Terraza</button>";
@@ -153,7 +148,7 @@ global $db;
             echo "<div class='seccionSpotInfo'>";
                     echo "<div class = 'seccionContacto'>";
                         echo "<div class = 'mapaCallejero'>";
-                            echo "<iframe width='300' height='225' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.openstreetmap.org/export/embed.html?bbox=-4.115452766418458%2C38.67803066731481%2C-4.1016554832458505%2C38.683885029177475&amp;layer=mapnik&amp;marker=38.680965031981174%2C-4.108549833690631' style='border: 1px solid black'></iframe><br/><br>";    
+                            echo "<iframe width='300' height='225' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.openstreetmap.org/export/embed.html?bbox=-4.115452766418458%2C38.67803066731481%2C-4.1016554832458505%2C38.683885029177475&amp;layer=mapnik&amp;marker=38.680965031981174%2C-4.108549833690631' style='border: 1px solid silver; border-radius:15px'></iframe><br/><br>";    
                         echo "</div>";
                         echo "<div class = 'infoSpot'>";
                             echo "<table border = '0' style = 'text-align:left'>";
@@ -164,7 +159,7 @@ global $db;
                                 echo "<td><div class='telefonoMini'></div>  926 42 53 13<br></td>";
                                 echo "</tr>";
                                 echo "<tr>";
-                                echo "<td><div class='relojMini'></div> ??????</td>";
+                                echo "<td><div class='relojMini'></div> 06:00 - 24:00</td>";
                                 echo "</tr>";
                             echo "</table>";
                         echo "</div>";

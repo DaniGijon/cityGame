@@ -1220,19 +1220,23 @@
     </tr>
     
         </table>
-        
-    <div id="opcionMano" style="display:none;">
-        <div id="manoTexto">
-            ¿En qué mano quieres equiparlo?
-        </div>
-        <div id="manoIzq" class="cualMano">
-            Mano Izquierda
-        </div>
-        <div id="manoDer" class="cualMano">
-            Mano Derecha
-        </div>
-    </div>
-    
+  <?php              
+    echo '<div id="fondoMano" style="display:none;">';
+       echo '<div id="opcionMano" style="display:none;">';
+            echo '<div id="manoTexto">';
+                echo "¿En qué mano quieres equiparlo?";
+            echo "</div>";
+            
+            echo '<div id="manoDer" class="cualMano">';
+                echo "Mano Derecha";
+            echo "</div>";
+            echo '<div id="manoIzq" class="cualMano">';
+                echo "Mano Izquierda";
+            echo "</div>";
+            
+        echo "</div>"; //fin #opcionMano
+    echo "</div>"; //fin #fondoMano           
+  ?>  
     <script>
                 $(".objetoBox").click(function(event){
                    var id = $(this).attr('id');
@@ -1245,15 +1249,20 @@
                       
                 });
                 
-                
+                $("#fondoMano").click(function(){
+                    $("#fondoMano").toggle();
+                });
                
                 $(".nuevoBoxBolsa").click(function(){
                    var objetoBolsaId = $(this).attr('id');
                    var areaCuerpoId = $("#areaCuerpo").text();
                    if(objetoBolsaId >=300 && objetoBolsaId < 400){
-                       $("#opcionMano").css('left',event.pageX - 300);
-                       $("#opcionMano").css('top',event.pageY - 200);
-                       $("#opcionMano").toggle();
+                       $("#opcionMano").css('left',300);
+                       $("#opcionMano").css('top',100);
+                       $("#opcionMano").show();
+                       $("#fondoMano").css('left',0);
+                       $("#fondoMano").css('top',0);
+                       $("#fondoMano").toggle();
                        
                        $(".cualMano").click(function(){
                             var manoId = $(this).attr('id');

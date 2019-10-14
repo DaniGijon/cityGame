@@ -62,10 +62,15 @@ global $db;
                 
             echo "</span>"; //FIN Contenedor2
             
-            echo "<div class='seccionSpotImagen'>" ;
-                        $imagenSpot = getFotoSpot(1);
-                        echo $imagenSpot;
-                    echo "</div>"; //FIN DE div seccionSpotImagen
+            echo "<div class='seccionSpotImagen' >" ;
+                $imagenSpot = getFotoSpot(1);
+                echo $imagenSpot;
+                        
+                echo"<div class='sombraImagenSpot'>";
+                echo "</div>";
+            echo "</div>"; //FIN DE div seccionSpotImagen
+            
+            
             
             echo "</div>"; //FIN DE div contenido
 

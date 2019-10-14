@@ -84,9 +84,10 @@ global $db;
             echo "<div class='seccionSpotInfo'>";
                 echo "<div class = 'seccionContacto'>";
                     echo "<div class = 'mapaCallejero'>";
-                        echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.116472005844117%2C38.67974766141164%2C-4.10267472267151%2C38.68560188282012&amp;layer=mapnik&amp;marker=38.68267929952015%2C-4.109571218359633" style="border: 1px solid black"></iframe><br/>';
+                        echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.116472005844117%2C38.67974766141164%2C-4.10267472267151%2C38.68560188282012&amp;layer=mapnik&amp;marker=38.68267929952015%2C-4.109571218359633" style="border: 1px solid silver; border-radius:15px"></iframe><br/><br>';
                     echo "</div>";
-                    echo "<div class = 'semiTransparente'>";
+                    
+                  
                     echo "<div class = 'infoSpot'>";
                         echo "<table border = '0' style = 'text-align:left'>";
                             echo "<tr>";
@@ -96,11 +97,10 @@ global $db;
                                echo "<td><div class='telefonoMini'></div>  926 04 71 96<br></td>";
                             echo "</tr>";
                             echo "<tr>";
-                                echo "<td><div class='relojMini'></div> 08:30 - 18:30 (Lunes a Viernes)</td>";
+                                echo "<td><div class='relojMini'></div> 08:00 - 19:00 (Lunes a Viernes)</td>";
                             echo "</tr>";
                         echo "</table>";
                     echo "</div>";
-                    echo "</div>"; //FIN Semitransparente
                 echo "</div>";
                     
                 echo "<div class = 'seccionInsignia'>";

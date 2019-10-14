@@ -81,7 +81,7 @@
                 echo "<div class='seccionDescripcionZona'>";
                     echo "<div class='seccionDescripcionZonaImagen'>";
                         if($spotID === 0){
-                            $imagenZona = "<img src='/design/img/zonas/" . $result[0]['imagenZona'] . "' style=''>";
+                            $imagenZona = "<img src='/design/img/zonas/" . $result[0]['imagenZona'] . "' style='border-radius:15px; border:1px solid silver'>";
                             echo $imagenZona;
                         }
                         else{

@@ -7,7 +7,7 @@ function getFotoSpot($idS){
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
-    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "'>";
+    return "<img src='/design/img/spots/" . $result[0]['imagenSpot'] . "' style='border:1px solid silver; border-radius:15px;'>";
 
 }
 
