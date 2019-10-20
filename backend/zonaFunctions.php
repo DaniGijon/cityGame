@@ -240,6 +240,9 @@ $(".irA").click(function(event){
         elseif($iconoSpot === 'trabajo'){
             echo "<div class = 'iconoSpotTrabajo iconoSpot'></div>";
         }
+        elseif($iconoSpot === 'banco'){
+            echo "<div class = 'iconoSpotBanco iconoSpot'></div>";
+        }
     }
     
     if(isset($_GET['dibujarZona'])){

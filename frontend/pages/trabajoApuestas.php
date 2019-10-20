@@ -113,6 +113,9 @@ global $db;
                                     echo "<div class='seccionSpotImagen'>" ;
                                         $spotImagen = getFotoSpot(0);
                                         echo $spotImagen;
+                                        
+                                        echo"<div class='sombraImagenSpot'>";
+                                        echo "</div>";
                                     echo "</div>";
                                 echo "</div>";
                             echo "</div>"; //FIN opcionSpot0

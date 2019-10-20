@@ -19,7 +19,7 @@ global $db;
                     echo "<div class='seccionSpotOpciones'>";
                     echo "<div class='semiTransparente'>"; 
                         echo "<div class='textoDependiente'>";
-                            echo "\"Porque ahí pone <i>incienso</i> que si no, juraría que este colocón tonto es por el olorzaco a marihuana\".";
+                            echo "\"Es aconsejable tener amigos tanto en el cielo como en el infierno\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/yoHombre.png">';
@@ -94,6 +94,9 @@ global $db;
                                     echo "<div class='seccionSpotImagen'>" ;
                                         $spotImagen = getFotoSpot(4);
                                         echo $spotImagen;
+                                        
+                                        echo"<div class='sombraImagenSpot'>";
+                                    echo "</div>";
                                     echo "</div>";
                                 echo "</div>";
                                

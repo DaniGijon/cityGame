@@ -262,56 +262,15 @@ global $db;
                 echo "</span>"; //FIN Contenedor1
                 
                 echo "<span class='contenedor2'>";
-                
-                echo "<div class='seccionSpotInfo'>";
-                    echo "<div class = 'seccionContacto'>";
-                        echo "<div class = 'mapaCallejero'>";
-                            echo "<iframe width='300' height='225' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.openstreetmap.org/export/embed.html?bbox=-4.115635156631471%2C38.677528124665%2C-4.101837873458863%2C38.682972148759305&amp;layer=mapnik&amp;marker=38.68025651175634%2C-4.108749389779405' style='border: 1px solid black'></iframe><br/><br>";    
-                        echo "</div>";
-                        echo "<div class = 'semiTransparente'>";
-                        echo "<div class = 'infoSpot'>";
-                            echo "<table border = '0' style = 'text-align:left'>";
-                                echo "<tr>";
-                                    echo "<td><div class='mapaMini'></div> C/Asdrúbal, 34<br></td>";
-                                echo "</tr>";
-                                echo "<tr>";
-                                echo "<td><div class='telefonoMini'></div> ????????<br></td>";
-                                echo "</tr>";
-                                echo "<tr>";
-                                echo "<td><div class='relojMini'></div> 09:00 - 21:00</td>";
-                                echo "</tr>";
-                            echo "</table>";
-                        echo "</div>";
-                        echo "</div>"; //FIN Semitransparente
-                    echo "</div>";
-                    
-                    echo "<div class = 'seccionInsignia'>";
-                        $fechaInsignia = comprobarInsignia(12);
-                        if ($fechaInsignia != '0'){
-                            $fotoInsignia = getFotoInsignia(12);
-                            echo "<div class='fotoInsignia'>";
-                                echo $fotoInsignia . "<br>";
+                    echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
+                        echo "<div class='seccionDescripcionZonaImagen'>";
+                            echo "<div class='seccionSpotImagen'>" ;
+                                $spotImagen = getFotoSpot(12);
+                                echo $spotImagen;
                             echo "</div>";
-                            echo "<span class='textoInsignia'>";
-                                echo "Nos visitaste el día: <b>" . date( 'd/m/Y',strtotime($fechaInsignia)) . "</b><br>¡Gracias por venir!";
-                            echo "</span>";
-                        }
-                        else{
-                            echo "<div class='fotoInsignia'>";
-                                echo "<img src='/design/img/insignias/insigniaVacia'><br>";
-                            echo "</div>";
-                            echo "<div class='textoInsignia'>";
-                                echo "Visítanos y pide al dependiente tu Código de Activación";
-                            echo "</div>";
-                          /*  echo "<form action='?bPage=comprobaciones&action=activarCodigo' method='post'>";
-                                echo "Introduce el código: <input type='text' name='codigoInsignia'><br>";
-                                echo "<input type='submit'>";
-                            echo "</form>";*/
-                        }
-                    echo "</div>";
-                echo "</div>";
-                
-                echo "</span>"; //FIN Contenedor2
+                        echo "</div>";               
+                    echo "</div>"; //FIN opcionSpot0
+                echo "</span>"; //FIN de contenedor2
                 
 
 ?>

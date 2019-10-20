@@ -195,7 +195,7 @@ global $db;
                                         echo '<input type="checkbox" name="cbox1" value="mascaraBomba">';
                                     echo "</div>";
                                     echo "<div class='opcionesTiendaTitulo'>";
-                                        echo 'Máscara Explosiva';
+                                        echo 'Máscara Bomba';
                                     echo "</div>";
                                     echo '<label for="cbox4"><div id="opcionBox">' . $imagenMascaraBomba . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label>';
                                 echo "</div>";
@@ -204,7 +204,7 @@ global $db;
                                         echo '<input type="checkbox" name="cbox1" value="mascaraMejora">';
                                     echo "</div>";
                                     echo "<div class='opcionesTiendaTitulo'>";
-                                        echo 'Máscara de Mejora';
+                                        echo 'Máscara de Mejoras';
                                     echo "</div>";
                                     echo '<label for="cbox4"><div id="opcionBox">' . $imagenMascaraMejora . '</div><div class="monedaTienda"></div><div class="precioTienda">1000</div></label>';
                                 echo "</div>";  
@@ -259,6 +259,15 @@ global $db;
                 echo "</span>"; //FIN Contenedor1
                 
                 echo "<span class='contenedor2'>";
+                
+                            echo "<div class='opcionSpot0 opcionSpot' style='display: inline'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    echo "<div class='seccionSpotImagen'>" ;
+                                        $spotImagen = getFotoSpot(29);
+                                        echo $spotImagen;
+                                    echo "</div>";
+                                echo "</div>";
+                            echo "</div>"; //FIN opcionSpot0
                 
                             echo "<div class='opcionSpot1 opcionSpot'>";
                                 echo "<div class='seccionDescripcionZonaImagen'>";
@@ -323,16 +332,19 @@ global $db;
                             
                             if (valor === 'mascaraConejo') {
                                 $(".opcionSpot1").show();
+                                $(".opcionSpot0").hide();
                                 $(".opcionSpot2").hide();
                                 $(".opcionSpot3").hide();
                             }
                             else if (valor === 'mascaraBomba'){
                                 $(".opcionSpot2").show();
+                                $(".opcionSpot0").hide();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot3").hide();
                             }
                             else if (valor === 'mascaraMejora'){
                                 $(".opcionSpot3").show();
+                                $(".opcionSpot0").hide();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot2").hide();
                             }

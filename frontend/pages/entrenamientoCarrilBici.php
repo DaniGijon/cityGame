@@ -94,6 +94,9 @@ global $db;
                                     echo "<div class='seccionSpotImagen'>" ;
                                         $spotImagen = getFotoSpot(6);
                                         echo $spotImagen;
+                                        
+                                        echo"<div class='sombraImagenSpot'>";
+                                        echo "</div>";
                                     echo "</div>";
                                 echo "</div>";
                                

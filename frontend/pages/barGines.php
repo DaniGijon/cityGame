@@ -149,7 +149,7 @@ global $db;
             echo "<div class='seccionSpotInfo'>";
                     echo "<div class = 'seccionContacto'>";
                         echo "<div class = 'mapaCallejero'>";
-                            echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.116584658622743%2C38.682046693879485%2C-4.109686017036439%2C38.684973770412256&amp;layer=mapnik&amp;marker=38.68351295999708%2C-4.113133192258829" style="border: 1px solid black"></iframe><br/>';
+                            echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.116584658622743%2C38.682046693879485%2C-4.109686017036439%2C38.684973770412256&amp;layer=mapnik&amp;marker=38.68351295999708%2C-4.113133192258829" style="border: 1px solid silver; border-radius:15px;"></iframe><br/><br>';
                         echo "</div>";
                         echo "<div class = 'infoSpot'>";
                             echo "<table border = '0' style = 'text-align:left'>";

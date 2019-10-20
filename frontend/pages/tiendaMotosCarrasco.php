@@ -266,23 +266,21 @@ global $db;
                 echo "<div class='seccionSpotInfo'>";
                     echo "<div class = 'seccionContacto'>";
                         echo "<div class = 'mapaCallejero'>";
-                            echo "<iframe width='300' height='225' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.openstreetmap.org/export/embed.html?bbox=-4.115635156631471%2C38.677528124665%2C-4.101837873458863%2C38.682972148759305&amp;layer=mapnik&amp;marker=38.68025651175634%2C-4.108749389779405' style='border: 1px solid black'></iframe><br/><br>";    
+                            echo '<iframe width="300" height="225" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.1087204217910775%2C38.68182056281338%2C-4.101821780204774%2C38.68474764859568&amp;layer=mapnik&amp;marker=38.68328803708945%2C-4.105268955427164" style="border: 1px solid silver; border-radius:15px;"></iframe><br/><br>';    
                         echo "</div>";
-                        echo "<div class = 'semiTransparente'>";
                         echo "<div class = 'infoSpot'>";
                             echo "<table border = '0' style = 'text-align:left'>";
                                 echo "<tr>";
-                                    echo "<td><div class='mapaMini'></div> C/Asdrúbal, 34<br></td>";
+                                    echo "<td><div class='mapaMini'></div> C/Gran Capitán, 40<br></td>";
                                 echo "</tr>";
                                 echo "<tr>";
-                                echo "<td><div class='telefonoMini'></div> ????????<br></td>";
+                                echo "<td><div class='telefonoMini'></div> 926 41 25 67<br></td>";
                                 echo "</tr>";
                                 echo "<tr>";
-                                echo "<td><div class='relojMini'></div> 09:00 - 21:00</td>";
+                                echo "<td><div class='relojMini'></div> 09:00 - 14:00, 17:00 - 20:30</td>";
                                 echo "</tr>";
                             echo "</table>";
                         echo "</div>";
-                        echo "</div>"; //FIN Semitransparente
                     echo "</div>";
                     
                     echo "<div class = 'seccionInsignia'>";

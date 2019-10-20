@@ -24,7 +24,7 @@ global $db;
                         echo "<div id='criba'>";
                             /*echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';*/
                             echo "<div class='textoDependiente'>";
-                                echo "El capataz no paga mucho, pero no tengo dinero ni para imprimir un currículum.";
+                                echo "El capataz no paga mucho, pero es que no tengo dinero ni para imprimir un currículum.";
                             echo "</div>";
                             echo "<div class='imagenDependiente'>";
                                 echo '<img src="/design/img/dependientes/yoHombre.png">';
@@ -144,13 +144,13 @@ global $db;
                         $(":checkbox").click(function(){
                             var valor = $(this).val();
                             
-                            if (valor === 'qualy') {
+                            if (valor === 'ratito') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
                                 $(".opcionSpot3").hide();
                                 $(".opcionSpot0").hide();
                             }
-                            else if (valor === 'carrera'){
+                            else if (valor === 'solasol'){
                                 $(".opcionSpot2").show();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot3").hide();
@@ -198,7 +198,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente'>";
                                     echo "<span class='textoDescripcionSpot'>";
-                                        $descripcionZona = "¡Capta rápido apostantes para la Qualy que está a punto de empezar!";
+                                        $descripcionZona = "¿Sabes qué? Hace falta cribar unas 400 toneladas de roca, grava y arena para obtener un quilate de diamante.";
                                         echo $descripcionZona;
                                     echo "</span>";
                                     echo "</div>";
@@ -213,7 +213,7 @@ global $db;
                                 echo "<div class='seccionDescripcionZonaTexto'>";
                                     echo "<div class='semiTransparente'>";
                                     echo "<span class='textoDescripcionSpot'>";
-                                        $descripcionZona = "Coloca apuestas para la próxima carrera que empezará en 30 Minutos";
+                                        $descripcionZona = "Lo peor de echar jornadas tan largas es que se repiten demasiado las canciones de la radio.";
                                         echo $descripcionZona;
                                     echo "</span>";
                                     echo "</div>";

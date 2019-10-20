@@ -21,7 +21,8 @@ global $db;
                     echo "<div class='semiTransparente'>"; 
                     echo "<div id='parroquia'>";
                         echo "<div class='textoDependiente'>";
-                            echo "\"Es aconsejable tener amigos tanto en el cielo como en el infierno\".";
+                            
+                            echo "\"Porque ahí pone <i>incienso</i> que si no, juraría que este colocón tonto es por el olorzaco a marihuana\".";
                         echo "</div>"; //FIN textoDependiente
                         echo "<div class='imagenDependiente'>";
                             echo '<img src="/design/img/dependientes/yoHombre.png">';
