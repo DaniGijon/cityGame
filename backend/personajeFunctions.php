@@ -44,6 +44,15 @@
                         $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7";
                         $stmt = $db->query($sql);
                         $objetosDB = $stmt->fetchAll();
+                        
+                        echo "<div id='capaInventarioSuperior'>";
+                            echo "<div id='inventarioTitulo' class='coolWhiteGigante'>";
+                                echo "MOCHILA GRANDE";
+                            echo "</div>";
+                            echo "<div id='inventarioX'>";
+                            echo "</div>";
+                        echo "</div>";
+                        
                         echo "<div id='capaFondo'>";
                         echo "<span id='areaCuerpo' style='display:none'></span>";
                         $inv = 8; //slot inicial de inventario
@@ -1251,6 +1260,10 @@
                 
                 $("#fondoMano").click(function(){
                     $("#fondoMano").toggle();
+                });
+                
+                $("#inventarioX").click(function(){
+                    $("#personajeArea").load("index.php?page=personaje&nonUI")
                 });
                
                 $(".nuevoBoxBolsa").click(function(){

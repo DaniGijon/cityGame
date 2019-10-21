@@ -939,8 +939,37 @@ h4{
     background-image: url("/design/img/background/maletinSin.png");
 }
 
+#capaInventarioSuperior{
+    width: 100%;
+    height: 80px;
+}
+
+#inventarioTitulo{
+    width: 80%;
+    height: 60px;
+    float: left;
+    padding-top:20px;
+    margin-left: 5%;
+    margin-top:35px;
+    background-image: url("/design/img/background/inventarioTituloBackground.png");
+    background-position-x: 50%;
+    background-position-y: 30%;
+    background-repeat: no-repeat;
+}
+
+#inventarioX{
+    margin-top:32px;
+    margin-right: 10px;
+    width: 20%;
+    max-width: 50px;
+    height: 80px;
+    float:right;
+    background-image: url("/design/img/botones/buttonX2.png");
+    background-repeat: no-repeat;
+}
+
 #capaFondo{
-    top:80px;
+    /*top:80px;*/
     display:none;
     width:433px;
     height:333px;
