@@ -31,7 +31,7 @@ global $db;
                                 echo '<input type="checkbox" name="cbox1" value="aventuraPatos">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Meterme al Estanque';
+                                echo 'Nadar en el Estanque';
                             echo "</div>";
                             echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
@@ -41,9 +41,19 @@ global $db;
                                 echo '<input type="checkbox" name="cbox1" value="aventuraPatosDebil">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
-                                echo 'Mesas de Picnic';
+                                echo 'Caminar por la orilla';
                             echo "</div>";
                             echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/entrenamiento/ritmitoGeneroso.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
+                        echo "</div>";
+                        
+                        echo "<div class='opcionesTienda'>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="pescar">';
+                            echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo 'Lanzar la caña';
+                            echo "</div>";
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/pescar/pescar.png">' . '</div><div class="relojMini"></div><div class="precioTienda">10M</div></label>';
                         echo "</div>";
                         
                         echo "<div class='submitTienda'>";
@@ -69,10 +79,18 @@ global $db;
                             if (valor === 'aventuraPatos') {
                                 $(".opcionSpot1").show();
                                 $(".opcionSpot2").hide();
+                                $(".opcionSpot3").hide();
                                 $(".opcionSpot0").hide();
                             }
                             else if (valor === 'aventuraPatosDebil'){
                                 $(".opcionSpot2").show();
+                                $(".opcionSpot3").hide();
+                                $(".opcionSpot1").hide();
+                                $(".opcionSpot0").hide();
+                            }
+                            else if (valor === 'pescar'){
+                                $(".opcionSpot3").show();
+                                $(".opcionSpot2").hide();
                                 $(".opcionSpot1").hide();
                                 $(".opcionSpot0").hide();
                             }
@@ -122,12 +140,28 @@ global $db;
                         
                                     echo "<span class='textoDescripcionSpot'>";
                                         echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
-                                            $descripcionZona = "Me sentaré un rato en las mesas de picnic, aunque no sé si será suficiente para evitar a los monstruos.";
+                                            $descripcionZona = "Caminaré por la orilla del estanque, aunque no sé si será suficiente para evitar a los monstruos.";
                                             echo $descripcionZona;
                                         echo "</div>";
                                     echo "</span>";
                                 echo "</div>"; //Fin descripcionZonaTexto
                             echo "</div>"; //FIN opcionSpot2
+                            
+                            echo "<div class='opcionSpot3 opcionSpot'>";
+                                echo "<div class='seccionDescripcionZonaImagen'>";
+                                    $imagenSpot = "<img src='/design/img/entrenamiento/carrilBici2.png'>";
+                                    echo $imagenSpot;
+                                echo "</div>";
+                                echo "<div class='seccionDescripcionZonaTexto'>";
+                        
+                                    echo "<span class='textoDescripcionSpot'>";
+                                        echo "<div class='semiTransparente' style='border-radius: 0px 0px 10px 10px'>";
+                                            $descripcionZona = "¡A ver si pican!";
+                                            echo $descripcionZona;
+                                        echo "</div>";
+                                    echo "</span>";
+                                echo "</div>"; //Fin descripcionZonaTexto
+                            echo "</div>"; //FIN opcionSpot3
                        
                     echo "</span>"; //FIN de contenedor2
 

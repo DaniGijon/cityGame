@@ -2408,7 +2408,100 @@ function accionSpot($box){
                 $db->query($sql);
             }
                 
-            break;   
+            break; 
+        
+        //MISION 21: BUSCANDO A TENACITAS    
+        case 'misionTenacitas':
+            $sql = "SELECT * FROM progresos WHERE idP='$id' AND idM='21'";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            
+            if(isset($result[0])){ //Si ya tengo comenzada la mision
+                if($result[0]['completada']==='0'){
+                    //Compruebo en que etapa me encuentro ahora mismo
+                    $etapaActual = $result[0]['progreso'];
+                    if($etapaActual === '1'){ //Si estoy en la 1a etapa, debo entregar a Tenacitas a su dueña
+                        //Ver Objetos que llevo desequipados
+                        $objetosDesequipados = objetosDesequipados();
+                        foreach($objetosDesequipados as $cadaObjeto){
+                            if($cadaObjeto['id'] === '7'){//Si es TENACITAS, la elimino y recojo recompensa y completo la mision y notifico mensaje mision
+                                //VER QUE SLOT QUEDA LIBRE EN EL INVENTARIO
+                                $sql = "SELECT inventario.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot > 7 AND inventario.idO = '7'";
+                                $stmt = $db->query($sql);
+                                $resultado = $stmt->fetchAll();
+                                $slotLibre = $resultado[0]['slot'];
+
+                                //BORRAR EL OBJETO VENDIDO
+                                $sql = "UPDATE inventario SET idO='0' WHERE (idP='$id' AND slot = '$slotLibre')";
+                                $db->query($sql);
+
+                                //Recojo Recompensa: +300exp
+                                $sql = "UPDATE personajes SET experiencia = experiencia + 300 WHERE id = '$id'";
+                                $db->query($sql);
+
+                                //Recojo Recompensa: +500 monedas
+                                $sql = "UPDATE personajes SET cash = cash + 500 WHERE id = '$id'";
+                                $db->query($sql);
+
+                                //Completo la Mision
+                                $sql = "UPDATE progresos SET completada = 1 WHERE idP = '$id' AND idM = '21'";
+                                $db->query($sql);
+
+                                //Genero un informe de Mision Cumplida
+                                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Misión Cumplida','¡Has completado la Misión <i>Buscando a Tenacitas</i>!<br>Al devolver la criaturita a su dueña ganas +300 EXP y además está tan feliz que decide recompensarte con un dinerillo. Obtienes +500 monedas. ¡Bien hecho!','etapa.png')";
+                                $db->query($sql);
+
+                                //Comprobar si subo de nivel
+                                $sql = "SELECT nivel FROM personajes WHERE id='$id'";
+                                $stmt = $db->query($sql);
+                                $personaje = $stmt->fetchAll();
+                                $nuevoNivel = comprobarSuboNivel($id);
+                                if($nuevoNivel != $personaje[0]['nivel'] ){ //sube de nivel
+                                    $avances = 5;
+                                    //Mirar si lleva algun objeto con la especialidad AVANCE EXTRA
+                                    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+                                    $stmt = $db->query($sql);
+                                    $objetosEquipados = $stmt->fetchAll();
+
+                                    foreach ($objetosEquipados as $cadaObjeto) {
+                                        if($cadaObjeto['especial']==='avance extra'){
+                                            $avances = $avances + 1;
+                                        }   
+                                    }
+
+                                    $sql = "UPDATE personajes SET nivel = personajes.nivel+1, avances = personajes.avances + $avances WHERE id='$id'";
+                                    $db->query($sql);
+                                    //Generar mensaje del informe de la subida de nivel
+                                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Subiste de Nivel','¡Enhorabuena! Acabas de subir a Nivel $nuevoNivel. <br> Obtienes $avances Avances para mejorar habilidades en la ventana de Personaje.','subirNivel.png')";
+                                    $db->query($sql);
+                                }
+
+                                break;
+
+                            }
+                            else{
+                                $box = "No he encontrado aún a Tenacitas, pero la traeré de vuelta.";
+                            }
+                        }
+                    
+                    
+                    }
+                    else{
+                        $box = "Ya completaste esta misión.";
+                    }
+                }
+                
+            }
+            else{
+                //Insertar la Mision en el registro de Misiones y Generar un informe
+                $sql = "INSERT INTO progresos (idP,idM,progreso,completada) VALUES('$id','21','1','0')";
+                $db->query($sql);
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Misión Aceptada','Acabas de aceptar la misión <i>Buscando a Tenacitas</i>.<br>Su dueña dice que les atacaron en el <b>Estanque de Patos</b> y ya no volvió a saber nada más de la pobre criaturita. ¿Qué tal si empiezo a buscar por allí?','subirNivel.png')";
+                $db->query($sql);
+            }
+                
+            break;
         
             
         // MISION 3: BAR UN ALTO

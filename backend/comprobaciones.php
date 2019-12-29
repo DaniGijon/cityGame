@@ -107,6 +107,25 @@ function comprobarIluminacion(){
     return $tengoIluminacion;
 }
 
+function comprobarCana(){
+    global $db;
+    $id = $_SESSION['loggedIn']; 
+    
+    $sql = "SELECT objetos.* FROM inventario JOIN objetos ON inventario.idO = objetos.id WHERE inventario.idP = '$id' AND inventario.slot <= 7";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll();
+    
+    $tengoRevolver = 0;
+    
+    foreach ($result as $cadaObjeto){
+        if($cadaObjeto['id'] === '307'){ //SI LLEVO EQUIPADO UNA CAÑA DE PESCAR
+            $tengoCana = 1;
+            break;
+        }
+    }
+    return $tengoCana;
+}
+
 function comprobarRevolver(){
     global $db;
     $id = $_SESSION['loggedIn']; 

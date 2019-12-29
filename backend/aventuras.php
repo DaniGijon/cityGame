@@ -9,6 +9,111 @@ function zona($box){
     
     
     switch($box){
+        //Caso especial: PESCAR
+        case 'pescar':
+            $agotamiento = 3;
+            $puedoHacerlo = comprobarEnergia($agotamiento);
+            $tengoCana = comprobarCana();
+            if($puedoHacerlo === 1 && $tengoCana === 1){ 
+                //Voy a pescar algo y voy a notificarselo
+                $pesca = rand(1, 30);
+                if($pesca <= 18){
+                    //No pican
+                    //Genero un informe de Pesca
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Pesca','No pican...','pescar.png')";
+                    $db->query($sql);
+                }
+                if($pesca > 18 && $pesca <= 25){
+                    //pescado crudo
+                    //Miro que tenga algun slot libre en el inventario
+                    $slotDondeGuardo = comprobarSlotLibre();
+                    if($slotDondeGuardo === -1){
+                        $mensajeObjeto = " Lo devolveré al agua, porque mi inventario está lleno.";
+                    }
+                    else{
+                        $mensajeObjeto = ' ¡Meeee lo llevo! \n\nObtengo 1x Pescado Crudo';
+                        //AÑADIR AL INVENTARIO
+                        $sql = "UPDATE inventario SET idO = '933' WHERE idP='$id' AND slot = '$slotDondeGuardo'";
+                        $db->query($sql);
+                    }
+                    //Genero un informe de Pesca
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Pesca','¡EEEH! Han mordido el anzuelo, ¡cacho pez cómo tira! $mensajeObjeto','pescar.png')";
+                    $db->query($sql);
+                }
+                if($pesca > 25 && $pesca <= 27){
+                    //monedas
+                     //Genero un informe de Pescar
+                    $cantidad = rand(20,80);
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Pescar','¡Anda! Al recoger sedal vienen unas monedas enganchadas al anzuelo. ¿Será que hay un tesoro hundido ahí abajo? Obtengo $cantidad monedas.','rebuscar.png')";
+                    $db->query($sql);
+                    
+                    $sql = "UPDATE personajes SET cash = cash + $cantidad WHERE id='$id'";
+                    $db->query($sql);
+                }
+                if($pesca > 27 && $pesca <= 29){
+                    //cofre
+                    //Miro que tenga algun slot libre en el inventario
+                    $slotDondeGuardo = comprobarSlotLibre();
+                    if($slotDondeGuardo === -1){
+                        $mensajeObjeto = " Lo devolveré al agua, porque mi inventario está lleno.";
+                    }
+                    else{
+                        $idCofre = rand(900, 909);
+                        if ($idCofre == 900)
+                            $mensajeObjeto = ' ¡Puaj! es una caja cubierta de algas y óxido.  \n\nObtengo 1x Cajita oxidada';
+                        elseif ($idCofre == 901)
+                            $mensajeObjeto = ' ¡Qué asco! alguien ha tirado una caja aquí y se ha estado pudriendo.  \n\nObtengo 1x Caja pequeña de madera';
+                        elseif ($idCofre == 902)
+                            $mensajeObjeto = ' ¡Mmeh! Una cajita. Se le habrá caído a alguien.  \n\nObtengo 1x Caja pequeña de metal';
+                        elseif ($idCofre == 903)
+                            $mensajeObjeto = ' ¡Oye! es un pequeño cofre, está muy deteriorado.  \n\nObtengo 1x Cofre pequeño oxidado';
+                        elseif ($idCofre == 904)
+                            $mensajeObjeto = ' ¡Oh! la madera está algo podrida pero es un cofre, y su interior parece intacto.  \n\nObtengo 1x Cofre pequeño de madera';
+                        elseif ($idCofre == 905)
+                            $mensajeObjeto = ' ¡Anda! es un pequeño cofre, y pesa lo suyo.  \n\nObtengo 1x Cofre pequeño de metal';
+                        elseif ($idCofre == 906)
+                            $mensajeObjeto = ' ¡Eh! es un cofre grande, tan grande como sus marcas de óxido.  \n\nObtengo 1x Cofre grande oxidado';
+                        elseif ($idCofre == 907)
+                            $mensajeObjeto = ' Un momento... no son restos de una balsa, ¡es una especie de baúl!  \n\nObtengo 1x Cofre grande de madera';
+                        elseif ($idCofre == 908)
+                            $mensajeObjeto = ' ¡Mira eso! puede que sea el tesoro de algún pirata.  \n\nObtengo 1x Cofre grande de metal';
+                        elseif ($idCofre == 909)
+                            $mensajeObjeto = ' ¡Cómo brilla!... Es un baúl adornado con pedrulos y todo. ¡Eso debe valer una pasta!  \n\nObtengo 1x Cofre de piedras preciosas';
+                        //AÑADIR AL INVENTARIO
+                        $sql = "UPDATE inventario SET idO = '$idCofre' WHERE idP='$id' AND slot = '$slotDondeGuardo'";
+                        $db->query($sql);
+                    }
+                    //Genero un informe de Pesca
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Pesca','Algo se ha enganchado al anzuelo. $mensajeObjeto','pescar.png')";
+                    $db->query($sql);
+                }
+                if($pesca == 30){
+                    //Tenacitas
+                    //Miro que tenga algun slot libre en el inventario
+                    $slotDondeGuardo = comprobarSlotLibre();
+                    if($slotDondeGuardo === -1){
+                        $mensajeObjeto = " Lo devolveré al agua, porque mi inventario está lleno.";
+                    }
+                    else{
+                        $mensajeObjeto = ' ¡Hola Teniii! \n\nObtengo 1x Tenacitas';
+                        //AÑADIR AL INVENTARIO
+                        $sql = "UPDATE inventario SET idO = '7' WHERE idP='$id' AND slot = '$slotDondeGuardo'";
+                        $db->query($sql);
+                    }
+                    //Genero un informe de Pesca
+                    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Pesca','¡AYYY! Han mordido el anzuelo y sea lo que sea ¡está gordísimo!... $mensajeObjeto','pescar.png')";
+                    $db->query($sql);
+                }
+                //Restar la energia necesaria para pescar y ponerle tiempo accion
+                $sql = "UPDATE personajes SET energia = energia-$agotamiento, accion = ADDTIME(NOW(), '0:01:0') WHERE id='$id'";
+                $stmt = $db->query($sql);
+            }
+            else{
+                $box = "Necesito una Caña para pescar y un poco de energía para tirar con fuerza.";
+            }
+            break;
+        
+        
         case 'aventuraLosPinos':
             $zona = 1;
             $barrio = 1;
@@ -2029,9 +2134,11 @@ function zona($box){
             exit;
     }
     
-    //Generar mensaje del informe de la aventura 
-    $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Aventura','$box','$imagenMonstruo')";
-    $db->query($sql);
+    //Generar mensaje del informe de la aventura excepto cuando sea Pescar
+    if($box != "pescar"){
+        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Aventura','$box','$imagenMonstruo')";
+        $db->query($sql); 
+    }
     header("location: ?page=mensajes");
 }
 

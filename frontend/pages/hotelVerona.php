@@ -5,8 +5,6 @@ global $db;
         $id = $_SESSION['loggedIn'];
         comprobarZona3Barrio9();
         
-        $estoyLibre = comprobarEspera();
-            if($estoyLibre === 1){
                 
             
         echo "<div id='moduloZona'>";
@@ -16,7 +14,13 @@ global $db;
             
             echo "<div class='contenido'>";
             echo "<span class='contenedor1'>"; 
+            echo "<div class='seccionSpotOpciones'>";
+                    echo "<div id='botonesComprarVender'>";
+                        echo "<button id='botonComprar' class='tagTiendaComprar'>Recepción</button>";
+                        echo "<button id='botonVender' class='tagTiendaVender'>Restaurante</button>";
+                    echo "</div>";
             echo "<div class='semiTransparente'>"; 
+            echo "<div id='recepcion'>";
             echo "<div class='textoDependiente'>";
                 echo "\"¡Qué sueñoooo!\".";
             echo "</div>"; //FIN textoDependiente
@@ -27,10 +31,10 @@ global $db;
             echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
                     echo "<div class='opcionesTienda'>";
                         echo "<div class='opcionesTiendaCheckbox'>";
-                            echo '<input type="checkbox" name="cbox1" value="habitacionDoble">';
+                            echo '<input type="checkbox" name="cbox1" value="habitacionEstandar">';
                         echo "</div>";
                         echo "<div class='opcionesTiendaTitulo'>";
-                            echo 'Habitación Doble';
+                            echo 'Habitación Estándar';
                         echo "</div>";
                         echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeIrlandes">' . '</div><div class="monedaTienda"></div><div class="precioTienda">50</div><div class="relojMini"></div><div class="vidaTienda">30M</div></label>';
                     echo "</div>";
@@ -63,7 +67,62 @@ global $db;
                         $dineroEnCash = $miDinero[0]['cash'];
                         echo "<br>Llevo " . $dineroEnCash . " <img src='/design/img/iconos/monedaTop.png' style='vertical-align: bottom'>" . " en el bolsillo.";
                                 
-            echo "</form>"; 
+            echo "</form>";
+            echo "</div>"; //FIN recepcion
+                
+                echo "<div id='restaurante'>";
+                $mostrar = comprobarMision(21);
+                    echo "<div class='textoDependiente'>";
+                            
+                            if($mostrar === 1){ //Está activada y en progreso en
+                                $progreso = comprobarProgreso(21);
+                                
+                                if($progreso === '1'){
+                                    
+                                    echo "¿Seguirás en el <b>Estanque de Patos</b>? Tenacitas, te echo muchísimo de menos.";
+                                    
+                                }
+                                
+                                else{
+                                    echo "El restaurante no abre hoy.";
+                                }
+                            }
+                            elseif($mostrar === 2){ //La mision aun no esta activada
+                                echo "\"¡Ayuda! Tenacitas se ha perdido. Nos atacaron en el <b>Estanque de Patos</b>, corrí, pero su pinzita se soltó de mi mano. Pobre pequeñín\".";
+                            }
+                            else{ //L mision ya esta completada
+                                echo "El restaurante no abre hoy.";
+                            }
+                        echo "</div>"; //FIN textoDependiente
+                        echo "<div class='imagenDependiente'>";
+                            if($mostrar === 0){ //Está completada
+                                echo '<img src="/design/img/dependientes/yoHombre.png">';
+                            }
+                            else{ //No está activada o está activad pero en progreso
+                                echo '<img src="/design/img/dependientes/fogataRitual.png">';
+                            }
+                        echo "</div>"; //FIN imagenDependiente
+                        
+                    if(($mostrar === 1 && $progreso === '1') || $mostrar === 2){
+                        echo '<form id = "selectorOpciones" action="?bPage=actualizaciones&action=accionSpot&nonUI" method="post">';
+
+                        echo "<div class='opcionesTienda'>";
+                            echo "<div class='opcionesTiendaCheckbox'>";
+                                echo '<input type="checkbox" name="cbox1" value="misionTenacitas">';
+                            echo "</div>";
+                            echo "<div class='opcionesTiendaTitulo'>";
+                                echo '¡Misión Tenacitas!';
+                            echo "</div>";
+                            echo '<label for="cbox3"><div id="opcionBox">' . '<img src="/design/img/bar/cafeConLeche">' . '</div><div class="monedaTienda"></div><div class="precioTienda">1 Etapa</div></label>';
+                        echo "</div>";
+
+                            echo "<div class='submitTienda'>";
+                                echo'<input type="submit" class="botonMision" value=" ">';
+                            echo "</div>";
+                        echo "</form>";  
+                    }
+                
+                echo "</div>";
                ?>     
 </form>                
                 <script>
@@ -77,10 +136,26 @@ global $db;
                        $box.prop("checked", true);
 
                     });
+                    
+                    
+                    $("#botonVender").click(function(){
+                        $("#recepcion").hide();
+                        $("#restaurante").show();
+                        $("#botonVender").css("background-color", "rgba(255, 249, 192, 0.7)");
+                        $("#botonComprar").css("background-color", "white");
+                    });
+
+                      $("#botonComprar").click(function(){
+                        $("#recepcion").show();
+                        $("#restaurante").hide();
+                        $("#botonComprar").css("background-color", "rgba(255, 249, 192, 0.7)");
+                        $("#botonVender").css("background-color", "white");
+                    });
                 </script>
 
                 <?php
                 
+                echo "</div>"; //fin de semiTransparente   
                 echo "</div>"; //FIN DE div seccionSpotOpciones
                 
             echo "</span>"; //FIN Contenedor1
@@ -143,9 +218,4 @@ global $db;
 
         echo "</div>"; //FIN DE div moduloZona
         
-            }
-            else{
-                header("location: ?page=zona&message=Aun no he descansado de mi última acción");
-            }
-
-
+            
