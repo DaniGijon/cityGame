@@ -110,6 +110,9 @@ function zona($box){
             }
             else{
                 $box = "Necesito una Caña para pescar y un poco de energía para tirar con fuerza.";
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Pesca','$box','pescar.png')";
+                $db->query($sql);
+                $box = "pescar";
             }
             break;
         

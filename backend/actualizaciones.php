@@ -5793,6 +5793,7 @@ function accionSpot($box){
             }else{
                 $box = "No tengo dinero para pagar eso.";
             }
+            
             break;     
             
         case 'G900':

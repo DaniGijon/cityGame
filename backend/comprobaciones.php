@@ -115,7 +115,7 @@ function comprobarCana(){
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     
-    $tengoRevolver = 0;
+    $tengoCana = 0;
     
     foreach ($result as $cadaObjeto){
         if($cadaObjeto['id'] === '307'){ //SI LLEVO EQUIPADO UNA CAÑA DE PESCAR
