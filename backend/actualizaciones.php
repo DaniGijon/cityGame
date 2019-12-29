@@ -5754,17 +5754,17 @@ function accionSpot($box){
             break;
             
         //CERRAJERIAS y EXPOLIADOR: ABRIR  
-        case 'Cajita oxidada':
+        case '900':
             $coste = 20;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
                 
                 //Calculo que objeto hay dentro (respetando el nivel)
-                $sql = "SELECT * FROM objetos WHERE nivelMin <= '1'";
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '21' AND nivelMin <= '21'";
                 $stmt = $db->query($sql);
                 $objetosCandidatos = $stmt->fetchAll();
                 
-                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin <= '1' && nivelMin > '0')";
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '21' AND nivelMin <= '21')";
                 $stmt = $db->query($sql);
                 $cuenta = $stmt->fetchAll();
                 $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
@@ -5773,7 +5773,7 @@ function accionSpot($box){
                 $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
 
                 //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
-                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='900'";
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='900' ORDER BY idO LIMIT 1";
                 $stmt = $db->query($sql);
                 
                 //Actualizo el dinero
@@ -5787,7 +5787,7 @@ function accionSpot($box){
                 
                 $nombreObjetoEncontrado = $resultado[0]['nombre'];
                 
-                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','El dependiente pasa largo rato mirando la caja bloqueada... parece estar pensando. Al fin entra a la trastienda a por las herramientas. Se escucha cómo pronuncia unas palabras mágicas ¡a la vez que saca una maza! Un instante después, la caja está abierta ante tus ojos. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Una cajita tan oxidada podría deshacerse al minimo contacto, espero que la trate con delicadeza. El dependiente mira la caja bloqueada... parece estar pensando. Al fin entra a la trastienda a por sus herramientas y un instante después, vuelve con una maza. ¡¡POMMM!! la cajita se abre ante tus ojos. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
                 $db->query($sql);
                 
             }else{
@@ -5795,17 +5795,17 @@ function accionSpot($box){
             }
             break;     
             
-        case 'GCajita oxidada':
+        case 'G900':
             $coste = 0;
             $puedoPagar = comprobarCoste($coste);
             if($puedoPagar === 1){
                 
                 //Calculo que objeto hay dentro (respetando el nivel)
-                $sql = "SELECT * FROM objetos WHERE nivelMin <= '1'";
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '21' AND nivelMin <= '21'";
                 $stmt = $db->query($sql);
                 $objetosCandidatos = $stmt->fetchAll();
                 
-                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin <= '1' && nivelMin > '0')";
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '21' AND nivelMin <= '21')";
                 $stmt = $db->query($sql);
                 $cuenta = $stmt->fetchAll();
                 $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
@@ -5814,7 +5814,48 @@ function accionSpot($box){
                 $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
 
                 //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
-                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='900'";
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='900' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Una cajita tan oxidada podría deshacerse al minimo contacto, espero que la trate con delicadeza. El dependiente mira la caja bloqueada... parece estar pensando. Al fin entra a la trastienda a por sus herramientas y un instante después, vuelve con una maza. ¡¡POMMM!! la cajita se abre ante tus ojos. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+
+                $db->query($sql);
+
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;
+        case '901':
+            $coste = 40;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '21' AND nivelMin <= '22'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '21' AND nivelMin <= '22')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='901' ORDER BY idO LIMIT 1";
                 $stmt = $db->query($sql);
                 
                 //Actualizo el dinero
@@ -5828,15 +5869,710 @@ function accionSpot($box){
                 
                 $nombreObjetoEncontrado = $resultado[0]['nombre'];
                 
-                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','El dependiente pasa largo rato mirando la caja bloqueada... parece estar pensando. Al fin entra a la trastienda a por las herramientas. Se escucha cómo pronuncia unas palabras mágicas ¡a la vez que saca una maza! Un instante después, la caja está abierta ante tus ojos. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Te preguntas, ¿cómo va a hacer para abrir la caja? De repente saca un hacha, apunta sobre la cerradura y... ¡CRASH! la cajita ya no está bloqueada. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
                 $db->query($sql);
                 
             }else{
                 $box = "No tengo dinero para pagar eso.";
             }
+            break;     
+            
+        case 'G901':
+            $coste = 0;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '21' AND nivelMin <= '22'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '21' AND nivelMin <= '22')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='901' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Te preguntas, ¿cómo va a hacer para abrir la caja? De repente saca un hacha, apunta sobre la cerradura y... ¡CRASH! la cajita ya no está bloqueada. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
             break;
-         
-        //Mascaras VENDEDOR DE MASCARAS
+        case '902':
+            $coste = 60;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '21' AND nivelMin <= '23'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '21' AND nivelMin <= '23')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='902' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Una caja de hierro sólido no debe ser fácil de abrir. ¿Cómo se las va a apañar? Oyes un chisporroteo, es la mecha de lo que parece ¡¿un cartucho de dinamita!?... ¡¡¡BOOOOM!!! la cajita ya no está bloqueada. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;     
+            
+        case 'G902':
+            $coste = 0;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '21' AND nivelMin <= '23'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '21' AND nivelMin <= '23')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='902' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Una caja de hierro sólido no debe ser fácil de abrir. ¿Cómo se las va a apañar? Oyes un chisporroteo, es la mecha de lo que parece ¡¿un cartucho de dinamita!?... ¡¡¡BOOOOM!!! la cajita ya no está bloqueada. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;
+        case '903':
+            $coste = 80;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '22' AND nivelMin <= '24'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '22' AND nivelMin <= '24')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='903' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','El cofrecito está tan oxidado que cuando el dependiente lo lanza contra la pared, se abre con facilidad. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;     
+            
+        case 'G903':
+            $coste = 0;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '22' AND nivelMin <= '24'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '22' AND nivelMin <= '24')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='903' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','El cofrecito está tan oxidado que cuando el dependiente lo lanza contra la pared, se abre con facilidad. Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;
+        case '904':
+            $coste = 100;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '23' AND nivelMin <= '25'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '23' AND nivelMin <= '25')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='904' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','El dependiente mira al cofre de madera con la misma cara que yo miraría a un cubo de rubik. Mejor me lo llevo a otro sitio, este tío no tiene ni id.... ¡Ostras! ¡¿Acaba de sacar una sierra?!... Lo es. ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;     
+            
+        case 'G904':
+            $coste = 0;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '23' AND nivelMin <= '25'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '23' AND nivelMin <= '25')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='904' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','El dependiente mira al cofre de madera con la misma cara que yo miraría a un cubo de rubik. Mejor me lo llevo a otro sitio, este tío no tiene ni id.... ¡Ostras! ¡¿Acaba de sacar una sierra?!... Lo es. ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;
+        case '905':
+            $coste = 120;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '24' AND nivelMin <= '26'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '24' AND nivelMin <= '26')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='905' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Me dicen que un cofre de metal está listo para darse su bañito en ácido nítrico. ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;     
+            
+        case 'G905':
+            $coste = 0;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '24' AND nivelMin <= '26'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '24' AND nivelMin <= '26')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='905' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Me dicen que un cofre de metal está listo para darse su bañito en ácido nítrico. ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;
+        case '906':
+            $coste = 140;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '25' AND nivelMin <= '27'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '25' AND nivelMin <= '27')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='906' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','¡Vaya! Este cofre es grandote. El dependiente te pide ayuda para entre los dos poner un buen cinturón de petardos que enseguida volarán esa cerradura. ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;     
+            
+        case 'G906':
+            $coste = 0;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '25' AND nivelMin <= '27'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '25' AND nivelMin <= '27')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='906' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','¡Vaya! Este cofre es grandote. El dependiente te pide ayuda para entre los dos poner un buen cinturón de petardos que enseguida volarán esa cerradura. ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;
+        case '907':
+            $coste = 160;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '26' AND nivelMin <= '28'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '26' AND nivelMin <= '28')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='907' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Mucha madera es igual a un buen festín para las termitas que tiene como mascotas el dependiente. ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;     
+            
+        case 'G907':
+            $coste = 0;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '26' AND nivelMin <= '28'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '26' AND nivelMin <= '28')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='907' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Mucha madera es igual a un buen festín para las termitas que tiene como mascotas el dependiente. ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;
+        case '908':
+            $coste = 180;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '27' AND nivelMin <= '29'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '27' AND nivelMin <= '29')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='908' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Al construir este gran cofre ahorraron en material y su calidad es pésima. Puedo deformarlo usando calor... ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;     
+            
+        case 'G908':
+            $coste = 0;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '27' AND nivelMin <= '29'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '27' AND nivelMin <= '29')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='908' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                 $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','Al construir este gran cofre ahorraron en material y su calidad es pésima. Puedo deformarlo usando calor... ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break; 
+        case '909':
+            $coste = 200;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '28' AND nivelMin <= '30'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '28' AND nivelMin <= '30')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='909' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','¡Cuánta pedrería! Este es sin duda un trabajo para mi mujer. ¡MARÍAAAA, ven pa acá! Al cabo de un rato viene la mujer, que empieza a quitar las piedras preciosas como si no hubiera un mañana. Con tanta ansia araña la María que hace un agujero en la estructura del cofre. ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break;     
+            
+        case 'G909':
+            $coste = 0;
+            $puedoPagar = comprobarCoste($coste);
+            if($puedoPagar === 1){
+                
+                //Calculo que objeto hay dentro (respetando el nivel)
+                $sql = "SELECT * FROM objetos WHERE nivelMin >= '28' AND nivelMin <= '30'";
+                $stmt = $db->query($sql);
+                $objetosCandidatos = $stmt->fetchAll();
+                
+                $sql = "SELECT COUNT(*) FROM objetos WHERE (nivelMin >= '28' AND nivelMin <= '30')";
+                $stmt = $db->query($sql);
+                $cuenta = $stmt->fetchAll();
+                $tope = $cuenta[0]['COUNT(*)']; //cantidad de objetos candidatos
+                
+                $indiceObjetoEncontrado = rand(0,$tope-1); //indice del objeto encontrado
+                $objetoEncontrado = $objetosCandidatos[$indiceObjetoEncontrado]['id']; //id del objeto encontrado
+
+                //Le paso el objeto encontrado al slot que ha quedado libre en el inventario
+                $sql = "UPDATE inventario SET idO = '$objetoEncontrado' WHERE idP='$id' AND idO='909' ORDER BY idO LIMIT 1";
+                $stmt = $db->query($sql);
+                
+                //Actualizo el dinero
+                $sql = "UPDATE personajes SET cash = cash - '$coste' WHERE id='$id'";
+                $stmt = $db->query($sql);
+                
+                //GENERAR EL INFORME DE OBJETO ENCONTRADO
+                $sql = "SELECT * FROM objetos WHERE id= '$objetoEncontrado'";
+                $stmt = $db->query($sql);
+                $resultado = $stmt->fetchAll();
+                
+                $nombreObjetoEncontrado = $resultado[0]['nombre'];
+                
+                $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$id','Cerrajería','¡Cuánta pedrería! Este es sin duda un trabajo para mi mujer. ¡MARÍAAAA, ven pa acá! Al cabo de un rato viene la mujer, que empieza a quitar las piedras preciosas como si no hubiera un mañana. Con tanta ansia araña la María que hace un agujero en la estructura del cofre. ¡Cofre abierto! Consigues su contenido : $nombreObjetoEncontrado','cerrajeria.png')";
+                $db->query($sql);
+                
+            }else{
+                $box = "No tengo dinero para pagar eso.";
+            }
+            break; 
+//Mascaras VENDEDOR DE MASCARAS
         case 'mascaraConejo':
             $coste = 1000;
             $puedoPagar = comprobarCoste($coste);

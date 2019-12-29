@@ -41,7 +41,7 @@ global $db;
                         foreach($cofres as $cadaObjeto){
                             echo "<div class='opcionesTienda'>";
                             echo "<div class='opcionesTiendaCheckbox'>";
-                                echo '<input type="checkbox" name="cbox1" value="' . $cadaObjeto['nombre'] . '">';
+                                echo '<input type="checkbox" name="cbox1" value="' . $cadaObjeto['id'] . '">';
                             echo "</div>";
                             echo "<div class='opcionesTiendaTitulo'>";
                                 echo $cadaObjeto['nombre'];
