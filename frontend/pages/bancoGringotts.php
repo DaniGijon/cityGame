@@ -17,7 +17,13 @@ global $db;
             
             echo "<div class='contenido'>";
             echo "<span class='contenedor1'>"; 
+            echo "<div class='seccionSpotOpciones'>";
+            echo "<div id='botonesComprarVender'>";
+                echo "<button id='botonComprar' class='tagTiendaComprar'>Cajero</button>";
+                echo "<button id='botonVender' class='tagTiendaVender'>Empeños</button>";
+            echo "</div>";
             echo "<div class='semiTransparente'>"; 
+            echo "<div id='cajero'>";
             echo "<div class='textoDependiente'>";
                 echo "\"Gringotts es el lugar más seguro del mundo para lo que quieras guardar\".";
             echo "</div>"; //FIN textoDependiente
@@ -49,7 +55,11 @@ global $db;
                 echo "<input type='submit' class='botonCarrilBici' value=' '><br><br>";
             echo "</div>";
             
-            echo "</form>";    
+            echo "</form>"; 
+            echo "</div>"; //FIN cajero
+            echo "<div id='empeno'>";
+            echo "HOLA";
+            echo "</div>"; //FIN empeno
         }
         
                 ?>
@@ -65,10 +75,24 @@ global $db;
                        $box.prop("checked", true);
 
                     });
+                    
+                     $("#botonVender").click(function(){
+                        $("#cajero").hide();
+                        $("#empeno").show();
+                        $("#botonVender").css("background-color", "rgba(255, 249, 192, 0.7)");
+                        $("#botonComprar").css("background-color", "white");
+                    });
+
+                      $("#botonComprar").click(function(){
+                        $("#cajero").show();
+                        $("#empeno").hide();
+                        $("#botonComprar").css("background-color", "rgba(255, 249, 192, 0.7)");
+                        $("#botonVender").css("background-color", "white");
+                    });
                 </script>
 
                 <?php
-                    
+                echo "</div>"; //fin de semiTransparente     
                 echo "</div>"; //FIN DE div seccionSpotOpciones
                 
                 echo "</span>"; //FIN contenedor1

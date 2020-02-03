@@ -1646,6 +1646,14 @@
                         $restaEnergia = rand(30,100);
                         $sql = "UPDATE personajes SET emboscada = ADDTIME(NOW(), '1:0:0'), energia = CASE WHEN energia-'$restaEnergia' < 0 THEN 0 ELSE energia-'$restaEnergia' END WHERE id='$miId'";
                         $db->query($sql);
+                        
+                        //Atacante ve restada su salud
+                        $sql = "UPDATE personajes SET salud = CASE WHEN salud-'$rivalPuntos' < 0 THEN 0 ELSE salud-'$rivalPuntos' END WHERE id='$miId'";
+                        $db->query($sql);
+                        
+                        //Defensor ve restada su salud
+                        $sql = "UPDATE personajes SET salud = CASE WHEN salud-'$misPuntos' < 0 THEN 0 ELSE salud-'$misPuntos' END WHERE id='$id'";
+                        $db->query($sql);
                     }
                     else{
                             echo "¡Ay! Estoy sin energia ahora mismo para hacer eso";
@@ -1727,7 +1735,7 @@
         $nombreYo = $miResult[0]['nombre'];
                 
         $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$idYo','Emboscada','En el silencio de la noche, $nombreRival camina apresuradamente de camino a casa. Al pasar por delante de un montón de cajas apiladas escucha un chasquido. Se gira en la oscuridad y todo lo que alcanza a ver es la sombra de un bate de béisbol empuñado por $nombreYo.<br>¡Comienza la Batalla!<br>Cuando al fín cesa el ruido y el humo se disipa, queda sobre el asfalto el cuerpo de $nombreRival herido, mientras $nombreYo huye de la escena con un botín de $dineroPillado Monedas y $respetoPillado Puntos de Respeto que $nombreRival echará en falta.','emboscada.png'),"
-                . "('$idRival','Emboscada','áéíóúñ!ÁÉÍÓÚ En el silencio de la noche, $nombreRival camina apresuradamente de camino a casa. Al pasar por delante de un montón de cajas apiladas escucha un chasquido. Se gira en la oscuridad y todo lo que alcanza a ver es la sombra de un bate de béisbol empuñado por $nombreYo.<br>¡Comienza la Batalla!<br>Cuando al fín cesa el ruido y el humo se disipa, queda sobre el asfalto el cuerpo de $nombreRival herido, mientras $nombreYo huye de la escena con un botín de $dineroPillado Monedas y $respetoPillado Puntos de Respeto que $nombreRival echará en falta.','emboscada.png')";
+                . "('$idRival','Emboscada','En el silencio de la noche, $nombreRival camina apresuradamente de camino a casa. Al pasar por delante de un montón de cajas apiladas escucha un chasquido. Se gira en la oscuridad y todo lo que alcanza a ver es la sombra de un bate de béisbol empuñado por $nombreYo.<br>¡Comienza la Batalla!<br>Cuando al fín cesa el ruido y el humo se disipa, queda sobre el asfalto el cuerpo de $nombreRival herido, mientras $nombreYo huye de la escena con un botín de $dineroPillado Monedas y $respetoPillado Puntos de Respeto que $nombreRival echará en falta.','emboscada.png')";
         $db->query($sql);
         
         //Actualizo el dinero y el respeto
@@ -1773,6 +1781,16 @@
         $sql = "UPDATE personajes SET cash = '$nuevoCash',respeto = '$nuevoRespeto' WHERE id='$miId'";
         $stmt = $db->query($sql);
         $stmt->fetchAll();
+        
+        //INFORMAR A AMBOS JUGADORES CON MENSAJE
+        $idRival = $rivalResult[0]['id'];
+        $nombreRival = $rivalResult[0]['nombre'];
+        $idYo = $miResult[0]['id'];
+        $nombreYo = $miResult[0]['nombre'];
+        //Creo los mensajes
+        $sql = "INSERT INTO mensajes (idP,asunto,contenido,imagen) VALUES('$idYo','Emboscada','En la vida conocí, mujer igual a $nombreRival, coral negro de La Habana, tremendísima mulata. Cien libras de piel y hueso, cuarenta kilos de salsa, y en la cara dos soles que sin palabras hablan. $nombreYo daría lo que fuera, aunque solo uno fuera.','emboscada.png'),"
+                . "('$idRival','Emboscada','En la vida conocí, mujer igual a $nombreRival, coral negro de La Habana, tremendísima mulata. Cien libras de piel y hueso, cuarenta kilos de salsa, y en la cara dos soles que sin palabras hablan. $nombreYo daría lo que fuera, aunque solo uno fuera.','emboscada.png')";
+        $db->query($sql);
         
         //Actualizo el rival
         $rivalResult = getPersonajeRow($id);
