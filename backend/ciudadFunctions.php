@@ -98,46 +98,46 @@
                                 
                                 //Mostrar los iconos
                                 if($tieneTiendaArmas === '1'){
-                                    echo "<div class='iconoZona'>tiendaArmas</div>";
+                                    echo "<div class='iconoZona iconoSpotTienda'></div>";
                                 }
                                 if($tieneTiendaMascotas === '1'){
-                                    echo "<div class='iconoZona'>tiendaMascotas</div>";
+                                    echo "<div class='iconoZona iconoSpotTienda'></div>";
                                 }
                                 if($tieneTiendaVehiculos === '1'){
-                                    echo "<div class='iconoZona'>tiendaVehiculos</div>";
+                                    echo "<div class='iconoZona iconoSpotTienda'></div>";
                                 }
                                 if($tieneTiendaVariedades === '1'){
-                                    echo "<div class='iconoZona'>tiendaVariedades</div>";
+                                    echo "<div class='iconoZona iconoSpotTienda'></div>";
                                 }
                                 if($tieneBanco === '1'){
-                                    echo "<div class='iconoZona'>banco</div>";
+                                    echo "<div class='iconoZona iconoSpotBanco'></div>";
                                 }
                                 if($tieneHotel === '1'){
-                                    echo "<div class='iconoZona'>hotel</div>";
+                                    echo "<div class='iconoZona iconoSpotHotel'></div>";
                                 }
                                 if($tieneCerrajeria === '1'){
-                                    echo "<div class='iconoZona'>cerrajeria</div>";
+                                    echo "<div class='iconoZona iconoSpotCerrajeria'></div>";
                                 }
                                 if($tieneApuestas === '1'){
-                                    echo "<div class='iconoZona'>apuestas</div>";
+                                    echo "<div class='iconoZona iconoSpotApostar'></div>";
                                 }
                                 if($tieneSocial === '1'){
-                                    echo "<div class='iconoZona'>social</div>";
+                                    echo "<div class='iconoZona iconoSpotSocial'></div>";
                                 }
                                 if($tieneEstilo === '1'){
-                                    echo "<div class='iconoZona'>estilo</div>";
+                                    echo "<div class='iconoZona iconoSpotEstilo'></div>";
                                 }
                                 if($tieneGimnasio === '1'){
-                                    echo "<div class='iconoZona'>gimnasio</div>";
+                                    echo "<div class='iconoZona iconoSpotGimnasio'></div>";
                                 }
                                 if($tieneEntrenamiento === '1'){
-                                    echo "<div class='iconoZona'>entrenamiento</div>";
+                                    echo "<div class='iconoZona iconoSpotEntrenamiento'></div>";
                                 }
                                 if($tieneIglesia === '1'){
-                                    echo "<div class='iconoZona'>iglesia</div>";
+                                    echo "<div class='iconoZona iconoSpotIglesia'></div>";
                                 }
                                 if($tieneCultura === '1'){
-                                    echo "<div class='iconoZona'>cultura</div>";
+                                    echo "<div class='iconoZona iconoSpotCultura'></div>";
                                 }
                                 
                             echo "</div>";

@@ -1006,11 +1006,23 @@ h4{
 
 }
 
+.cajaEmpenos{
+    margin-top: 15px;
+}
+.empeno{
+    background-color: grey;
+    border-color: silver;
+}
+
 .madera1{
     background-image: url("/design/img/botones/boton-madera1.png");
     width: 113px;
     background-repeat: repeat-y;
     height: 36px;
+}
+
+.slotEnVenta{
+    background-image: url("/design/img/iconos/empeno.png");
 }
 
 .madera2{
@@ -2936,4 +2948,16 @@ h4{
     height: 455px;
     text-align: center;
     background-image: url("/design/img/zonas/mapab1z2.jpg");
+}
+
+#costeViaje{
+    margin:auto;
+    float:left;
+    position: relative;
+    border: 1px solid black;
+    text-align: center;
+}
+
+#iconosZona{
+    
 }

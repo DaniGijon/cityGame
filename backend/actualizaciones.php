@@ -2,21 +2,45 @@
 
 //Para las transacciones del BANCO
 function actualizarDinero($operacion, $cantidadDeposito, $cantidadRetirada){
+    include (__ROOT__.'/backend/comprobaciones.php');
     global $db;
     $id = $_SESSION['loggedIn'];
-    
+
     if($operacion === "depositarDinero"){
-        echo "Quiero depositar" . $cantidadDeposito;
-        $sql = "UPDATE personajes SET enBanco=enBanco + $cantidadDeposito, cash=cash-$cantidadDeposito WHERE id='$id'";
-        $stmt = $db->query($sql);
-        header("location: ?page=zona&message=Exito");
-        
+        //compruebo que las cantidades son un entero positivo
+        if($cantidadDeposito >= 0){
+            //comprobar que la cantidad que quiero retirar no supera la cantidad que tengo ingresada enBanco
+            $miDinero = comprobarDinero();
+            if($miDinero[0]['cash'] >= $cantidadDeposito){
+                $sql = "UPDATE personajes SET enBanco=enBanco + $cantidadDeposito, cash=cash-$cantidadDeposito WHERE id='$id'";
+                $stmt = $db->query($sql);
+                header("location: ?page=zona&message=Exito");
+            }
+            else{
+                header("location: ?page=zona&message=Fallo");
+            }
+        }
+        else{
+            header("location: ?page=zona&message=Fallo");
+        }
     }
     elseif ($operacion === "retirarDinero") {
-        echo "Quiero retirar" . $cantidadRetirada;
-        $sql = "UPDATE personajes SET cash=cash+$cantidadRetirada*0.95, enBanco=enBanco-$cantidadRetirada WHERE id='$id'";
-        $stmt = $db->query($sql);
-        header("location: ?page=zona&message=Exito");
+        //compruebo que las cantidades son un entero positivo
+        if($cantidadRetirada >= 0){
+            //comprobar que la cantidad que quiero retirar no supera la cantidad que tengo ingresada enBanco
+            $miDinero = comprobarDinero();
+            if($miDinero[0]['enBanco'] >= $cantidadRetirada){
+                $sql = "UPDATE personajes SET cash=cash+$cantidadRetirada*0.95, enBanco=enBanco-$cantidadRetirada WHERE id='$id'";
+                $stmt = $db->query($sql);
+                header("location: ?page=zona&message=Exito");
+            }
+            else{
+                header("location: ?page=zona&message=Fallo");
+            }
+        }
+        else{
+            header("location: ?page=zona&message=Fallo");
+        }
     }
     
 }

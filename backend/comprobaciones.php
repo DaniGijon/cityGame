@@ -1031,6 +1031,24 @@ function comprobarInsignia($idI){
      }
 }
 
+//Ver SLOTS DE EMPEÑO QUE TIENE EL JUGADOR
+function verSlotsEmpeno(){
+    global $db;
+    $id = $_SESSION['loggedIn'];
+    
+     $sql = "SELECT * FROM empenos WHERE idP='$id'";
+     $stmt = $db->query($sql);
+     $result = $stmt->fetchAll();
+     
+     if($result){
+        return $result;
+     }
+     else{
+         return 0;
+     }
+}
+
+
 /*
 //ACTIVAR CODIGOS INSIGNIAS
 function activarCodigo($codigoInsignia){

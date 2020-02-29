@@ -173,6 +173,62 @@ $(".irA").click(function(event){
 <?php
     }
     
+    function taquillear($idObjeto, $slot, $idInv, $inv){
+        global $db;
+        $id = $_SESSION['loggedIn'];
+        
+        
+        //veo si realmente ese jugador tiene esos objetos en esos slots y si es afirmativo los intercambio.
+        $sql = "SELECT idO FROM empenos WHERE (idP = '$id' AND slot = '$slot' AND idO = '$idObjeto')";
+        $stmt = $db->query($sql);
+        $resultTaquilla = $stmt->fetchAll();
+        
+        $sql = "SELECT idO FROM inventario WHERE (idP = '$id' AND slot = '$inv' AND idO = '$idInv')";
+        $stmt = $db->query($sql);
+        $resultInventario = $stmt->fetchAll();
+       
+        if(isset($resultTaquilla[0]) && isset($resultInventario[0])){
+        
+            
+            $sql = "UPDATE inventario SET idO=$idObjeto WHERE (idP='$id' AND slot='$inv')";
+            $db->query($sql);
+            
+            $sql = "UPDATE empenos SET idO=$idInv WHERE (idP='$id' AND slot='$slot')";
+            $db->query($sql);
+         
+       }
+    }
+    
+    function comprarTaquilla(){
+        global $db;
+        $id = $_SESSION['loggedIn'];
+        
+        //ver si tengo dinero para comprar la taquilla (10.000 monedas)
+        $puedoComprar = comprobarCoste(10000);
+        if($puedoComprar === 1){
+            //restar dinero cash, el precio de haber comprado la taquilla (-10.000 monedas)
+            $sql = "UPDATE personajes SET cash=cash-10000 WHERE id='$id'";
+            $db->query($sql);
+
+            //añadir taquilla a este personaje
+            $sql = "SELECT COUNT(*) FROM empenos WHERE (idP = '$id')";
+            $stmt = $db->query($sql);
+            $result = $stmt->fetchAll();
+            $nuevoSlot = $result[0]['COUNT(*)'];
+            $sql = "INSERT INTO empenos (idP, slot, idO) VALUES ('$id','$nuevoSlot', '0')";
+            $db->query($sql);
+        }
+        else{
+            //decirle que no tiene dinero para pagar
+            ?>
+            <script>
+                alert("No tienes dinero para comprar más taquillas.");
+            </script>
+            <?php
+        }
+        
+    }
+    
     function siguienteSpot($idS){
         global $db;
         $id = $_SESSION['loggedIn'];
@@ -305,8 +361,21 @@ $(".irA").click(function(event){
         
     }
     
+    if(isset($_GET['comprarTaquilla'])){
+        $id = $_SESSION['loggedIn'];
+        comprarTaquilla();
+    }
+    
+    if(isset($_POST['idObjeto'])){
+        taquillear($_POST['idObjeto'], $_POST['slot'], $_POST['idInv'], $_POST['inv']);
+    }
+    
     if(isset($_POST['spotId'])){
         siguienteSpot($_POST['spotId']);
+    }
+    
+    if(isset($_POST['compraTaquilla'])){
+        comprarTaquilla();
     }
 
 ?>
